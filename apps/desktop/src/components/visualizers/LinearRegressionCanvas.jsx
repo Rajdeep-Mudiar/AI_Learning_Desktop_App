@@ -113,7 +113,7 @@ export default function LinearRegressionCanvas() {
         <div>
           <h2 style={{ fontSize: '1.25rem', marginBottom: 4 }}>Interactive Linear Regression & Gradient Descent</h2>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-            Watch the optimizer navigate the loss surface to find optimal parameter weights $\mathbf{w}$ and bias $b$.
+            Watch the optimizer navigate the loss surface to find optimal parameter weight (w) and bias (b).
           </p>
         </div>
 
