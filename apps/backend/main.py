@@ -15,17 +15,15 @@ async def lifespan(app: FastAPI):
     await connect_to_mongo()
     db = get_database()
     
-    # Check if courses exist, if not seed initial curriculum
-    course_count = await db.courses.count_documents({})
-    if course_count == 0:
-        for course in COURSES_DATA:
-            await db.courses.update_one({"slug": course["slug"]}, {"$set": course}, upsert=True)
-        for lesson in LESSONS_DATA:
-            await db.lessons.update_one({"slug": lesson["slug"]}, {"$set": lesson}, upsert=True)
-        for quiz in QUIZZES_DATA:
-            await db.quizzes.update_one({"id": quiz["id"]}, {"$set": quiz}, upsert=True)
-        for skill in SKILLS_DATA:
-            await db.skills.update_one({"id": skill["id"]}, {"$set": skill}, upsert=True)
+    # Always upsert all courses, lessons, quizzes, and skills on startup
+    for course in COURSES_DATA:
+        await db.courses.update_one({"slug": course["slug"]}, {"$set": course}, upsert=True)
+    for lesson in LESSONS_DATA:
+        await db.lessons.update_one({"slug": lesson["slug"]}, {"$set": lesson}, upsert=True)
+    for quiz in QUIZZES_DATA:
+        await db.quizzes.update_one({"id": quiz["id"]}, {"$set": quiz}, upsert=True)
+    for skill in SKILLS_DATA:
+        await db.skills.update_one({"id": skill["id"]}, {"$set": skill}, upsert=True)
             
     yield
     # Shutdown

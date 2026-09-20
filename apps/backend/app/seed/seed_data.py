@@ -239,44 +239,254 @@ COURSES_DATA = [
         ]
     },
     # =========================================================================
-    # COURSE 7: WEB DEVELOPMENT (DOMAIN: web-dev)
+    # COURSE 7A: HTML5 & WEB ARCHITECTURE FOUNDATIONS (DOMAIN: web-dev) - BEGINNER
     # =========================================================================
     {
-        "slug": "fullstack-web-dev",
-        "title": "Modern Full-Stack Web Development",
+        "slug": "html5-web-architecture",
+        "title": "HTML5 & Web Architecture Foundations",
         "domain": "web-dev",
-        "description": "Master modern responsive web development: HTML5 semantics, CSS3 flexbox layouts, modern ES6+ JavaScript, React 18 component state, and REST APIs.",
+        "description": "Start from absolute zero: How browsers communicate with servers via DNS and HTTP/HTTPS, semantic HTML5 document structures, SEO meta tags, and accessible forms with ARIA.",
         "category": "Web Development",
         "level": "Beginner",
-        "estimated_hours": 14,
+        "estimated_hours": 8,
         "icon": "Globe",
         "color": "#06B6D4",
         "order": 7,
         "is_published": True,
         "prerequisites": [],
-        "skills_taught": ["HTML5 Semantics", "CSS Box Model", "Flexbox & Grid", "Async JavaScript", "React Hooks", "REST APIs"],
-        "syllabus_overview": "Learn how the modern web works from the ground up. From CSS layout models to building reactive component trees in React 18 and fetching data asynchronously from backend APIs.",
+        "skills_taught": ["HTTP Protocols", "DNS Resolution", "Semantic HTML5", "Form Validations", "ARIA Accessibility", "SEO Metadata"],
+        "syllabus_overview": "Understand the fundamental building blocks of the web. Learn how browser engines parse HTML documents into the DOM tree, structure content semantically for search crawlers, and create accessible interactive forms.",
         "modules": [
             {
-                "id": "web-mod-1",
-                "title": "Module 1: HTML5 & Modern CSS Layouts",
-                "description": "Semantic architecture, the CSS Box Model, and mastering responsive Flexbox grids.",
+                "id": "html-mod-1",
+                "title": "Module 1: How the Web Works & HTTP/HTTPS",
+                "description": "DNS lookup, TCP/IP handshakes, client-server models, and request/response headers.",
                 "order": 1,
-                "lesson_ids": ["web-html-css-box-model"]
+                "lesson_ids": ["web-how-the-web-works"]
             },
             {
-                "id": "web-mod-2",
-                "title": "Module 2: JavaScript ES6+ & Async Fetching",
-                "description": "The event loop, DOM manipulation, promises, async/await, and REST API consumption.",
+                "id": "html-mod-2",
+                "title": "Module 2: Semantic HTML5 Architecture",
+                "description": "Structuring clean accessible web pages with header, main, section, article, and nav tags.",
                 "order": 2,
-                "lesson_ids": ["web-javascript-dom-async"]
+                "lesson_ids": ["web-semantic-html5-tags"]
             },
             {
-                "id": "web-mod-3",
-                "title": "Module 3: React 18 Components & State",
-                "description": "JSX, props, useState, useEffect, and building fast reactive interfaces.",
+                "id": "html-mod-3",
+                "title": "Module 3: Interactive Forms, Validation & ARIA",
+                "description": "Inputs, form validation rules, accessibility attributes, and WCAG screen reader standards.",
                 "order": 3,
-                "lesson_ids": ["web-react-hooks-state"]
+                "lesson_ids": ["web-forms-validation-accessibility"]
+            }
+        ]
+    },
+    # =========================================================================
+    # COURSE 7B: CSS3 MASTERY, RESPONSIVE LAYOUTS & MODERN GRID (DOMAIN: web-dev) - BEGINNER
+    # =========================================================================
+    {
+        "slug": "css3-mastery-responsive-grid",
+        "title": "CSS3 Mastery, Responsive Layouts & Modern Grid",
+        "domain": "web-dev",
+        "description": "Master visual styling: The CSS Cascade and Box Model, fluid 1D Flexbox, 2D CSS Grid templates, mobile-first media queries, custom properties, and keyframe animations.",
+        "category": "Web Development",
+        "level": "Beginner",
+        "estimated_hours": 12,
+        "icon": "Layers",
+        "color": "#3B82F6",
+        "order": 8,
+        "is_published": True,
+        "prerequisites": ["html5-web-architecture"],
+        "skills_taught": ["CSS Box Model", "Specificity & Cascade", "Flexbox", "2D CSS Grid", "Responsive Breakpoints", "Keyframe Animations"],
+        "syllabus_overview": "Turn basic HTML markup into stunning, pixel-perfect user interfaces. Learn how layout engines calculate geometry, master responsive alignment with Flexbox and CSS Grid, and design smooth micro-interactions.",
+        "modules": [
+            {
+                "id": "css-mod-1",
+                "title": "Module 1: The Box Model & The CSS Cascade",
+                "description": "Content, padding, border, margin, box-sizing, and specificity calculation.",
+                "order": 1,
+                "lesson_ids": ["web-css-box-model-cascade"]
+            },
+            {
+                "id": "css-mod-2",
+                "title": "Module 2: Flexbox & 2D CSS Grid Layout Engineering",
+                "description": "One-dimensional flex alignment and multi-column CSS grid templates with minmax and auto-fit.",
+                "order": 2,
+                "lesson_ids": ["web-css-flexbox-grid-mastery"]
+            },
+            {
+                "id": "css-mod-3",
+                "title": "Module 3: Responsive Units, Variables & Animations",
+                "description": "Fluid typography with clamp(), custom CSS variables, and GPU-accelerated transitions.",
+                "order": 3,
+                "lesson_ids": ["web-css-responsive-animations"]
+            }
+        ]
+    },
+    # =========================================================================
+    # COURSE 7C: MODERN JAVASCRIPT: CORE ENGINE & ASYNC MASTERY (DOMAIN: web-dev) - INTERMEDIATE
+    # =========================================================================
+    {
+        "slug": "javascript-core-async",
+        "title": "Modern JavaScript: Core Engine & Async Mastery",
+        "domain": "web-dev",
+        "description": "Demystify JavaScript under the hood: The V8 engine, call stack, execution contexts, lexical closures, the event loop, microtask queue, promises, and async/await.",
+        "category": "Web Development",
+        "level": "Intermediate",
+        "estimated_hours": 14,
+        "icon": "Code2",
+        "color": "#F59E0B",
+        "order": 9,
+        "is_published": True,
+        "prerequisites": ["css3-mastery-responsive-grid"],
+        "skills_taught": ["Execution Contexts", "Lexical Closures", "Event Loop", "Promises & Async/Await", "DOM Event Delegation", "Fetch API"],
+        "syllabus_overview": "Deeply understand the language of the web. Learn how JavaScript executes single-threaded code, manages heap memory, schedules microtasks, and coordinates high-performance DOM manipulation.",
+        "modules": [
+            {
+                "id": "js-mod-1",
+                "title": "Module 1: Execution Contexts, Scopes & Closures",
+                "description": "Call stack, variable hoisting, lexical environments, and closure memory retention.",
+                "order": 1,
+                "lesson_ids": ["web-js-execution-scope-closures"]
+            },
+            {
+                "id": "js-mod-2",
+                "title": "Module 2: The Event Loop, Promises & Async/Await",
+                "description": "Macrotasks, microtasks, Promise chaining, and async/await error boundaries.",
+                "order": 2,
+                "lesson_ids": ["web-js-event-loop-promises-async"]
+            },
+            {
+                "id": "js-mod-3",
+                "title": "Module 3: DOM Traversal, Event Bubbling & APIs",
+                "description": "DOM querying, event bubbling vs capturing, event delegation, and the Fetch API.",
+                "order": 3,
+                "lesson_ids": ["web-js-dom-events-delegation"]
+            }
+        ]
+    },
+    # =========================================================================
+    # COURSE 7D: REACT 18: COMPONENTS, HOOKS & STATE ARCHITECTURE (DOMAIN: web-dev) - INTERMEDIATE
+    # =========================================================================
+    {
+        "slug": "react18-frontend-architecture",
+        "title": "React 18: Components, Hooks & State Architecture",
+        "domain": "web-dev",
+        "description": "Build modern scalable single-page applications: Declarative JSX, Virtual DOM reconciliation, Custom Hooks, useMemo/useCallback performance, and global state with Context & Zustand.",
+        "category": "Web Development",
+        "level": "Intermediate",
+        "estimated_hours": 16,
+        "icon": "Cpu",
+        "color": "#6366F1",
+        "order": 10,
+        "is_published": True,
+        "prerequisites": ["javascript-core-async"],
+        "skills_taught": ["Declarative JSX", "Virtual DOM Diffing", "React 18 Hooks", "Custom Hooks", "Zustand & Context API", "React Router 6"],
+        "syllabus_overview": "Master enterprise React development. Learn how React 18 manages concurrent rendering, organizes component hierarchies with one-way data flow, and avoids unnecessary re-renders using memoization.",
+        "modules": [
+            {
+                "id": "react-mod-1",
+                "title": "Module 1: Declarative JSX & Virtual DOM Diffing",
+                "description": "Component trees, JSX compilation, props, and how the reconciliation engine updates the browser DOM.",
+                "order": 1,
+                "lesson_ids": ["web-react-jsx-vdom-components"]
+            },
+            {
+                "id": "react-mod-2",
+                "title": "Module 2: React 18 Hooks & Custom Hook Architecture",
+                "description": "useState, useEffect dependency arrays, useMemo, useCallback, and reusable custom hooks.",
+                "order": 2,
+                "lesson_ids": ["web-react-hooks-deep-dive"]
+            },
+            {
+                "id": "react-mod-3",
+                "title": "Module 3: State Management & Client-Side Routing",
+                "description": "Context API, lightweight Zustand stores, and dynamic client routing with React Router 6.",
+                "order": 3,
+                "lesson_ids": ["web-react-state-routing-zustand"]
+            }
+        ]
+    },
+    # =========================================================================
+    # COURSE 7E: BACKEND ENGINEERING: NODE.JS, EXPRESS & REST APIS (DOMAIN: web-dev) - INTERMEDIATE
+    # =========================================================================
+    {
+        "slug": "nodejs-backend-apis",
+        "title": "Backend Engineering: Node.js, Express & REST APIs",
+        "domain": "web-dev",
+        "description": "Architect high-performance web backends: Node.js runtime, Express middleware pipelines, JWT token authentication, MongoDB & PostgreSQL database modeling, and RESTful API standards.",
+        "category": "Web Development",
+        "level": "Intermediate",
+        "estimated_hours": 16,
+        "icon": "Server",
+        "color": "#10B981",
+        "order": 11,
+        "is_published": True,
+        "prerequisites": ["javascript-core-async"],
+        "skills_taught": ["Node.js Runtime", "Express Middleware", "JWT Authentication", "Bcrypt Hashing", "MongoDB & Mongoose", "PostgreSQL Queries"],
+        "syllabus_overview": "Transition from frontend to full-stack engineering. Learn how to write secure, scalable backend services with authentication guards, relational and document database drivers, and CORS protections.",
+        "modules": [
+            {
+                "id": "node-mod-1",
+                "title": "Module 1: Node.js Runtime & Express Middleware",
+                "description": "V8 engine on the server, request-response pipelines, routing, and centralized error handling.",
+                "order": 1,
+                "lesson_ids": ["web-nodejs-express-middleware"]
+            },
+            {
+                "id": "node-mod-2",
+                "title": "Module 2: Authentication, JWT & Security Guards",
+                "description": "Bcrypt password hashing, JSON Web Tokens (JWT), HTTP-only cookies, and rate limiting.",
+                "order": 2,
+                "lesson_ids": ["web-jwt-auth-security-bcrypt"]
+            },
+            {
+                "id": "node-mod-3",
+                "title": "Module 3: Database Modeling with MongoDB & SQL",
+                "description": "Schema modeling, indexes, foreign keys, and performant CRUD queries with MongoDB and PostgreSQL.",
+                "order": 3,
+                "lesson_ids": ["web-db-mongodb-postgresql-crud"]
+            }
+        ]
+    },
+    # =========================================================================
+    # COURSE 7F: ADVANCED FULL-STACK ENGINEERING & WEB PERFORMANCE (DOMAIN: web-dev) - ADVANCED
+    # =========================================================================
+    {
+        "slug": "advanced-fullstack-performance",
+        "title": "Advanced Full-Stack Engineering & Web Performance",
+        "domain": "web-dev",
+        "description": "Scale enterprise web applications: Server-Side Rendering (SSR) with Next.js, Core Web Vitals optimization, real-time bidirectional WebSockets, and distributed Redis caching.",
+        "category": "Web Development",
+        "level": "Advanced",
+        "estimated_hours": 18,
+        "icon": "Zap",
+        "color": "#8B5CF6",
+        "order": 12,
+        "is_published": True,
+        "prerequisites": ["react18-frontend-architecture", "nodejs-backend-apis"],
+        "skills_taught": ["Server-Side Rendering (SSR)", "Next.js App Router", "Core Web Vitals (LCP/FID/CLS)", "WebSockets", "Redis Caching", "Code Splitting"],
+        "syllabus_overview": "Master high-performance web engineering. Learn how top tech companies optimize render speeds with SSR and hydration, maintain real-time socket connections for millions of users, and eliminate database bottlenecks using Redis.",
+        "modules": [
+            {
+                "id": "adv-web-mod-1",
+                "title": "Module 1: Next.js SSR, SSG & Server Components",
+                "description": "Static site generation, dynamic server-side rendering, client hydration, and React Server Components.",
+                "order": 1,
+                "lesson_ids": ["web-nextjs-ssr-ssg-hydration"]
+            },
+            {
+                "id": "adv-web-mod-2",
+                "title": "Module 2: Web Performance & Core Web Vitals",
+                "description": "Optimizing Largest Contentful Paint (LCP), Cumulative Layout Shift (CLS), code splitting, and lazy loading.",
+                "order": 2,
+                "lesson_ids": ["web-performance-core-web-vitals"]
+            },
+            {
+                "id": "adv-web-mod-3",
+                "title": "Module 3: Real-Time WebSockets & In-Memory Redis Caching",
+                "description": "Bi-directional WebSocket streaming, socket rooms, Cache-Aside Redis patterns, and invalidation.",
+                "order": 3,
+                "lesson_ids": ["web-websockets-realtime-redis-caching"]
             }
         ]
     },
@@ -1550,21 +1760,142 @@ LESSONS_DATA = [
         "prev_lesson_slug": "prompt-chain-of-thought-reasoning"
     },
     # =========================================================================
-    # COURSE 7: WEB DEVELOPMENT LESSONS
+    # COURSE 7A: HTML5 & WEB ARCHITECTURE LESSONS (BEGINNER)
     # =========================================================================
     {
-        "slug": "web-html-css-box-model",
-        "course_slug": "fullstack-web-dev",
-        "module_id": "web-mod-1",
-        "title": "HTML5 Semantic Architecture & The CSS Box Model",
+        "slug": "web-how-the-web-works",
+        "course_slug": "html5-web-architecture",
+        "module_id": "html-mod-1",
+        "title": "How the Web Works: DNS, HTTP/HTTPS & The Client-Server Model",
+        "order": 1,
+        "estimated_minutes": 15,
+        "difficulty": "Beginner",
+        "skill_tag": "web_foundations",
+        "learning_objectives": [
+            "Understand how a browser converts a URL (like google.com) into an IP address via DNS.",
+            "Learn the client-server request/response cycle over TCP/IP.",
+            "Understand HTTP methods (GET, POST, PUT, DELETE) and status codes (200, 301, 404, 500)."
+        ],
+        "theory_sections": [
+            {
+                "title": "The Web's Postal System Analogy",
+                "content_markdown": "When you type `https://example.com` into your browser:\n1. **DNS (Phonebook)**: Your browser asks a DNS server, *'What IP address belongs to example.com?'* -> Answer: `93.184.216.34`.\n2. **TCP Handshake (Knocking on the door)**: Browser and server establish a secure, reliable connection.\n3. **HTTP Request (Ordering a meal)**: Browser sends a `GET /index.html HTTP/2` request with headers.\n4. **HTTP Response (Delivering the meal)**: Server returns `200 OK` along with the raw HTML string, CSS styles, and JS bundles.",
+                "key_takeaway": "The web is fundamentally a request-response dialogue over HTTP between client browsers and server machines."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "Client-Server Request-Response Lifecycle",
+            "subtitle": "Browser -> DNS Lookup -> TCP Handshake -> HTTP GET -> 200 OK Response",
+            "diagram_type": "client_server_flow"
+        },
+        "code_example": {
+            "title": "Inspecting HTTP Request and Response Headers",
+            "language": "http",
+            "code": "GET /api/v1/profile HTTP/1.1\nHost: api.example.com\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)\nAccept: application/json\nAuthorization: Bearer eyJhbGciOiJIUzI1NiIsIn...\n\nHTTP/1.1 200 OK\nContent-Type: application/json; charset=utf-8\nCache-Control: max-age=3600\n\n{\n  \"status\": \"success\",\n  \"user\": { \"id\": 101, \"username\": \"alex_dev\" }\n}",
+            "explanation": "Demonstrates raw HTTP headers sent by the client and returned by the server.",
+            "output_preview": "Status: 200 OK | Content-Type: application/json"
+        },
+        "quiz_id": "quiz-web-how-the-web-works",
+        "summary": "You understood DNS resolution, TCP handshakes, and HTTP/HTTPS client-server communication.",
+        "next_lesson_slug": "web-semantic-html5-tags",
+        "prev_lesson_slug": "prompt-ai-agents-tool-use"
+    },
+    {
+        "slug": "web-semantic-html5-tags",
+        "course_slug": "html5-web-architecture",
+        "module_id": "html-mod-2",
+        "title": "Semantic HTML5 Architecture & Document Structure",
+        "order": 2,
+        "estimated_minutes": 20,
+        "difficulty": "Beginner",
+        "skill_tag": "html5_semantics",
+        "learning_objectives": [
+            "Understand why semantic tags (<header>, <nav>, <main>, <article>, <aside>, <footer>) beat generic <div> soup.",
+            "Learn how search engine web crawlers build document outline trees for SEO rankings.",
+            "Implement accessible landmark elements recognized by screen readers."
+        ],
+        "theory_sections": [
+            {
+                "title": "Why Semantic Tags Matter",
+                "content_markdown": "A webpage built entirely with `<div>` tags looks like a book where every single word is printed in the same size without chapters, headings, or index.\n\n* `<header>`: Site banner, logos, primary navigation.\n* `<main>`: The unique core content of this specific page.\n* `<article>`: Self-contained piece of content that makes sense if syndicated on its own (like a blog post or product card).\n* `<section>`: Thematic grouping of content with a heading.\n* `<footer>`: Author copyright, legal links, and secondary navigation.",
+                "key_takeaway": "Semantic HTML describes the meaning of content, making it indexable by SEO bots and accessible to assistive tech."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "Semantic HTML5 Landmark Hierarchy",
+            "subtitle": "<header> -> <nav> -> <main> [<article>, <section>] -> <aside> -> <footer>",
+            "diagram_type": "html_landmarks"
+        },
+        "code_example": {
+            "title": "Clean Semantic HTML5 Layout",
+            "language": "html",
+            "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>Developer Portfolio</title>\n</head>\n<body>\n  <header>\n    <nav aria-label=\"Main navigation\">\n      <a href=\"/\">Home</a>\n      <a href=\"/projects\">Projects</a>\n    </nav>\n  </header>\n  <main>\n    <article>\n      <h1>Building Scalable Web Apps</h1>\n      <p>Modern full-stack practices...</p>\n    </article>\n  </main>\n  <footer>\n    <p>&copy; 2026 AI Learning Lab. All rights reserved.</p>\n  </footer>\n</body>\n</html>",
+            "explanation": "Demonstrates semantic landmarks with proper viewport settings and accessible navigation.",
+            "output_preview": "[Rendered Semantic Web Document with Header, Main, and Footer]"
+        },
+        "quiz_id": "quiz-web-semantic-html5-tags",
+        "summary": "You mastered semantic HTML5 document architecture and SEO landmark structures.",
+        "next_lesson_slug": "web-forms-validation-accessibility",
+        "prev_lesson_slug": "web-how-the-web-works"
+    },
+    {
+        "slug": "web-forms-validation-accessibility",
+        "course_slug": "html5-web-architecture",
+        "module_id": "html-mod-3",
+        "title": "Interactive Forms, Native Validation & ARIA Accessibility",
+        "order": 3,
+        "estimated_minutes": 25,
+        "difficulty": "Beginner",
+        "skill_tag": "web_accessibility",
+        "learning_objectives": [
+            "Build accessible forms connecting <label for=\"id\"> with input fields.",
+            "Use native HTML5 validations: required, minlength, type=\"email\", pattern regex.",
+            "Apply ARIA attributes (aria-expanded, aria-describedby, role=\"alert\") for screen readers."
+        ],
+        "theory_sections": [
+            {
+                "title": "Form Accessibility & UX",
+                "content_markdown": "Forms are the primary way users submit data to servers.\n* Always connect labels to inputs using `<label for=\"email-input\">` so clicking the label focuses the input.\n* Native HTML5 validation prevents invalid requests before hitting JavaScript.\n* ARIA attributes announce dynamic error messages to visually impaired users automatically.",
+                "key_takeaway": "Accessible forms with explicit labels and native constraints provide the best user experience and accessibility compliance."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "Accessible Form Interaction Model",
+            "subtitle": "Label -> Input Focus -> Native Constraint Check -> ARIA Live Error Announcement",
+            "diagram_type": "form_accessibility"
+        },
+        "code_example": {
+            "title": "Accessible Registration Form with HTML5 Validation",
+            "language": "html",
+            "code": "<form action=\"/api/register\" method=\"POST\">\n  <div class=\"form-group\">\n    <label for=\"username\">Username</label>\n    <input \n      type=\"text\" \n      id=\"username\" \n      name=\"username\" \n      required \n      minlength=\"3\" \n      aria-describedby=\"user-hint\" \n    />\n    <small id=\"user-hint\">Must be at least 3 characters.</small>\n  </div>\n  <button type=\"submit\">Create Account</button>\n</form>",
+            "explanation": "Demonstrates native client-side validation paired with ARIA description attributes.",
+            "output_preview": "[Accessible Input Form with validation feedback]"
+        },
+        "quiz_id": "quiz-web-forms-validation-accessibility",
+        "summary": "You mastered accessible forms, ARIA standards, and native HTML5 input constraints.",
+        "next_lesson_slug": "web-css-box-model-cascade",
+        "prev_lesson_slug": "web-semantic-html5-tags"
+    },
+
+    # =========================================================================
+    # COURSE 7B: CSS3 MASTERY & RESPONSIVE LAYOUTS LESSONS (BEGINNER)
+    # =========================================================================
+    {
+        "slug": "web-css-box-model-cascade",
+        "course_slug": "css3-mastery-responsive-grid",
+        "module_id": "css-mod-1",
+        "title": "The CSS Box Model, Specificity & The Cascade",
         "order": 1,
         "estimated_minutes": 20,
         "difficulty": "Beginner",
-        "skill_tag": "web_layout",
+        "skill_tag": "css_box_model",
         "learning_objectives": [
-            "Understand why semantic HTML5 (<header>, <main>, <article>) improves accessibility and SEO.",
-            "Master the CSS Box Model: Content, Padding, Border, and Margin.",
-            "Build responsive layouts using CSS Flexbox (justify-content, align-items, flex-direction)."
+            "Master the 4 layers of the Box Model: Content, Padding, Border, Margin.",
+            "Understand why `box-sizing: border-box` solves accidental width expansion.",
+            "Calculate CSS selector specificity: Inline (1000) > IDs (100) > Classes (10) > Tags (1)."
         ],
         "theory_sections": [
             {
@@ -1580,30 +1911,151 @@ LESSONS_DATA = [
             "diagram_type": "box_model"
         },
         "code_example": {
-            "title": "Responsive Card Layout with Flexbox",
-            "language": "html",
-            "code": "<div class=\"user-card\">\n  <img src=\"avatar.png\" class=\"avatar\" />\n  <div class=\"details\">\n    <h3>Alex Morgan</h3>\n    <p>Frontend Engineer</p>\n  </div>\n</div>\n\n<style>\n.user-card {\n  display: flex;\n  align-items: center;\n  gap: 1rem;\n  padding: 1.5rem;\n  background: #1e293b;\n  border-radius: 12px;\n}\n</style>",
-            "explanation": "Demonstrates clean flexbox alignment with consistent padding and spacing.",
-            "output_preview": "[Flex Container with aligned Avatar and Text Details]"
+            "title": "Universal Box-Sizing Reset",
+            "language": "css",
+            "code": "/* Universal CSS Reset */\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\n\n.card {\n  width: 300px;\n  padding: 20px;\n  border: 2px solid #3b82f6;\n  margin: 16px;\n  /* Total width remains precisely 300px on screen! */\n}",
+            "explanation": "Demonstrates why border-box prevents element overflow in responsive layouts.",
+            "output_preview": "[Perfect 300px Width Box with internal padding]"
         },
-        "quiz_id": "quiz-web-html-css-box-model",
-        "summary": "You mastered HTML5 semantics, the CSS Box Model, and flexbox alignment.",
-        "next_lesson_slug": "web-javascript-dom-async",
-        "prev_lesson_slug": "prompt-ai-agents-tool-use"
+        "quiz_id": "quiz-web-css-box-model-cascade",
+        "summary": "You mastered the CSS Box Model, border-box sizing, and specificity calculations.",
+        "next_lesson_slug": "web-css-flexbox-grid-mastery",
+        "prev_lesson_slug": "web-forms-validation-accessibility"
     },
     {
-        "slug": "web-javascript-dom-async",
-        "course_slug": "fullstack-web-dev",
-        "module_id": "web-mod-2",
-        "title": "Modern JavaScript ES6+, Event Loop & Async Fetch",
+        "slug": "web-css-flexbox-grid-mastery",
+        "course_slug": "css3-mastery-responsive-grid",
+        "module_id": "css-mod-2",
+        "title": "1D Flexbox & 2D CSS Grid Layout Engineering",
         "order": 2,
         "estimated_minutes": 25,
         "difficulty": "Beginner",
-        "skill_tag": "javascript_core",
+        "skill_tag": "css_flexbox_grid",
         "learning_objectives": [
-            "Understand the JavaScript Single-Threaded Event Loop & Call Stack.",
-            "Learn how Promises and Async/Await prevent UI freezing during network calls.",
-            "Fetch JSON data from REST API endpoints safely with try/catch error handling."
+            "Master 1D Flexbox: Main axis (justify-content) vs Cross axis (align-items).",
+            "Master 2D CSS Grid: grid-template-columns with repeat(auto-fit, minmax(280px, 1fr)).",
+            "Combine Flexbox for components and CSS Grid for macro-page layouts."
+        ],
+        "theory_sections": [
+            {
+                "title": "When to Use Flexbox vs CSS Grid",
+                "content_markdown": "* **Flexbox (1D)**: For arranging items in a single direction (row OR column). Ideal for navbars, pill badges, and form control rows.\n* **CSS Grid (2D)**: For arranging items across rows AND columns simultaneously. Ideal for dashboard widgets, photo galleries, and responsive product grids without media queries!",
+                "key_takeaway": "Use CSS Grid for overall page layouts and Flexbox for component-level alignment."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "Flexbox vs CSS Grid Axis Models",
+            "subtitle": "Flexbox (1D: Main/Cross) | CSS Grid (2D: Rows & Columns Matrix)",
+            "diagram_type": "flex_vs_grid"
+        },
+        "code_example": {
+            "title": "Zero-Media-Query Responsive Card Grid with CSS Grid",
+            "language": "css",
+            "code": ".dashboard-grid {\n  display: grid;\n  /* Automatically wraps cards into clean columns based on available width */\n  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));\n  gap: 1.5rem;\n  padding: 1.5rem;\n}\n\n.card {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  background: #1e293b;\n  border-radius: 12px;\n  padding: 1rem;\n}",
+            "explanation": "Creates a completely fluid responsive layout that adapts to any screen size automatically.",
+            "output_preview": "[Responsive Multi-Column Card Grid with auto-fit]"
+        },
+        "quiz_id": "quiz-web-css-flexbox-grid-mastery",
+        "summary": "You mastered 1D Flexbox alignment and responsive 2D CSS Grid templates.",
+        "next_lesson_slug": "web-css-responsive-animations",
+        "prev_lesson_slug": "web-css-box-model-cascade"
+    },
+    {
+        "slug": "web-css-responsive-animations",
+        "course_slug": "css3-mastery-responsive-grid",
+        "module_id": "css-mod-3",
+        "title": "Responsive Units, Custom Properties & Smooth Animations",
+        "order": 3,
+        "estimated_minutes": 20,
+        "difficulty": "Beginner",
+        "skill_tag": "css_animations",
+        "learning_objectives": [
+            "Use fluid typography with `clamp(min, preferred, max)`.",
+            "Manage design system tokens using CSS Custom Properties (`--color-primary`).",
+            "Create 60fps GPU-accelerated micro-animations using `transform` and `opacity`."
+        ],
+        "theory_sections": [
+            {
+                "title": "60fps Performance Rules in CSS",
+                "content_markdown": "Animating properties like `width`, `height`, or `top` forces the browser to recalculate layout and repaint pixels across the entire screen (causing UI lag).\n\nAlways animate `transform: translate3d()` and `opacity`. These run directly on the GPU compositor thread without triggering CPU layout recalculations!",
+                "key_takeaway": "Animate only transform and opacity for butter-smooth 60fps animations."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "Browser Rendering Pipeline",
+            "subtitle": "JS -> Style Calc -> Layout (Reflow) -> Paint -> Composite (GPU)",
+            "diagram_type": "rendering_pipeline"
+        },
+        "code_example": {
+            "title": "Design Tokens & Smooth GPU Hover Effect",
+            "language": "css",
+            "code": ":root {\n  --primary: #3b82f6;\n  --radius: 8px;\n  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);\n}\n\n.btn-interactive {\n  background: var(--primary);\n  border-radius: var(--radius);\n  transition: transform 0.2s ease, box-shadow 0.2s ease;\n  will-change: transform;\n}\n\n.btn-interactive:hover {\n  transform: translateY(-2px);\n  box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.5);\n}",
+            "explanation": "Leverages CSS variables and hardware-accelerated transform for fluid interactive buttons.",
+            "output_preview": "[Interactive Glowing Button with smooth elevation lift]"
+        },
+        "quiz_id": "quiz-web-css-responsive-animations",
+        "summary": "You mastered CSS custom properties, clamp fluid units, and GPU-accelerated animations.",
+        "next_lesson_slug": "web-js-execution-scope-closures",
+        "prev_lesson_slug": "web-css-flexbox-grid-mastery"
+    },
+
+    # =========================================================================
+    # COURSE 7C: MODERN JAVASCRIPT LESSONS (INTERMEDIATE)
+    # =========================================================================
+    {
+        "slug": "web-js-execution-scope-closures",
+        "course_slug": "javascript-core-async",
+        "module_id": "js-mod-1",
+        "title": "JavaScript Execution Contexts, Lexical Scope & Closures",
+        "order": 1,
+        "estimated_minutes": 25,
+        "difficulty": "Intermediate",
+        "skill_tag": "javascript_internals",
+        "learning_objectives": [
+            "Understand the Global Execution Context and Function Execution Contexts on the Call Stack.",
+            "Learn how Lexical Scope determines variable accessibility.",
+            "Master Closures: How inner functions retain access to their outer enclosing scope."
+        ],
+        "theory_sections": [
+            {
+                "title": "The Backpack Analogy (Closures)",
+                "content_markdown": "When a function finishes running, its local variables are normally destroyed by garbage collection.\n\nHowever, if an inner function is returned, it packs a **Backpack (Closure)** containing all the variables from its lexical birth environment. Wherever that inner function travels in your code, it still has access to the variables inside its backpack!",
+                "key_takeaway": "A closure gives you access to an outer function's scope from an inner function even after the outer function has returned."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "Closure Scope Backpack in Memory",
+            "subtitle": "Outer Function [count=0] -> Returns Inner Function -> Closure retains [count]",
+            "diagram_type": "closure_memory"
+        },
+        "code_example": {
+            "title": "Creating Private Encapsulated State with Closures",
+            "language": "javascript",
+            "code": "function createCounter(initialValue = 0) {\n  let count = initialValue; // Private state variable\n\n  return {\n    increment: () => ++count,\n    decrement: () => --count,\n    getValue: () => count\n  };\n}\n\nconst counter = createCounter(10);\nconsole.log(counter.increment()); // 11\nconsole.log(counter.increment()); // 12\nconsole.log(counter.getValue());  // 12\n// 'count' cannot be modified directly from outside!",
+            "explanation": "Demonstrates closure data hiding without using classes.",
+            "output_preview": "11\n12\n12"
+        },
+        "quiz_id": "quiz-web-js-execution-scope-closures",
+        "summary": "You mastered execution contexts, lexical scope chains, and closure memory retention.",
+        "next_lesson_slug": "web-js-event-loop-promises-async",
+        "prev_lesson_slug": "web-css-responsive-animations"
+    },
+    {
+        "slug": "web-js-event-loop-promises-async",
+        "course_slug": "javascript-core-async",
+        "module_id": "js-mod-2",
+        "title": "The Event Loop, Microtask Queue, Promises & Async/Await",
+        "order": 2,
+        "estimated_minutes": 25,
+        "difficulty": "Intermediate",
+        "skill_tag": "javascript_async",
+        "learning_objectives": [
+            "Understand the single-threaded Event Loop, Call Stack, Web APIs, and Microtask Queue.",
+            "Learn why Promise microtasks execute before setTimeout macrotasks.",
+            "Handle asynchronous network calls with async/await and robust try/catch blocks."
         ],
         "theory_sections": [
             {
@@ -1615,34 +2067,77 @@ LESSONS_DATA = [
         "visual_explainer": {
             "type": "diagram",
             "title": "JavaScript Event Loop Architecture",
-            "subtitle": "Call Stack -> Web APIs -> Callback Queue -> Event Loop",
+            "subtitle": "Call Stack -> Web APIs -> Microtask Queue (Promises) -> Macrotask Queue (Timers) -> Event Loop",
             "diagram_type": "event_loop"
         },
         "code_example": {
-            "title": "Fetching REST API Data with Async/Await in JavaScript",
+            "title": "Parallel Network Fetching with Promise.allSettled",
             "language": "javascript",
-            "code": "async function loadUserData(userId) {\n  try {\n    const response = await fetch(`https://api.example.com/users/${userId}`);\n    if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);\n    const data = await response.json();\n    console.log('User Profile:', data.name);\n    return data;\n  } catch (error) {\n    console.error('Failed to load user:', error.message);\n  }\n}",
-            "explanation": "Demonstrates safe asynchronous network fetching with proper error boundary handling.",
-            "output_preview": "User Profile: Alex Morgan"
+            "code": "async function loadDashboardData(userId) {\n  try {\n    const [userRes, metricsRes] = await Promise.all([\n      fetch(`/api/users/${userId}`),\n      fetch(`/api/users/${userId}/metrics`)\n    ]);\n\n    const user = await userRes.json();\n    const metrics = await metricsRes.json();\n    return { user, metrics };\n  } catch (err) {\n    console.error('Network failure:', err.message);\n    throw err;\n  }\n}",
+            "explanation": "Executes multiple HTTP requests in parallel rather than serial waterfalls.",
+            "output_preview": "{ user: { name: 'Alex' }, metrics: { streak: 14 } }"
         },
-        "quiz_id": "quiz-web-javascript-dom-async",
-        "summary": "You mastered async/await, promises, and the JavaScript event loop.",
-        "next_lesson_slug": "web-react-hooks-state",
-        "prev_lesson_slug": "web-html-css-box-model"
+        "quiz_id": "quiz-web-js-event-loop-promises-async",
+        "summary": "You mastered the JavaScript Event Loop, Promise microtask queues, and parallel async data fetching.",
+        "next_lesson_slug": "web-js-dom-events-delegation",
+        "prev_lesson_slug": "web-js-execution-scope-closures"
     },
     {
-        "slug": "web-react-hooks-state",
-        "course_slug": "fullstack-web-dev",
-        "module_id": "web-mod-3",
-        "title": "React 18: Component State, Props & Custom Hooks",
+        "slug": "web-js-dom-events-delegation",
+        "course_slug": "javascript-core-async",
+        "module_id": "js-mod-3",
+        "title": "High-Performance DOM Traversal & Event Delegation",
         "order": 3,
+        "estimated_minutes": 20,
+        "difficulty": "Intermediate",
+        "skill_tag": "dom_manipulation",
+        "learning_objectives": [
+            "Traverse and query the DOM with `querySelector` and `closest()`.",
+            "Understand Event Bubbling and Event Capturing phases.",
+            "Implement Event Delegation on parent containers to handle thousands of dynamic child nodes efficiently."
+        ],
+        "theory_sections": [
+            {
+                "title": "Event Delegation Pattern",
+                "content_markdown": "If you have a table with 1,000 rows, attaching 1,000 separate `click` listeners consumes massive heap memory.\n\nBecause events **bubble up** to parent ancestors, you attach **one single listener** to the `<table>` element. When clicked, `event.target.closest('tr')` identifies precisely which row triggered the action!",
+                "key_takeaway": "Event delegation attaches a single event handler to a parent to manage all existing and future children."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "DOM Event Bubbling Propagation",
+            "subtitle": "Target Element -> Parent Div -> Section -> Body -> Document Window",
+            "diagram_type": "event_bubbling"
+        },
+        "code_example": {
+            "title": "Event Delegation with closest() Pattern",
+            "language": "javascript",
+            "code": "const listContainer = document.querySelector('#todo-list');\n\n// One single listener for all present and future items!\nlistContainer.addEventListener('click', (e) => {\n  const deleteBtn = e.target.closest('.delete-btn');\n  if (!deleteBtn) return;\n\n  const item = deleteBtn.closest('.todo-item');\n  item.remove();\n});",
+            "explanation": "Demonstrates high-performance event delegation managing dynamically appended items.",
+            "output_preview": "[Item removed from DOM on delete click]"
+        },
+        "quiz_id": "quiz-web-js-dom-events-delegation",
+        "summary": "You mastered DOM traversal, event bubbling propagation, and high-performance event delegation.",
+        "next_lesson_slug": "web-react-jsx-vdom-components",
+        "prev_lesson_slug": "web-js-event-loop-promises-async"
+    },
+
+    # =========================================================================
+    # COURSE 7D: REACT 18 LESSONS (INTERMEDIATE)
+    # =========================================================================
+    {
+        "slug": "web-react-jsx-vdom-components",
+        "course_slug": "react18-frontend-architecture",
+        "module_id": "react-mod-1",
+        "title": "Declarative JSX, Component Hierarchies & Virtual DOM Diffing",
+        "order": 1,
         "estimated_minutes": 25,
         "difficulty": "Intermediate",
-        "skill_tag": "react_engineering",
+        "skill_tag": "react_core",
         "learning_objectives": [
-            "Understand React's declarative Virtual DOM rendering lifecycle.",
-            "Master useState for dynamic UI state and useEffect for lifecycle side-effects.",
-            "Learn one-way data flow: Passing props down and bubbling events up."
+            "Understand Declarative UI vs Imperative DOM manipulation.",
+            "Learn how JSX compiles down to `React.createElement()` function calls.",
+            "Understand React's Reconciliation algorithm (Virtual DOM diffing) and why unique `key` props are mandatory."
         ],
         "theory_sections": [
             {
@@ -1653,21 +2148,341 @@ LESSONS_DATA = [
         ],
         "visual_explainer": {
             "type": "diagram",
-            "title": "React Component Tree & State Flow",
-            "subtitle": "Parent State -> Props Passed Down -> Event Bubbling Up",
-            "diagram_type": "component_hierarchy"
+            "title": "React Reconciliation & Virtual DOM Diffing",
+            "subtitle": "State Change -> Virtual DOM Snapshot -> Diff Tree -> Surgical Real DOM Patch",
+            "diagram_type": "vdom_diffing"
         },
         "code_example": {
-            "title": "Building an Interactive Stateful Component in React 18",
-            "language": "javascript",
-            "code": "import React, { useState, useEffect } from 'react';\n\nexport function LikeCounter({ initialLikes = 0 }) {\n  const [likes, setLikes] = useState(initialLikes);\n  const [isLiked, setIsLiked] = useState(false);\n\n  const handleToggle = () => {\n    setIsLiked(!isLiked);\n    setLikes(prev => isLiked ? prev - 1 : prev + 1);\n  };\n\n  return (\n    <button onClick={handleToggle} style={{ color: isLiked ? '#f43f5e' : '#94a3b8' }}>\n      ♥ {likes} Likes\n    </button>\n  );\n}",
-            "explanation": "Demonstrates useState state updates and conditional inline styling.",
-            "output_preview": "[Interactive Heart Button with Live Counter]"
+            "title": "Reusable Component with Typed Props and Keys",
+            "language": "jsx",
+            "code": "export function CourseCard({ title, level, xpReward, isCompleted }) {\n  return (\n    <div className={`course-card ${isCompleted ? 'border-green' : 'border-slate'}`}>\n      <h3>{title}</h3>\n      <div className=\"meta-row\">\n        <span className=\"badge\">{level}</span>\n        <span className=\"xp\">+{xpReward} XP</span>\n      </div>\n    </div>\n  );\n}",
+            "explanation": "Demonstrates declarative JSX component composition with dynamic conditional classes.",
+            "output_preview": "[Rendered Course Card Component with Badges]"
         },
-        "quiz_id": "quiz-web-react-hooks-state",
-        "summary": "You understood React 18 component state, props, and declarative Virtual DOM rendering.",
+        "quiz_id": "quiz-web-react-jsx-vdom-components",
+        "summary": "You mastered JSX compilation, Virtual DOM reconciliation, and component composition.",
+        "next_lesson_slug": "web-react-hooks-deep-dive",
+        "prev_lesson_slug": "web-js-dom-events-delegation"
+    },
+    {
+        "slug": "web-react-hooks-deep-dive",
+        "course_slug": "react18-frontend-architecture",
+        "module_id": "react-mod-2",
+        "title": "React 18 Hooks Deep-Dive: useEffect, useMemo & Custom Hooks",
+        "order": 2,
+        "estimated_minutes": 25,
+        "difficulty": "Intermediate",
+        "skill_tag": "react_hooks",
+        "learning_objectives": [
+            "Master the `useEffect` lifecycle and cleanup functions (clearing timers/listeners).",
+            "Optimize expensive calculations and memoize callbacks with `useMemo` and `useCallback`.",
+            "Extract shared business logic into clean, reusable Custom Hooks (e.g. `useFetch`, `useDebounce`)."
+        ],
+        "theory_sections": [
+            {
+                "title": "The Rules of Hooks & Dependency Arrays",
+                "content_markdown": "* **Rule 1**: Only call hooks at the top level (never inside loops or conditions).\n* **Rule 2**: Only call hooks from React function components or custom hooks.\n* **Dependency Arrays**: If you use a state variable or prop inside `useEffect` or `useMemo`, it MUST be declared in the dependency array to prevent stale closure bugs.",
+                "key_takeaway": "Custom hooks allow you to isolate stateful logic into reusable modular functions."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "React Hook Lifecycle & Cleanup",
+            "subtitle": "Component Mount -> Effect Runs -> Dependency Change -> Cleanup Previous -> Effect Re-runs",
+            "diagram_type": "hooks_lifecycle"
+        },
+        "code_example": {
+            "title": "Building a Reusable useDebounce Custom Hook",
+            "language": "jsx",
+            "code": "import { useState, useEffect } from 'react';\n\nexport function useDebounce(value, delayMs = 300) {\n  const [debouncedValue, setDebouncedValue] = useState(value);\n\n  useEffect(() => {\n    const timer = setTimeout(() => setDebouncedValue(value), delayMs);\n    return () => clearTimeout(timer); // Cleanup on rapid keystrokes\n  }, [value, delayMs]);\n\n  return debouncedValue;\n}",
+            "explanation": "Debounces rapid user typing in search inputs to avoid triggering hundreds of redundant API calls.",
+            "output_preview": "[Debounced Search Query emits after 300ms idle]"
+        },
+        "quiz_id": "quiz-web-react-hooks-deep-dive",
+        "summary": "You mastered useEffect cleanup lifecycles, memoization optimizations, and custom hooks.",
+        "next_lesson_slug": "web-react-state-routing-zustand",
+        "prev_lesson_slug": "web-react-jsx-vdom-components"
+    },
+    {
+        "slug": "web-react-state-routing-zustand",
+        "course_slug": "react18-frontend-architecture",
+        "module_id": "react-mod-3",
+        "title": "Global State Architecture (Context vs Zustand) & Client Routing",
+        "order": 3,
+        "estimated_minutes": 25,
+        "difficulty": "Intermediate",
+        "skill_tag": "react_state_management",
+        "learning_objectives": [
+            "Understand Prop Drilling and when to use Global State vs Local State.",
+            "Compare React Context API vs lightweight atomic stores like Zustand.",
+            "Implement multi-page client-side routing with React Router 6 and protected route guards."
+        ],
+        "theory_sections": [
+            {
+                "title": "State Colocation vs Global Stores",
+                "content_markdown": "Don't put everything into global state! Keep state as close to where it is used as possible (**State Colocation**).\n\nWhen multiple non-adjacent components need shared data (like user auth tokens, dark mode theme, or shopping cart items), lightweight state managers like **Zustand** provide direct atomic subscriptions without re-rendering the entire component tree.",
+                "key_takeaway": "Use local state for UI components and atomic Zustand stores for global application state."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "Prop Drilling vs Atomic Global State Store",
+            "subtitle": "Parent -> Child -> Child (Drilling) vs Component -> Direct Zustand Store Subscription",
+            "diagram_type": "state_architecture"
+        },
+        "code_example": {
+            "title": "Creating an Atomic Auth Store with Zustand",
+            "language": "javascript",
+            "code": "import { create } from 'zustand';\n\nexport const useAuthStore = create((set) => ({\n  user: null,\n  token: null,\n  isAuthenticated: false,\n  login: (userData, authToken) => set({\n    user: userData,\n    token: authToken,\n    isAuthenticated: true\n  }),\n  logout: () => set({ user: null, token: null, isAuthenticated: false })\n}));",
+            "explanation": "Provides instant global state access with zero boilerplate and minimal re-render overhead.",
+            "output_preview": "[Global User Profile & Session Store Active]"
+        },
+        "quiz_id": "quiz-web-react-state-routing-zustand",
+        "summary": "You mastered state colocation, Zustand global stores, and client-side routing.",
+        "next_lesson_slug": "web-nodejs-express-middleware",
+        "prev_lesson_slug": "web-react-hooks-deep-dive"
+    },
+
+    # =========================================================================
+    # COURSE 7E: BACKEND ENGINEERING LESSONS (INTERMEDIATE)
+    # =========================================================================
+    {
+        "slug": "web-nodejs-express-middleware",
+        "course_slug": "nodejs-backend-apis",
+        "module_id": "node-mod-1",
+        "title": "Node.js Architecture & Express Middleware Pipelines",
+        "order": 1,
+        "estimated_minutes": 25,
+        "difficulty": "Intermediate",
+        "skill_tag": "nodejs_express",
+        "learning_objectives": [
+            "Understand the Node.js libuv asynchronous I/O thread pool.",
+            "Learn how the Express Middleware Pipeline processes requests in sequence using `next()`.",
+            "Implement centralized error-handling middleware."
+        ],
+        "theory_sections": [
+            {
+                "title": "The Onion Middleware Model",
+                "content_markdown": "In Express, every incoming HTTP request passes through a pipeline of middleware functions like layers of an onion:\n1. **Logger Middleware**: Records `[GET] /api/users`.\n2. **CORS & JSON Body Parser**: Parses raw body streams into `req.body`.\n3. **Auth Guard Middleware**: Verifies JWT bearer token.\n4. **Route Controller**: Executes database query and sends `res.json()`.",
+                "key_takeaway": "Middleware functions have access to req, res, and next, allowing modular validation, authentication, and logging."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "Express Middleware Onion Pipeline",
+            "subtitle": "Request -> [Logger] -> [CORS/Parser] -> [AuthGuard] -> [Controller] -> Response",
+            "diagram_type": "middleware_pipeline"
+        },
+        "code_example": {
+            "title": "Express REST API with Modular Middleware",
+            "language": "javascript",
+            "code": "import express from 'express';\n\nconst app = express();\napp.use(express.json());\n\n// Custom Request Timing Middleware\napp.use((req, res, next) => {\n  const start = Date.now();\n  res.on('finish', () => console.log(`${req.method} ${req.url} took ${Date.now() - start}ms`));\n  next();\n});\n\napp.get('/api/health', (req, res) => {\n  res.json({ status: 'ok', uptime: process.uptime() });\n});\n\napp.listen(8080, () => console.log('Server running on port 8080'));",
+            "explanation": "Demonstrates non-blocking middleware execution and JSON response formatting.",
+            "output_preview": "[GET] /api/health took 2ms | 200 OK"
+        },
+        "quiz_id": "quiz-web-nodejs-express-middleware",
+        "summary": "You mastered the Node.js runtime, Express middleware chaining, and server initialization.",
+        "next_lesson_slug": "web-jwt-auth-security-bcrypt",
+        "prev_lesson_slug": "web-react-state-routing-zustand"
+    },
+    {
+        "slug": "web-jwt-auth-security-bcrypt",
+        "course_slug": "nodejs-backend-apis",
+        "module_id": "node-mod-2",
+        "title": "JWT Token Authentication, Bcrypt Hashing & REST Security",
+        "order": 2,
+        "estimated_minutes": 25,
+        "difficulty": "Intermediate",
+        "skill_tag": "web_security",
+        "learning_objectives": [
+            "Hash user passwords with salted Bcrypt algorithms (never store plaintext passwords!).",
+            "Understand the 3 parts of a JWT: Header, Payload, and Cryptographic Signature.",
+            "Protect endpoints against XSS and CSRF using HTTP-only secure cookies."
+        ],
+        "theory_sections": [
+            {
+                "title": "How JSON Web Tokens Work",
+                "content_markdown": "A JWT is a stateless identity passport:\n* **Header**: Algorithm used (e.g. `HS256`).\n* **Payload**: Public user claims (`userId: 42, role: \"admin\"`).\n* **Signature**: Hash of Header + Payload signed with your server's secret key.\n\nBecause the signature can only be created by the server, any tampering with the payload invalidates the token instantly without querying a session database!",
+                "key_takeaway": "JWTs allow stateless, scalable authentication verified via cryptographic signatures."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "JWT Authentication Lifecycle",
+            "subtitle": "Login -> Password Verified -> Server Signs JWT -> Client Stores Token -> Bearer Auth on API Calls",
+            "diagram_type": "jwt_auth_flow"
+        },
+        "code_example": {
+            "title": "Verifying JWT in Express Auth Guard Middleware",
+            "language": "javascript",
+            "code": "import jwt from 'jsonwebtoken';\n\nexport function requireAuth(req, res, next) {\n  const authHeader = req.headers.authorization;\n  if (!authHeader || !authHeader.startsWith('Bearer ')) {\n    return res.status(401).json({ error: 'Unauthorized: Missing token' });\n  }\n\n  const token = authHeader.split(' ')[1];\n  try {\n    const decoded = jwt.verify(token, process.env.JWT_SECRET);\n    req.user = decoded;\n    next();\n  } catch (err) {\n    return res.status(403).json({ error: 'Forbidden: Invalid or expired token' });\n  }\n}",
+            "explanation": "Guards private API routes by verifying JWT cryptographic authenticity.",
+            "output_preview": "Verified req.user: { userId: 42, role: 'admin' }"
+        },
+        "quiz_id": "quiz-web-jwt-auth-security-bcrypt",
+        "summary": "You mastered salted password hashing, JWT signing, and route protection guards.",
+        "next_lesson_slug": "web-db-mongodb-postgresql-crud",
+        "prev_lesson_slug": "web-nodejs-express-middleware"
+    },
+    {
+        "slug": "web-db-mongodb-postgresql-crud",
+        "course_slug": "nodejs-backend-apis",
+        "module_id": "node-mod-3",
+        "title": "Database Modeling with MongoDB & PostgreSQL CRUD",
+        "order": 3,
+        "estimated_minutes": 25,
+        "difficulty": "Intermediate",
+        "skill_tag": "database_crud",
+        "learning_objectives": [
+            "Compare Document Databases (MongoDB) vs Relational Tables (PostgreSQL).",
+            "Design normalized schemas, foreign keys, and indexes for fast queries.",
+            "Implement high-performance CRUD queries and prevent SQL injection vulnerabilities."
+        ],
+        "theory_sections": [
+            {
+                "title": "SQL vs NoSQL Decision Matrix",
+                "content_markdown": "* **Relational (PostgreSQL)**: Rigid tabular schema with strict ACID transactions. Best for financial ledgers, inventory systems, and complex relational joins.\n* **Document (MongoDB)**: Flexible JSON-like BSON documents that can nest arrays and sub-objects. Best for rapid prototyping, content management, and polymorphic data models.",
+                "key_takeaway": "Choose PostgreSQL for structured relational consistency and MongoDB for flexible nested document schemas."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "Relational Tables vs Document JSON Models",
+            "subtitle": "PostgreSQL (Foreign Key Joins) vs MongoDB (Embedded BSON Documents)",
+            "diagram_type": "sql_vs_nosql"
+        },
+        "code_example": {
+            "title": "Parameterized SQL Query Preventing SQL Injection",
+            "language": "javascript",
+            "code": "import { pool } from './db.js';\n\nexport async function getUserById(userId) {\n  // Parameterized query: $1 prevents SQL injection attacks!\n  const query = 'SELECT id, username, email, created_at FROM users WHERE id = $1';\n  const result = await pool.query(query, [userId]);\n  return result.rows[0];\n}",
+            "explanation": "Demonstrates safe database querying using parameterized values.",
+            "output_preview": "{ id: 101, username: 'alex_dev', email: 'alex@example.com' }"
+        },
+        "quiz_id": "quiz-web-db-mongodb-postgresql-crud",
+        "summary": "You mastered database schema design, index optimization, and SQL injection prevention.",
+        "next_lesson_slug": "web-nextjs-ssr-ssg-hydration",
+        "prev_lesson_slug": "web-jwt-auth-security-bcrypt"
+    },
+
+    # =========================================================================
+    # COURSE 7F: ADVANCED FULL-STACK ENGINEERING LESSONS (ADVANCED)
+    # =========================================================================
+    {
+        "slug": "web-nextjs-ssr-ssg-hydration",
+        "course_slug": "advanced-fullstack-performance",
+        "module_id": "adv-web-mod-1",
+        "title": "Next.js Architecture: SSR, SSG & Client Hydration",
+        "order": 1,
+        "estimated_minutes": 30,
+        "difficulty": "Advanced",
+        "skill_tag": "nextjs_ssr",
+        "learning_objectives": [
+            "Understand the trade-offs: Client-Side Rendering (CSR), Static Site Generation (SSG), and Server-Side Rendering (SSR).",
+            "Learn how Client Hydration attaches event listeners to pre-rendered server HTML.",
+            "Build full-stack applications with React Server Components (RSC)."
+        ],
+        "theory_sections": [
+            {
+                "title": "The Hydration Process",
+                "content_markdown": "In traditional SPA (CSR), the user sees a blank screen until the massive JS bundle downloads, parses, and renders.\n\nIn **SSR / Next.js**:\n1. Server executes React components and sends a fully-rendered HTML document immediately (instant visual preview for SEO and users!).\n2. The browser downloads the lightweight JavaScript bundle.\n3. **Hydration**: React walks through the existing DOM and attaches interactive event listeners seamlessly.",
+                "key_takeaway": "SSR sends ready-to-view HTML from the server, which is then hydrated with React interactive event listeners."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "SSR Server Render & Hydration Timeline",
+            "subtitle": "Server renders HTML -> Fast First Paint -> JS Bundle Loads -> Hydration completes -> Fully Interactive",
+            "diagram_type": "hydration_timeline"
+        },
+        "code_example": {
+            "title": "React Server Component Fetching Data on the Server",
+            "language": "jsx",
+            "code": "// Next.js Server Component (Zero client-side JS bundle overhead!)\nexport default async function LeaderboardPage() {\n  const res = await fetch('https://api.example.com/leaderboard', { next: { revalidate: 60 } });\n  const topLearners = await res.json();\n\n  return (\n    <main className=\"leaderboard\">\n      <h1>Global AI Masterclass Leaderboard</h1>\n      <ul>\n        {topLearners.map(student => (\n          <li key={student.id}>{student.name} — {student.xp} XP</li>\n        ))}\n      </ul>\n    </main>\n  );\n}",
+            "explanation": "Executes data fetching securely on the server without leaking API keys to the browser.",
+            "output_preview": "[Instantly Rendered Server HTML with Cached Leaderboard Data]"
+        },
+        "quiz_id": "quiz-web-nextjs-ssr-ssg-hydration",
+        "summary": "You mastered Server-Side Rendering, Static Site Generation, and React hydration architecture.",
+        "next_lesson_slug": "web-performance-core-web-vitals",
+        "prev_lesson_slug": "web-db-mongodb-postgresql-crud"
+    },
+    {
+        "slug": "web-performance-core-web-vitals",
+        "course_slug": "advanced-fullstack-performance",
+        "module_id": "adv-web-mod-2",
+        "title": "Web Performance Optimization & Core Web Vitals",
+        "order": 2,
+        "estimated_minutes": 25,
+        "difficulty": "Advanced",
+        "skill_tag": "web_performance",
+        "learning_objectives": [
+            "Master Google Core Web Vitals: LCP (Largest Contentful Paint), INP (Interaction to Next Paint), CLS (Cumulative Layout Shift).",
+            "Optimize bundle sizes with dynamic code-splitting and dynamic `import()`.",
+            "Implement image responsive srcset, lazy loading, and modern WebP/AVIF compression."
+        ],
+        "theory_sections": [
+            {
+                "title": "Diagnosing Core Web Vitals",
+                "content_markdown": "* **LCP (< 2.5s)**: Measures loading performance of the main hero image or headline block.\n* **INP (< 200ms)**: Measures UI responsiveness when a user clicks a button or taps a menu.\n* **CLS (< 0.1)**: Measures visual stability (preventing buttons from jumping around as ads or late images load). Always declare explicit `width` and `height` attributes on images!",
+                "key_takeaway": "Optimizing Core Web Vitals boosts Google SEO rankings and drastically cuts user bounce rates."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "Google Core Web Vitals Metrics",
+            "subtitle": "LCP (Loading < 2.5s) | INP (Interactivity < 200ms) | CLS (Stability < 0.1)",
+            "diagram_type": "core_web_vitals"
+        },
+        "code_example": {
+            "title": "Dynamic Code-Splitting with React.lazy and Suspense",
+            "language": "jsx",
+            "code": "import React, { lazy, Suspense } from 'react';\n\n// Heavy 3D / Graph component is downloaded only when navigated to!\nconst HeavyAnalyticsGraph = lazy(() => import('./HeavyAnalyticsGraph'));\n\nexport function AnalyticsDashboard() {\n  return (\n    <div>\n      <h2>Performance Dashboard</h2>\n      <Suspense fallback={<div className=\"skeleton\">Loading chart modules...</div>}>\n        <HeavyAnalyticsGraph />\n      </Suspense>\n    </div>\n  );\n}",
+            "explanation": "Drastically reduces initial page bundle size by lazy-loading heavy secondary dependencies.",
+            "output_preview": "[Lazy Module Loaded On Demand]"
+        },
+        "quiz_id": "quiz-web-performance-core-web-vitals",
+        "summary": "You mastered Core Web Vitals, dynamic code splitting, and asset loading optimizations.",
+        "next_lesson_slug": "web-websockets-realtime-redis-caching",
+        "prev_lesson_slug": "web-nextjs-ssr-ssg-hydration"
+    },
+    {
+        "slug": "web-websockets-realtime-redis-caching",
+        "course_slug": "advanced-fullstack-performance",
+        "module_id": "adv-web-mod-3",
+        "title": "Real-Time WebSockets & Distributed In-Memory Redis Caching",
+        "order": 3,
+        "estimated_minutes": 30,
+        "difficulty": "Advanced",
+        "skill_tag": "realtime_caching",
+        "learning_objectives": [
+            "Understand full-duplex persistent bidirectional communication with WebSockets.",
+            "Implement the Cache-Aside pattern with Redis to eliminate repetitive database hits.",
+            "Handle cache invalidation and Time-To-Live (TTL) expiration strategies."
+        ],
+        "theory_sections": [
+            {
+                "title": "HTTP Polling vs WebSockets vs Redis Caching",
+                "content_markdown": "* **HTTP Polling**: Browser asks the server every 2 seconds *'Any new messages?'* (Wastes massive bandwidth).\n* **WebSockets**: A persistent TCP handshake connection remains open. Whenever an event occurs, server pushes data instantly to the client with sub-10ms latency!\n* **Redis**: In-memory key-value data store providing sub-millisecond query responses, reducing PostgreSQL/MongoDB load by up to 95%.",
+                "key_takeaway": "WebSockets enable instant live streaming and Redis caching protects primary databases from high-concurrency spikes."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "Real-Time WebSocket & Redis Cache-Aside Flow",
+            "subtitle": "Client <-> WebSocket Server <-> Redis Cache <-> PostgreSQL Database",
+            "diagram_type": "websocket_redis_flow"
+        },
+        "code_example": {
+            "title": "Cache-Aside Pattern with Redis in Node.js",
+            "language": "javascript",
+            "code": "import { redisClient } from './redis.js';\nimport { db } from './postgres.js';\n\nexport async function getCachedUserProfile(userId) {\n  const cacheKey = `user:${userId}`;\n  \n  // 1. Check Redis Cache First\n  const cached = await redisClient.get(cacheKey);\n  if (cached) return JSON.parse(cached);\n\n  // 2. Cache Miss: Query Database\n  const user = await db.query('SELECT * FROM users WHERE id = $1', [userId]);\n  \n  // 3. Populate Redis with 1 Hour TTL\n  await redisClient.set(cacheKey, JSON.stringify(user.rows[0]), { EX: 3600 });\n  return user.rows[0];\n}",
+            "explanation": "Implements the industry-standard Cache-Aside pattern with automatic expiration.",
+            "output_preview": "[Cache HIT: 0.8ms response time]"
+        },
+        "quiz_id": "quiz-web-websockets-realtime-redis-caching",
+        "summary": "You mastered real-time WebSocket communication and Redis distributed in-memory caching.",
         "next_lesson_slug": "app-viewport-flexbox-layout",
-        "prev_lesson_slug": "web-javascript-dom-async"
+        "prev_lesson_slug": "web-performance-core-web-vitals"
     },
 
     # =========================================================================
@@ -2639,15 +3454,82 @@ QUIZZES_DATA = [
 
     # Course 7 Quizzes (Web Dev)
     {
-        "id": "quiz-web-html-css-box-model",
-        "lesson_slug": "web-html-css-box-model",
-        "title": "HTML5 & CSS Box Model Quiz",
+        "id": "quiz-web-how-the-web-works",
+        "lesson_slug": "web-how-the-web-works",
+        "title": "Web Architecture & HTTP Protocols Quiz",
         "passing_score": 70,
         "questions": [
             {
                 "id": "q1",
                 "type": "multiple_choice",
-                "question": "When using `box-sizing: border-box` in CSS, what elements are included in the element's total declared width?",
+                "question": "What is the primary role of DNS (Domain Name System) on the web?",
+                "options": [
+                    "Translates human-readable domain names (like example.com) into machine IP addresses (like 93.184.216.34)",
+                    "Encrypts database passwords",
+                    "Renders HTML in the browser canvas",
+                    "Compiles TypeScript into JavaScript"
+                ],
+                "correct_answer": 0,
+                "points": 10,
+                "skill_tag": "web_foundations",
+                "explanation": "DNS acts as the phonebook of the internet, resolving domain names into numerical IP addresses.",
+                "hint": "Think of an internet phonebook."
+            }
+        ]
+    },
+    {
+        "id": "quiz-web-semantic-html5-tags",
+        "lesson_slug": "web-semantic-html5-tags",
+        "title": "Semantic HTML5 Architecture Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "Which HTML5 tag represents self-contained content that can be syndicated independently (such as a blog post or tweet card)?",
+                "options": ["<article>", "<div>", "<span>", "<header>"],
+                "correct_answer": 0,
+                "points": 10,
+                "skill_tag": "html5_semantics",
+                "explanation": "<article> is used for self-contained, standalone content suitable for syndication or RSS readers.",
+                "hint": "Think of a newspaper article."
+            }
+        ]
+    },
+    {
+        "id": "quiz-web-forms-validation-accessibility",
+        "lesson_slug": "web-forms-validation-accessibility",
+        "title": "Forms & ARIA Accessibility Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "Why is associating a <label for=\"id\"> with an <input id=\"id\"> critical for web accessibility?",
+                "options": [
+                    "It allows screen readers to announce the field name when focused and expands the clickable target area",
+                    "It speeds up network bandwidth",
+                    "It automatically submits the form to the backend",
+                    "It disables browser cookies"
+                ],
+                "correct_answer": 0,
+                "points": 10,
+                "skill_tag": "web_accessibility",
+                "explanation": "Explicit label associations enable assistive technology to read inputs aloud and allow users to click the text label to focus the input.",
+                "hint": "It aids screen readers and expands tap targets."
+            }
+        ]
+    },
+    {
+        "id": "quiz-web-css-box-model-cascade",
+        "lesson_slug": "web-css-box-model-cascade",
+        "title": "CSS Box Model & Specificity Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "When using `box-sizing: border-box` in CSS, what is included inside the element's declared width?",
                 "options": [
                     "Content only (padding and border add extra width)",
                     "Content, Padding, and Border (padding and border do NOT expand total width)",
@@ -2656,57 +3538,345 @@ QUIZZES_DATA = [
                 ],
                 "correct_answer": 1,
                 "points": 10,
-                "skill_tag": "web_layout",
-                "explanation": "With border-box, the width you declare includes content, padding, and border, preventing unexpected layout overflows.",
+                "skill_tag": "css_box_model",
+                "explanation": "With border-box, the declared width absorbs padding and border, eliminating unexpected overflow.",
                 "hint": "Border-box absorbs padding inside the box."
             }
         ]
     },
     {
-        "id": "quiz-web-javascript-dom-async",
-        "lesson_slug": "web-javascript-dom-async",
-        "title": "JavaScript Event Loop & Async Fetch Quiz",
+        "id": "quiz-web-css-flexbox-grid-mastery",
+        "lesson_slug": "web-css-flexbox-grid-mastery",
+        "title": "Flexbox & CSS Grid Mastery Quiz",
         "passing_score": 70,
         "questions": [
             {
                 "id": "q1",
                 "type": "multiple_choice",
-                "question": "Why is using async/await essential when fetching data over the network in browser JavaScript?",
+                "question": "What is the key architectural difference between CSS Flexbox and CSS Grid?",
                 "options": [
-                    "It converts JavaScript into WebAssembly",
-                    "It prevents long network requests from blocking the single main execution thread, keeping the UI smooth and responsive",
-                    "It doubles network download speed",
-                    "It encrypts the payload"
+                    "Flexbox is designed for 1-dimensional layouts (row OR column), while CSS Grid is designed for 2-dimensional layouts (rows AND columns simultaneously)",
+                    "Flexbox only works in dark mode",
+                    "CSS Grid cannot use padding",
+                    "Flexbox requires JavaScript"
                 ],
-                "correct_answer": 1,
+                "correct_answer": 0,
                 "points": 10,
-                "skill_tag": "javascript_core",
-                "explanation": "JavaScript is single-threaded. Blocking the main thread freezes clicks and animations. Async/await allows network requests to resolve in the background queue.",
-                "hint": "Think of non-blocking I/O keeping the UI responsive."
+                "skill_tag": "css_flexbox_grid",
+                "explanation": "Flexbox handles 1D linear alignment, whereas CSS Grid controls simultaneous 2D row/column matrices.",
+                "hint": "1D vs 2D layout models."
             }
         ]
     },
     {
-        "id": "quiz-web-react-hooks-state",
-        "lesson_slug": "web-react-hooks-state",
-        "title": "React 18 State & Hooks Quiz",
+        "id": "quiz-web-css-responsive-animations",
+        "lesson_slug": "web-css-responsive-animations",
+        "title": "Responsive Units & 60fps Animations Quiz",
         "passing_score": 70,
         "questions": [
             {
                 "id": "q1",
                 "type": "multiple_choice",
-                "question": "In React 18, what triggers a component to re-render its UI?",
+                "question": "Which CSS properties run directly on the GPU compositor thread without triggering expensive CPU layout recalculations?",
                 "options": [
-                    "A change in local state (useState) or incoming props from a parent component",
-                    "Changing a regular JavaScript variable `let x = 5`",
-                    "Writing a comment in the code",
-                    "Closing the browser tab"
+                    "`transform` and `opacity`",
+                    "`width` and `height`",
+                    "`margin-top` and `left`",
+                    "`font-size` and `border-width`"
                 ],
                 "correct_answer": 0,
                 "points": 10,
-                "skill_tag": "react_engineering",
-                "explanation": "React components re-render whenever their state (useState) or props change, prompting Virtual DOM reconciliation.",
-                "hint": "State and props are the two drivers of React rendering."
+                "skill_tag": "css_animations",
+                "explanation": "Transform and opacity bypass the layout/paint steps and execute on the GPU compositor for 60fps animations.",
+                "hint": "Transform and opacity are hardware accelerated."
+            }
+        ]
+    },
+    {
+        "id": "quiz-web-js-execution-scope-closures",
+        "lesson_slug": "web-js-execution-scope-closures",
+        "title": "JavaScript Closures & Execution Scope Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "What is a closure in JavaScript?",
+                "options": [
+                    "A function bundled together with references to its lexical environment, allowing it to remember outer variables even after the outer function has returned",
+                    "A syntax error when missing a closing bracket",
+                    "A way to terminate an infinite loop",
+                    "A method to close browser tabs"
+                ],
+                "correct_answer": 0,
+                "points": 10,
+                "skill_tag": "javascript_internals",
+                "explanation": "Closures allow inner functions to retain access to enclosing outer scope variables across memory lifetimes.",
+                "hint": "Think of the backpack analogy retaining outer variables."
+            }
+        ]
+    },
+    {
+        "id": "quiz-web-js-event-loop-promises-async",
+        "lesson_slug": "web-js-event-loop-promises-async",
+        "title": "Event Loop & Async Promises Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "In the JavaScript event loop, which queue has higher priority and executes first when the call stack clears?",
+                "options": [
+                    "Microtask Queue (Promise callbacks, queueMicrotask)",
+                    "Macrotask Queue (setTimeout, setInterval)",
+                    "Render Queue",
+                    "Garbage Collector"
+                ],
+                "correct_answer": 0,
+                "points": 10,
+                "skill_tag": "javascript_async",
+                "explanation": "Microtasks (resolved Promise handlers) are drained completely before the next macrotask (timer) is executed.",
+                "hint": "Microtasks run before macrotasks."
+            }
+        ]
+    },
+    {
+        "id": "quiz-web-js-dom-events-delegation",
+        "lesson_slug": "web-js-dom-events-delegation",
+        "title": "DOM Traversal & Event Delegation Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "Why is Event Delegation more performant than attaching individual listeners to 1,000 table rows?",
+                "options": [
+                    "It leverages event bubbling to handle all child clicks from a single parent listener, saving heap memory and automatically supporting new rows",
+                    "It bypasses the JavaScript single thread",
+                    "It forces hardware GPU acceleration",
+                    "It compiles JavaScript into C++"
+                ],
+                "correct_answer": 0,
+                "points": 10,
+                "skill_tag": "dom_manipulation",
+                "explanation": "Attaching one parent listener catches bubbled events from any child, dramatically cutting memory usage.",
+                "hint": "One parent listener handles all children via event bubbling."
+            }
+        ]
+    },
+    {
+        "id": "quiz-web-react-jsx-vdom-components",
+        "lesson_slug": "web-react-jsx-vdom-components",
+        "title": "React 18 JSX & Virtual DOM Diffing Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "Why does React require a unique `key` prop when rendering dynamic arrays of elements?",
+                "options": [
+                    "It helps the Virtual DOM diffing algorithm uniquely track which items were added, removed, or reordered without re-rendering the whole list",
+                    "It is used for database indexing",
+                    "It encrypts array contents",
+                    "It determines CSS z-index"
+                ],
+                "correct_answer": 0,
+                "points": 10,
+                "skill_tag": "react_core",
+                "explanation": "Keys give React stable element identities to perform optimal minimum-mutation diffs during list reconciliation.",
+                "hint": "Keys identify items across list re-renders."
+            }
+        ]
+    },
+    {
+        "id": "quiz-web-react-hooks-deep-dive",
+        "lesson_slug": "web-react-hooks-deep-dive",
+        "title": "React 18 Hooks & Memoization Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "What is the primary purpose of `useCallback` in React?",
+                "options": [
+                    "Memoizes a function definition between renders so child components receiving it as a prop don't re-render unnecessarily",
+                    "Calls an API endpoint in the background",
+                    "Creates a timer loop",
+                    "Renders JSX to HTML strings"
+                ],
+                "correct_answer": 0,
+                "points": 10,
+                "skill_tag": "react_hooks",
+                "explanation": "useCallback caches function instances between re-renders to maintain referential equality for memoized children.",
+                "hint": "It preserves function identity across re-renders."
+            }
+        ]
+    },
+    {
+        "id": "quiz-web-react-state-routing-zustand",
+        "lesson_slug": "web-react-state-routing-zustand",
+        "title": "Global State & Client Routing Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "What advantage does Zustand offer over standard React Context API for global application state?",
+                "options": [
+                    "Components can subscribe to atomic state slices without re-rendering when unrelated state properties change",
+                    "It requires a Redux boilerplate boilerplate reducer",
+                    "It only works on mobile devices",
+                    "It stores data in cookies only"
+                ],
+                "correct_answer": 0,
+                "points": 10,
+                "skill_tag": "react_state_management",
+                "explanation": "Zustand provides selective atomic subscriptions, eliminating the full-tree re-render issues of wide Context providers.",
+                "hint": "Selective atomic subscriptions prevent redundant re-renders."
+            }
+        ]
+    },
+    {
+        "id": "quiz-web-nodejs-express-middleware",
+        "lesson_slug": "web-nodejs-express-middleware",
+        "title": "Node.js & Express Middleware Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "What happens if an Express middleware does not call `next()` or send a response with `res.json()`?",
+                "options": [
+                    "The client HTTP request will hang indefinitely until timing out",
+                    "The server will immediately crash and reboot",
+                    "The database will automatically rollback",
+                    "The request will jump to the next route automatically"
+                ],
+                "correct_answer": 0,
+                "points": 10,
+                "skill_tag": "nodejs_express",
+                "explanation": "Express middleware must either call next() to advance the pipeline or terminate the request by sending a response.",
+                "hint": "The pipeline stops and the request hangs."
+            }
+        ]
+    },
+    {
+        "id": "quiz-web-jwt-auth-security-bcrypt",
+        "lesson_slug": "web-jwt-auth-security-bcrypt",
+        "title": "JWT Auth & Web Security Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "Why is storing JWT auth tokens in `httpOnly` secure cookies safer than localStorage?",
+                "options": [
+                    "`httpOnly` cookies cannot be accessed by JavaScript, protecting them from Cross-Site Scripting (XSS) token theft",
+                    "Cookies are stored in RAM only",
+                    "localStorage is limited to 10 bytes",
+                    "Cookies bypass CORS rules"
+                ],
+                "correct_answer": 0,
+                "points": 10,
+                "skill_tag": "web_security",
+                "explanation": "httpOnly cookies shield sensitive session credentials from malicious scripts injected via XSS vulnerabilities.",
+                "hint": "JavaScript cannot read httpOnly cookies."
+            }
+        ]
+    },
+    {
+        "id": "quiz-web-db-mongodb-postgresql-crud",
+        "lesson_slug": "web-db-mongodb-postgresql-crud",
+        "title": "Databases & CRUD Optimization Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "Why should database queries always use parameterized values (e.g. `SELECT * FROM users WHERE id = $1`) instead of string concatenation?",
+                "options": [
+                    "To completely prevent SQL injection attacks by treating user input strictly as literal data rather than executable code",
+                    "To make queries run on the client GPU",
+                    "To format the output as JSON automatically",
+                    "To compress the database on disk"
+                ],
+                "correct_answer": 0,
+                "points": 10,
+                "skill_tag": "database_crud",
+                "explanation": "Parameterized queries separate SQL structure from user input, making SQL injection impossible.",
+                "hint": "It treats input strictly as data, preventing SQL injection."
+            }
+        ]
+    },
+    {
+        "id": "quiz-web-nextjs-ssr-ssg-hydration",
+        "lesson_slug": "web-nextjs-ssr-ssg-hydration",
+        "title": "Next.js SSR & Hydration Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "What is 'Client Hydration' in Server-Side Rendered (SSR) React applications?",
+                "options": [
+                    "The process where client-side JavaScript attaches event listeners to pre-rendered server HTML to make it interactive",
+                    "Downloading water reminder notifications",
+                    "Cleaning up unmounted component memory",
+                    "Compressing image assets into WebP"
+                ],
+                "correct_answer": 0,
+                "points": 10,
+                "skill_tag": "nextjs_ssr",
+                "explanation": "Hydration brings static server-rendered HTML alive by attaching React state and event handlers in the browser.",
+                "hint": "Attaching event handlers to server HTML."
+            }
+        ]
+    },
+    {
+        "id": "quiz-web-performance-core-web-vitals",
+        "lesson_slug": "web-performance-core-web-vitals",
+        "title": "Core Web Vitals & Performance Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "How do you prevent Cumulative Layout Shift (CLS) when loading responsive images?",
+                "options": [
+                    "Always set explicit `width` and `height` aspect-ratio attributes on `<img>` tags so the browser reserves layout space before download",
+                    "Use PNG instead of JPEG",
+                    "Load all images on startup",
+                    "Remove CSS styles"
+                ],
+                "correct_answer": 0,
+                "points": 10,
+                "skill_tag": "web_performance",
+                "explanation": "Explicit width/height attributes allow the browser layout engine to allocate space immediately, preventing jumpy shifts.",
+                "hint": "Reserve space with explicit width and height attributes."
+            }
+        ]
+    },
+    {
+        "id": "quiz-web-websockets-realtime-redis-caching",
+        "lesson_slug": "web-websockets-realtime-redis-caching",
+        "title": "Real-Time WebSockets & Redis Caching Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "In the Cache-Aside pattern with Redis, what happens when a requested item is NOT found in the cache (Cache Miss)?",
+                "options": [
+                    "The application queries the primary database, returns data to the user, and writes the result into Redis with a TTL for future requests",
+                    "The server throws a 500 error",
+                    "The client disconnects",
+                    "Redis clears all memory"
+                ],
+                "correct_answer": 0,
+                "points": 10,
+                "skill_tag": "realtime_caching",
+                "explanation": "On a cache miss, data is read from the primary database and cached in Redis with a TTL to accelerate future reads.",
+                "hint": "Read from DB and populate Redis with a TTL."
             }
         ]
     },
@@ -3055,37 +4225,70 @@ SKILLS_DATA = [
 
     # Web Dev Skills
     {
-        "id": "skill-web-layout",
-        "name": "HTML5 & CSS Layouts",
+        "id": "skill-web-foundations",
+        "name": "Web Architecture & HTML5",
         "category": "Web Development",
-        "description": "Semantic markup, CSS box model, responsive flexbox, and grid systems.",
+        "description": "DNS, HTTP/HTTPS protocols, semantic landmarks, and accessible form validations.",
         "icon": "Globe",
         "tier": 1,
         "prerequisites": [],
         "mastery_threshold": 70,
-        "matching_lessons": ["web-html-css-box-model"]
+        "matching_lessons": ["web-how-the-web-works", "web-semantic-html5-tags", "web-forms-validation-accessibility"]
+    },
+    {
+        "id": "skill-css-mastery",
+        "name": "CSS3 Box Model & Grid",
+        "category": "Web Development",
+        "description": "Box model, specificity, 1D flexbox, 2D CSS grid templates, and 60fps animations.",
+        "icon": "Layers",
+        "tier": 1,
+        "prerequisites": ["skill-web-foundations"],
+        "mastery_threshold": 70,
+        "matching_lessons": ["web-css-box-model-cascade", "web-css-flexbox-grid-mastery", "web-css-responsive-animations"]
     },
     {
         "id": "skill-javascript-core",
-        "name": "Modern JavaScript & Async",
+        "name": "JavaScript Engine & Async",
         "category": "Web Development",
-        "description": "Event loops, DOM manipulation, promises, async/await, and REST APIs.",
+        "description": "Execution contexts, closures, event loop microtasks, promises, and DOM delegation.",
         "icon": "Code2",
-        "tier": 1,
-        "prerequisites": ["skill-web-layout"],
+        "tier": 2,
+        "prerequisites": ["skill-css-mastery"],
         "mastery_threshold": 70,
-        "matching_lessons": ["web-javascript-dom-async"]
+        "matching_lessons": ["web-js-execution-scope-closures", "web-js-event-loop-promises-async", "web-js-dom-events-delegation"]
     },
     {
         "id": "skill-react-engineering",
         "name": "React 18 & State Architecture",
         "category": "Web Development",
-        "description": "Declarative Virtual DOM rendering, useState, useEffect, and custom hooks.",
-        "icon": "Sparkles",
+        "description": "Declarative Virtual DOM rendering, useState, useEffect, custom hooks, and Zustand.",
+        "icon": "Cpu",
         "tier": 2,
         "prerequisites": ["skill-javascript-core"],
         "mastery_threshold": 70,
-        "matching_lessons": ["web-react-hooks-state"]
+        "matching_lessons": ["web-react-jsx-vdom-components", "web-react-hooks-deep-dive", "web-react-state-routing-zustand"]
+    },
+    {
+        "id": "skill-nodejs-backend",
+        "name": "Node.js & Database Engineering",
+        "category": "Web Development",
+        "description": "Express middleware pipelines, JWT auth, MongoDB and PostgreSQL CRUD optimization.",
+        "icon": "Server",
+        "tier": 3,
+        "prerequisites": ["skill-javascript-core"],
+        "mastery_threshold": 70,
+        "matching_lessons": ["web-nodejs-express-middleware", "web-jwt-auth-security-bcrypt", "web-db-mongodb-postgresql-crud"]
+    },
+    {
+        "id": "skill-advanced-fullstack",
+        "name": "SSR, Next.js & Performance",
+        "category": "Web Development",
+        "description": "Server components, hydration, Core Web Vitals, WebSockets, and Redis in-memory caching.",
+        "icon": "Zap",
+        "tier": 4,
+        "prerequisites": ["skill-react-engineering", "skill-nodejs-backend"],
+        "mastery_threshold": 70,
+        "matching_lessons": ["web-nextjs-ssr-ssg-hydration", "web-performance-core-web-vitals", "web-websockets-realtime-redis-caching"]
     },
 
     # App Dev Skills

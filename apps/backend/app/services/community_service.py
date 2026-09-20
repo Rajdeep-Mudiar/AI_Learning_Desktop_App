@@ -111,10 +111,10 @@ CAREER_PATHS: List[CareerPath] = [
         description="Builds high-performance interactive web apps, reactive React 18 interfaces, REST/GraphQL APIs, and responsive design systems.",
         readiness_percentage=90,
         skills_required=[
-            RoleSkillRequirement(skill_name="HTML5 Semantics & Responsive CSS Grid", importance="Must Have", is_mastered=True, matching_course="Modern Full-Stack Web Development"),
-            RoleSkillRequirement(skill_name="Modern ES6+ Async JavaScript", importance="Must Have", is_mastered=True, matching_course="Modern Full-Stack Web Development"),
-            RoleSkillRequirement(skill_name="React 18 Hooks & State Architecture", importance="Must Have", is_mastered=True, matching_course="Modern Full-Stack Web Development"),
-            RoleSkillRequirement(skill_name="REST API Integration & Web Vitals", importance="Important", is_mastered=True, matching_course="Modern Full-Stack Web Development")
+            RoleSkillRequirement(skill_name="HTML5 Semantics & Responsive CSS Grid", importance="Must Have", is_mastered=True, matching_course="HTML5 & Web Architecture Foundations"),
+            RoleSkillRequirement(skill_name="Modern ES6+ Async JavaScript", importance="Must Have", is_mastered=True, matching_course="Modern JavaScript: Core Engine & Async Mastery"),
+            RoleSkillRequirement(skill_name="React 18 Hooks & State Architecture", importance="Must Have", is_mastered=True, matching_course="React 18: Components, Hooks & State Architecture"),
+            RoleSkillRequirement(skill_name="REST API Integration & Web Vitals", importance="Important", is_mastered=True, matching_course="Backend Engineering: Node.js, Express & REST APIs")
         ]
     ),
     # ================= APP DEV CAREER =================
