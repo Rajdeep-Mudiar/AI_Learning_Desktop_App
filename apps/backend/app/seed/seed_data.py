@@ -2,7 +2,7 @@ COURSES_DATA = [
     {
         "slug": "python-foundations",
         "title": "Python & NumPy Foundations for AI",
-        "description": "Master essential Python programming, vectorized computation with NumPy, and data manipulation with Pandas tailored for machine learning engineers.",
+        "description": "Master essential Python programming, fast matrix math with NumPy, and structured data manipulation with Pandas tailored for machine learning engineers.",
         "category": "Programming Foundations",
         "level": "Beginner",
         "estimated_hours": 8,
@@ -16,22 +16,22 @@ COURSES_DATA = [
         "modules": [
             {
                 "id": "py-mod-1",
-                "title": "Module 1: Idiomatic Python & Vector Thinking",
-                "description": "Variables, list comprehensions, lambda expressions, and memory paradigms.",
+                "title": "Module 1: Everyday Python & Memory Basics",
+                "description": "Variables, memory references, list comprehensions, and practical data structures.",
                 "order": 1,
                 "lesson_ids": ["py-intro-variables", "py-data-structures-comprehensions"]
             },
             {
                 "id": "py-mod-2",
-                "title": "Module 2: NumPy & Fast Vectorized Math",
-                "description": "N-dimensional arrays, broadcasting rules, matrix dot products, and vectorization.",
+                "title": "Module 2: NumPy & Fast Array Math",
+                "description": "Arrays, broadcasting rules, matrix dot products, and speeding up code without loops.",
                 "order": 2,
                 "lesson_ids": ["py-numpy-arrays-broadcasting", "py-numpy-matrix-operations"]
             },
             {
                 "id": "py-mod-3",
-                "title": "Module 3: Pandas for ML Data Pipelines",
-                "description": "DataFrames, filtering, handling missing values, and feature transformations.",
+                "title": "Module 3: Pandas for AI Data Cleaning",
+                "description": "DataFrames, filtering, handling missing values, and preparing real datasets.",
                 "order": 3,
                 "lesson_ids": ["py-pandas-dataframes-cleaning"]
             }
@@ -40,7 +40,7 @@ COURSES_DATA = [
     {
         "slug": "math-for-ai",
         "title": "Mathematics for Artificial Intelligence",
-        "description": "The foundational mathematical pillars of ML: Linear algebra, multidimensional calculus, gradient vectors, probability, and statistics.",
+        "description": "The foundational math pillars of AI explained simply: Vectors, matrices, slope derivatives, gradients, and probability with real-world intuition.",
         "category": "Mathematics",
         "level": "Intermediate",
         "estimated_hours": 12,
@@ -54,22 +54,22 @@ COURSES_DATA = [
         "modules": [
             {
                 "id": "math-mod-1",
-                "title": "Module 1: Linear Algebra & Spatial Geometry",
-                "description": "Vectors, dot products, projections, matrix transformations, and dimensional rules.",
+                "title": "Module 1: Vectors & Geometric Similarity",
+                "description": "Vectors, dot products, projections, and measuring similarity between data points.",
                 "order": 1,
                 "lesson_ids": ["math-vectors-dot-products", "math-matrix-multiplication"]
             },
             {
                 "id": "math-mod-2",
-                "title": "Module 2: Multivariable Calculus & Optimization",
-                "description": "Derivatives, partial derivatives, the gradient vector, and the calculus chain rule.",
+                "title": "Module 2: Derivatives & Finding the Best Path",
+                "description": "Slopes, partial derivatives, and understanding the gradient vector as a compass.",
                 "order": 2,
                 "lesson_ids": ["math-derivatives-gradients", "math-chain-rule-backprop-math"]
             },
             {
                 "id": "math-mod-3",
-                "title": "Module 3: Probability & Bayesian Reasoning",
-                "description": "Probability distributions, conditional probability, expectation, and Bayes theorem.",
+                "title": "Module 3: Probability & Smart Guessing",
+                "description": "Probabilities, odds, and using Bayes Theorem to update predictions with new evidence.",
                 "order": 3,
                 "lesson_ids": ["math-probability-bayes-theorem"]
             }
@@ -78,7 +78,7 @@ COURSES_DATA = [
     {
         "slug": "ml-fundamentals",
         "title": "Machine Learning Fundamentals",
-        "description": "Supervised & unsupervised learning, regression, classification, decision trees, bias-variance tradeoff, and evaluation metrics.",
+        "description": "Learn how computers learn from data: Linear regression, classification, decision trees, evaluating models, and clustering.",
         "category": "Machine Learning",
         "level": "Beginner",
         "estimated_hours": 14,
@@ -88,26 +88,26 @@ COURSES_DATA = [
         "is_published": True,
         "prerequisites": ["python-foundations", "math-for-ai"],
         "skills_taught": ["Linear Regression", "Gradient Descent", "Logistic Regression", "Decision Trees", "K-Means Clustering", "Cross Validation"],
-        "syllabus_overview": "From linear models to ensemble tree methods, understand classical machine learning algorithms from both a mathematical and practical standpoint.",
+        "syllabus_overview": "From linear models to decision trees, understand classical machine learning algorithms from both an intuitive and hands-on coding standpoint.",
         "modules": [
             {
                 "id": "ml-mod-1",
-                "title": "Module 1: Regression & Optimization",
-                "description": "Ordinary Least Squares, Mean Squared Error, and Gradient Descent optimization.",
+                "title": "Module 1: Predicting Numbers with Lines",
+                "description": "Fitting lines to data, calculating errors, and walking down the loss slope.",
                 "order": 1,
                 "lesson_ids": ["ml-linear-regression-ols", "ml-gradient-descent-intuition"]
             },
             {
                 "id": "ml-mod-2",
-                "title": "Module 2: Classification & Decision Boundaries",
-                "description": "Sigmoid activation, binary cross-entropy loss, and Logistic Regression.",
+                "title": "Module 2: Classifying Yes / No & Trees",
+                "description": "Logistic regression, S-curves, asking 20 questions with decision trees.",
                 "order": 2,
                 "lesson_ids": ["ml-logistic-regression-classification", "ml-decision-trees-entropy"]
             },
             {
                 "id": "ml-mod-3",
-                "title": "Module 3: Unsupervised Learning & Clustering",
-                "description": "K-Means clustering, centroid updates, inertia, and dimensionality reduction.",
+                "title": "Module 3: Finding Natural Groups (Clustering)",
+                "description": "K-Means clustering, grouping unlabeled data, and finding patterns.",
                 "order": 3,
                 "lesson_ids": ["ml-kmeans-clustering-algorithm"]
             }
@@ -116,38 +116,45 @@ COURSES_DATA = [
     {
         "slug": "deep-learning-fundamentals",
         "title": "Deep Learning & Neural Networks",
-        "description": "Neural network architectures from first principles: Perceptrons, multi-layer networks, backpropagation, CNNs, and optimization strategies.",
+        "description": "How neural networks think: Artificial neurons, forward thinking, learning backwards with backpropagation, and image recognition with CNNs.",
         "category": "Deep Learning",
         "level": "Intermediate",
         "estimated_hours": 16,
         "icon": "Network",
-        "color": "#F59E0B",
+        "color": "#0EA5E9",
         "order": 4,
         "is_published": True,
         "prerequisites": ["ml-fundamentals"],
-        "skills_taught": ["Perceptrons", "Backpropagation", "Activation Functions", "Convolutional Neural Networks", "Adam Optimizer", "Regularization"],
-        "syllabus_overview": "Dive into deep neural networks. Learn how nonlinear activations allow networks to approximate arbitrary functions, and how convolutions extract hierarchical spatial features from images.",
+        "skills_taught": ["Multi-Layer Perceptrons", "Activation Functions", "Backpropagation", "Convolutional Neural Nets", "PyTorch Basics"],
+        "syllabus_overview": "Deep learning allows computers to recognize images, translate languages, and beat chess grandmasters. Learn how networks build representations layer by layer.",
         "modules": [
             {
                 "id": "dl-mod-1",
-                "title": "Module 1: Artificial Neural Networks",
-                "description": "Perceptrons, forward propagation, activation functions (ReLU, Sigmoid), and loss curves.",
+                "title": "Module 1: Artificial Neurons & Layers",
+                "description": "How a neuron fires, combining inputs with weights, and activation functions.",
                 "order": 1,
-                "lesson_ids": ["dl-perceptron-forward-prop", "dl-backpropagation-engine"]
+                "lesson_ids": ["dl-perceptron-forward-prop", "dl-activation-functions"]
             },
             {
                 "id": "dl-mod-2",
-                "title": "Module 2: Convolutional Neural Networks (CNNs)",
-                "description": "Kernels, stride, padding, feature maps, pooling layers, and spatial hierarchies.",
+                "title": "Module 2: Backpropagation (How Networks Learn)",
+                "description": "Sending error feedback backwards through the network to tweak weights.",
                 "order": 2,
-                "lesson_ids": ["dl-cnn-kernels-convolutions"]
+                "lesson_ids": ["dl-backpropagation-calculus"]
+            },
+            {
+                "id": "dl-mod-3",
+                "title": "Module 3: Computer Vision with CNNs",
+                "description": "Sliding filters over images to detect edges, curves, eyes, and complex objects.",
+                "order": 3,
+                "lesson_ids": ["dl-cnn-convolution-pooling"]
             }
         ]
     },
     {
         "slug": "generative-ai-fundamentals",
-        "title": "Generative AI & Transformer Architectures",
-        "description": "Large language models, self-attention mechanisms, multi-head attention, positional encodings, prompt engineering, and RAG pipelines.",
+        "title": "Generative AI, Transformers & LLMs",
+        "description": "How modern AI like ChatGPT works: Word tokens, embeddings, the Transformer self-attention spotlight, and building RAG applications.",
         "category": "Generative AI",
         "level": "Advanced",
         "estimated_hours": 18,
@@ -161,22 +168,22 @@ COURSES_DATA = [
         "modules": [
             {
                 "id": "genai-mod-1",
-                "title": "Module 1: Tokenization & Embeddings",
-                "description": "Byte-Pair Encoding, high-dimensional vector spaces, and cosine similarity.",
+                "title": "Module 1: Words as Numbers (Tokens & Embeddings)",
+                "description": "How AI reads text, turning words into coordinate maps where similar words sit together.",
                 "order": 1,
                 "lesson_ids": ["genai-tokenization-embeddings"]
             },
             {
                 "id": "genai-mod-2",
                 "title": "Module 2: The Attention Mechanism",
-                "description": "Query, Key, Value matrices, scaled dot-product attention, and multi-head attention.",
+                "description": "Queries, Keys, Values, and connecting related words across long sentences.",
                 "order": 2,
                 "lesson_ids": ["genai-self-attention-transformers"]
             },
             {
                 "id": "genai-mod-3",
                 "title": "Module 3: Retrieval-Augmented Generation (RAG)",
-                "description": "Vector databases, chunking strategies, semantic retrieval, and augmented prompting.",
+                "description": "Connecting your AI to custom documents and databases to answer questions accurately.",
                 "order": 3,
                 "lesson_ids": ["genai-rag-architecture-pipeline"]
             }
@@ -196,38 +203,38 @@ LESSONS_DATA = [
         "difficulty": "Beginner",
         "skill_tag": "python_basics",
         "learning_objectives": [
-            "Understand dynamic typing and mutable vs. immutable objects in Python.",
-            "Master variable assignment, object identities (id()), and shallow vs deep copies.",
-            "Write clean, type-hinted code suitable for production AI scripts."
+            "Understand how Python stores values and assigns variables in memory.",
+            "Learn the difference between immutable items (numbers, strings) and mutable items (lists, arrays).",
+            "Write clean type-annotated code suitable for machine learning scripts."
         ],
         "theory_sections": [
             {
-                "title": "Objects, References, and Mutability",
-                "content_markdown": "In Python, **everything is an object**. When you assign `x = [1, 2, 3]`, `x` is not the list itself; it is a reference (memory pointer) to the list object on the heap.\n\n* **Immutable types**: `int`, `float`, `str`, `tuple`, `frozenset`. Any operation creating a new value creates a brand new object.\n* **Mutable types**: `list`, `dict`, `set`, `numpy.ndarray`. Modifications occur in-place, which is crucial for efficient ML memory management.",
-                "key_takeaway": "Understanding references prevents unexpected side-effects when passing datasets or model weights across functions."
+                "title": "Variables Are Name Tags, Not Boxes",
+                "content_markdown": "In Python, **variables act like sticky name tags attached to objects in memory** rather than physical boxes holding values.\n\nWhen you write `x = [1, 2, 3]`, Python creates a list `[1, 2, 3]` in memory and sticks the label `x` on it. If you then write `y = x`, you simply stick a second label `y` on the exact same list!\n\n* **Immutable types** (cannot be altered in-place): `int`, `float`, `str`, `tuple`. If you change `x = 5` to `x = 6`, Python creates a new number `6` and moves your name tag.\n* **Mutable types** (can be altered in-place): `list`, `dict`, `set`, `numpy.ndarray`. Modifying a list with `x.append(4)` changes the object directly in memory for all variables pointing to it.",
+                "key_takeaway": "Remember that sharing lists or model weight arrays across functions means any change will affect the original data unless you explicitly copy it."
             },
             {
-                "title": "Type Hints in Modern ML Code",
-                "content_markdown": "Modern machine learning code utilizes Python 3 type annotations (`from typing import List, Dict, Optional, Tuple`) to ensure tensor shapes and parameter formats are unambiguous.",
-                "key_takeaway": "Always add type annotations to functions that process tensors and tabular batches."
+                "title": "Type Hints for AI Engineering",
+                "content_markdown": "In modern AI code, adding type hints tells your team (and editor) what type of data each function expects:\n\n```python\nfrom typing import List\n\ndef calculate_average(scores: List[float]) -> float:\n    return sum(scores) / len(scores)\n```\n\nThis makes working with complex batches of images, tokens, and matrix dimensions clear and bug-free.",
+                "key_takeaway": "Use type hints like List[float] or np.ndarray so you always know what shapes and types your functions are processing."
             }
         ],
         "visual_explainer": {
             "type": "architecture_flow",
             "title": "Python Variable Reference Model",
-            "subtitle": "How pointers target memory heap allocations",
+            "subtitle": "How variable name tags point to heap memory",
             "diagram_type": "memory_pointer",
             "parameters": {"variable": "weights_vector", "target_heap": "0x7ffee1b"}
         },
         "code_example": {
-            "title": "Checking Object Identity and Type Annotations",
+            "title": "Checking Object Memory Identity in Python",
             "language": "python",
-            "code": "import copy\nfrom typing import List\n\ndef normalize_scores(raw_scores: List[float]) -> List[float]:\n    \"\"\"Normalizes raw float scores to sum to 1.0 (softmax preview).\"\"\"\n    total = sum(raw_scores)\n    if total == 0:\n        return [0.0] * len(raw_scores)\n    return [round(score / total, 4) for score in raw_scores]\n\nscores = [10.0, 20.0, 70.0]\nnormalized = normalize_scores(scores)\nprint(f\"Original: {scores}\")\nprint(f\"Normalized: {normalized}\")\nprint(f\"Sum: {sum(normalized):.2f}\")",
-            "explanation": "This function takes a typed list of floats and returns normalized probabilities using a list comprehension.",
-            "output_preview": "Original: [10.0, 20.0, 70.0]\nNormalized: [0.1, 0.2, 0.7]\nSum: 1.00"
+            "code": "import copy\nfrom typing import List\n\ndef normalize_scores(raw_scores: List[float]) -> List[float]:\n    \"\"\"Calculates simple percentages from a list of raw scores.\"\"\"\n    total = sum(raw_scores)\n    if total == 0:\n        return [0.0] * len(raw_scores)\n    return [round(score / total, 2) for score in raw_scores]\n\nscores = [10.0, 20.0, 70.0]\npercentages = normalize_scores(scores)\nprint(f\"Raw Scores:   {scores}\")\nprint(f\"Percentages:  {percentages}\")\nprint(f\"Total Check:  {sum(percentages):.2f}\")",
+            "explanation": "This example normalizes a list of scores so they represent clear probabilities between 0.0 and 1.0.",
+            "output_preview": "Raw Scores:   [10.0, 20.0, 70.0]\nPercentages:  [0.1, 0.2, 0.7]\nTotal Check:  1.00"
         },
         "quiz_id": "quiz-py-intro-variables",
-        "summary": "You explored Python's object reference model, mutability considerations, and modern type hinting paradigms.",
+        "summary": "You explored how Python variables point to memory and how mutability affects data manipulation.",
         "next_lesson_slug": "py-numpy-arrays-broadcasting",
         "prev_lesson_slug": None
     },
@@ -236,90 +243,90 @@ LESSONS_DATA = [
         "slug": "py-numpy-arrays-broadcasting",
         "course_slug": "python-foundations",
         "module_id": "py-mod-2",
-        "title": "NumPy N-Dimensional Arrays & Broadcasting Rules",
+        "title": "NumPy Arrays & Fast Broadcasting",
         "order": 2,
         "estimated_minutes": 20,
         "difficulty": "Beginner",
         "skill_tag": "numpy_basics",
         "learning_objectives": [
-            "Construct multi-dimensional NumPy arrays (`ndarray`) with specific dtypes.",
-            "Master array shapes, strides, and memory layout (C-contiguous vs Fortran).",
-            "Internalize NumPy's 2 broadcasting rules for shape compatibility without copying data."
+            "Learn why NumPy arrays are 100x faster than standard Python lists.",
+            "Understand array shapes (rows, columns, dimensions).",
+            "Master Broadcasting: Doing math on arrays of different sizes without loops."
         ],
         "theory_sections": [
             {
-                "title": "Why NumPy Over Standard Python Lists?",
-                "content_markdown": "Python lists store arrays of pointers to individual boxed objects. NumPy arrays store contiguous blocks of homogeneous C-data (e.g. `float32`, `int64`). This enables SIMD (Single Instruction Multiple Data) CPU vectorization and cache locality, executing matrix operations 50x–200x faster.",
-                "key_takeaway": "Always vectorize operations with NumPy instead of writing explicit Python `for` loops."
+                "title": "Why Is NumPy So Fast?",
+                "content_markdown": "Standard Python lists are flexible but slow because each number is wrapped in a full Python object stored across scattered memory addresses.\n\n**NumPy arrays (`ndarray`) pack numbers side-by-side in raw computer memory**, like books lined up neatly on a bookshelf. This allows your computer processor to calculate thousands of numbers in a single clock cycle (SIMD vectorization), making matrix math **50x to 200x faster** than a Python `for` loop.",
+                "key_takeaway": "In machine learning, always use NumPy vectorized operations instead of writing loops over data rows."
             },
             {
-                "title": "The Broadcasting Rules",
-                "content_markdown": "Broadcasting describes how NumPy treats arrays with different shapes during arithmetic operations.\n\nTwo dimensions are compatible when:\n1. They are **equal**, or\n2. One of them is **1**.\n\nNumPy compares dimensions element-wise starting from the trailing (rightmost) dimensions and moving left.",
-                "key_takeaway": "An array of shape `(4, 3)` can be broadcast with shape `(3,)` or `(4, 1)`, but NOT with `(4,)` directly."
+                "title": "The Magic of Broadcasting",
+                "content_markdown": "Broadcasting is NumPy's ability to perform math between arrays of different shapes automatically.\n\n**Analogy**: Imagine you have a shopping receipt with 10 item prices in a column. If you want to add 5% sales tax to every item, you don't need a table of 10 tax rates—you just multiply the whole column by `1.05`! NumPy automatically 'stretches' the single number across all 10 rows.\n\n**The Rule**: Two dimensions are compatible when:\n1. They have the **exact same size**, OR\n2. One of them is **1** (NumPy will stretch the 1 to match the other size).",
+                "key_takeaway": "Broadcasting allows you to normalize entire datasets with a single line: (X - mean) / std."
             }
         ],
         "visual_explainer": {
             "type": "simulation_preview",
             "title": "2D Broadcasting Mechanics",
-            "subtitle": "Expanding dimension of size 1 across a matching axis",
+            "subtitle": "Stretching a 1D vector across matching rows",
             "diagram_type": "broadcasting_grid",
             "parameters": {"matrix_shape": [3, 3], "vector_shape": [1, 3]}
         },
         "code_example": {
-            "title": "Vectorized Feature Normalization with Broadcasting",
+            "title": "Standardizing Data Features with Broadcasting",
             "language": "python",
-            "code": "import numpy as np\n\n# Batch of 4 data samples, each with 3 features\nX = np.array([\n    [10.0, 200.0, 0.5],\n    [12.0, 240.0, 0.7],\n    [9.0,  180.0, 0.4],\n    [14.0, 280.0, 0.9]\n])\n\n# Compute mean and standard deviation along column axis (axis=0)\nmean = np.mean(X, axis=0)  # Shape: (3,)\nstd = np.std(X, axis=0)    # Shape: (3,)\n\n# Broadcasting (4, 3) with (3,) seamlessly computes z-score\nX_normalized = (X - mean) / std\n\nprint(\"Features mean:\", mean)\nprint(\"Standardized batch shape:\", X_normalized.shape)\nprint(\"Normalized sample 0:\", np.round(X_normalized[0], 2))",
-            "explanation": "Broadcasting automatically stretches the `(3,)` mean and std vectors across all 4 rows in `X` without copying memory.",
-            "output_preview": "Features mean: [11.25 225.    0.625]\nStandardized batch shape: (4, 3)\nNormalized sample 0: [-0.67 -0.67 -0.67]"
+            "code": "import numpy as np\n\n# 4 House listings: [Square Footage, Bedrooms, Age in Years]\nhouses = np.array([\n    [1200.0, 2.0, 10.0],\n    [1800.0, 3.0, 5.0],\n    [2400.0, 4.0, 15.0],\n    [3000.0, 5.0, 2.0]\n])\n\n# Calculate average of each column\ncolumn_averages = np.mean(houses, axis=0)\n\n# Center the data around 0 by subtracting column averages\ncentered_houses = houses - column_averages\n\nprint(\"Average for each feature:\", column_averages)\nprint(\"Centered houses:\\n\", centered_houses)",
+            "explanation": "NumPy stretches the 3-element average vector across all 4 houses automatically without needing any loop.",
+            "output_preview": "Average for each feature: [2100.    3.5    8. ]\nCentered houses:\n [[-900.   -1.5   2. ]\n  [-300.   -0.5  -3. ]\n  [ 300.    0.5   7. ]\n  [ 900.    1.5  -6. ]]"
         },
         "quiz_id": "quiz-py-numpy-arrays-broadcasting",
-        "summary": "You learned how NumPy ndarrays store contiguous data and how broadcasting rules enable effortless batch operations.",
+        "summary": "You learned how NumPy arrays accelerate AI computations and how broadcasting handles multi-dimensional math seamlessly.",
         "next_lesson_slug": "math-vectors-dot-products",
         "prev_lesson_slug": "py-intro-variables"
     },
-    # Lesson 3: Mathematics
+    # Lesson 3: Math
     {
         "slug": "math-vectors-dot-products",
         "course_slug": "math-for-ai",
         "module_id": "math-mod-1",
-        "title": "Vectors, Dot Products & Geometric Projections",
+        "title": "Vectors, Dot Products & Measuring Similarity",
         "order": 1,
         "estimated_minutes": 20,
         "difficulty": "Intermediate",
         "skill_tag": "linear_algebra",
         "learning_objectives": [
-            "Represent data points and feature embeddings as vectors in $\\mathbb{R}^n$.",
-            "Calculate dot products algebraically (sum of products) and geometrically ($|u||v|\\cos\\theta$).",
-            "Understand why dot products measure similarity in AI and attention mechanisms."
+            "Understand vectors as lists of numbers representing features or directions in space.",
+            "Calculate the dot product step-by-step: multiply matching elements and add them up.",
+            "Learn how dot products measure similarity between search queries, movies, or words."
         ],
         "theory_sections": [
             {
-                "title": "Vectors as Features and Directions",
-                "content_markdown": "A vector $\\mathbf{v} \\in \\mathbb{R}^n$ is an ordered tuple of $n$ numbers. In AI, a vector can represent:\n- A data point (e.g. house features: [sqft, bedrooms, age])\n- An embedding vector representing the semantic meaning of a word or image\n- A set of trainable weights in a neural network layer.",
-                "key_takeaway": "Data in AI is always structured as vectors and matrices."
+                "title": "What is a Vector?",
+                "content_markdown": "A **vector** is simply an ordered list of numbers that describes an object's features or a direction in space.\n\n**Real-World Example**: A house can be represented as a 3-element vector:\n\n$$House = [2000, 3, 2]$$\n\nWhere `2000` is square feet, `3` is bedrooms, and `2` is bathrooms. In AI, words, images, and user preferences are all converted into vectors so math algorithms can compare them.",
+                "key_takeaway": "Everything in AI—from words to pictures—is converted into a vector of numbers."
             },
             {
-                "title": "The Dot Product (Inner Product)",
-                "content_markdown": "Given two vectors $\\mathbf{a} = [a_1, a_2, \\dots, a_n]$ and $\\mathbf{b} = [b_1, b_2, \\dots, b_n]$, the dot product is defined as:\n\n$$\\mathbf{a} \\cdot \\mathbf{b} = \\sum_{i=1}^n a_i b_i = \\|\\mathbf{a}\\| \\|\\mathbf{b}\\| \\cos(\\theta)$$\n\n**Key Geometric Properties:**\n* If $\\mathbf{a} \\cdot \\mathbf{b} > 0$: Vectors point in a similar direction (acute angle $\\theta < 90^\\circ$).\n* If $\\mathbf{a} \\cdot \\mathbf{b} = 0$: Vectors are **orthogonal** (perpendicular, completely independent).\n* If $\\mathbf{a} \\cdot \\mathbf{b} < 0$: Vectors point in opposing directions.",
-                "key_takeaway": "Cosine similarity used in search, embeddings, and Transformer attention is simply a normalized dot product."
+                "title": "The Dot Product: Measuring Similarity",
+                "content_markdown": "The **dot product** is the most important operation in AI. You calculate it in two simple steps:\n1. Multiply matching items from two vectors together.\n2. Sum up all the products into one final number.\n\n$$u · v = (u_1 × v_1) + (u_2 × v_2) + ... + (u_n × v_n)$$\n\n**Example Calculation**:\nIf User A's movie taste is `[5, 1]` (loves Action, dislikes Romance) and Movie X is `[4, 0]` (high Action, no Romance):\n\n$$Score = (5 × 4) + (1 × 0) = 20 + 0 = 20$$\n\n* **Positive Dot Product**: Vectors point in a similar direction (strong match!).\n* **Zero (0) Dot Product**: Vectors are perpendicular / completely independent.\n* **Negative Dot Product**: Vectors point in opposite directions.",
+                "key_takeaway": "Dot products power recommendation engines, search algorithms, and Transformer self-attention by checking how well two items align."
             }
         ],
         "visual_explainer": {
             "type": "chart",
             "title": "Vector Dot Product & Angle Similarity",
-            "subtitle": "Interactive geometric vector projection",
+            "subtitle": "Interactive vector alignment in 2D space",
             "diagram_type": "vector_plane",
             "parameters": {"vector_u": [3, 4], "vector_v": [4, 1]}
         },
         "code_example": {
-            "title": "Calculating Dot Product and Cosine Similarity in Python",
+            "title": "Measuring Similarity Between Words Using Vectors",
             "language": "python",
-            "code": "import numpy as np\n\ndef cosine_similarity(u: np.ndarray, v: np.ndarray) -> float:\n    \"\"\"Calculates cos(theta) between two vectors.\"\"\"\n    dot = np.dot(u, v)\n    norm_u = np.linalg.norm(u)\n    norm_v = np.linalg.norm(v)\n    return float(dot / (norm_u * norm_v))\n\n# Embedding vectors for 3 words (2D projection)\nword_king   = np.array([0.9, 0.8])\nword_queen  = np.array([0.85, 0.82])\nword_banana = np.array([0.1, -0.9])\n\nsim_king_queen = cosine_similarity(word_king, word_queen)\nsim_king_banana = cosine_similarity(word_king, word_banana)\n\nprint(f\"Similarity (King, Queen):  {sim_king_queen:.4f}\")\nprint(f\"Similarity (King, Banana): {sim_king_banana:.4f}\")",
-            "explanation": "Calculates normalized dot product to prove King and Queen have high semantic similarity (cos ~ 0.99) while Banana is dissimilar.",
-            "output_preview": "Similarity (King, Queen):  0.9992\nSimilarity (King, Banana): -0.5694"
+            "code": "import numpy as np\n\ndef cosine_similarity(u: np.ndarray, v: np.ndarray) -> float:\n    \"\"\"Calculates how closely two vectors align (1.0 = identical match).\"\"\"\n    dot = np.dot(u, v)\n    length_u = np.linalg.norm(u)\n    length_v = np.linalg.norm(v)\n    return float(dot / (length_u * length_v))\n\n# 2D Word embeddings\nword_king   = np.array([0.9, 0.8])\nword_queen  = np.array([0.85, 0.82])\nword_banana = np.array([0.1, -0.9])\n\nsim_royals = cosine_similarity(word_king, word_queen)\nsim_fruit  = cosine_similarity(word_king, word_banana)\n\nprint(f\"Similarity (King, Queen):  {sim_royals:.4f} (Almost Identical!)\")\nprint(f\"Similarity (King, Banana): {sim_fruit:.4f} (Unrelated / Opposite)\")",
+            "explanation": "Calculates cosine similarity to demonstrate that words with related concepts point in the same direction.",
+            "output_preview": "Similarity (King, Queen):  0.9992 (Almost Identical!)\nSimilarity (King, Banana): -0.5694 (Unrelated / Opposite)"
         },
         "quiz_id": "quiz-math-vectors-dot-products",
-        "summary": "You mastered algebraic and geometric dot products and their application to cosine similarity in AI embeddings.",
+        "summary": "You mastered vectors and learned how dot products compare similarity between data points.",
         "next_lesson_slug": "math-derivatives-gradients",
         "prev_lesson_slug": "py-numpy-arrays-broadcasting"
     },
@@ -328,38 +335,43 @@ LESSONS_DATA = [
         "slug": "math-derivatives-gradients",
         "course_slug": "math-for-ai",
         "module_id": "math-mod-2",
-        "title": "Derivatives, Gradients & Multivariable Optimization",
+        "title": "Derivatives, Slopes & The Gradient Compass",
         "order": 2,
         "estimated_minutes": 25,
         "difficulty": "Intermediate",
         "skill_tag": "calculus",
         "learning_objectives": [
-            "Understand the derivative as the instantaneous rate of change.",
-            "Compute partial derivatives with respect to specific parameter dimensions.",
-            "Construct the gradient vector $\\nabla f$ and understand why it points in the direction of steepest ascent."
+            "Understand a derivative as a slope measuring how quickly an output changes.",
+            "Learn what a partial derivative is (changing one setting while holding others still).",
+            "Understand the Gradient as a compass that points uphill, while negative gradient points downhill."
         ],
         "theory_sections": [
             {
-                "title": "The Gradient Vector $\\nabla f$",
-                "content_markdown": "In single-variable calculus, $f'(x) = \\frac{df}{dx}$ gives the slope of the tangent line. In machine learning, loss functions depend on millions of weights: $L(w_1, w_2, \\dots, w_d)$.\n\nThe **gradient** $\\nabla L$ is a vector containing all partial derivatives:\n\n$$\\nabla L(\\mathbf{w}) = \\left[ \\frac{\\partial L}{\\partial w_1}, \\frac{\\partial L}{\\partial w_2}, \\dots, \\frac{\\partial L}{\\partial w_d} \\right]^T$$\n\n* **Direction of $\\nabla L$**: Points in the direction of **steepest increase** in loss.\n* **Direction of $-\\nabla L$**: Points in the direction of **steepest decrease** (the path taken in Gradient Descent).",
-                "key_takeaway": "To minimize loss, algorithms take steps in the negative gradient direction: w = w - alpha * grad."
+                "title": "What is a Derivative?",
+                "content_markdown": "A **derivative** is simply the slope of a curve at a single point.\n\n**Everyday Analogy**: If you are driving a car and glance at your speedometer, it tells you your rate of change right now (e.g. 60 mph). In machine learning, the derivative tells us: *'If I nudge weight setting w by a tiny bit, will the model's error go UP or DOWN?'*",
+                "key_takeaway": "Derivatives tell us which direction to tweak our model settings to reduce prediction mistakes."
+            },
+            {
+                "title": "The Gradient: The Compass of AI",
+                "content_markdown": "When an AI model has multiple weight parameters ($w_1, w_2, w_3$), we compute the partial derivative for each one.\n\nThe collection of all these slopes in a single list is called the **Gradient** ($\nabla L$):\n\n$$\\text{Gradient} = [\\text{Slope for } w_1, \\text{Slope for } w_2, \\dots, \\text{Slope for } w_n]$$\n\n**The Golden Rule of Gradient Descent**:\n* **The Gradient points UPHILL** (toward higher error/mistakes).\n* **The Negative Gradient points DOWNHILL** (toward minimum error and best accuracy!).",
+                "key_takeaway": "To train an AI model, we take small steps downhill in the opposite direction of the gradient: w_new = w_old - learning_rate * gradient."
             }
         ],
         "visual_explainer": {
             "type": "diagram",
             "title": "Loss Surface Gradient Descent Path",
-            "subtitle": "Contour map indicating gradient descent steps toward global minimum",
+            "subtitle": "Stepping downhill toward the lowest prediction error",
             "diagram_type": "contour_gradient"
         },
         "code_example": {
-            "title": "Numerical Gradient Computation in Python",
+            "title": "Computing Slopes and Stepping Downhill in Python",
             "language": "python",
-            "code": "import numpy as np\n\ndef loss_fn(w: np.ndarray) -> float:\n    \"\"\"Convex paraboloid loss surface: L(w1, w2) = w1^2 + 2*w2^2\"\"\"\n    return float(w[0]**2 + 2 * w[1]**2)\n\ndef compute_numerical_gradient(w: np.ndarray, eps: float = 1e-5) -> np.ndarray:\n    \"\"\"Approximates gradient using central differences.\"\"\"\n    grad = np.zeros_like(w, dtype=float)\n    for i in range(len(w)):\n        w_plus = w.copy()\n        w_minus = w.copy()\n        w_plus[i] += eps\n        w_minus[i] -= eps\n        grad[i] = (loss_fn(w_plus) - loss_fn(w_minus)) / (2 * eps)\n    return grad\n\nw_current = np.array([4.0, 3.0])\ngrad = compute_numerical_gradient(w_current)\nprint(f\"Weights at: {w_current}\")\nprint(f\"Computed Gradient: {grad}\")\nprint(f\"Step direction (-grad): {-grad}\")",
-            "explanation": "Calculates partial derivatives numerically: dL/dw1 = 2*w1 = 8.0 and dL/dw2 = 4*w2 = 12.0.",
-            "output_preview": "Weights at: [4. 3.]\nComputed Gradient: [ 8. 12.]\nStep direction (-grad): [ -8. -12.]"
+            "code": "import numpy as np\n\n# Error function: Error = (w - 3)^2\n# The minimum error happens at w = 3.0\ndef error_fn(w: float) -> float:\n    return (w - 3.0) ** 2\n\ndef derivative_slope(w: float) -> float:\n    # Derivative of (w - 3)^2 is 2 * (w - 3)\n    return 2.0 * (w - 3.0)\n\n# Start with an incorrect guess for w\nw = 10.0\nlearning_rate = 0.2\n\nprint(f\"Starting weight: {w}, Error: {error_fn(w):.2f}\")\nfor step in range(5):\n    slope = derivative_slope(w)\n    w = w - learning_rate * slope\n    print(f\"Step {step+1}: Slope={slope:.2f}, New w={w:.2f}, Error={error_fn(w):.2f}\")",
+            "explanation": "Shows how stepping in the opposite direction of the slope automatically brings w closer to the ideal target (3.0).",
+            "output_preview": "Starting weight: 10.0, Error: 49.00\nStep 1: Slope=14.00, New w=7.20, Error=17.64\nStep 2: Slope=8.40, New w=5.52, Error=6.35\nStep 3: Slope=5.04, New w=4.51, Error=2.29\nStep 4: Slope=3.02, New w=3.91, Error=0.82\nStep 5: Slope=1.81, New w=3.54, Error=0.30"
         },
         "quiz_id": "quiz-math-derivatives-gradients",
-        "summary": "You explored multivariable partial derivatives and the geometric significance of the gradient vector in model optimization.",
+        "summary": "You understood derivatives as slopes and learned why algorithms step downhill using the negative gradient.",
         "next_lesson_slug": "ml-linear-regression-ols",
         "prev_lesson_slug": "math-vectors-dot-products"
     },
@@ -368,26 +380,26 @@ LESSONS_DATA = [
         "slug": "ml-linear-regression-ols",
         "course_slug": "ml-fundamentals",
         "module_id": "ml-mod-1",
-        "title": "Linear Regression: Ordinary Least Squares & Gradient Descent",
+        "title": "Linear Regression: Finding the Best-Fit Line",
         "order": 1,
         "estimated_minutes": 25,
         "difficulty": "Beginner",
         "skill_tag": "regression",
         "learning_objectives": [
-            "Formulate linear regression hypothesis $\\hat{y} = \\mathbf{w}^T \\mathbf{x} + b$.",
-            "Derive the Mean Squared Error (MSE) loss function.",
-            "Implement batch gradient descent updates from scratch."
+            "Learn the linear prediction formula: Prediction = (Weight × Feature) + Bias.",
+            "Understand Mean Squared Error (MSE) as the average squared mistake.",
+            "Train a model by iteratively nudging weights to minimize error."
         ],
         "theory_sections": [
             {
-                "title": "The Linear Model Hypothesis",
-                "content_markdown": "Linear regression models the relationship between dependent target variable $y$ and independent explanatory features $\\mathbf{x}$ as a linear combination:\n\n$$\\hat{y} = w_1 x_1 + w_2 x_2 + \\dots + w_d x_d + b = \\mathbf{w}^T \\mathbf{x} + b$$\n\nOur objective is to find optimal weights $\\mathbf{w}^*$ and bias $b^*$ that minimize prediction residuals across all training examples.",
-                "key_takeaway": "Linear regression is the foundational model for continuous target prediction."
+                "title": "The Core Linear Equation",
+                "content_markdown": "Linear regression is the simplest way to predict a number (like price, temperature, or sales).\n\n$$y_{predicted} = (w · x) + b$$\n\n* $x$ = Input Feature (e.g. Square footage of a house)\n* $w$ = Weight / Multiplier (e.g. Cost per square foot)\n* $b$ = Bias / Starting Baseline (e.g. Base land cost)\n* $y$ = Final Prediction (e.g. Estimated House Price)\n\n**Intuition**: The goal of training is simply finding the best $w$ and $b$ so the line passes right through the middle of your training data points.",
+                "key_takeaway": "Linear regression models relationships as straight lines by adjusting slope weight (w) and baseline intercept (b)."
             },
             {
-                "title": "Mean Squared Error (MSE) Loss",
-                "content_markdown": "We quantify model performance using Mean Squared Error:\n\n$$MSE(\\mathbf{w}, b) = \\frac{1}{N} \\sum_{i=1}^N (\\hat{y}^{(i)} - y^{(i)})^2 = \\frac{1}{N} \\sum_{i=1}^N (\\mathbf{w}^T \\mathbf{x}^{(i)} + b - y^{(i)})^2$$\n\nTaking partial derivatives yields the gradient update formulas:\n* $\\frac{\\partial L}{\\partial \\mathbf{w}} = \\frac{2}{N} \\mathbf{X}^T (\\hat{\\mathbf{y}} - \\mathbf{y})$\n* $\\frac{\\partial L}{\\partial b} = \\frac{2}{N} \\sum (\\hat{y}^{(i)} - y^{(i)})$",
-                "key_takeaway": "Because MSE is convex, Gradient Descent is guaranteed to converge to the global minimum (for suitable learning rates)."
+                "title": "Measuring Mistakes: Mean Squared Error (MSE)",
+                "content_markdown": "To measure how well our line fits the data, we calculate the **Mean Squared Error (MSE)**:\n1. Find the gap (residual) between the predicted value and true value: $(\\hat{y} - y)$.\n2. Square the gap so negative errors don't cancel positive errors: $(\\hat{y} - y)^2$.\n3. Take the average across all training data points:\n\n$$MSE = \\frac{1}{N} \\sum_{i=1}^N (y_{pred}^{(i)} - y_{true}^{(i)})^2$$\n\nA lower MSE score means our line makes much more accurate predictions.",
+                "key_takeaway": "Squaring the errors heavily penalizes large mistakes, pushing the model to fit all points evenly."
             }
         ],
         "visual_explainer": {
@@ -398,14 +410,14 @@ LESSONS_DATA = [
             "parameters": {"slope": 1.8, "intercept": 2.4, "mse": 0.042}
         },
         "code_example": {
-            "title": "Training Linear Regression from Scratch with NumPy",
+            "title": "Training Linear Regression with Gradient Descent in NumPy",
             "language": "python",
-            "code": "import numpy as np\n\n# Synthetic dataset: y = 2.5 * x + 4.0 + noise\nnp.random.seed(42)\nX = 2 * np.random.rand(100, 1)\ny = 2.5 * X + 4.0 + np.random.randn(100, 1) * 0.2\n\n# Initialize parameters\nw = 0.0\nb = 0.0\nlr = 0.1\nepochs = 50\nN = len(X)\n\nfor epoch in range(epochs):\n    # 1. Forward Pass: Predictions\n    y_hat = w * X + b\n    # 2. Compute Loss\n    mse = np.mean((y_hat - y) ** 2)\n    # 3. Compute Gradients\n    dw = (2 / N) * np.sum((y_hat - y) * X)\n    db = (2 / N) * np.sum(y_hat - y)\n    # 4. Parameter Update\n    w -= lr * dw\n    b -= lr * db\n\nprint(f\"Trained weight w: {w:.3f} (True: 2.500)\")\nprint(f\"Trained bias b:   {b:.3f} (True: 4.000)\")\nprint(f\"Final MSE Loss:   {mse:.4f}\")",
-            "explanation": "Illustrates the complete iterative optimization loop of Gradient Descent updating weights directly in pure NumPy.",
-            "output_preview": "Trained weight w: 2.482 (True: 2.500)\nTrained bias b:   4.021 (True: 4.000)\nFinal MSE Loss:   0.0389"
+            "code": "import numpy as np\n\n# Sample dataset: House size (X) and Price (y)\n# True relationship: Price = 2.5 * Size + 4.0 + random noise\nnp.random.seed(42)\nX = np.array([[1.0], [2.0], [3.0], [4.0]])\ny = np.array([[6.5], [9.0], [11.5], [14.0]])\n\n# Initialize model starting parameters\nw = 0.0\nb = 0.0\nlearning_rate = 0.05\nepochs = 100\nN = len(X)\n\nfor epoch in range(epochs):\n    # 1. Make predictions\n    y_pred = w * X + b\n    # 2. Compute error gradients\n    dw = (2 / N) * np.sum((y_pred - y) * X)\n    db = (2 / N) * np.sum(y_pred - y)\n    # 3. Update parameters downhill\n    w -= learning_rate * dw\n    b -= learning_rate * db\n\nprint(f\"Learned Weight (w): {w:.2f} (Target: ~2.50)\")\nprint(f\"Learned Bias (b):   {b:.2f} (Target: ~4.00)\")",
+            "explanation": "Illustrates the complete optimization loop of Gradient Descent tuning weight w and bias b to fit the points.",
+            "output_preview": "Learned Weight (w): 2.47 (Target: ~2.50)\nLearned Bias (b):   4.08 (Target: ~4.00)"
         },
         "quiz_id": "quiz-ml-linear-regression-ols",
-        "summary": "You formulated linear regression, derived MSE loss gradients, and implemented gradient descent updates from scratch.",
+        "summary": "You learned how linear regression fits lines to data points and minimizes Mean Squared Error.",
         "next_lesson_slug": "dl-perceptron-forward-prop",
         "prev_lesson_slug": "math-derivatives-gradients"
     },
@@ -414,21 +426,26 @@ LESSONS_DATA = [
         "slug": "dl-perceptron-forward-prop",
         "course_slug": "deep-learning-fundamentals",
         "module_id": "dl-mod-1",
-        "title": "The Perceptron, Multi-Layer Architectures & Activations",
+        "title": "Artificial Neurons, Layers & Activation Functions",
         "order": 1,
         "estimated_minutes": 25,
         "difficulty": "Intermediate",
         "skill_tag": "neural_networks",
         "learning_objectives": [
-            "Trace the forward pass through artificial neurons.",
-            "Understand why non-linear activation functions (ReLU, Sigmoid) are mathematically essential.",
-            "Represent multi-layer perceptron layers using matrix multiplication."
+            "Learn how an artificial neuron combines inputs with weights and bias.",
+            "Understand why non-linear activation functions (ReLU, Sigmoid) are essential.",
+            "See how stacking layers allows networks to recognize complex shapes and patterns."
         ],
         "theory_sections": [
             {
-                "title": "The Artificial Neuron (Perceptron)",
-                "content_markdown": "A single artificial neuron takes inputs $\\mathbf{x}$, multiplies them by trainable weights $\\mathbf{w}$, adds a scalar bias $b$, and passes the pre-activation $z$ through a nonlinear activation function $\\sigma(z)$:\n\n$$z = \\sum_{j=1}^d w_j x_j + b = \\mathbf{w}^T \\mathbf{x} + b$$\n$$a = \\sigma(z)$$\n\nWithout non-linear activations, stacking 100 linear layers is mathematically equivalent to a single linear layer ($W_2 W_1 x = W_{combined} x$). Non-linearities allow neural networks to model arbitrary complex decision boundaries.",
-                "key_takeaway": "Activation functions introduce non-linearity, enabling deep networks to approximate any continuous function."
+                "title": "How a Single Neuron Thinks",
+                "content_markdown": "An **artificial neuron** is inspired by biological brain cells:\n1. It takes in multiple input numbers ($x_1, x_2, \\dots$).\n2. Multiplies each input by an importance weight ($w_1, w_2, \\dots$).\n3. Adds a base threshold bias ($b$).\n4. Passes the result through an **activation function** $\\sigma(z)$ to decide how strongly to fire:\n\n$$z = (w_1 x_1 + w_2 x_2 + ... + w_n x_n) + b$$\n$$\\text{Output } a = \\sigma(z)$$",
+                "key_takeaway": "Each neuron acts as a specialized pattern detector."
+            },
+            {
+                "title": "Why Do We Need Activation Functions?",
+                "content_markdown": "If we only did addition and multiplication, stacking 100 neural layers would still just equal one giant straight line!\n\n**Activation functions (like ReLU or Sigmoid)** introduce curves and bends. For example, **ReLU** (Rectified Linear Unit) has a simple rule:\n\n$$\\text{ReLU}(z) = \\max(0, z)$$\n\nIf the input $z$ is negative, output `0`. If positive, output $z$. This simple on/off switch enables deep networks to bend decision boundaries around complex shapes like circles, faces, and speech patterns.",
+                "key_takeaway": "Activation functions bend the math, allowing networks to learn complex non-linear patterns."
             }
         ],
         "visual_explainer": {
@@ -439,14 +456,14 @@ LESSONS_DATA = [
             "parameters": {"layers": [3, 4, 2]}
         },
         "code_example": {
-            "title": "2-Layer Neural Network Forward Pass in NumPy",
+            "title": "Building a 2-Layer Neural Network Forward Pass in NumPy",
             "language": "python",
-            "code": "import numpy as np\n\ndef relu(z):\n    return np.maximum(0, z)\n\ndef softmax(z):\n    exp_z = np.exp(z - np.max(z, axis=1, keepdims=True))\n    return exp_z / np.sum(exp_z, axis=1, keepdims=True)\n\n# Batch of 2 samples with 3 features\nX = np.array([\n    [1.0, 2.0, -1.0],\n    [0.5, -1.5, 2.0]\n])\n\n# Layer 1: 3 inputs -> 4 hidden neurons\nW1 = np.random.randn(3, 4) * 0.1\nb1 = np.zeros((1, 4))\n\n# Layer 2: 4 hidden -> 2 output classes\nW2 = np.random.randn(4, 2) * 0.1\nb2 = np.zeros((1, 2))\n\n# Forward Pass\nZ1 = np.dot(X, W1) + b1\nA1 = relu(Z1)             # Hidden activation\nZ2 = np.dot(A1, W2) + b2\nprobs = softmax(Z2)       # Output probabilities\n\nprint(\"Hidden layer activation shape:\", A1.shape)\nprint(\"Predicted class probabilities:\")\nprint(np.round(probs, 4))",
-            "explanation": "Demonstrates forward propagation: matrix multiplication followed by ReLU non-linearity and Softmax probability normalization.",
-            "output_preview": "Hidden layer activation shape: (2, 4)\nPredicted class probabilities:\n[[0.5012 0.4988]\n [0.4995 0.5005]]"
+            "code": "import numpy as np\n\ndef relu(z):\n    \"\"\"Zero out negative values, keep positive values unchanged.\"\"\"\n    return np.maximum(0, z)\n\n# 2 input samples with 3 features each\nX = np.array([\n    [1.0, 2.0, -1.0],\n    [0.5, -1.5, 2.0]\n])\n\n# Layer 1 weights: 3 inputs -> 4 hidden neurons\nW1 = np.random.randn(3, 4) * 0.1\nb1 = np.zeros((1, 4))\n\n# Forward pass through Layer 1\nZ1 = np.dot(X, W1) + b1\nA1 = relu(Z1)  # Apply ReLU activation\n\nprint(\"Input batch shape:\", X.shape)\nprint(\"Hidden layer activation shape:\", A1.shape)\nprint(\"Sample 0 activations:\\n\", np.round(A1[0], 3))",
+            "explanation": "Demonstrates matrix multiplication followed by non-linear ReLU activation for a hidden layer.",
+            "output_preview": "Input batch shape: (2, 3)\nHidden layer activation shape: (2, 4)\nSample 0 activations:\n [0.082 0.    0.145 0.   ]"
         },
         "quiz_id": "quiz-dl-perceptron-forward-prop",
-        "summary": "You learned neuron mechanics, activation functions, and vectorizing multi-layer forward passes.",
+        "summary": "You explored artificial neurons, why non-linear activations are necessary, and how layers pass signals forward.",
         "next_lesson_slug": "genai-self-attention-transformers",
         "prev_lesson_slug": "ml-linear-regression-ols"
     },
@@ -455,43 +472,43 @@ LESSONS_DATA = [
         "slug": "genai-self-attention-transformers",
         "course_slug": "generative-ai-fundamentals",
         "module_id": "genai-mod-2",
-        "title": "Scaled Dot-Product Self-Attention & Transformers",
+        "title": "The Self-Attention Mechanism Behind ChatGPT",
         "order": 1,
         "estimated_minutes": 30,
         "difficulty": "Advanced",
         "skill_tag": "transformers",
         "learning_objectives": [
-            "Deconstruct Query ($Q$), Key ($K$), and Value ($V$) projections.",
-            "Understand the Scaled Dot-Product Attention equation $\\text{Softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)V$.",
-            "Explain why dividing by $\\sqrt{d_k}$ prevents vanishing softmax gradients in high dimensions."
+            "Learn how Self-Attention allows words to look at surrounding words for context.",
+            "Understand Query ($Q$), Key ($K$), and Value ($V$) with the filing cabinet analogy.",
+            "Understand the Attention formula: Softmax(QKᵀ / √d_k) · V."
         ],
         "theory_sections": [
             {
-                "title": "The Self-Attention Mechanism",
-                "content_markdown": "In language, word meanings depend on context. In the sentence *'The animal didn't cross the street because it was too tired'*, self-attention allows the token *'it'* to attend strongly to *'animal'* rather than *'street'*.\n\nEvery token embedding is projected into 3 representations:\n1. **Query ($Q$)**: *'What am I looking for?'*\n2. **Key ($K$)**: *'What information do I have?'*\n3. **Value ($V$)**: *'What content do I provide if matched?'*\n\n$$\\text{Attention}(Q, K, V) = \\text{Softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right) V$$",
-                "key_takeaway": "Self-attention computes dynamic pairwise relevance weights between all tokens simultaneously in parallel."
+                "title": "Why Does Attention Matter?",
+                "content_markdown": "In human language, the meaning of a word depends entirely on the words around it.\n\nConsider the sentence:\n> *'The bank on the river was muddy.'* vs *'The bank approved my loan.'*\n\nWithout attention, the word *'bank'* would have the exact same representation. **Self-Attention acts like a dynamic mental spotlight** that connects *'bank'* to *'river'* in the first sentence and *'bank'* to *'loan'* in the second sentence!",
+                "key_takeaway": "Self-attention lets words update their meaning based on all other words in the sentence simultaneously."
             },
             {
-                "title": "Why Scale by $\\sqrt{d_k}$?",
-                "content_markdown": "For large projection dimensions $d_k$, the dot products $q \\cdot k$ grow large in magnitude. Large values push the Softmax function into regions with extremely small gradients (vanishing gradients). Dividing by $\\sqrt{d_k}$ stabilizes variance to 1.0.",
-                "key_takeaway": "Scaling preserves well-behaved gradients during backpropagation."
+                "title": "The Query, Key, and Value Analogy",
+                "content_markdown": "To compute attention, every word is projected into 3 vectors, just like searching a library or YouTube:\n1. **Query ($Q$)**: *What am I searching for?* (e.g. *'Who does pronoun \"it\" refer to?'*)\n2. **Key ($K$)**: *The title tag / label on each file in the library.* (e.g. *'animal'*, *'street'*)\n3. **Value ($V$)**: *The actual content inside the matched file.*\n\n$$\\text{Attention}(Q, K, V) = \\text{Softmax}\\left( \\frac{Q · K^T}{\\sqrt{d_k}} \\right) · V$$\n\n1. Multiply $Q$ and $K^T$ to score how relevant each word is to every other word.\n2. Divide by $\\sqrt{d_k}$ to prevent numbers from blowing up.\n3. Pass scores through `Softmax` so all attention weights sum up to 100% (`1.0`).\n4. Multiply by $V$ to get the final context-aware word representation.",
+                "key_takeaway": "The Attention equation simply calculates a weighted average of word contents based on relevance scores."
             }
         ],
         "visual_explainer": {
             "type": "diagram",
             "title": "Scaled Dot-Product Attention Flow",
-            "subtitle": "Q * K^T -> Scale -> Mask -> Softmax -> Weight V",
+            "subtitle": "Q * K^T -> Scale -> Softmax -> Weight Values (V)",
             "diagram_type": "attention_matrix"
         },
         "code_example": {
-            "title": "Scaled Dot-Product Attention in Pure NumPy",
+            "title": "Computing Self-Attention in Pure NumPy",
             "language": "python",
-            "code": "import numpy as np\n\ndef softmax(x):\n    e_x = np.exp(x - np.max(x, axis=-1, keepdims=True))\n    return e_x / np.sum(e_x, axis=-1, keepdims=True)\n\ndef scaled_dot_product_attention(Q, K, V):\n    d_k = Q.shape[-1]\n    # 1. Q * K^T\n    scores = np.matmul(Q, K.T)\n    # 2. Scale by sqrt(d_k)\n    scaled_scores = scores / np.sqrt(d_k)\n    # 3. Softmax attention weights\n    attention_weights = softmax(scaled_scores)\n    # 4. Weighted sum of values\n    output = np.matmul(attention_weights, V)\n    return output, attention_weights\n\n# 3 tokens (e.g. ['AI', 'is', 'amazing']), dim=4\nnp.random.seed(42)\nQ = np.random.randn(3, 4)\nK = np.random.randn(3, 4)\nV = np.random.randn(3, 4)\n\nout, weights = scaled_dot_product_attention(Q, K, V)\nprint(\"Attention Weights Matrix (3x3):\")\nprint(np.round(weights, 3))\nprint(\"Token 0 attending to all tokens:\", np.round(weights[0], 3))\nprint(\"Sum of weights for Token 0:\", np.sum(weights[0]))",
-            "explanation": "Calculates attention scores and verifies that every row of the attention matrix sums to 1.0 via Softmax.",
-            "output_preview": "Attention Weights Matrix (3x3):\n[[0.219 0.443 0.338]\n [0.495 0.384 0.121]\n [0.428 0.301 0.271]]\nToken 0 attending to all tokens: [0.219 0.443 0.338]\nSum of weights for Token 0: 1.0"
+            "code": "import numpy as np\n\ndef softmax(x):\n    e_x = np.exp(x - np.max(x, axis=-1, keepdims=True))\n    return e_x / np.sum(e_x, axis=-1, keepdims=True)\n\ndef self_attention(Q, K, V):\n    d_k = Q.shape[-1]\n    # 1. Similarity scores between queries and keys\n    scores = np.matmul(Q, K.T) / np.sqrt(d_k)\n    # 2. Convert to probabilities summing to 1.0\n    weights = softmax(scores)\n    # 3. Weighted blend of values\n    output = np.matmul(weights, V)\n    return output, weights\n\n# 3 Tokens: ['AI', 'is', 'awesome'], feature dim = 4\nnp.random.seed(42)\nQ = np.random.randn(3, 4)\nK = np.random.randn(3, 4)\nV = np.random.randn(3, 4)\n\ncontext_output, attention_matrix = self_attention(Q, K, V)\nprint(\"Attention Weights Matrix (3x3):\\n\", np.round(attention_matrix, 3))\nprint(\"Row 0 attention sum check:\", np.sum(attention_matrix[0]))",
+            "explanation": "Computes attention scores and verifies that every row of the attention matrix sums to 1.0 (100% attention distribution).",
+            "output_preview": "Attention Weights Matrix (3x3):\n [[0.219 0.443 0.338]\n  [0.495 0.384 0.121]\n  [0.428 0.301 0.271]]\nRow 0 attention sum check: 1.0"
         },
         "quiz_id": "quiz-genai-self-attention-transformers",
-        "summary": "You understood Query/Key/Value dynamics, scaled attention calculations, and token contextualization in Transformers.",
+        "summary": "You mastered Query/Key/Value dynamics, attention matrix weighting, and how Transformers contextualize language.",
         "next_lesson_slug": None,
         "prev_lesson_slug": "dl-perceptron-forward-prop"
     }
@@ -523,12 +540,12 @@ QUIZZES_DATA = [
             {
                 "id": "q2",
                 "type": "true_false",
-                "question": "In Python, integers, floats, and strings are immutable data types.",
+                "question": "In Python, numbers (integers, floats) and strings are immutable (cannot be altered in-place).",
                 "options": ["True", "False"],
                 "correct_answer": 0,
                 "points": 10,
                 "skill_tag": "python_basics",
-                "explanation": "True. Numeric types (int, float) and strings are immutable. Any modification (like `x += 1`) allocates a new object rather than modifying the existing memory block in-place."
+                "explanation": "True. Numeric types (int, float) and strings are immutable. Any modification (like `x += 1`) creates a brand new number object rather than modifying the existing memory block in-place."
             }
         ]
     },
@@ -569,7 +586,7 @@ QUIZZES_DATA = [
     {
         "id": "quiz-math-vectors-dot-products",
         "lesson_slug": "math-vectors-dot-products",
-        "title": "Vectors, Dot Products & Linear Algebra Quiz",
+        "title": "Vectors & Dot Products Quiz",
         "passing_score": 70,
         "questions": [
             {
@@ -578,15 +595,15 @@ QUIZZES_DATA = [
                 "question": "If two non-zero vectors u and v have a dot product u · v = 0, what does this indicate geometrically?",
                 "options": [
                     "They point in exactly the same direction",
-                    "They are orthogonal (perpendicular) to each other with an angle of 90 degrees",
+                    "They are orthogonal (perpendicular / 90 degrees apart with 0 similarity)",
                     "One of the vectors has length zero",
                     "They point in opposite directions (180 degrees)"
                 ],
                 "correct_answer": 1,
                 "points": 10,
                 "skill_tag": "linear_algebra",
-                "explanation": "Since u · v = |u||v| cos(theta), when u and v are non-zero, u · v = 0 implies cos(theta) = 0, meaning theta = 90 degrees (orthogonal vectors).",
-                "hint": "Recall the geometric formula u · v = |u||v|cos(theta)."
+                "explanation": "When the dot product between two non-zero vectors is 0, cos(theta) = 0, meaning the angle between them is 90 degrees (completely independent / orthogonal).",
+                "hint": "Recall that a dot product of 0 means 90 degree angle."
             },
             {
                 "id": "q2",
@@ -609,115 +626,160 @@ QUIZZES_DATA = [
             {
                 "id": "q1",
                 "type": "multiple_choice",
-                "question": "Why do Gradient Descent algorithms subtract the gradient (w = w - alpha * grad) instead of adding it?",
+                "question": "In Gradient Descent optimization, in which direction do we update model weights to reduce prediction error?",
                 "options": [
-                    "The gradient vector points in the direction of steepest increase; the negative gradient points toward steepest decrease.",
-                    "Adding the gradient causes integer overflow in floating point hardware.",
-                    "Subtracting ensures the learning rate alpha is always positive.",
-                    "The sign is arbitrary and either addition or subtraction finds the minimum."
+                    "In the direction of the gradient (+∇L) to go uphill",
+                    "In the opposite direction of the gradient (-∇L) to go downhill toward lowest error",
+                    "At a random 90-degree angle to the gradient",
+                    "Weights are never updated using the gradient"
                 ],
-                "correct_answer": 0,
+                "correct_answer": 1,
                 "points": 10,
                 "skill_tag": "calculus",
-                "explanation": "By definition, the gradient vector points in the direction of greatest rate of increase (steepest ascent). To minimize the loss function, we must step in the opposite direction (-grad).",
-                "hint": "Think of moving downhill on a 3D valley loss surface."
+                "explanation": "The gradient vector points in the direction of steepest increase (uphill). Therefore, taking steps in the negative gradient direction (-∇L) takes us downhill toward minimum loss.",
+                "hint": "We want to decrease error, so we move opposite to the steepest uphill direction."
             }
         ]
     },
     {
         "id": "quiz-ml-linear-regression-ols",
         "lesson_slug": "ml-linear-regression-ols",
-        "title": "Linear Regression & Gradient Descent Quiz",
+        "title": "Linear Regression & Loss Functions Quiz",
         "passing_score": 70,
         "questions": [
             {
                 "id": "q1",
                 "type": "multiple_choice",
-                "question": "What occurs if the learning rate alpha in Gradient Descent is set excessively high?",
+                "question": "In the linear regression equation y_hat = w · x + b, what does parameter b represent?",
                 "options": [
-                    "The model converges to the global minimum instantaneously",
-                    "The loss oscillates and diverges away from the minimum",
-                    "The weights become permanently zero",
-                    "The Mean Squared Error function ceases to be convex"
+                    "The slope (rate of change per unit of x)",
+                    "The bias / y-intercept (the baseline prediction when input feature x is 0)",
+                    "The total number of training rows",
+                    "The learning rate"
                 ],
                 "correct_answer": 1,
                 "points": 10,
                 "skill_tag": "regression",
-                "explanation": "An excessively large learning rate causes updates to overshoot the valley of the convex loss surface, leading to wild oscillations and numerical divergence (loss reaching infinity/NaN).",
-                "hint": "What happens when step sizes overshoot the bottom of the valley?"
+                "explanation": "Parameter b is the bias (or intercept). It shifts the line up or down so the model can make predictions when all input features x are zero.",
+                "hint": "Think of y = mx + b where b is the y-intercept."
             }
         ]
     },
     {
         "id": "quiz-dl-perceptron-forward-prop",
         "lesson_slug": "dl-perceptron-forward-prop",
-        "title": "Neural Networks & Activations Quiz",
+        "title": "Artificial Neurons & Activations Quiz",
         "passing_score": 70,
         "questions": [
             {
                 "id": "q1",
                 "type": "multiple_choice",
-                "question": "Why can a neural network with only linear activation functions (f(z) = z) NOT learn XOR or complex decision boundaries?",
+                "question": "What is the primary mathematical reason for using non-linear activation functions (like ReLU) in deep neural networks?",
                 "options": [
-                    "Linear layers lack trainable bias parameters",
-                    "The composition of any number of linear transformations is mathematically just another single linear transformation",
-                    "Linear activations always produce negative outputs",
-                    "Backpropagation cannot calculate derivatives for linear functions"
+                    "To speed up matrix multiplication hardware",
+                    "To prevent multiple linear layers from collapsing into a single simple linear model, enabling complex pattern recognition",
+                    "To convert all numbers to integers",
+                    "To eliminate all negative numbers from the computer's memory"
                 ],
                 "correct_answer": 1,
                 "points": 10,
                 "skill_tag": "neural_networks",
-                "explanation": "For linear layers: f(x) = W2(W1*x + b1) + b2 = (W2*W1)*x + (W2*b1 + b2) = W_new * x + b_new. No matter the depth, the entire network reduces to a single hyper-plane linear classifier, unable to model non-linear relations like XOR."
+                "explanation": "Without non-linear activations, stacking 100 neural layers is mathematically equivalent to a single linear layer (W2 * W1 * x = W_combined * x). Non-linear activations allow networks to learn curved, complex boundaries.",
+                "hint": "Without non-linearities, linear layers simply multiply into another straight line."
             }
         ]
     },
     {
         "id": "quiz-genai-self-attention-transformers",
         "lesson_slug": "genai-self-attention-transformers",
-        "title": "Transformers & Self-Attention Quiz",
+        "title": "Self-Attention & Transformers Quiz",
         "passing_score": 70,
         "questions": [
             {
                 "id": "q1",
                 "type": "multiple_choice",
-                "question": "In Scaled Dot-Product Attention, what is the mathematical purpose of dividing QK^T by sqrt(d_k)?",
+                "question": "In the Transformer attention equation Softmax(Q·Kᵀ / √d_k) · V, why do we divide the dot products by √d_k?",
                 "options": [
-                    "To ensure the attention weights matrix is symmetric",
-                    "To prevent large dot product magnitudes from pushing the Softmax into saturated regions with vanishing gradients",
-                    "To convert the matrix into complex numbers",
-                    "To enforce causality in autoregressive generation"
+                    "To convert the matrix into text characters",
+                    "To scale dot product magnitudes and prevent vanishing gradients during Softmax backpropagation",
+                    "To remove punctuation marks from sentences",
+                    "To calculate the total number of words in the vocabulary"
                 ],
                 "correct_answer": 1,
                 "points": 10,
                 "skill_tag": "transformers",
-                "explanation": "When dimension d_k is large, the variance of the dot products scales with d_k. Unscaled large inputs to Softmax produce outputs close to 1 and 0 with nearly zero derivatives, causing severe vanishing gradient problems during backprop.",
-                "hint": "Consider the derivative of Softmax when inputs have large magnitudes."
+                "explanation": "In high dimensions d_k, dot products grow large in magnitude, which would push the Softmax function into flat regions with tiny gradients. Dividing by √d_k stabilizes variance to 1.0.",
+                "hint": "Dividing by √d_k keeps numbers within a well-behaved range for Softmax."
             }
         ]
     }
 ]
 
 SKILLS_DATA = [
-    # Programming
-    {"id": "python_basics", "category": "Programming", "title": "Python Syntax & Idioms", "description": "Core language constructs, references, comprehensions, and data structures.", "level": 1, "prerequisites": []},
-    {"id": "numpy_basics", "category": "Programming", "title": "NumPy Vectorized Computing", "description": "N-dimensional arrays, broadcasting, and high-performance vector math.", "level": 1, "prerequisites": ["python_basics"]},
-    {"id": "pandas_basics", "category": "Programming", "title": "Pandas Data Pipelines", "description": "DataFrame transformations, cleaning, and feature preparation.", "level": 2, "prerequisites": ["numpy_basics"]},
-    
-    # Mathematics
-    {"id": "linear_algebra", "category": "Mathematics", "title": "Linear Algebra & Vectors", "description": "Dot products, matrix transformations, spatial projections, and eigenvalues.", "level": 1, "prerequisites": []},
-    {"id": "calculus", "category": "Mathematics", "title": "Multivariable Calculus & Gradients", "description": "Partial derivatives, gradient vectors, and optimization landscapes.", "level": 2, "prerequisites": ["linear_algebra"]},
-    {"id": "statistics", "category": "Mathematics", "title": "Probability & Statistics", "description": "Distributions, expectation, Bayes theorem, and hypothesis testing.", "level": 2, "prerequisites": []},
-    
-    # Machine Learning
-    {"id": "supervised_learning", "category": "Machine Learning", "title": "Supervised Learning Foundations", "description": "Target prediction, training/testing splits, and evaluation metrics.", "level": 1, "prerequisites": ["linear_algebra"]},
-    {"id": "regression", "category": "Machine Learning", "title": "Linear & Polynomial Regression", "description": "Ordinary Least Squares, MSE minimization, and gradient descent.", "level": 2, "prerequisites": ["supervised_learning", "calculus"]},
-    {"id": "classification", "category": "Machine Learning", "title": "Logistic Regression & Trees", "description": "Cross-entropy, decision boundaries, entropy, and Random Forests.", "level": 2, "prerequisites": ["supervised_learning"]},
-    
-    # Deep Learning
-    {"id": "neural_networks", "category": "Deep Learning", "title": "Multi-Layer Perceptrons (MLP)", "description": "Neuron forward pass, activations (ReLU/Sigmoid), and backpropagation.", "level": 2, "prerequisites": ["calculus", "regression"]},
-    {"id": "deep_learning", "category": "Deep Learning", "title": "CNNs & Computer Vision", "description": "Convolutional filters, pooling, stride, and spatial feature maps.", "level": 3, "prerequisites": ["neural_networks"]},
-    
-    # Generative AI
-    {"id": "transformers", "category": "Generative AI", "title": "Transformers & Self-Attention", "description": "Query/Key/Value mechanisms, multi-head attention, and token embeddings.", "level": 3, "prerequisites": ["neural_networks"]},
-    {"id": "rag", "category": "Generative AI", "title": "RAG & Vector Retrieval", "description": "Vector stores, semantic chunking, embedding distance, and grounding.", "level": 4, "prerequisites": ["transformers"]}
+    {
+        "id": "skill-python-basics",
+        "name": "Python & NumPy Computing",
+        "category": "Programming",
+        "description": "Object reference models, mutability, vectorization, and broadcasting.",
+        "icon": "Code2",
+        "tier": 1,
+        "prerequisites": [],
+        "mastery_threshold": 70,
+        "matching_lessons": ["py-intro-variables", "py-numpy-arrays-broadcasting"]
+    },
+    {
+        "id": "skill-linear-algebra",
+        "name": "Linear Algebra & Vectors",
+        "category": "Mathematics",
+        "description": "Vector dot products, geometric cosine similarity, and matrix projections.",
+        "icon": "Binary",
+        "tier": 1,
+        "prerequisites": ["skill-python-basics"],
+        "mastery_threshold": 70,
+        "matching_lessons": ["math-vectors-dot-products"]
+    },
+    {
+        "id": "skill-calculus",
+        "name": "Calculus & Optimization",
+        "category": "Mathematics",
+        "description": "Derivatives, partial slopes, and gradient vector descent paths.",
+        "icon": "TrendingUp",
+        "tier": 2,
+        "prerequisites": ["skill-linear-algebra"],
+        "mastery_threshold": 70,
+        "matching_lessons": ["math-derivatives-gradients"]
+    },
+    {
+        "id": "skill-regression",
+        "name": "Classical Machine Learning",
+        "category": "Machine Learning",
+        "description": "Linear regression, loss surfaces, and MSE optimization.",
+        "icon": "Cpu",
+        "tier": 2,
+        "prerequisites": ["skill-calculus"],
+        "mastery_threshold": 70,
+        "matching_lessons": ["ml-linear-regression-ols"]
+    },
+    {
+        "id": "skill-neural-networks",
+        "name": "Deep Neural Networks",
+        "category": "Deep Learning",
+        "description": "Multi-layer perceptron forward propagation and non-linear activations.",
+        "icon": "Network",
+        "tier": 3,
+        "prerequisites": ["skill-regression"],
+        "mastery_threshold": 70,
+        "matching_lessons": ["dl-perceptron-forward-prop"]
+    },
+    {
+        "id": "skill-transformers",
+        "name": "Transformers & Generative AI",
+        "category": "Generative AI",
+        "description": "Query/Key/Value self-attention, token contextualization, and scaling.",
+        "icon": "Sparkles",
+        "tier": 4,
+        "prerequisites": ["skill-neural-networks"],
+        "mastery_threshold": 70,
+        "matching_lessons": ["genai-self-attention-transformers"]
+    }
 ]
