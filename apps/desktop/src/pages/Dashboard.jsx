@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { dashboardService } from '../services/dashboardService';
 import { useAuth } from '../contexts/AuthContext';
+import { useDomain } from '../contexts/DomainContext';
 import ContinueLearningCard from '../components/dashboard/ContinueLearningCard';
 import SkillProgressWidget from '../components/dashboard/SkillProgressWidget';
 import DailyChallengeCard from '../components/dashboard/DailyChallengeCard';
@@ -28,6 +29,7 @@ export default function Dashboard() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
+  const { currentDomain, domainInfo } = useDomain();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -45,18 +47,61 @@ export default function Dashboard() {
     fetchDashboard();
   }, []);
 
-  if (loading) return <LoadingSpinner message="Assembling your personalized AI learning cockpit..." />;
+  if (loading) return <LoadingSpinner message="Assembling your personalized engineering cockpit..." />;
   if (!data) return <div className="card">Unable to load dashboard data.</div>;
 
   const streakCount = user?.streak?.current || data.streak_days || 1;
+
+  // Track-specific quick labs
+  const getQuickLabs = () => {
+    switch (currentDomain) {
+      case 'web-dev':
+        return [
+          { label: 'Web Sandbox & Live Preview', icon: Terminal, path: '/web-lab', color: '#06B6D4' },
+          { label: 'Code Playground', icon: Code2, path: '/playground', color: '#10B981' },
+          { label: 'Engineering Challenges', icon: Trophy, path: '/challenges', color: '#F59E0B' },
+          { label: 'AI Tutor', icon: Bot, path: '/tutor', color: '#EC4899' },
+        ];
+      case 'app-dev':
+        return [
+          { label: 'Mobile Device Frame Canvas', icon: Sparkles, path: '/app-lab', color: '#EC4899' },
+          { label: 'React Native / Flutter Studio', icon: Code2, path: '/app-lab', color: '#38BDF8' },
+          { label: 'Engineering Challenges', icon: Trophy, path: '/challenges', color: '#F59E0B' },
+          { label: 'AI Tutor', icon: Bot, path: '/tutor', color: '#8B5CF6' },
+        ];
+      case 'system-design':
+        return [
+          { label: 'System Topology & Load Lab', icon: Network, path: '/system-design-lab', color: '#10B981' },
+          { label: 'Redis Cache & RPS Studio', icon: Cpu, path: '/system-design-lab', color: '#EF4444' },
+          { label: 'Architecture Viva & Projects', icon: BookOpen, path: '/projects', color: '#6366F1' },
+          { label: 'AI Tutor', icon: Bot, path: '/tutor', color: '#EC4899' },
+        ];
+      case 'github':
+        return [
+          { label: 'Interactive Git DAG Canvas', icon: Activity, path: '/git-lab', color: '#F59E0B' },
+          { label: 'Branch & Rebase Studio', icon: Terminal, path: '/git-lab', color: '#10B981' },
+          { label: 'GitHub CI/CD Actions', icon: CheckCircle, path: '/git-lab', color: '#38BDF8' },
+          { label: 'AI Tutor', icon: Bot, path: '/tutor', color: '#EC4899' },
+        ];
+      case 'ai-ml':
+      default:
+        return [
+          { label: 'Algorithm Lab', icon: Cpu, path: '/algorithms', color: '#6366f1' },
+          { label: 'Deep Learning', icon: Network, path: '/deep-learning', color: '#0ea5e9' },
+          { label: 'Python Sandbox', icon: Terminal, path: '/playground', color: '#10b981' },
+          { label: 'ML Experiments', icon: FlaskConical, path: '/experiments', color: '#a855f7' },
+          { label: 'AI Tutor', icon: Bot, path: '/tutor', color: '#ec4899' },
+        ];
+    }
+  };
 
   return (
     <div className="animate-fade-in" style={{ paddingBottom: 'var(--space-2xl)' }}>
       {/* Hero Welcome Banner */}
       <div
         style={{
-          background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.16) 0%, rgba(14, 165, 233, 0.08) 50%, var(--bg-card) 100%)',
-          border: '1px solid var(--border-highlight)',
+          background: `linear-gradient(135deg, ${domainInfo.color}25 0%, rgba(14, 165, 233, 0.08) 50%, var(--bg-card) 100%)`,
+          border: `1px solid ${domainInfo.color}40`,
           borderRadius: 'var(--radius-lg)',
           padding: '28px 32px',
           marginBottom: 'var(--space-xl)',
@@ -67,14 +112,14 @@ export default function Dashboard() {
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 'var(--space-md)' }}>
           <div style={{ maxWidth: '640px' }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(99, 102, 241, 0.2)', border: '1px solid rgba(99, 102, 241, 0.4)', padding: '3px 10px', borderRadius: 'var(--radius-full)', fontSize: '0.725rem', fontWeight: 700, color: 'var(--color-primary-400)', textTransform: 'uppercase', marginBottom: '10px' }}>
-              <Sparkles size={12} /> AI Engineering Cockpit
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: `${domainInfo.color}20`, border: `1px solid ${domainInfo.color}40`, padding: '3px 10px', borderRadius: 'var(--radius-full)', fontSize: '0.725rem', fontWeight: 700, color: domainInfo.color, textTransform: 'uppercase', marginBottom: '10px' }}>
+              <Sparkles size={12} /> {domainInfo.title} Cockpit
             </div>
             <h1 style={{ fontSize: 'var(--font-3xl)', fontWeight: 800, margin: '0 0 8px 0', color: 'var(--color-text-main)', letterSpacing: '-0.03em' }}>
-              {data.greeting || `Welcome back, ${user?.name || 'Student'}!`}
+              {data.greeting || `Welcome back, ${user?.name || 'Engineer'}!`}
             </h1>
             <p style={{ margin: 0, color: 'var(--color-text-secondary)', fontSize: 'var(--font-sm)', lineHeight: 1.6 }}>
-              Master Artificial Intelligence through the loop: <strong>Learn → Visualize → Experiment → Code → Break → Debug → Challenge → Build</strong>.
+              {domainInfo.description} Master concepts through the loop: <strong>Learn → Visualize → Experiment → Code → Test → Challenge → Build</strong>.
             </p>
           </div>
 
@@ -108,19 +153,13 @@ export default function Dashboard() {
         {/* Quick-Jump Lab Hub Bar */}
         <div style={{ display: 'flex', gap: '10px', marginTop: '22px', flexWrap: 'wrap', borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '18px' }}>
           <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', fontWeight: 600, marginRight: '4px' }}>
-            Quick Labs:
+            Track Labs & Tools:
           </span>
-          {[
-            { label: 'Algorithm Lab', icon: Cpu, path: '/algorithms', color: '#6366f1' },
-            { label: 'Deep Learning', icon: Network, path: '/deep-learning', color: '#0ea5e9' },
-            { label: 'Python Sandbox', icon: Terminal, path: '/playground', color: '#10b981' },
-            { label: 'ML Experiments', icon: FlaskConical, path: '/experiments', color: '#a855f7' },
-            { label: 'AI Tutor', icon: Bot, path: '/tutor', color: '#ec4899' },
-          ].map((lab) => {
+          {getQuickLabs().map((lab) => {
             const Icon = lab.icon;
             return (
               <button
-                key={lab.path}
+                key={lab.path + lab.label}
                 onClick={() => navigate(lab.path)}
                 style={{
                   background: 'var(--bg-tertiary)',

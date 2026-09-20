@@ -25,6 +25,7 @@ class CourseSummary(BaseModel):
     title: str
     slug: str
     description: str
+    domain: str = "ai-ml"
     category: str
     level: str  # Beginner, Intermediate, Advanced
     estimated_hours: int
@@ -41,3 +42,4 @@ class CourseDetail(CourseSummary):
     syllabus_overview: str
     modules: List[ModuleDetail]
     next_up_lesson_slug: Optional[str] = None
+

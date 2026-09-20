@@ -7,6 +7,7 @@ COURSES_DATA = [
     {
         "slug": "python-foundations",
         "title": "Python & NumPy Foundations for AI",
+        "domain": "ai-ml",
         "description": "Master essential Python programming, fast matrix math with NumPy, and structured data manipulation with Pandas tailored for machine learning engineers.",
         "category": "Programming Foundations",
         "level": "Beginner",
@@ -45,6 +46,7 @@ COURSES_DATA = [
     {
         "slug": "math-for-ai",
         "title": "Mathematics for Artificial Intelligence",
+        "domain": "ai-ml",
         "description": "The foundational math pillars of AI explained simply: Vectors, matrices, slope derivatives, gradients, and probability with real-world intuition.",
         "category": "Mathematics",
         "level": "Intermediate",
@@ -83,6 +85,7 @@ COURSES_DATA = [
     {
         "slug": "ml-fundamentals",
         "title": "Machine Learning Fundamentals",
+        "domain": "ai-ml",
         "description": "Learn how computers learn from data: Linear regression, classification, decision trees, evaluating models, and clustering.",
         "category": "Machine Learning",
         "level": "Beginner",
@@ -121,6 +124,7 @@ COURSES_DATA = [
     {
         "slug": "deep-learning-fundamentals",
         "title": "Deep Learning & Neural Networks",
+        "domain": "ai-ml",
         "description": "How neural networks think: Artificial neurons, forward thinking, learning backwards with backpropagation, and image recognition with CNNs.",
         "category": "Deep Learning",
         "level": "Intermediate",
@@ -159,6 +163,7 @@ COURSES_DATA = [
     {
         "slug": "generative-ai-fundamentals",
         "title": "Generative AI, Transformers & LLMs",
+        "domain": "ai-ml",
         "description": "How modern AI like ChatGPT works: Word tokens, embeddings, the Transformer self-attention spotlight, and building RAG applications.",
         "category": "Generative AI",
         "level": "Advanced",
