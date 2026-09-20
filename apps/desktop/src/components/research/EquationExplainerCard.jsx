@@ -31,17 +31,17 @@ export default function EquationExplainerCard({ equation }) {
       <div
         style={{
           padding: '16px 20px',
-          background: '#070a13',
+          background: 'var(--canvas-bg)',
           borderRadius: 'var(--radius-md)',
-          border: '1px solid rgba(99, 102, 241, 0.25)',
+          border: '1px solid var(--border-highlight)',
           fontFamily: 'var(--font-mono)',
           fontSize: '1.05rem',
           fontWeight: 600,
           textAlign: 'center',
-          color: '#38bdf8',
+          color: 'var(--accent-primary)',
           letterSpacing: '0.03em',
           overflowX: 'auto',
-          boxShadow: 'inset 0 2px 8px rgba(0, 0, 0, 0.4)',
+          boxShadow: 'var(--shadow-xs)',
         }}
       >
         {formattedLatex}

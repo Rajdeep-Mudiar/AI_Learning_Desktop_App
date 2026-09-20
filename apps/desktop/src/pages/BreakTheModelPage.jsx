@@ -554,7 +554,7 @@ export default function BreakTheModelPage() {
                 <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#38bdf8', textTransform: 'uppercase', marginBottom: 6, letterSpacing: '0.04em' }}>
                   Verified Production Fix:
                 </div>
-                <pre style={{ background: '#070a13', padding: 14, borderRadius: 8, fontSize: '0.825rem', color: '#38bdf8', overflowX: 'auto', margin: 0, border: '1px solid rgba(56, 189, 248, 0.2)' }}>
+                <pre style={{ background: 'var(--canvas-bg)', padding: 14, borderRadius: 8, fontSize: '0.825rem', color: 'var(--accent-primary)', overflowX: 'auto', margin: 0, border: '1px solid var(--border-highlight)' }}>
                   <code>{evaluationResult.fix_code_snippet}</code>
                 </pre>
               </div>

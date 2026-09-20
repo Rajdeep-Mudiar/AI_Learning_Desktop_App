@@ -123,18 +123,18 @@ export default function MathFormula({
       <div
         style={{
           padding: '16px 20px',
-          background: '#070a13',
-          border: '1px solid rgba(99, 102, 241, 0.25)',
+          background: 'var(--canvas-bg)',
+          border: '1px solid var(--border-highlight)',
           borderRadius: 'var(--radius-md)',
           textAlign: 'center',
           fontFamily: 'var(--font-mono)',
           fontSize: '1.15rem',
           fontWeight: 600,
-          color: '#38bdf8',
+          color: 'var(--accent-primary)',
           letterSpacing: '0.04em',
           overflowX: 'auto',
           margin: '4px 0 14px 0',
-          boxShadow: 'inset 0 2px 8px rgba(0, 0, 0, 0.4)',
+          boxShadow: 'var(--shadow-xs)',
         }}
       >
         {formattedFormula}
