@@ -610,17 +610,126 @@ input[type="range"]::-webkit-slider-thumb:hover {
   background: var(--bg-card-hover);
 }
 
-/* --- Light Mode Refinements for Code and Surfaces --- */
+/* --- Facebook & Instagram Light Mode Refinements --- */
+[data-theme="light"] .card {
+  background: #ffffff;
+  border: 1px solid #e4e6eb;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .card-hoverable:hover {
+  border-color: #1877f2;
+  box-shadow: 0 4px 14px rgba(24, 119, 242, 0.15);
+}
+
+[data-theme="light"] .top-nav {
+  background: #ffffff;
+  border-bottom: 1px solid #e4e6eb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .sidebar {
+  background: #ffffff;
+  border-right: 1px solid #e4e6eb;
+}
+
+[data-theme="light"] .nav-item {
+  color: #65676b;
+}
+
+[data-theme="light"] .nav-item:hover {
+  background: #f0f2f5;
+  color: #050505;
+}
+
+[data-theme="light"] .nav-item-active {
+  background: #e7f3ff;
+  color: #1877f2;
+  font-weight: 700;
+  border-left: 3px solid #1877f2;
+  box-shadow: none;
+}
+
+[data-theme="light"] .btn-primary {
+  background: #1877f2;
+  color: #ffffff;
+  border-color: #1877f2;
+  box-shadow: 0 2px 6px rgba(24, 119, 242, 0.3);
+}
+
+[data-theme="light"] .btn-primary:hover:not(:disabled) {
+  background: #166fe5;
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.45);
+}
+
+[data-theme="light"] .btn-gradient {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(225, 48, 108, 0.35);
+}
+
+[data-theme="light"] .btn-secondary {
+  background: #e4e6eb;
+  color: #050505;
+  border: 1px solid #d8dadf;
+}
+
+[data-theme="light"] .btn-secondary:hover:not(:disabled) {
+  background: #d8dadf;
+  color: #050505;
+}
+
+[data-theme="light"] .btn-ghost {
+  color: #65676b;
+}
+
+[data-theme="light"] .btn-ghost:hover:not(:disabled) {
+  background: #f0f2f5;
+  color: #050505;
+}
+
+[data-theme="light"] .search-trigger-box {
+  background: #f0f2f5;
+  border: 1px solid #e4e6eb;
+  color: #65676b;
+}
+
+[data-theme="light"] .search-trigger-box:hover {
+  background: #e4e6eb;
+  border-color: #ced0d4;
+  color: #050505;
+}
+
+[data-theme="light"] .streak-pill {
+  background: #fff8eb;
+  border: 1px solid #fbd38d;
+  color: #b7791f;
+}
+
+/* Instagram Story Glow Utility */
+.ig-story-ring {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  padding: 2px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.ig-gradient-text {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 [data-theme="light"] .code-container {
   background: #f8fafc;
-  border-color: var(--border-strong);
+  border-color: #e4e6eb;
 }
 
 [data-theme="light"] .code-header {
-  background: #f1f5f9;
-  color: var(--text-secondary);
+  background: #f0f2f5;
+  color: #65676b;
 }
 
 [data-theme="light"] .code-body {
-  color: #0f172a;
+  color: #050505;
 }

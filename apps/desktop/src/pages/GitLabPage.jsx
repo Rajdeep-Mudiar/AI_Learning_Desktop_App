@@ -34,8 +34,12 @@ import {
   Database
 } from 'lucide-react';
 import Badge from '../components/common/Badge';
+import { useTheme } from '../contexts/ThemeContext';
 
 export default function GitLabPage() {
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
+
   const [activeTab, setActiveTab] = useState('all-terminal'); 
   // 'all-terminal' | 'snapshots' | 'branching' | 'undo-rebase' | 'remotes-sync' | 'github-pr' | 'github-actions'
 
@@ -499,14 +503,14 @@ export default function GitLabPage() {
   ];
 
   const SIMULATION_VIEWS = [
-    { id: 'dag', label: 'DAG Graph', icon: GitCommit, color: '#f59e0b', glow: 'rgba(245, 158, 11, 0.4)' },
-    { id: 'staging-trees', label: '3-Trees Staging', icon: Layers, color: '#10b981', glow: 'rgba(16, 185, 129, 0.4)' },
-    { id: 'diff-inspector', label: 'Diff Inspector', icon: FileCode, color: '#38bdf8', glow: 'rgba(56, 189, 248, 0.4)' },
-    { id: 'branch-network', label: 'Branch Network', icon: GitBranch, color: '#a855f7', glow: 'rgba(168, 85, 247, 0.4)' },
-    { id: 'rebase-replay', label: 'Rebase & Cherry-Pick', icon: RefreshCw, color: '#ec4899', glow: 'rgba(236, 72, 153, 0.4)' },
-    { id: 'stash-stack', label: 'Stash Stack', icon: Archive, color: '#eab308', glow: 'rgba(234, 179, 8, 0.4)' },
-    { id: 'remote-sync', label: 'Remote Sync', icon: UploadCloud, color: '#8b5cf6', glow: 'rgba(139, 92, 246, 0.4)' },
-    { id: 'reset-rollback', label: 'Reset Matrix', icon: RotateCcw, color: '#f43f5e', glow: 'rgba(244, 63, 94, 0.4)' }
+    { id: 'dag', label: 'DAG Graph', icon: GitCommit, color: isLight ? '#d97706' : '#f59e0b', glow: 'rgba(245, 158, 11, 0.4)' },
+    { id: 'staging-trees', label: '3-Trees Staging', icon: Layers, color: isLight ? '#16a34a' : '#10b981', glow: 'rgba(16, 185, 129, 0.4)' },
+    { id: 'diff-inspector', label: 'Diff Inspector', icon: FileCode, color: isLight ? '#1877f2' : '#38bdf8', glow: 'rgba(24, 119, 242, 0.4)' },
+    { id: 'branch-network', label: 'Branch Network', icon: GitBranch, color: isLight ? '#9333ea' : '#a855f7', glow: 'rgba(147, 51, 234, 0.4)' },
+    { id: 'rebase-replay', label: 'Rebase & Cherry-Pick', icon: RefreshCw, color: isLight ? '#e1306c' : '#ec4899', glow: 'rgba(225, 48, 108, 0.4)' },
+    { id: 'stash-stack', label: 'Stash Stack', icon: Archive, color: isLight ? '#d97706' : '#eab308', glow: 'rgba(217, 119, 6, 0.4)' },
+    { id: 'remote-sync', label: 'Remote Sync', icon: UploadCloud, color: isLight ? '#7c3aed' : '#8b5cf6', glow: 'rgba(124, 58, 237, 0.4)' },
+    { id: 'reset-rollback', label: 'Reset Matrix', icon: RotateCcw, color: isLight ? '#dc2626' : '#f43f5e', glow: 'rgba(220, 38, 38, 0.4)' }
   ];
 
   return (
@@ -517,10 +521,10 @@ export default function GitLabPage() {
         <div style={{ minWidth: 0, flex: 1 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6, flexWrap: 'wrap' }}>
             <Badge variant="yellow"><GitBranch size={14} /> Git & GitHub Command Suite</Badge>
-            <span style={{ fontSize: '0.85rem', color: '#94a3b8', fontWeight: 600 }}>Interactive Visual Simulator</span>
+            <span style={{ fontSize: '0.85rem', color: isLight ? '#65676b' : '#94a3b8', fontWeight: 600 }}>Interactive Visual Simulator</span>
           </div>
-          <h1 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.02em' }}>Complete Git & GitHub Simulator</h1>
-          <p style={{ color: '#cbd5e1', fontSize: '0.92rem', marginTop: 4 }}>
+          <h1 style={{ fontSize: '1.75rem', fontWeight: 800, color: isLight ? '#050505' : '#ffffff', letterSpacing: '-0.02em' }}>Complete Git & GitHub Simulator</h1>
+          <p style={{ color: isLight ? '#65676b' : '#cbd5e1', fontSize: '0.92rem', marginTop: 4 }}>
             Execute any command in the shell emulator to trigger live, reactive visual animations in real time.
           </p>
         </div>
@@ -529,13 +533,13 @@ export default function GitLabPage() {
       {/* Primary Navigation Tabs */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(135px, 1fr))', gap: 6, marginBottom: 16, width: '100%', minWidth: 0 }}>
         {[
-          { id: 'all-terminal', title: '💻 Interactive Terminal', level: 'Every Command', color: '#38bdf8' },
-          { id: 'snapshots', title: '📄 3-Trees & Staging', level: 'add / commit / diff', color: '#10b981' },
-          { id: 'branching', title: '🌿 Branching & Merges', level: 'branch / switch / merge', color: '#f59e0b' },
-          { id: 'undo-rebase', title: '⚡ Rebase & Stash', level: 'rebase / reset / cherry-pick', color: '#ec4899' },
-          { id: 'remotes-sync', title: '☁️ Remote Sync', level: 'fetch / pull / push', color: '#8b5cf6' },
-          { id: 'github-pr', title: '🔀 Pull Requests', level: 'PRs & Code Review', color: '#6366f1' },
-          { id: 'github-actions', title: '🚀 GitHub Actions', level: 'CI/CD Matrix', color: '#06b6d4' }
+          { id: 'all-terminal', title: '💻 Interactive Terminal', level: 'Every Command', color: isLight ? '#1877f2' : '#38bdf8' },
+          { id: 'snapshots', title: '📄 3-Trees & Staging', level: 'add / commit / diff', color: isLight ? '#16a34a' : '#10b981' },
+          { id: 'branching', title: '🌿 Branching & Merges', level: 'branch / switch / merge', color: isLight ? '#d97706' : '#f59e0b' },
+          { id: 'undo-rebase', title: '⚡ Rebase & Stash', level: 'rebase / reset / cherry-pick', color: isLight ? '#e1306c' : '#ec4899' },
+          { id: 'remotes-sync', title: '☁️ Remote Sync', level: 'fetch / pull / push', color: isLight ? '#7c3aed' : '#8b5cf6' },
+          { id: 'github-pr', title: '🔀 Pull Requests', level: 'PRs & Code Review', color: isLight ? '#4f46e5' : '#6366f1' },
+          { id: 'github-actions', title: '🚀 GitHub Actions', level: 'CI/CD Matrix', color: isLight ? '#0284c7' : '#06b6d4' }
         ].map((tab) => {
           const isActive = activeTab === tab.id;
           return (
@@ -543,28 +547,28 @@ export default function GitLabPage() {
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               style={{
-                background: isActive ? '#1e293b' : '#0b1120',
-                border: isActive ? `2px solid ${tab.color}` : '1px solid #1e293b',
+                background: isActive ? (isLight ? '#e7f3ff' : '#1e293b') : (isLight ? '#ffffff' : '#0b1120'),
+                border: isActive ? (isLight ? '2px solid #1877f2' : `2px solid ${tab.color}`) : (isLight ? '1px solid #e4e6eb' : '1px solid #1e293b'),
                 padding: '9px 12px',
                 borderRadius: '8px',
                 textAlign: 'left',
                 cursor: 'pointer',
                 transition: 'all 0.15s ease',
-                boxShadow: isActive ? `0 0 12px ${tab.color}33` : 'none',
+                boxShadow: isActive ? (isLight ? '0 2px 8px rgba(24, 119, 242, 0.2)' : `0 0 12px ${tab.color}33`) : (isLight ? '0 1px 2px rgba(0,0,0,0.04)' : 'none'),
                 minWidth: 0
               }}
             >
               <div style={{ fontSize: '0.65rem', fontWeight: 800, color: tab.color, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{tab.level}</div>
-              <div style={{ fontSize: '0.78rem', fontWeight: 700, color: '#f8fafc', marginTop: 2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{tab.title}</div>
+              <div style={{ fontSize: '0.78rem', fontWeight: 700, color: isLight ? (isActive ? '#1877f2' : '#050505') : '#f8fafc', marginTop: 2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{tab.title}</div>
             </button>
           );
         })}
       </div>
 
-      {/* Quick Interactive Command Dispatcher Bar (Dark High-Contrast Card) */}
-      <div style={{ padding: '12px 16px', marginBottom: 16, background: '#0b1120', border: '1px solid #1e293b', borderRadius: '10px', width: '100%', minWidth: 0, boxSizing: 'border-box' }}>
-        <div style={{ fontSize: '0.78rem', fontWeight: 700, color: '#94a3b8', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
-          <Sparkles size={14} color="#38bdf8" /> Click any command pill to execute instantly:
+      {/* Quick Interactive Command Dispatcher Bar */}
+      <div style={{ padding: '12px 16px', marginBottom: 16, background: isLight ? '#ffffff' : '#0b1120', border: isLight ? '1px solid #e4e6eb' : '1px solid #1e293b', borderRadius: '10px', width: '100%', minWidth: 0, boxSizing: 'border-box', boxShadow: isLight ? '0 1px 3px rgba(0,0,0,0.06)' : 'none' }}>
+        <div style={{ fontSize: '0.78rem', fontWeight: 700, color: isLight ? '#65676b' : '#94a3b8', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
+          <Sparkles size={14} color={isLight ? '#1877f2' : '#38bdf8'} /> Click any command pill to execute instantly:
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', width: '100%' }}>
           {COMMAND_PRESETS.map((item, idx) => (
@@ -575,21 +579,21 @@ export default function GitLabPage() {
                 fontFamily: 'JetBrains Mono, Fira Code, Consolas, monospace',
                 fontSize: '0.75rem',
                 fontWeight: 600,
-                background: '#131d31',
-                border: '1px solid #0284c7',
+                background: isLight ? '#f0f2f5' : '#131d31',
+                border: isLight ? '1px solid #d8dadf' : '1px solid #0284c7',
                 padding: '4px 10px',
                 borderRadius: '6px',
-                color: '#38bdf8',
+                color: isLight ? '#1877f2' : '#38bdf8',
                 cursor: 'pointer',
                 transition: 'all 0.15s ease'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = '#0284c7';
+                e.currentTarget.style.background = isLight ? '#1877f2' : '#0284c7';
                 e.currentTarget.style.color = '#ffffff';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = '#131d31';
-                e.currentTarget.style.color = '#38bdf8';
+                e.currentTarget.style.background = isLight ? '#f0f2f5' : '#131d31';
+                e.currentTarget.style.color = isLight ? '#1877f2' : '#38bdf8';
               }}
               title={`Run ${item.cmd}`}
             >
@@ -604,28 +608,28 @@ export default function GitLabPage() {
         <div style={{ display: 'grid', gap: 16, width: '100%', minWidth: 0 }}>
           
           {/* REACTIVE SIMULATION STAGE CONTAINER */}
-          <div style={{ padding: '18px 20px', background: '#070b14', border: '1px solid #1e293b', borderRadius: '12px', width: '100%', minWidth: 0, boxSizing: 'border-box', boxShadow: '0 8px 30px rgba(0,0,0,0.6)' }}>
+          <div style={{ padding: '18px 20px', background: isLight ? '#ffffff' : '#070b14', border: isLight ? '1px solid #e4e6eb' : '1px solid #1e293b', borderRadius: '12px', width: '100%', minWidth: 0, boxSizing: 'border-box', boxShadow: isLight ? '0 2px 12px rgba(0,0,0,0.06)' : '0 8px 30px rgba(0,0,0,0.6)' }}>
             
             {/* Stage Info Header */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10, marginBottom: 12, width: '100%' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-                <div style={{ padding: '6px 12px', borderRadius: '8px', background: 'rgba(56, 189, 248, 0.15)', border: '1px solid #38bdf8', display: 'flex', alignItems: 'center', gap: 6 }}>
-                  <Sparkles size={15} color="#38bdf8" />
-                  <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#f8fafc' }}>
+                <div style={{ padding: '6px 12px', borderRadius: '8px', background: isLight ? '#e7f3ff' : 'rgba(56, 189, 248, 0.15)', border: isLight ? '1px solid #1877f2' : '1px solid #38bdf8', display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <Sparkles size={15} color={isLight ? '#1877f2' : '#38bdf8'} />
+                  <span style={{ fontSize: '0.85rem', fontWeight: 800, color: isLight ? '#050505' : '#f8fafc' }}>
                     Live Stage:
                   </span>
-                  <span style={{ fontSize: '0.85rem', fontWeight: 800, color: SIMULATION_VIEWS.find(v => v.id === activeSimView)?.color || '#38bdf8' }}>
+                  <span style={{ fontSize: '0.85rem', fontWeight: 800, color: isLight ? '#1877f2' : (SIMULATION_VIEWS.find(v => v.id === activeSimView)?.color || '#38bdf8') }}>
                     {SIMULATION_VIEWS.find(v => v.id === activeSimView)?.label}
                   </span>
                 </div>
 
-                <div style={{ background: '#1e293b', border: '1px solid #334155', padding: '5px 12px', borderRadius: '8px', fontSize: '0.8rem', color: '#f8fafc', fontWeight: 600 }}>
-                  Active Branch: <strong style={{ color: '#38bdf8', fontWeight: 800 }}>{currentBranch}</strong>
+                <div style={{ background: isLight ? '#f0f2f5' : '#1e293b', border: isLight ? '1px solid #e4e6eb' : '1px solid #334155', padding: '5px 12px', borderRadius: '8px', fontSize: '0.8rem', color: isLight ? '#65676b' : '#f8fafc', fontWeight: 600 }}>
+                  Active Branch: <strong style={{ color: isLight ? '#1877f2' : '#38bdf8', fontWeight: 800 }}>{currentBranch}</strong>
                 </div>
               </div>
             </div>
 
-            {/* Simulation View Switcher Pills (Crisp High-Contrast Buttons) */}
+            {/* Simulation View Switcher Pills */}
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 14, width: '100%' }}>
               {SIMULATION_VIEWS.map(v => {
                 const isCurrent = activeSimView === v.id;
@@ -642,24 +646,24 @@ export default function GitLabPage() {
                       display: 'flex',
                       alignItems: 'center',
                       gap: 6,
-                      background: isCurrent ? v.color : '#131d31',
-                      color: isCurrent ? '#050811' : '#e2e8f0',
-                      border: isCurrent ? `1px solid ${v.color}` : '1px solid #334155',
-                      boxShadow: isCurrent ? `0 0 14px ${v.glow}` : 'none',
+                      background: isCurrent ? (isLight ? '#1877f2' : v.color) : (isLight ? '#f0f2f5' : '#131d31'),
+                      color: isCurrent ? '#ffffff' : (isLight ? '#050505' : '#e2e8f0'),
+                      border: isCurrent ? (isLight ? '1px solid #1877f2' : `1px solid ${v.color}`) : (isLight ? '1px solid #e4e6eb' : '1px solid #334155'),
+                      boxShadow: isCurrent ? (isLight ? '0 2px 8px rgba(24, 119, 242, 0.3)' : `0 0 14px ${v.glow}`) : 'none',
                       cursor: 'pointer',
                       transition: 'all 0.15s ease'
                     }}
                   >
-                    <Icon size={13} color={isCurrent ? '#050811' : v.color} />
+                    <Icon size={13} color={isCurrent ? '#ffffff' : (isLight ? '#1877f2' : v.color)} />
                     {v.label}
                   </button>
                 );
               })}
             </div>
 
-            {/* Dynamic Status Alert Message Banner (High Contrast) */}
-            <div style={{ padding: '10px 14px', borderRadius: '8px', background: '#0f1d36', border: '1px solid #1e3a5f', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.82rem', color: '#f8fafc', wordBreak: 'break-word' }}>
-              <span style={{ color: '#38bdf8', fontWeight: 800, whiteSpace: 'nowrap' }}>⚡ Last Action:</span>
+            {/* Dynamic Status Alert Message Banner */}
+            <div style={{ padding: '10px 14px', borderRadius: '8px', background: isLight ? '#f0f2f5' : '#0f1d36', border: isLight ? '1px solid #e4e6eb' : '1px solid #1e3a5f', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.82rem', color: isLight ? '#050505' : '#f8fafc', wordBreak: 'break-word' }}>
+              <span style={{ color: isLight ? '#1877f2' : '#38bdf8', fontWeight: 800, whiteSpace: 'nowrap' }}>⚡ Last Action:</span>
               <span style={{ flex: 1, minWidth: 0, fontWeight: 600 }}>{simAlertMsg}</span>
             </div>
 
@@ -674,32 +678,32 @@ export default function GitLabPage() {
                       <div key={c.id} style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
                         <div
                           style={{
-                            background: c.branch === 'main' ? '#131d31' : '#1e1b4b',
-                            border: isHead ? '2px solid #38bdf8' : `1px solid ${c.branch === 'main' ? '#334155' : '#6366f1'}`,
+                            background: isLight ? '#ffffff' : (c.branch === 'main' ? '#131d31' : '#1e1b4b'),
+                            border: isHead ? (isLight ? '2px solid #1877f2' : '2px solid #38bdf8') : (isLight ? '1px solid #e4e6eb' : (c.branch === 'main' ? '#334155' : '#6366f1')),
                             padding: '12px 16px',
                             borderRadius: '10px',
                             minWidth: '160px',
                             maxWidth: '220px',
-                            boxShadow: isHead ? '0 0 18px rgba(56, 189, 248, 0.45)' : 'none',
+                            boxShadow: isHead ? (isLight ? '0 4px 16px rgba(24, 119, 242, 0.25)' : '0 0 18px rgba(56, 189, 248, 0.45)') : (isLight ? '0 1px 3px rgba(0,0,0,0.06)' : 'none'),
                             position: 'relative'
                           }}
                         >
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
-                            <span style={{ fontFamily: 'monospace', fontSize: '0.82rem', color: '#fbbf24', fontWeight: 800 }}>{c.hash}</span>
-                            <span style={{ fontSize: '0.68rem', padding: '2px 7px', borderRadius: '4px', background: c.branch === 'main' ? '#0f172a' : '#4338ca', color: '#f8fafc', fontWeight: 700 }}>{c.branch}</span>
+                            <span style={{ fontFamily: 'monospace', fontSize: '0.82rem', color: isLight ? '#d97706' : '#fbbf24', fontWeight: 800 }}>{c.hash}</span>
+                            <span style={{ fontSize: '0.68rem', padding: '2px 7px', borderRadius: '4px', background: isLight ? '#e7f3ff' : (c.branch === 'main' ? '#0f172a' : '#4338ca'), color: isLight ? '#1877f2' : '#f8fafc', fontWeight: 700 }}>{c.branch}</span>
                           </div>
-                          <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ffffff', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.message}</div>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 6, fontSize: '0.72rem', color: '#94a3b8' }}>
+                          <div style={{ fontSize: '0.85rem', fontWeight: 700, color: isLight ? '#050505' : '#ffffff', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.message}</div>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 6, fontSize: '0.72rem', color: isLight ? '#65676b' : '#94a3b8' }}>
                             <span>{c.author}</span>
-                            {isHead && <span style={{ color: '#38bdf8', fontWeight: 800 }}>HEAD ➔</span>}
+                            {isHead && <span style={{ color: isLight ? '#1877f2' : '#38bdf8', fontWeight: 800 }}>HEAD ➔</span>}
                           </div>
                           {hasTag && (
-                            <div style={{ position: 'absolute', top: -10, right: 10, background: '#f59e0b', color: '#090d16', fontSize: '0.65rem', fontWeight: 900, padding: '2px 7px', borderRadius: '4px', boxShadow: '0 2px 6px rgba(0,0,0,0.4)' }}>
+                            <div style={{ position: 'absolute', top: -10, right: 10, background: 'linear-gradient(45deg, #f09433, #e1306c)', color: '#ffffff', fontSize: '0.65rem', fontWeight: 900, padding: '2px 7px', borderRadius: '4px', boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}>
                               🏷️ {hasTag.name}
                             </div>
                           )}
                         </div>
-                        {idx < commits.length - 1 && <div style={{ color: '#38bdf8', fontSize: '1.4rem', fontWeight: 800, flexShrink: 0 }}>➔</div>}
+                        {idx < commits.length - 1 && <div style={{ color: isLight ? '#1877f2' : '#38bdf8', fontSize: '1.4rem', fontWeight: 800, flexShrink: 0 }}>➔</div>}
                       </div>
                     );
                   })}
@@ -711,55 +715,55 @@ export default function GitLabPage() {
             {activeSimView === 'staging-trees' && (
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: 14, width: '100%', minWidth: 0 }}>
                 {/* 1. Working Directory */}
-                <div style={{ background: '#131d31', padding: 14, borderRadius: '10px', border: '1px solid #f43f5e', minWidth: 0 }}>
+                <div style={{ background: isLight ? '#ffffff' : '#131d31', padding: 14, borderRadius: '10px', border: isLight ? '1px solid #fa383e' : '1px solid #f43f5e', minWidth: 0, boxShadow: isLight ? '0 1px 3px rgba(0,0,0,0.06)' : 'none' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-                    <span style={{ fontWeight: 800, fontSize: '0.85rem', color: '#fb7185', display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <span style={{ fontWeight: 800, fontSize: '0.85rem', color: '#fa383e', display: 'flex', alignItems: 'center', gap: 5 }}>
                       <FileCode size={15} /> 1. Working Directory
                     </span>
-                    <button onClick={() => executeGitCommand('git add .')} style={{ background: '#f43f5e', color: '#ffffff', border: 'none', padding: '3px 8px', borderRadius: '5px', fontWeight: 700, fontSize: '0.72rem', cursor: 'pointer' }}>
+                    <button onClick={() => executeGitCommand('git add .')} style={{ background: '#fa383e', color: '#ffffff', border: 'none', padding: '4px 10px', borderRadius: '5px', fontWeight: 700, fontSize: '0.72rem', cursor: 'pointer' }}>
                       + git add .
                     </button>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                     {workingFiles.map((f, idx) => (
-                      <div key={idx} style={{ padding: '8px 10px', background: '#0b1120', borderRadius: '6px', fontSize: '0.78rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1px solid #1e293b' }}>
-                        <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: '#f8fafc', fontWeight: 600 }}>📄 {f.name}</span>
-                        <span style={{ color: f.status === 'clean' ? '#34d399' : '#fb7185', fontWeight: 800, fontSize: '0.72rem', marginLeft: 6, textTransform: 'uppercase' }}>{f.status}</span>
+                      <div key={idx} style={{ padding: '8px 10px', background: isLight ? '#f0f2f5' : '#0b1120', borderRadius: '6px', fontSize: '0.78rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: isLight ? '1px solid #e4e6eb' : '1px solid #1e293b' }}>
+                        <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: isLight ? '#050505' : '#f8fafc', fontWeight: 600 }}>📄 {f.name}</span>
+                        <span style={{ color: f.status === 'clean' ? '#42b72a' : '#fa383e', fontWeight: 800, fontSize: '0.72rem', marginLeft: 6, textTransform: 'uppercase' }}>{f.status}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 {/* 2. Staging Index */}
-                <div style={{ background: '#131d31', padding: 14, borderRadius: '10px', border: '1px solid #10b981', minWidth: 0 }}>
+                <div style={{ background: isLight ? '#ffffff' : '#131d31', padding: 14, borderRadius: '10px', border: isLight ? '1px solid #42b72a' : '1px solid #10b981', minWidth: 0, boxShadow: isLight ? '0 1px 3px rgba(0,0,0,0.06)' : 'none' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-                    <span style={{ fontWeight: 800, fontSize: '0.85rem', color: '#34d399', display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <span style={{ fontWeight: 800, fontSize: '0.85rem', color: '#42b72a', display: 'flex', alignItems: 'center', gap: 5 }}>
                       <Layers size={15} /> 2. Staging Index
                     </span>
-                    <button onClick={() => executeGitCommand('git reset')} disabled={stagedFiles.length === 0} style={{ background: '#1e293b', color: '#e2e8f0', border: '1px solid #475569', padding: '3px 8px', borderRadius: '5px', fontWeight: 700, fontSize: '0.72rem', cursor: 'pointer', opacity: stagedFiles.length === 0 ? 0.5 : 1 }}>
+                    <button onClick={() => executeGitCommand('git reset')} disabled={stagedFiles.length === 0} style={{ background: isLight ? '#f0f2f5' : '#1e293b', color: isLight ? '#050505' : '#e2e8f0', border: isLight ? '1px solid #d8dadf' : '1px solid #475569', padding: '4px 10px', borderRadius: '5px', fontWeight: 700, fontSize: '0.72rem', cursor: 'pointer', opacity: stagedFiles.length === 0 ? 0.5 : 1 }}>
                       git reset
                     </button>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                     {stagedFiles.map((f, idx) => (
-                      <div key={idx} style={{ padding: '8px 10px', background: '#0b1120', borderRadius: '6px', fontSize: '0.78rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1px solid #1e293b' }}>
-                        <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: '#f8fafc', fontWeight: 600 }}>✓ {f.name}</span>
-                        <span style={{ color: '#34d399', fontWeight: 800, fontSize: '0.72rem' }}>STAGED</span>
+                      <div key={idx} style={{ padding: '8px 10px', background: isLight ? '#f0f2f5' : '#0b1120', borderRadius: '6px', fontSize: '0.78rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: isLight ? '1px solid #e4e6eb' : '1px solid #1e293b' }}>
+                        <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: isLight ? '#050505' : '#f8fafc', fontWeight: 600 }}>✓ {f.name}</span>
+                        <span style={{ color: '#42b72a', fontWeight: 800, fontSize: '0.72rem' }}>STAGED</span>
                       </div>
                     ))}
-                    {stagedFiles.length === 0 && <span style={{ fontSize: '0.78rem', color: '#94a3b8', fontStyle: 'italic', padding: '8px 0' }}>No staged snapshots</span>}
+                    {stagedFiles.length === 0 && <span style={{ fontSize: '0.78rem', color: isLight ? '#65676b' : '#94a3b8', fontStyle: 'italic', padding: '8px 0' }}>No staged snapshots</span>}
                   </div>
                 </div>
 
                 {/* 3. HEAD Commit */}
-                <div style={{ background: '#131d31', padding: 14, borderRadius: '10px', border: '1px solid #38bdf8', minWidth: 0 }}>
-                  <div style={{ fontWeight: 800, fontSize: '0.85rem', color: '#38bdf8', marginBottom: 10, display: 'flex', alignItems: 'center', gap: 5 }}>
+                <div style={{ background: isLight ? '#ffffff' : '#131d31', padding: 14, borderRadius: '10px', border: isLight ? '1px solid #1877f2' : '1px solid #38bdf8', minWidth: 0, boxShadow: isLight ? '0 1px 3px rgba(0,0,0,0.06)' : 'none' }}>
+                  <div style={{ fontWeight: 800, fontSize: '0.85rem', color: isLight ? '#1877f2' : '#38bdf8', marginBottom: 10, display: 'flex', alignItems: 'center', gap: 5 }}>
                     <GitCommit size={15} /> 3. Repository (HEAD)
                   </div>
-                  <div style={{ padding: '12px', background: '#0b1120', borderRadius: '8px', border: '1px solid #1e293b' }}>
-                    <div style={{ fontSize: '0.8rem', color: '#fbbf24', fontWeight: 800 }}>Commit: {commits[commits.length - 1]?.hash}</div>
-                    <div style={{ fontSize: '0.85rem', color: '#ffffff', fontWeight: 700, marginTop: 4 }}>{commits[commits.length - 1]?.message}</div>
-                    <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: 4 }}>Branch: {commits[commits.length - 1]?.branch}</div>
+                  <div style={{ padding: '12px', background: isLight ? '#f0f2f5' : '#0b1120', borderRadius: '8px', border: isLight ? '1px solid #e4e6eb' : '1px solid #1e293b' }}>
+                    <div style={{ fontSize: '0.8rem', color: isLight ? '#d97706' : '#fbbf24', fontWeight: 800 }}>Commit: {commits[commits.length - 1]?.hash}</div>
+                    <div style={{ fontSize: '0.85rem', color: isLight ? '#050505' : '#ffffff', fontWeight: 700, marginTop: 4 }}>{commits[commits.length - 1]?.message}</div>
+                    <div style={{ fontSize: '0.75rem', color: isLight ? '#65676b' : '#94a3b8', marginTop: 4 }}>Branch: {commits[commits.length - 1]?.branch}</div>
                   </div>
                 </div>
               </div>
@@ -767,45 +771,45 @@ export default function GitLabPage() {
 
             {/* VIEW 3: DIFF INSPECTOR */}
             {activeSimView === 'diff-inspector' && (
-              <div style={{ background: '#0b1120', padding: 16, borderRadius: '10px', border: '1px solid #334155', width: '100%', minWidth: 0, boxSizing: 'border-box' }}>
+              <div style={{ background: isLight ? '#ffffff' : '#0b1120', padding: 16, borderRadius: '10px', border: isLight ? '1px solid #e4e6eb' : '1px solid #334155', width: '100%', minWidth: 0, boxSizing: 'border-box' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10, flexWrap: 'wrap', gap: 6 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <FileText size={16} color="#38bdf8" />
-                    <span style={{ fontFamily: 'monospace', fontSize: '0.85rem', fontWeight: 800, color: '#ffffff' }}>
+                    <FileText size={16} color={isLight ? '#1877f2' : '#38bdf8'} />
+                    <span style={{ fontFamily: 'monospace', fontSize: '0.85rem', fontWeight: 800, color: isLight ? '#050505' : '#ffffff' }}>
                       diff --git a/{selectedDiffFile} b/{selectedDiffFile}
                     </span>
                   </div>
-                  <span style={{ fontSize: '0.75rem', color: '#34d399', fontWeight: 800, background: 'rgba(52, 211, 153, 0.15)', padding: '2px 8px', borderRadius: '4px' }}>+14 lines</span>
+                  <span style={{ fontSize: '0.75rem', color: isLight ? '#16a34a' : '#34d399', fontWeight: 800, background: isLight ? '#e6ffec' : 'rgba(52, 211, 153, 0.15)', padding: '2px 8px', borderRadius: '4px' }}>+14 lines</span>
                 </div>
 
-                <div style={{ fontFamily: 'JetBrains Mono, Fira Code, Consolas, monospace', fontSize: '0.82rem', background: '#050811', padding: 14, borderRadius: '8px', lineHeight: 1.6, overflowX: 'auto', width: '100%', boxSizing: 'border-box', border: '1px solid #1e293b' }}>
-                  <div style={{ color: '#94a3b8' }}>--- a/src/auth/jwt.py (Index)</div>
-                  <div style={{ color: '#94a3b8' }}>+++ b/src/auth/jwt.py (Working Tree)</div>
-                  <div style={{ color: '#64748b' }}>@@ -12,8 +12,12 @@ def generate_session_token(user_id: str):</div>
-                  <div style={{ color: '#e2e8f0' }}>     payload = {`{"sub": user_id}`}</div>
-                  <div style={{ background: 'rgba(244, 63, 94, 0.25)', color: '#fca5a5', padding: '3px 6px', borderRadius: '4px', borderLeft: '3px solid #f43f5e', fontWeight: 600 }}>
+                <div style={{ fontFamily: 'JetBrains Mono, Fira Code, Consolas, monospace', fontSize: '0.82rem', background: isLight ? '#f8f9fa' : '#050811', padding: 14, borderRadius: '8px', lineHeight: 1.6, overflowX: 'auto', width: '100%', boxSizing: 'border-box', border: isLight ? '1px solid #e4e6eb' : '1px solid #1e293b' }}>
+                  <div style={{ color: isLight ? '#65676b' : '#94a3b8' }}>--- a/src/auth/jwt.py (Index)</div>
+                  <div style={{ color: isLight ? '#65676b' : '#94a3b8' }}>+++ b/src/auth/jwt.py (Working Tree)</div>
+                  <div style={{ color: isLight ? '#65676b' : '#64748b' }}>@@ -12,8 +12,12 @@ def generate_session_token(user_id: str):</div>
+                  <div style={{ color: isLight ? '#050505' : '#e2e8f0' }}>     payload = {`{"sub": user_id}`}</div>
+                  <div style={{ background: isLight ? '#ffebe9' : 'rgba(244, 63, 94, 0.25)', color: isLight ? '#cf222e' : '#fca5a5', padding: '3px 6px', borderRadius: '4px', borderLeft: '3px solid #fa383e', fontWeight: 600 }}>
                     -    return jwt.encode(payload, SECRET_KEY, algorithm="HS256")
                   </div>
-                  <div style={{ background: 'rgba(16, 185, 129, 0.25)', color: '#6ee7b7', padding: '3px 6px', borderRadius: '4px', borderLeft: '3px solid #10b981', fontWeight: 600 }}>
+                  <div style={{ background: isLight ? '#e6ffec' : 'rgba(16, 185, 129, 0.25)', color: isLight ? '#1a7f37' : '#6ee7b7', padding: '3px 6px', borderRadius: '4px', borderLeft: '3px solid #42b72a', fontWeight: 600 }}>
                     +    expire = datetime.utcnow() + timedelta(minutes=60)
                   </div>
-                  <div style={{ background: 'rgba(16, 185, 129, 0.25)', color: '#6ee7b7', padding: '3px 6px', borderRadius: '4px', borderLeft: '3px solid #10b981', fontWeight: 600 }}>
+                  <div style={{ background: isLight ? '#e6ffec' : 'rgba(16, 185, 129, 0.25)', color: isLight ? '#1a7f37' : '#6ee7b7', padding: '3px 6px', borderRadius: '4px', borderLeft: '3px solid #42b72a', fontWeight: 600 }}>
                     +    payload.update({`{"exp": expire, "role": "admin"}`})
                   </div>
-                  <div style={{ background: 'rgba(16, 185, 129, 0.25)', color: '#6ee7b7', padding: '3px 6px', borderRadius: '4px', borderLeft: '3px solid #10b981', fontWeight: 600 }}>
+                  <div style={{ background: isLight ? '#e6ffec' : 'rgba(16, 185, 129, 0.25)', color: isLight ? '#1a7f37' : '#6ee7b7', padding: '3px 6px', borderRadius: '4px', borderLeft: '3px solid #42b72a', fontWeight: 600 }}>
                     +    return jwt.encode(payload, RSA_PRIVATE_KEY, algorithm="RS256")
                   </div>
                 </div>
               </div>
             )}
 
-            {/* VIEW 4: BRANCH NETWORK (High Visibility Redesign) */}
+            {/* VIEW 4: BRANCH NETWORK */}
             {activeSimView === 'branch-network' && (
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 14, width: '100%', minWidth: 0 }}>
                 
                 {/* Active Branch Pointers List */}
-                <div style={{ background: '#131d31', padding: 16, borderRadius: '10px', border: '1px solid #334155', minWidth: 0 }}>
-                  <div style={{ fontWeight: 800, fontSize: '0.88rem', color: '#c084fc', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 6 }}>
+                <div style={{ background: isLight ? '#ffffff' : '#131d31', padding: 16, borderRadius: '10px', border: isLight ? '1px solid #e4e6eb' : '1px solid #334155', minWidth: 0, boxShadow: isLight ? '0 1px 3px rgba(0,0,0,0.06)' : 'none' }}>
+                  <div style={{ fontWeight: 800, fontSize: '0.88rem', color: isLight ? '#9333ea' : '#c084fc', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 6 }}>
                     <GitBranch size={16} /> Active Branch Pointers:
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -816,26 +820,26 @@ export default function GitLabPage() {
                           key={idx}
                           style={{
                             padding: '10px 14px',
-                            background: isCurrent ? '#1e293b' : '#0b1120',
+                            background: isCurrent ? (isLight ? '#e7f3ff' : '#1e293b') : (isLight ? '#f0f2f5' : '#0b1120'),
                             borderRadius: '8px',
                             fontSize: '0.85rem',
                             display: 'flex',
                             justifyContent: 'space-between',
                             alignItems: 'center',
-                            border: isCurrent ? '2px solid #38bdf8' : '1px solid #334155',
-                            boxShadow: isCurrent ? '0 0 14px rgba(56, 189, 248, 0.25)' : 'none'
+                            border: isCurrent ? (isLight ? '2px solid #1877f2' : '2px solid #38bdf8') : (isLight ? '1px solid #e4e6eb' : '1px solid #334155'),
+                            boxShadow: isCurrent ? (isLight ? '0 2px 8px rgba(24, 119, 242, 0.15)' : '0 0 14px rgba(56, 189, 248, 0.25)') : 'none'
                           }}
                         >
-                          <span style={{ color: isCurrent ? '#38bdf8' : '#ffffff', fontWeight: isCurrent ? 800 : 600, display: 'flex', alignItems: 'center', gap: 6 }}>
+                          <span style={{ color: isCurrent ? (isLight ? '#1877f2' : '#38bdf8') : (isLight ? '#050505' : '#ffffff'), fontWeight: isCurrent ? 800 : 600, display: 'flex', alignItems: 'center', gap: 6 }}>
                             {isCurrent ? '● (HEAD)' : '○'} {b}
                           </span>
                           {!isCurrent && (
                             <button
                               onClick={() => executeGitCommand(`git checkout ${b}`)}
                               style={{
-                                background: '#1e293b',
-                                color: '#38bdf8',
-                                border: '1px solid #0284c7',
+                                background: isLight ? '#ffffff' : '#1e293b',
+                                color: isLight ? '#1877f2' : '#38bdf8',
+                                border: isLight ? '1px solid #d8dadf' : '1px solid #0284c7',
                                 padding: '4px 10px',
                                 borderRadius: '5px',
                                 fontSize: '0.75rem',
@@ -844,12 +848,12 @@ export default function GitLabPage() {
                                 transition: 'all 0.15s ease'
                               }}
                               onMouseEnter={(e) => {
-                                e.currentTarget.style.background = '#0284c7';
+                                e.currentTarget.style.background = isLight ? '#1877f2' : '#0284c7';
                                 e.currentTarget.style.color = '#ffffff';
                               }}
                               onMouseLeave={(e) => {
-                                e.currentTarget.style.background = '#1e293b';
-                                e.currentTarget.style.color = '#38bdf8';
+                                e.currentTarget.style.background = isLight ? '#ffffff' : '#1e293b';
+                                e.currentTarget.style.color = isLight ? '#1877f2' : '#38bdf8';
                               }}
                             >
                               checkout
@@ -862,15 +866,15 @@ export default function GitLabPage() {
                 </div>
 
                 {/* Fast Branch Actions */}
-                <div style={{ background: '#131d31', padding: 16, borderRadius: '10px', border: '1px solid #334155', minWidth: 0 }}>
-                  <div style={{ fontWeight: 800, fontSize: '0.88rem', color: '#38bdf8', marginBottom: 12 }}>
+                <div style={{ background: isLight ? '#ffffff' : '#131d31', padding: 16, borderRadius: '10px', border: isLight ? '1px solid #e4e6eb' : '1px solid #334155', minWidth: 0, boxShadow: isLight ? '0 1px 3px rgba(0,0,0,0.06)' : 'none' }}>
+                  <div style={{ fontWeight: 800, fontSize: '0.88rem', color: isLight ? '#1877f2' : '#38bdf8', marginBottom: 12 }}>
                     Fast Branch Actions:
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                     <button
                       onClick={() => executeGitCommand('git checkout -b feature/analytics')}
                       style={{
-                        background: 'linear-gradient(135deg, #6366f1, #4f46e5)',
+                        background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
                         color: '#ffffff',
                         border: 'none',
                         padding: '10px 14px',
@@ -878,7 +882,7 @@ export default function GitLabPage() {
                         fontSize: '0.82rem',
                         fontWeight: 700,
                         cursor: 'pointer',
-                        boxShadow: '0 4px 12px rgba(99, 102, 241, 0.35)'
+                        boxShadow: '0 3px 10px rgba(225, 48, 108, 0.3)'
                       }}
                     >
                       + Branch 'feature/analytics'
@@ -887,7 +891,7 @@ export default function GitLabPage() {
                     <button
                       onClick={() => executeGitCommand('git merge main')}
                       style={{
-                        background: 'linear-gradient(135deg, #10b981, #059669)',
+                        background: isLight ? '#1877f2' : 'linear-gradient(135deg, #10b981, #059669)',
                         color: '#ffffff',
                         border: 'none',
                         padding: '10px 14px',
@@ -895,7 +899,7 @@ export default function GitLabPage() {
                         fontSize: '0.82rem',
                         fontWeight: 700,
                         cursor: 'pointer',
-                        boxShadow: '0 4px 12px rgba(16, 185, 129, 0.35)'
+                        boxShadow: isLight ? '0 3px 10px rgba(24, 119, 242, 0.3)' : '0 4px 12px rgba(16, 185, 129, 0.35)'
                       }}
                     >
                       🔀 Merge 'main' into '{currentBranch}'
@@ -904,9 +908,9 @@ export default function GitLabPage() {
                     <button
                       onClick={() => executeGitCommand('git switch main')}
                       style={{
-                        background: '#1e293b',
-                        color: '#fbbf24',
-                        border: '1px solid #d97706',
+                        background: isLight ? '#f0f2f5' : '#1e293b',
+                        color: isLight ? '#050505' : '#fbbf24',
+                        border: isLight ? '1px solid #d8dadf' : '1px solid #d97706',
                         padding: '10px 14px',
                         borderRadius: '8px',
                         fontSize: '0.82rem',
@@ -923,18 +927,18 @@ export default function GitLabPage() {
 
             {/* VIEW 5: REBASE & CHERRY-PICK REPLAY */}
             {activeSimView === 'rebase-replay' && (
-              <div style={{ background: '#0b1120', padding: 16, borderRadius: '10px', border: '1px solid #ec4899', width: '100%', minWidth: 0, boxSizing: 'border-box' }}>
-                <div style={{ fontWeight: 800, fontSize: '0.88rem', color: '#f472b6', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <div style={{ background: isLight ? '#ffffff' : '#0b1120', padding: 16, borderRadius: '10px', border: isLight ? '1px solid #e1306c' : '1px solid #ec4899', width: '100%', minWidth: 0, boxSizing: 'border-box' }}>
+                <div style={{ fontWeight: 800, fontSize: '0.88rem', color: isLight ? '#e1306c' : '#f472b6', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
                   <RefreshCw size={16} /> Linear Commit Replay vs Merge Commit:
                 </div>
-                <p style={{ fontSize: '0.82rem', color: '#cbd5e1', marginBottom: 12 }}>
+                <p style={{ fontSize: '0.82rem', color: isLight ? '#65676b' : '#cbd5e1', marginBottom: 12 }}>
                   `git rebase` rewinds current branch commits, fast-forwards to base `main`, and reapplies commits sequentially without creating merge clutter.
                 </p>
                 <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                  <button onClick={() => executeGitCommand('git rebase main')} style={{ background: '#1e293b', border: '1px solid #ec4899', color: '#f472b6', padding: '8px 14px', borderRadius: '6px', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer' }}>
+                  <button onClick={() => executeGitCommand('git rebase main')} style={{ background: isLight ? '#fff0f5' : '#1e293b', border: isLight ? '1px solid #e1306c' : '1px solid #ec4899', color: isLight ? '#e1306c' : '#f472b6', padding: '8px 14px', borderRadius: '6px', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer' }}>
                     ⚡ git rebase main
                   </button>
-                  <button onClick={() => executeGitCommand('git cherry-pick 3c19e4')} style={{ background: '#1e293b', border: '1px solid #38bdf8', color: '#38bdf8', padding: '8px 14px', borderRadius: '6px', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer' }}>
+                  <button onClick={() => executeGitCommand('git cherry-pick 3c19e4')} style={{ background: isLight ? '#e7f3ff' : '#1e293b', border: isLight ? '1px solid #1877f2' : '1px solid #38bdf8', color: isLight ? '#1877f2' : '#38bdf8', padding: '8px 14px', borderRadius: '6px', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer' }}>
                     🍒 git cherry-pick 3c19e4
                   </button>
                 </div>
@@ -943,26 +947,26 @@ export default function GitLabPage() {
 
             {/* VIEW 6: LIFO STASH STACK */}
             {activeSimView === 'stash-stack' && (
-              <div style={{ background: '#0b1120', padding: 16, borderRadius: '10px', border: '1px solid #eab308', width: '100%', minWidth: 0, boxSizing: 'border-box' }}>
+              <div style={{ background: isLight ? '#ffffff' : '#0b1120', padding: 16, borderRadius: '10px', border: isLight ? '1px solid #f59e0b' : '1px solid #eab308', width: '100%', minWidth: 0, boxSizing: 'border-box' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10, flexWrap: 'wrap', gap: 6 }}>
-                  <span style={{ fontWeight: 800, fontSize: '0.88rem', color: '#fde047', display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <span style={{ fontWeight: 800, fontSize: '0.88rem', color: isLight ? '#d97706' : '#fde047', display: 'flex', alignItems: 'center', gap: 6 }}>
                     <Archive size={16} /> LIFO Stash Stack ({stashStack.length} items)
                   </span>
                   <div style={{ display: 'flex', gap: 8 }}>
-                    <button onClick={() => executeGitCommand('git stash')} style={{ background: '#eab308', color: '#090d16', border: 'none', padding: '5px 12px', borderRadius: '6px', fontWeight: 800, fontSize: '0.75rem', cursor: 'pointer' }}>git stash</button>
-                    <button onClick={() => executeGitCommand('git stash pop')} style={{ background: '#1e293b', color: '#fde047', border: '1px solid #eab308', padding: '5px 12px', borderRadius: '6px', fontWeight: 800, fontSize: '0.75rem', cursor: 'pointer' }}>git stash pop</button>
+                    <button onClick={() => executeGitCommand('git stash')} style={{ background: '#f59e0b', color: '#ffffff', border: 'none', padding: '5px 12px', borderRadius: '6px', fontWeight: 800, fontSize: '0.75rem', cursor: 'pointer' }}>git stash</button>
+                    <button onClick={() => executeGitCommand('git stash pop')} style={{ background: isLight ? '#f0f2f5' : '#1e293b', color: isLight ? '#d97706' : '#fde047', border: '1px solid #f59e0b', padding: '5px 12px', borderRadius: '6px', fontWeight: 800, fontSize: '0.75rem', cursor: 'pointer' }}>git stash pop</button>
                   </div>
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                   {stashStack.map((s, idx) => (
-                    <div key={idx} style={{ padding: '10px 14px', background: '#131d31', borderRadius: '6px', fontSize: '0.82rem', display: 'flex', justifyContent: 'space-between', border: '1px solid #334155' }}>
-                      <span style={{ fontFamily: 'monospace', color: '#fde047', fontWeight: 700 }}>{s.id}: WIP on {s.branch}</span>
-                      <span style={{ color: '#94a3b8', fontSize: '0.75rem' }}>{s.items?.length || 1} file(s)</span>
+                    <div key={idx} style={{ padding: '10px 14px', background: isLight ? '#f0f2f5' : '#131d31', borderRadius: '6px', fontSize: '0.82rem', display: 'flex', justifyContent: 'space-between', border: isLight ? '1px solid #e4e6eb' : '1px solid #334155' }}>
+                      <span style={{ fontFamily: 'monospace', color: isLight ? '#d97706' : '#fde047', fontWeight: 700 }}>{s.id}: WIP on {s.branch}</span>
+                      <span style={{ color: isLight ? '#65676b' : '#94a3b8', fontSize: '0.75rem' }}>{s.items?.length || 1} file(s)</span>
                     </div>
                   ))}
                   {stashStack.length === 0 && (
-                    <div style={{ color: '#94a3b8', fontSize: '0.8rem', fontStyle: 'italic', padding: 6 }}>
+                    <div style={{ color: isLight ? '#65676b' : '#94a3b8', fontSize: '0.8rem', fontStyle: 'italic', padding: 6 }}>
                       No stashed snapshots. Run 'git stash' to store temporary uncommitted state.
                     </div>
                   )}
@@ -973,66 +977,66 @@ export default function GitLabPage() {
             {/* VIEW 7: REMOTE SYNC & FETCH */}
             {activeSimView === 'remote-sync' && (
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 12, alignItems: 'center', width: '100%', minWidth: 0 }}>
-                <div style={{ background: '#131d31', padding: 14, borderRadius: '10px', border: '1px solid #10b981', minWidth: 0 }}>
-                  <div style={{ fontWeight: 800, fontSize: '0.85rem', color: '#34d399', marginBottom: 4 }}>💻 Local Repository</div>
-                  <div style={{ fontSize: '0.78rem', color: '#e2e8f0' }}>Branch: <strong style={{ color: '#38bdf8' }}>{currentBranch}</strong></div>
-                  <div style={{ fontSize: '0.78rem', color: '#34d399', fontWeight: 800, marginTop: 4 }}>{commits.length} Local Commits</div>
+                <div style={{ background: isLight ? '#ffffff' : '#131d31', padding: 14, borderRadius: '10px', border: isLight ? '1px solid #42b72a' : '1px solid #10b981', minWidth: 0, boxShadow: isLight ? '0 1px 3px rgba(0,0,0,0.06)' : 'none' }}>
+                  <div style={{ fontWeight: 800, fontSize: '0.85rem', color: isLight ? '#42b72a' : '#34d399', marginBottom: 4 }}>💻 Local Repository</div>
+                  <div style={{ fontSize: '0.78rem', color: isLight ? '#65676b' : '#e2e8f0' }}>Branch: <strong style={{ color: isLight ? '#1877f2' : '#38bdf8' }}>{currentBranch}</strong></div>
+                  <div style={{ fontSize: '0.78rem', color: isLight ? '#42b72a' : '#34d399', fontWeight: 800, marginTop: 4 }}>{commits.length} Local Commits</div>
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'stretch', minWidth: 0 }}>
-                  <button onClick={() => executeGitCommand('git fetch origin')} style={{ background: '#1e293b', border: '1px solid #38bdf8', color: '#38bdf8', padding: '6px', borderRadius: '6px', fontWeight: 700, fontSize: '0.75rem', cursor: 'pointer' }}>
+                  <button onClick={() => executeGitCommand('git fetch origin')} style={{ background: isLight ? '#e7f3ff' : '#1e293b', border: isLight ? '1px solid #1877f2' : '1px solid #38bdf8', color: isLight ? '#1877f2' : '#38bdf8', padding: '7px', borderRadius: '6px', fontWeight: 700, fontSize: '0.75rem', cursor: 'pointer' }}>
                     Fetch ⬇️
                   </button>
-                  <button onClick={() => executeGitCommand('git pull origin main')} style={{ background: '#1e293b', border: '1px solid #10b981', color: '#34d399', padding: '6px', borderRadius: '6px', fontWeight: 700, fontSize: '0.75rem', cursor: 'pointer' }}>
+                  <button onClick={() => executeGitCommand('git pull origin main')} style={{ background: isLight ? '#f0f2f5' : '#1e293b', border: isLight ? '1px solid #42b72a' : '1px solid #10b981', color: isLight ? '#42b72a' : '#34d399', padding: '7px', borderRadius: '6px', fontWeight: 700, fontSize: '0.75rem', cursor: 'pointer' }}>
                     Pull 🔄
                   </button>
-                  <button onClick={() => executeGitCommand('git push origin main')} style={{ background: '#10b981', color: '#090d16', border: 'none', padding: '6px', borderRadius: '6px', fontWeight: 800, fontSize: '0.75rem', cursor: 'pointer' }}>
+                  <button onClick={() => executeGitCommand('git push origin main')} style={{ background: isLight ? '#1877f2' : '#10b981', color: '#ffffff', border: 'none', padding: '7px', borderRadius: '6px', fontWeight: 800, fontSize: '0.75rem', cursor: 'pointer' }}>
                     Push ⬆️
                   </button>
                 </div>
 
-                <div style={{ background: '#131d31', padding: 14, borderRadius: '10px', border: '1px solid #8b5cf6', minWidth: 0 }}>
-                  <div style={{ fontWeight: 800, fontSize: '0.85rem', color: '#a78bfa', marginBottom: 4 }}>☁️ GitHub Remote (origin)</div>
-                  <div style={{ fontSize: '0.72rem', color: '#e2e8f0', wordBreak: 'break-all' }}>{remoteOriginUrl}</div>
-                  <div style={{ fontSize: '0.78rem', color: '#a78bfa', fontWeight: 800, marginTop: 4 }}>{remoteCommitsCount} Remote Commits</div>
+                <div style={{ background: isLight ? '#ffffff' : '#131d31', padding: 14, borderRadius: '10px', border: isLight ? '1px solid #8b5cf6' : '1px solid #8b5cf6', minWidth: 0, boxShadow: isLight ? '0 1px 3px rgba(0,0,0,0.06)' : 'none' }}>
+                  <div style={{ fontWeight: 800, fontSize: '0.85rem', color: isLight ? '#7c3aed' : '#a78bfa', marginBottom: 4 }}>☁️ GitHub Remote (origin)</div>
+                  <div style={{ fontSize: '0.72rem', color: isLight ? '#65676b' : '#e2e8f0', wordBreak: 'break-all' }}>{remoteOriginUrl}</div>
+                  <div style={{ fontSize: '0.78rem', color: isLight ? '#7c3aed' : '#a78bfa', fontWeight: 800, marginTop: 4 }}>{remoteCommitsCount} Remote Commits</div>
                 </div>
               </div>
             )}
 
             {/* VIEW 8: RESET & ROLLBACK MATRIX */}
             {activeSimView === 'reset-rollback' && (
-              <div style={{ background: '#0b1120', padding: 16, borderRadius: '10px', border: '1px solid #f43f5e', width: '100%', minWidth: 0, boxSizing: 'border-box' }}>
-                <div style={{ fontWeight: 800, fontSize: '0.88rem', color: '#fb7185', marginBottom: 10, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <div style={{ background: isLight ? '#ffffff' : '#0b1120', padding: 16, borderRadius: '10px', border: isLight ? '1px solid #fa383e' : '1px solid #f43f5e', width: '100%', minWidth: 0, boxSizing: 'border-box' }}>
+                <div style={{ fontWeight: 800, fontSize: '0.88rem', color: isLight ? '#fa383e' : '#fb7185', marginBottom: 10, display: 'flex', alignItems: 'center', gap: 6 }}>
                   <RotateCcw size={16} /> Git Reset Comparison Matrix:
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 10, width: '100%', minWidth: 0 }}>
-                  <div style={{ background: '#131d31', padding: 10, borderRadius: '8px', border: '1px solid #38bdf8', minWidth: 0 }}>
-                    <div style={{ fontWeight: 800, fontSize: '0.78rem', color: '#38bdf8' }}>--soft HEAD~1</div>
-                    <div style={{ fontSize: '0.72rem', color: '#cbd5e1', marginTop: 3 }}>Preserves Index.</div>
-                    <button onClick={() => executeGitCommand('git reset --soft HEAD~1')} style={{ marginTop: 6, fontSize: '0.7rem', padding: '3px 6px', background: '#1e293b', color: '#38bdf8', border: '1px solid #0284c7', borderRadius: '4px', cursor: 'pointer', fontWeight: 700 }}>Soft Reset</button>
+                  <div style={{ background: isLight ? '#f0f2f5' : '#131d31', padding: 10, borderRadius: '8px', border: isLight ? '1px solid #1877f2' : '1px solid #38bdf8', minWidth: 0 }}>
+                    <div style={{ fontWeight: 800, fontSize: '0.78rem', color: isLight ? '#1877f2' : '#38bdf8' }}>--soft HEAD~1</div>
+                    <div style={{ fontSize: '0.72rem', color: isLight ? '#65676b' : '#cbd5e1', marginTop: 3 }}>Preserves Index.</div>
+                    <button onClick={() => executeGitCommand('git reset --soft HEAD~1')} style={{ marginTop: 6, fontSize: '0.7rem', padding: '4px 8px', background: isLight ? '#ffffff' : '#1e293b', color: isLight ? '#1877f2' : '#38bdf8', border: isLight ? '1px solid #1877f2' : '1px solid #0284c7', borderRadius: '4px', cursor: 'pointer', fontWeight: 700 }}>Soft Reset</button>
                   </div>
-                  <div style={{ background: '#131d31', padding: 10, borderRadius: '8px', border: '1px solid #f59e0b', minWidth: 0 }}>
-                    <div style={{ fontWeight: 800, fontSize: '0.78rem', color: '#fbbf24' }}>--mixed (default)</div>
-                    <div style={{ fontSize: '0.72rem', color: '#cbd5e1', marginTop: 3 }}>Unstages Index.</div>
-                    <button onClick={() => executeGitCommand('git reset')} style={{ marginTop: 6, fontSize: '0.7rem', padding: '3px 6px', background: '#1e293b', color: '#fbbf24', border: '1px solid #d97706', borderRadius: '4px', cursor: 'pointer', fontWeight: 700 }}>Mixed Reset</button>
+                  <div style={{ background: isLight ? '#f0f2f5' : '#131d31', padding: 10, borderRadius: '8px', border: isLight ? '1px solid #f59e0b' : '1px solid #f59e0b', minWidth: 0 }}>
+                    <div style={{ fontWeight: 800, fontSize: '0.78rem', color: isLight ? '#d97706' : '#fbbf24' }}>--mixed (default)</div>
+                    <div style={{ fontSize: '0.72rem', color: isLight ? '#65676b' : '#cbd5e1', marginTop: 3 }}>Unstages Index.</div>
+                    <button onClick={() => executeGitCommand('git reset')} style={{ marginTop: 6, fontSize: '0.7rem', padding: '4px 8px', background: isLight ? '#ffffff' : '#1e293b', color: isLight ? '#d97706' : '#fbbf24', border: isLight ? '1px solid #f59e0b' : '1px solid #d97706', borderRadius: '4px', cursor: 'pointer', fontWeight: 700 }}>Mixed Reset</button>
                   </div>
-                  <div style={{ background: '#131d31', padding: 10, borderRadius: '8px', border: '1px solid #f43f5e', minWidth: 0 }}>
-                    <div style={{ fontWeight: 800, fontSize: '0.78rem', color: '#fb7185' }}>--hard HEAD~1</div>
-                    <div style={{ fontSize: '0.72rem', color: '#cbd5e1', marginTop: 3 }}>Wipes uncommitted work.</div>
-                    <button onClick={() => executeGitCommand('git reset --hard HEAD~1')} style={{ marginTop: 6, fontSize: '0.7rem', padding: '3px 6px', background: '#f43f5e', color: '#ffffff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 700 }}>Hard Reset</button>
+                  <div style={{ background: isLight ? '#f0f2f5' : '#131d31', padding: 10, borderRadius: '8px', border: isLight ? '1px solid #fa383e' : '1px solid #f43f5e', minWidth: 0 }}>
+                    <div style={{ fontWeight: 800, fontSize: '0.78rem', color: '#fa383e' }}>--hard HEAD~1</div>
+                    <div style={{ fontSize: '0.72rem', color: isLight ? '#65676b' : '#cbd5e1', marginTop: 3 }}>Wipes work.</div>
+                    <button onClick={() => executeGitCommand('git reset --hard HEAD~1')} style={{ marginTop: 6, fontSize: '0.7rem', padding: '4px 8px', background: '#fa383e', color: '#ffffff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 700 }}>Hard Reset</button>
                   </div>
-                  <div style={{ background: '#131d31', padding: 10, borderRadius: '8px', border: '1px solid #10b981', minWidth: 0 }}>
-                    <div style={{ fontWeight: 800, fontSize: '0.78rem', color: '#34d399' }}>git revert</div>
-                    <div style={{ fontSize: '0.72rem', color: '#cbd5e1', marginTop: 3 }}>Safe forward patch.</div>
-                    <button onClick={() => executeGitCommand('git revert 9a01f8')} style={{ marginTop: 6, fontSize: '0.7rem', padding: '3px 6px', background: '#10b981', color: '#090d16', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 800 }}>Revert</button>
+                  <div style={{ background: isLight ? '#f0f2f5' : '#131d31', padding: 10, borderRadius: '8px', border: isLight ? '1px solid #42b72a' : '1px solid #10b981', minWidth: 0 }}>
+                    <div style={{ fontWeight: 800, fontSize: '0.78rem', color: isLight ? '#42b72a' : '#34d399' }}>git revert</div>
+                    <div style={{ fontSize: '0.72rem', color: isLight ? '#65676b' : '#cbd5e1', marginTop: 3 }}>Forward patch.</div>
+                    <button onClick={() => executeGitCommand('git revert 9a01f8')} style={{ marginTop: 6, fontSize: '0.7rem', padding: '4px 8px', background: isLight ? '#42b72a' : '#10b981', color: '#ffffff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 800 }}>Revert</button>
                   </div>
                 </div>
               </div>
             )}
           </div>
 
-          {/* Terminal Console (Crystal-Clear High-Contrast Terminal) */}
-          <div style={{ padding: 0, overflow: 'hidden', background: '#050811', border: '1px solid #1e293b', borderRadius: '12px', width: '100%', minWidth: 0, boxSizing: 'border-box', boxShadow: '0 8px 30px rgba(0,0,0,0.6)' }}>
+          {/* Terminal Console */}
+          <div style={{ padding: 0, overflow: 'hidden', background: '#050811', border: isLight ? '1px solid #e4e6eb' : '1px solid #1e293b', borderRadius: '12px', width: '100%', minWidth: 0, boxSizing: 'border-box', boxShadow: isLight ? '0 2px 12px rgba(0,0,0,0.1)' : '0 8px 30px rgba(0,0,0,0.6)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 16px', background: '#0b1120', borderBottom: '1px solid #1e293b' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 <Terminal size={15} color="#38bdf8" />
@@ -1068,56 +1072,56 @@ export default function GitLabPage() {
       {/* TAB 2: 3-TREES & DIFF STAGING */}
       {activeTab === 'snapshots' && (
         <div style={{ display: 'grid', gap: 16, width: '100%', minWidth: 0 }}>
-          <div style={{ padding: 18, background: '#070b14', border: '1px solid #1e293b', borderRadius: '12px', width: '100%', minWidth: 0, boxSizing: 'border-box' }}>
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#ffffff', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 6 }}>
-              <Layers size={17} color="#10b981" /> Git 3-Trees Workflow (`git status`, `git add`, `git diff`)
+          <div style={{ padding: 18, background: isLight ? '#ffffff' : '#070b14', border: isLight ? '1px solid #e4e6eb' : '1px solid #1e293b', borderRadius: '12px', width: '100%', minWidth: 0, boxSizing: 'border-box', boxShadow: isLight ? '0 1px 3px rgba(0,0,0,0.06)' : 'none' }}>
+            <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: isLight ? '#050505' : '#ffffff', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <Layers size={17} color={isLight ? '#16a34a' : '#10b981'} /> Git 3-Trees Workflow (`git status`, `git add`, `git diff`)
             </h3>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 14, width: '100%', minWidth: 0 }}>
               {/* Working Tree */}
-              <div style={{ background: '#131d31', padding: 14, borderRadius: '10px', border: '1px solid #f43f5e', minWidth: 0 }}>
+              <div style={{ background: isLight ? '#f0f2f5' : '#131d31', padding: 14, borderRadius: '10px', border: isLight ? '1px solid #fa383e' : '1px solid #f43f5e', minWidth: 0 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-                  <span style={{ fontWeight: 800, fontSize: '0.85rem', color: '#fb7185' }}>1. Working Directory</span>
-                  <button onClick={() => executeGitCommand('git add .')} style={{ background: '#f43f5e', color: '#ffffff', border: 'none', padding: '3px 8px', borderRadius: '5px', fontWeight: 700, fontSize: '0.72rem', cursor: 'pointer' }}>
+                  <span style={{ fontWeight: 800, fontSize: '0.85rem', color: '#fa383e' }}>1. Working Directory</span>
+                  <button onClick={() => executeGitCommand('git add .')} style={{ background: '#fa383e', color: '#ffffff', border: 'none', padding: '4px 10px', borderRadius: '5px', fontWeight: 700, fontSize: '0.72rem', cursor: 'pointer' }}>
                     + Stage All (git add .)
                   </button>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                   {workingFiles.map((f, idx) => (
-                    <div key={idx} style={{ padding: '8px 10px', background: '#0b1120', borderRadius: '6px', fontSize: '0.78rem', display: 'flex', justifyContent: 'space-between', border: '1px solid #1e293b' }}>
-                      <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: '#f8fafc', fontWeight: 600 }}>📄 {f.name}</span>
-                      <span style={{ color: f.status === 'clean' ? '#34d399' : '#fb7185', fontWeight: 800 }}>{f.status}</span>
+                    <div key={idx} style={{ padding: '8px 10px', background: isLight ? '#ffffff' : '#0b1120', borderRadius: '6px', fontSize: '0.78rem', display: 'flex', justifyContent: 'space-between', border: isLight ? '1px solid #e4e6eb' : '1px solid #1e293b' }}>
+                      <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: isLight ? '#050505' : '#f8fafc', fontWeight: 600 }}>📄 {f.name}</span>
+                      <span style={{ color: f.status === 'clean' ? '#42b72a' : '#fa383e', fontWeight: 800 }}>{f.status}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Staging Area */}
-              <div style={{ background: '#131d31', padding: 14, borderRadius: '10px', border: '1px solid #10b981', minWidth: 0 }}>
+              <div style={{ background: isLight ? '#f0f2f5' : '#131d31', padding: 14, borderRadius: '10px', border: isLight ? '1px solid #42b72a' : '1px solid #10b981', minWidth: 0 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-                  <span style={{ fontWeight: 800, fontSize: '0.85rem', color: '#34d399' }}>2. Staging Index (Cache)</span>
-                  <button onClick={() => executeGitCommand('git reset')} disabled={stagedFiles.length === 0} style={{ background: '#1e293b', color: '#e2e8f0', border: '1px solid #475569', padding: '3px 8px', borderRadius: '5px', fontWeight: 700, fontSize: '0.72rem', cursor: 'pointer', opacity: stagedFiles.length === 0 ? 0.5 : 1 }}>
+                  <span style={{ fontWeight: 800, fontSize: '0.85rem', color: '#42b72a' }}>2. Staging Index (Cache)</span>
+                  <button onClick={() => executeGitCommand('git reset')} disabled={stagedFiles.length === 0} style={{ background: isLight ? '#ffffff' : '#1e293b', color: isLight ? '#050505' : '#e2e8f0', border: isLight ? '1px solid #d8dadf' : '1px solid #475569', padding: '4px 10px', borderRadius: '5px', fontWeight: 700, fontSize: '0.72rem', cursor: 'pointer', opacity: stagedFiles.length === 0 ? 0.5 : 1 }}>
                     Unstage (git reset)
                   </button>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                   {stagedFiles.map((f, idx) => (
-                    <div key={idx} style={{ padding: '8px 10px', background: '#0b1120', borderRadius: '6px', fontSize: '0.78rem', display: 'flex', justifyContent: 'space-between', border: '1px solid #1e293b' }}>
-                      <span style={{ color: '#f8fafc', fontWeight: 600 }}>✓ {f.name}</span>
-                      <span style={{ color: '#34d399', fontWeight: 800 }}>STAGED</span>
+                    <div key={idx} style={{ padding: '8px 10px', background: isLight ? '#ffffff' : '#0b1120', borderRadius: '6px', fontSize: '0.78rem', display: 'flex', justifyContent: 'space-between', border: isLight ? '1px solid #e4e6eb' : '1px solid #1e293b' }}>
+                      <span style={{ color: isLight ? '#050505' : '#f8fafc', fontWeight: 600 }}>✓ {f.name}</span>
+                      <span style={{ color: '#42b72a', fontWeight: 800 }}>STAGED</span>
                     </div>
                   ))}
-                  {stagedFiles.length === 0 && <span style={{ fontSize: '0.78rem', color: '#94a3b8' }}>No staged snapshots</span>}
+                  {stagedFiles.length === 0 && <span style={{ fontSize: '0.78rem', color: isLight ? '#65676b' : '#94a3b8' }}>No staged snapshots</span>}
                 </div>
               </div>
 
               {/* Local HEAD Commit */}
-              <div style={{ background: '#131d31', padding: 14, borderRadius: '10px', border: '1px solid #38bdf8', minWidth: 0 }}>
-                <div style={{ fontWeight: 800, fontSize: '0.85rem', color: '#38bdf8', marginBottom: 10 }}>3. Local Repository (HEAD)</div>
-                <div style={{ padding: '12px', background: '#0b1120', borderRadius: '8px', border: '1px solid #1e293b' }}>
-                  <div style={{ fontSize: '0.8rem', color: '#fbbf24', fontWeight: 800 }}>Commit: {commits[commits.length - 1]?.hash}</div>
-                  <div style={{ fontSize: '0.85rem', color: '#ffffff', fontWeight: 700, marginTop: 4 }}>{commits[commits.length - 1]?.message}</div>
-                  <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: 4 }}>Branch: {commits[commits.length - 1]?.branch}</div>
+              <div style={{ background: isLight ? '#f0f2f5' : '#131d31', padding: 14, borderRadius: '10px', border: isLight ? '1px solid #1877f2' : '1px solid #38bdf8', minWidth: 0 }}>
+                <div style={{ fontWeight: 800, fontSize: '0.85rem', color: isLight ? '#1877f2' : '#38bdf8', marginBottom: 10 }}>3. Local Repository (HEAD)</div>
+                <div style={{ padding: '12px', background: isLight ? '#ffffff' : '#0b1120', borderRadius: '8px', border: isLight ? '1px solid #e4e6eb' : '1px solid #1e293b' }}>
+                  <div style={{ fontSize: '0.8rem', color: isLight ? '#d97706' : '#fbbf24', fontWeight: 800 }}>Commit: {commits[commits.length - 1]?.hash}</div>
+                  <div style={{ fontSize: '0.85rem', color: isLight ? '#050505' : '#ffffff', fontWeight: 700, marginTop: 4 }}>{commits[commits.length - 1]?.message}</div>
+                  <div style={{ fontSize: '0.75rem', color: isLight ? '#65676b' : '#94a3b8', marginTop: 4 }}>Branch: {commits[commits.length - 1]?.branch}</div>
                 </div>
               </div>
             </div>
@@ -1128,22 +1132,22 @@ export default function GitLabPage() {
       {/* TAB 3: BRANCHING & MERGES */}
       {activeTab === 'branching' && (
         <div style={{ display: 'grid', gap: 16, width: '100%', minWidth: 0 }}>
-          <div style={{ padding: 18, background: '#070b14', border: '1px solid #1e293b', borderRadius: '12px', width: '100%', minWidth: 0, boxSizing: 'border-box' }}>
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#ffffff', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 6 }}>
-              <GitBranch size={17} color="#f59e0b" /> Branching, Switching & Fast-Forward Merges
+          <div style={{ padding: 18, background: isLight ? '#ffffff' : '#070b14', border: isLight ? '1px solid #e4e6eb' : '1px solid #1e293b', borderRadius: '12px', width: '100%', minWidth: 0, boxSizing: 'border-box', boxShadow: isLight ? '0 1px 3px rgba(0,0,0,0.06)' : 'none' }}>
+            <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: isLight ? '#050505' : '#ffffff', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <GitBranch size={17} color={isLight ? '#d97706' : '#f59e0b'} /> Branching, Switching & Fast-Forward Merges
             </h3>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 14, width: '100%', minWidth: 0 }}>
-              <div style={{ background: '#131d31', padding: 14, borderRadius: '10px', border: '1px solid #334155', minWidth: 0 }}>
-                <div style={{ fontWeight: 800, fontSize: '0.85rem', color: '#38bdf8', marginBottom: 10 }}>Active Branches:</div>
+              <div style={{ background: isLight ? '#f0f2f5' : '#131d31', padding: 14, borderRadius: '10px', border: isLight ? '1px solid #e4e6eb' : '1px solid #334155', minWidth: 0 }}>
+                <div style={{ fontWeight: 800, fontSize: '0.85rem', color: isLight ? '#1877f2' : '#38bdf8', marginBottom: 10 }}>Active Branches:</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                   {branches.map((b, idx) => (
-                    <div key={idx} style={{ padding: '8px 12px', background: '#0b1120', borderRadius: '6px', fontSize: '0.82rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1px solid #1e293b' }}>
-                      <span style={{ color: b === currentBranch ? '#34d399' : '#ffffff', fontWeight: b === currentBranch ? 800 : 600 }}>
+                    <div key={idx} style={{ padding: '8px 12px', background: isLight ? '#ffffff' : '#0b1120', borderRadius: '6px', fontSize: '0.82rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: isLight ? '1px solid #e4e6eb' : '1px solid #1e293b' }}>
+                      <span style={{ color: b === currentBranch ? (isLight ? '#1877f2' : '#34d399') : (isLight ? '#050505' : '#ffffff'), fontWeight: b === currentBranch ? 800 : 600 }}>
                         {b === currentBranch ? '● (HEAD) ' : '○ '}{b}
                       </span>
                       {b !== currentBranch && (
-                        <button onClick={() => executeGitCommand(`git checkout ${b}`)} style={{ background: '#1e293b', color: '#38bdf8', border: '1px solid #0284c7', padding: '3px 8px', borderRadius: '5px', fontSize: '0.72rem', fontWeight: 700, cursor: 'pointer' }}>
+                        <button onClick={() => executeGitCommand(`git checkout ${b}`)} style={{ background: isLight ? '#f0f2f5' : '#1e293b', color: isLight ? '#1877f2' : '#38bdf8', border: isLight ? '1px solid #d8dadf' : '1px solid #0284c7', padding: '3px 8px', borderRadius: '5px', fontSize: '0.72rem', fontWeight: 700, cursor: 'pointer' }}>
                           Checkout
                         </button>
                       )}
@@ -1152,13 +1156,13 @@ export default function GitLabPage() {
                 </div>
               </div>
 
-              <div style={{ background: '#131d31', padding: 14, borderRadius: '10px', border: '1px solid #334155', minWidth: 0 }}>
-                <div style={{ fontWeight: 800, fontSize: '0.85rem', color: '#34d399', marginBottom: 10 }}>Merge Operations:</div>
+              <div style={{ background: isLight ? '#f0f2f5' : '#131d31', padding: 14, borderRadius: '10px', border: isLight ? '1px solid #e4e6eb' : '1px solid #334155', minWidth: 0 }}>
+                <div style={{ fontWeight: 800, fontSize: '0.85rem', color: isLight ? '#1877f2' : '#34d399', marginBottom: 10 }}>Merge Operations:</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                  <button onClick={() => executeGitCommand(`git merge main`)} style={{ background: 'linear-gradient(135deg, #10b981, #059669)', color: '#ffffff', border: 'none', padding: '10px', borderRadius: '8px', fontSize: '0.82rem', fontWeight: 800, cursor: 'pointer' }}>
+                  <button onClick={() => executeGitCommand(`git merge main`)} style={{ background: isLight ? '#1877f2' : 'linear-gradient(135deg, #10b981, #059669)', color: '#ffffff', border: 'none', padding: '10px', borderRadius: '8px', fontSize: '0.82rem', fontWeight: 800, cursor: 'pointer' }}>
                     Merge 'main' into '{currentBranch}'
                   </button>
-                  <button onClick={() => executeGitCommand(`git checkout -b feature/analytics`)} style={{ background: 'linear-gradient(135deg, #6366f1, #4f46e5)', color: '#ffffff', border: 'none', padding: '10px', borderRadius: '8px', fontSize: '0.82rem', fontWeight: 800, cursor: 'pointer' }}>
+                  <button onClick={() => executeGitCommand(`git checkout -b feature/analytics`)} style={{ background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)', color: '#ffffff', border: 'none', padding: '10px', borderRadius: '8px', fontSize: '0.82rem', fontWeight: 800, cursor: 'pointer' }}>
                     Create Branch: 'feature/analytics'
                   </button>
                 </div>
@@ -1171,43 +1175,43 @@ export default function GitLabPage() {
       {/* TAB 4: HISTORY REWRITING, REBASE & STASH */}
       {activeTab === 'undo-rebase' && (
         <div style={{ display: 'grid', gap: 16, width: '100%', minWidth: 0 }}>
-          <div style={{ padding: 18, background: '#070b14', border: '1px solid #1e293b', borderRadius: '12px', width: '100%', minWidth: 0, boxSizing: 'border-box' }}>
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#ffffff', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 6 }}>
-              <RotateCcw size={17} color="#ec4899" /> History Rewriting: `rebase`, `cherry-pick`, `reset`, `revert`, `stash`
+          <div style={{ padding: 18, background: isLight ? '#ffffff' : '#070b14', border: isLight ? '1px solid #e4e6eb' : '1px solid #1e293b', borderRadius: '12px', width: '100%', minWidth: 0, boxSizing: 'border-box', boxShadow: isLight ? '0 1px 3px rgba(0,0,0,0.06)' : 'none' }}>
+            <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: isLight ? '#050505' : '#ffffff', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <RotateCcw size={17} color={isLight ? '#e1306c' : '#ec4899'} /> History Rewriting: `rebase`, `cherry-pick`, `reset`, `revert`, `stash`
             </h3>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 12, width: '100%', minWidth: 0 }}>
-              <div style={{ background: '#131d31', padding: 12, borderRadius: '8px', border: '1px solid #ec4899', minWidth: 0 }}>
-                <div style={{ fontWeight: 800, fontSize: '0.82rem', color: '#f472b6', marginBottom: 4 }}>1. Linearize (rebase)</div>
-                <p style={{ fontSize: '0.75rem', color: '#cbd5e1', margin: '0 0 10px 0' }}>Replays commits on top of base.</p>
-                <button onClick={() => executeGitCommand('git rebase main')} style={{ width: '100%', background: '#1e293b', color: '#f472b6', border: '1px solid #ec4899', padding: '6px', borderRadius: '6px', fontWeight: 700, fontSize: '0.75rem', cursor: 'pointer' }}>
+              <div style={{ background: isLight ? '#f0f2f5' : '#131d31', padding: 12, borderRadius: '8px', border: isLight ? '1px solid #e1306c' : '1px solid #ec4899', minWidth: 0 }}>
+                <div style={{ fontWeight: 800, fontSize: '0.82rem', color: isLight ? '#e1306c' : '#f472b6', marginBottom: 4 }}>1. Linearize (rebase)</div>
+                <p style={{ fontSize: '0.75rem', color: isLight ? '#65676b' : '#cbd5e1', margin: '0 0 10px 0' }}>Replays commits on top of base.</p>
+                <button onClick={() => executeGitCommand('git rebase main')} style={{ width: '100%', background: isLight ? '#ffffff' : '#1e293b', color: isLight ? '#e1306c' : '#f472b6', border: isLight ? '1px solid #e1306c' : '1px solid #ec4899', padding: '6px', borderRadius: '6px', fontWeight: 700, fontSize: '0.75rem', cursor: 'pointer' }}>
                   git rebase main
                 </button>
               </div>
 
-              <div style={{ background: '#131d31', padding: 12, borderRadius: '8px', border: '1px solid #38bdf8', minWidth: 0 }}>
-                <div style={{ fontWeight: 800, fontSize: '0.82rem', color: '#38bdf8', marginBottom: 4 }}>2. Cherry-Pick</div>
-                <p style={{ fontSize: '0.75rem', color: '#cbd5e1', margin: '0 0 10px 0' }}>Applies a single commit delta.</p>
-                <button onClick={() => executeGitCommand('git cherry-pick 3c19e4')} style={{ width: '100%', background: '#1e293b', color: '#38bdf8', border: '1px solid #38bdf8', padding: '6px', borderRadius: '6px', fontWeight: 700, fontSize: '0.75rem', cursor: 'pointer' }}>
+              <div style={{ background: isLight ? '#f0f2f5' : '#131d31', padding: 12, borderRadius: '8px', border: isLight ? '1px solid #1877f2' : '1px solid #38bdf8', minWidth: 0 }}>
+                <div style={{ fontWeight: 800, fontSize: '0.82rem', color: isLight ? '#1877f2' : '#38bdf8', marginBottom: 4 }}>2. Cherry-Pick</div>
+                <p style={{ fontSize: '0.75rem', color: isLight ? '#65676b' : '#cbd5e1', margin: '0 0 10px 0' }}>Applies a single commit delta.</p>
+                <button onClick={() => executeGitCommand('git cherry-pick 3c19e4')} style={{ width: '100%', background: isLight ? '#ffffff' : '#1e293b', color: isLight ? '#1877f2' : '#38bdf8', border: isLight ? '1px solid #1877f2' : '1px solid #38bdf8', padding: '6px', borderRadius: '6px', fontWeight: 700, fontSize: '0.75rem', cursor: 'pointer' }}>
                   git cherry-pick 3c19e4
                 </button>
               </div>
 
-              <div style={{ background: '#131d31', padding: 12, borderRadius: '8px', border: '1px solid #eab308', minWidth: 0 }}>
-                <div style={{ fontWeight: 800, fontSize: '0.82rem', color: '#fde047', marginBottom: 4 }}>3. Stash Stack</div>
-                <p style={{ fontSize: '0.75rem', color: '#cbd5e1', margin: '0 0 10px 0' }}>Items in stack: <strong>{stashStack.length}</strong></p>
+              <div style={{ background: isLight ? '#f0f2f5' : '#131d31', padding: 12, borderRadius: '8px', border: isLight ? '1px solid #f59e0b' : '1px solid #eab308', minWidth: 0 }}>
+                <div style={{ fontWeight: 800, fontSize: '0.82rem', color: isLight ? '#d97706' : '#fde047', marginBottom: 4 }}>3. Stash Stack</div>
+                <p style={{ fontSize: '0.75rem', color: isLight ? '#65676b' : '#cbd5e1', margin: '0 0 10px 0' }}>Items in stack: <strong>{stashStack.length}</strong></p>
                 <div style={{ display: 'flex', gap: 6 }}>
-                  <button onClick={() => executeGitCommand('git stash')} style={{ flex: 1, background: '#eab308', color: '#090d16', border: 'none', padding: '5px', borderRadius: '5px', fontWeight: 800, fontSize: '0.72rem', cursor: 'pointer' }}>Stash</button>
-                  <button onClick={() => executeGitCommand('git stash pop')} style={{ flex: 1, background: '#1e293b', color: '#fde047', border: '1px solid #eab308', padding: '5px', borderRadius: '5px', fontWeight: 800, fontSize: '0.72rem', cursor: 'pointer' }}>Pop</button>
+                  <button onClick={() => executeGitCommand('git stash')} style={{ flex: 1, background: '#f59e0b', color: '#ffffff', border: 'none', padding: '5px', borderRadius: '5px', fontWeight: 800, fontSize: '0.72rem', cursor: 'pointer' }}>Stash</button>
+                  <button onClick={() => executeGitCommand('git stash pop')} style={{ flex: 1, background: isLight ? '#ffffff' : '#1e293b', color: isLight ? '#d97706' : '#fde047', border: '1px solid #f59e0b', padding: '5px', borderRadius: '5px', fontWeight: 800, fontSize: '0.72rem', cursor: 'pointer' }}>Pop</button>
                 </div>
               </div>
 
-              <div style={{ background: '#131d31', padding: 12, borderRadius: '8px', border: '1px solid #f43f5e', minWidth: 0 }}>
-                <div style={{ fontWeight: 800, fontSize: '0.82rem', color: '#fb7185', marginBottom: 4 }}>4. Reset & Revert</div>
-                <p style={{ fontSize: '0.75rem', color: '#cbd5e1', margin: '0 0 10px 0' }}>Undo commits or create patch.</p>
+              <div style={{ background: isLight ? '#f0f2f5' : '#131d31', padding: 12, borderRadius: '8px', border: isLight ? '1px solid #fa383e' : '1px solid #f43f5e', minWidth: 0 }}>
+                <div style={{ fontWeight: 800, fontSize: '0.82rem', color: '#fa383e', marginBottom: 4 }}>4. Reset & Revert</div>
+                <p style={{ fontSize: '0.75rem', color: isLight ? '#65676b' : '#cbd5e1', margin: '0 0 10px 0' }}>Undo commits or create patch.</p>
                 <div style={{ display: 'flex', gap: 6 }}>
-                  <button onClick={() => executeGitCommand('git reset --hard HEAD~1')} style={{ flex: 1, background: '#f43f5e', color: '#ffffff', border: 'none', padding: '5px', borderRadius: '5px', fontWeight: 700, fontSize: '0.7rem', cursor: 'pointer' }}>Hard Reset</button>
-                  <button onClick={() => executeGitCommand('git revert 9a01f8')} style={{ flex: 1, background: '#10b981', color: '#090d16', border: 'none', padding: '5px', borderRadius: '5px', fontWeight: 800, fontSize: '0.7rem', cursor: 'pointer' }}>Revert</button>
+                  <button onClick={() => executeGitCommand('git reset --hard HEAD~1')} style={{ flex: 1, background: '#fa383e', color: '#ffffff', border: 'none', padding: '5px', borderRadius: '5px', fontWeight: 700, fontSize: '0.7rem', cursor: 'pointer' }}>Hard Reset</button>
+                  <button onClick={() => executeGitCommand('git revert 9a01f8')} style={{ flex: 1, background: isLight ? '#42b72a' : '#10b981', color: '#ffffff', border: 'none', padding: '5px', borderRadius: '5px', fontWeight: 800, fontSize: '0.7rem', cursor: 'pointer' }}>Revert</button>
                 </div>
               </div>
             </div>
@@ -1218,30 +1222,30 @@ export default function GitLabPage() {
       {/* TAB 5: REMOTE SYNC & COLLABORATION */}
       {activeTab === 'remotes-sync' && (
         <div style={{ display: 'grid', gap: 16, width: '100%', minWidth: 0 }}>
-          <div style={{ padding: 18, background: '#070b14', border: '1px solid #1e293b', borderRadius: '12px', width: '100%', minWidth: 0, boxSizing: 'border-box' }}>
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#ffffff', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 6 }}>
-              <UploadCloud size={17} color="#8b5cf6" /> Remote Synchronization (`remote`, `fetch`, `pull`, `push`)
+          <div style={{ padding: 18, background: isLight ? '#ffffff' : '#070b14', border: isLight ? '1px solid #e4e6eb' : '1px solid #1e293b', borderRadius: '12px', width: '100%', minWidth: 0, boxSizing: 'border-box', boxShadow: isLight ? '0 1px 3px rgba(0,0,0,0.06)' : 'none' }}>
+            <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: isLight ? '#050505' : '#ffffff', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <UploadCloud size={17} color={isLight ? '#7c3aed' : '#8b5cf6'} /> Remote Synchronization (`remote`, `fetch`, `pull`, `push`)
             </h3>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 14, width: '100%', minWidth: 0 }}>
-              <div style={{ background: '#131d31', padding: 14, borderRadius: '10px', border: '1px solid #8b5cf6', minWidth: 0 }}>
-                <div style={{ fontWeight: 800, fontSize: '0.85rem', color: '#a78bfa', marginBottom: 4 }}>Remote Endpoints (origin):</div>
-                <div style={{ fontFamily: 'monospace', fontSize: '0.75rem', color: '#38bdf8', padding: '8px', background: '#0b1120', borderRadius: '6px', wordBreak: 'break-all', border: '1px solid #1e293b' }}>
+              <div style={{ background: isLight ? '#f0f2f5' : '#131d31', padding: 14, borderRadius: '10px', border: isLight ? '1px solid #e4e6eb' : '1px solid #8b5cf6', minWidth: 0 }}>
+                <div style={{ fontWeight: 800, fontSize: '0.85rem', color: isLight ? '#7c3aed' : '#a78bfa', marginBottom: 4 }}>Remote Endpoints (origin):</div>
+                <div style={{ fontFamily: 'monospace', fontSize: '0.75rem', color: isLight ? '#1877f2' : '#38bdf8', padding: '8px', background: isLight ? '#ffffff' : '#0b1120', borderRadius: '6px', wordBreak: 'break-all', border: isLight ? '1px solid #e4e6eb' : '1px solid #1e293b' }}>
                   {remoteOriginUrl}
                 </div>
-                <div style={{ fontSize: '0.78rem', color: '#cbd5e1', marginTop: 8 }}>
-                  Commits on Remote: <strong style={{ color: '#a78bfa' }}>{remoteCommitsCount}</strong> • Local: <strong style={{ color: '#34d399' }}>{commits.length}</strong>
+                <div style={{ fontSize: '0.78rem', color: isLight ? '#65676b' : '#cbd5e1', marginTop: 8 }}>
+                  Commits on Remote: <strong style={{ color: isLight ? '#7c3aed' : '#a78bfa' }}>{remoteCommitsCount}</strong> • Local: <strong style={{ color: isLight ? '#42b72a' : '#34d399' }}>{commits.length}</strong>
                 </div>
               </div>
 
-              <div style={{ background: '#131d31', padding: 14, borderRadius: '10px', display: 'flex', flexDirection: 'column', gap: 8, minWidth: 0, border: '1px solid #334155' }}>
-                <button onClick={() => executeGitCommand('git fetch origin')} style={{ background: '#1e293b', color: '#38bdf8', border: '1px solid #0284c7', padding: '8px', borderRadius: '6px', fontWeight: 700, fontSize: '0.78rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+              <div style={{ background: isLight ? '#f0f2f5' : '#131d31', padding: 14, borderRadius: '10px', display: 'flex', flexDirection: 'column', gap: 8, minWidth: 0, border: isLight ? '1px solid #e4e6eb' : '1px solid #334155' }}>
+                <button onClick={() => executeGitCommand('git fetch origin')} style={{ background: isLight ? '#ffffff' : '#1e293b', color: isLight ? '#1877f2' : '#38bdf8', border: isLight ? '1px solid #d8dadf' : '1px solid #0284c7', padding: '8px', borderRadius: '6px', fontWeight: 700, fontSize: '0.78rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
                   <DownloadCloud size={14} /> Fetch Remote Objects (git fetch)
                 </button>
-                <button onClick={() => executeGitCommand('git pull origin main')} style={{ background: '#1e293b', color: '#34d399', border: '1px solid #10b981', padding: '8px', borderRadius: '6px', fontWeight: 700, fontSize: '0.78rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                <button onClick={() => executeGitCommand('git pull origin main')} style={{ background: isLight ? '#ffffff' : '#1e293b', color: isLight ? '#42b72a' : '#34d399', border: isLight ? '1px solid #d8dadf' : '1px solid #10b981', padding: '8px', borderRadius: '6px', fontWeight: 700, fontSize: '0.78rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
                   <RotateCw size={14} /> Pull & Merge Remote (git pull)
                 </button>
-                <button onClick={() => executeGitCommand('git push origin main')} style={{ background: 'linear-gradient(135deg, #10b981, #059669)', color: '#ffffff', border: 'none', padding: '8px', borderRadius: '6px', fontWeight: 800, fontSize: '0.78rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                <button onClick={() => executeGitCommand('git push origin main')} style={{ background: isLight ? '#1877f2' : 'linear-gradient(135deg, #10b981, #059669)', color: '#ffffff', border: 'none', padding: '8px', borderRadius: '6px', fontWeight: 800, fontSize: '0.78rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
                   <UploadCloud size={14} /> Push Local Commits (git push)
                 </button>
               </div>
@@ -1253,11 +1257,11 @@ export default function GitLabPage() {
       {/* TAB 6: GITHUB PULL REQUESTS & REVIEWS */}
       {activeTab === 'github-pr' && (
         <div style={{ display: 'grid', gap: 16, width: '100%', minWidth: 0 }}>
-          <div style={{ padding: 18, background: '#070b14', border: '1px solid #1e293b', borderRadius: '12px', width: '100%', minWidth: 0, boxSizing: 'border-box' }}>
+          <div style={{ padding: 18, background: isLight ? '#ffffff' : '#070b14', border: isLight ? '1px solid #e4e6eb' : '1px solid #1e293b', borderRadius: '12px', width: '100%', minWidth: 0, boxSizing: 'border-box', boxShadow: isLight ? '0 1px 3px rgba(0,0,0,0.06)' : 'none' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14, flexWrap: 'wrap', gap: 6 }}>
               <div>
-                <span style={{ fontSize: '0.75rem', color: '#a78bfa', fontWeight: 800 }}>PULL REQUEST #42</span>
-                <h3 style={{ fontSize: '1.15rem', fontWeight: 800, margin: '2px 0 0 0', color: '#ffffff' }}>
+                <span style={{ fontSize: '0.75rem', color: isLight ? '#7c3aed' : '#a78bfa', fontWeight: 800 }}>PULL REQUEST #42</span>
+                <h3 style={{ fontSize: '1.15rem', fontWeight: 800, margin: '2px 0 0 0', color: isLight ? '#050505' : '#ffffff' }}>
                   feat: implement enterprise JWT authentication and security headers
                 </h3>
               </div>
@@ -1267,8 +1271,8 @@ export default function GitLabPage() {
                   borderRadius: '16px',
                   fontSize: '0.75rem',
                   fontWeight: 800,
-                  background: prStatus === 'merged' ? 'rgba(139, 92, 246, 0.25)' : 'rgba(16, 185, 129, 0.25)',
-                  color: prStatus === 'merged' ? '#a78bfa' : '#34d399',
+                  background: prStatus === 'merged' ? (isLight ? '#f3e8ff' : 'rgba(139, 92, 246, 0.25)') : (isLight ? '#e6ffec' : 'rgba(16, 185, 129, 0.25)'),
+                  color: prStatus === 'merged' ? (isLight ? '#7c3aed' : '#a78bfa') : (isLight ? '#16a34a' : '#34d399'),
                   border: `1px solid ${prStatus === 'merged' ? '#8b5cf6' : '#10b981'}`
                 }}
               >
@@ -1279,25 +1283,25 @@ export default function GitLabPage() {
             {/* Reviewers Feedback */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 14 }}>
               {prReviews.map((r, idx) => (
-                <div key={idx} style={{ padding: '10px 14px', background: '#131d31', borderRadius: '8px', border: '1px solid #334155', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div key={idx} style={{ padding: '10px 14px', background: isLight ? '#f0f2f5' : '#131d31', borderRadius: '8px', border: isLight ? '1px solid #e4e6eb' : '1px solid #334155', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div>
-                    <span style={{ fontSize: '0.82rem', fontWeight: 800, color: '#f8fafc' }}>{r.reviewer}</span>
-                    <div style={{ fontSize: '0.75rem', color: '#cbd5e1', marginTop: 2 }}>{r.comment}</div>
+                    <span style={{ fontSize: '0.82rem', fontWeight: 800, color: isLight ? '#050505' : '#f8fafc' }}>{r.reviewer}</span>
+                    <div style={{ fontSize: '0.75rem', color: isLight ? '#65676b' : '#cbd5e1', marginTop: 2 }}>{r.comment}</div>
                   </div>
-                  <span style={{ fontSize: '0.72rem', color: '#34d399', fontWeight: 800 }}>✓ {r.status}</span>
+                  <span style={{ fontSize: '0.72rem', color: isLight ? '#16a34a' : '#34d399', fontWeight: 800 }}>✓ {r.status}</span>
                 </div>
               ))}
             </div>
 
             {/* Merge Actions */}
             {prStatus === 'open' && (
-              <div style={{ display: 'flex', gap: 10, alignItems: 'center', background: '#0b1120', padding: 12, borderRadius: '8px', border: '1px solid #1e293b', flexWrap: 'wrap' }}>
-                <select className="input" value={mergeStrategy} onChange={(e) => setMergeStrategy(e.target.value)} style={{ fontSize: '0.8rem', flex: 1, minWidth: '160px', background: '#1e293b', color: '#f8fafc', border: '1px solid #334155' }}>
+              <div style={{ display: 'flex', gap: 10, alignItems: 'center', background: isLight ? '#f0f2f5' : '#0b1120', padding: 12, borderRadius: '8px', border: isLight ? '1px solid #e4e6eb' : '1px solid #1e293b', flexWrap: 'wrap' }}>
+                <select className="input" value={mergeStrategy} onChange={(e) => setMergeStrategy(e.target.value)} style={{ fontSize: '0.8rem', flex: 1, minWidth: '160px', background: isLight ? '#ffffff' : '#1e293b', color: isLight ? '#050505' : '#f8fafc', border: isLight ? '1px solid #d8dadf' : '1px solid #334155' }}>
                   <option value="merge-commit">Create a merge commit</option>
                   <option value="squash">Squash and merge</option>
                   <option value="rebase">Rebase and merge</option>
                 </select>
-                <button onClick={handleMergePr} style={{ background: 'linear-gradient(135deg, #6366f1, #4f46e5)', color: '#ffffff', border: 'none', padding: '8px 16px', borderRadius: '6px', fontWeight: 800, fontSize: '0.8rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6 }}>
+                <button onClick={handleMergePr} style={{ background: isLight ? '#1877f2' : 'linear-gradient(135deg, #6366f1, #4f46e5)', color: '#ffffff', border: 'none', padding: '8px 16px', borderRadius: '6px', fontWeight: 800, fontSize: '0.8rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6 }}>
                   <GitPullRequest size={14} /> Merge Pull Request
                 </button>
               </div>
@@ -1309,15 +1313,15 @@ export default function GitLabPage() {
       {/* TAB 7: GITHUB ACTIONS CI/CD */}
       {activeTab === 'github-actions' && (
         <div style={{ display: 'grid', gap: 16, width: '100%', minWidth: 0 }}>
-          <div style={{ padding: 18, background: '#070b14', border: '1px solid #1e293b', borderRadius: '12px', width: '100%', minWidth: 0, boxSizing: 'border-box' }}>
+          <div style={{ padding: 18, background: isLight ? '#ffffff' : '#070b14', border: isLight ? '1px solid #e4e6eb' : '1px solid #1e293b', borderRadius: '12px', width: '100%', minWidth: 0, boxSizing: 'border-box', boxShadow: isLight ? '0 1px 3px rgba(0,0,0,0.06)' : 'none' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14, flexWrap: 'wrap', gap: 6 }}>
               <div>
-                <span style={{ fontSize: '0.75rem', color: '#38bdf8', fontWeight: 800 }}>WORKFLOW: .github/workflows/main.yml</span>
-                <h3 style={{ fontSize: '1.1rem', fontWeight: 800, margin: '2px 0 0 0', color: '#ffffff' }}>
+                <span style={{ fontSize: '0.75rem', color: isLight ? '#0284c7' : '#38bdf8', fontWeight: 800 }}>WORKFLOW: .github/workflows/main.yml</span>
+                <h3 style={{ fontSize: '1.1rem', fontWeight: 800, margin: '2px 0 0 0', color: isLight ? '#050505' : '#ffffff' }}>
                   🚀 Enterprise CI/CD Automated Deployment Matrix
                 </h3>
               </div>
-              <button onClick={runCicdPipeline} disabled={pipelineRunning} style={{ background: 'linear-gradient(135deg, #0ea5e9, #0284c7)', color: '#ffffff', border: 'none', padding: '6px 14px', borderRadius: '6px', fontWeight: 800, fontSize: '0.78rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, opacity: pipelineRunning ? 0.6 : 1 }}>
+              <button onClick={runCicdPipeline} disabled={pipelineRunning} style={{ background: isLight ? '#1877f2' : 'linear-gradient(135deg, #0ea5e9, #0284c7)', color: '#ffffff', border: 'none', padding: '6px 14px', borderRadius: '6px', fontWeight: 800, fontSize: '0.78rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, opacity: pipelineRunning ? 0.6 : 1 }}>
                 <Play size={13} /> {pipelineRunning ? 'Executing...' : 'Trigger Workflow'}
               </button>
             </div>
@@ -1328,23 +1332,23 @@ export default function GitLabPage() {
                   key={step.id}
                   style={{
                     padding: '12px 16px',
-                    background: '#131d31',
+                    background: isLight ? '#f0f2f5' : '#131d31',
                     borderRadius: '8px',
-                    border: `1px solid ${step.status === 'success' ? '#10b981' : step.status === 'running' ? '#38bdf8' : '#334155'}`,
+                    border: `1px solid ${step.status === 'success' ? (isLight ? '#42b72a' : '#10b981') : step.status === 'running' ? (isLight ? '#1877f2' : '#38bdf8') : (isLight ? '#e4e6eb' : '#334155')}`,
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center'
                   }}
                 >
-                  <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#f8fafc' }}>{step.name}</span>
+                  <span style={{ fontSize: '0.82rem', fontWeight: 700, color: isLight ? '#050505' : '#f8fafc' }}>{step.name}</span>
                   <span
                     style={{
                       fontSize: '0.72rem',
                       fontWeight: 800,
                       padding: '3px 8px',
                       borderRadius: '5px',
-                      background: step.status === 'success' ? 'rgba(16, 185, 129, 0.2)' : step.status === 'running' ? 'rgba(56, 189, 248, 0.2)' : 'rgba(255, 255, 255, 0.05)',
-                      color: step.status === 'success' ? '#34d399' : step.status === 'running' ? '#38bdf8' : '#94a3b8'
+                      background: step.status === 'success' ? (isLight ? '#e6ffec' : 'rgba(16, 185, 129, 0.2)') : step.status === 'running' ? (isLight ? '#e7f3ff' : 'rgba(56, 189, 248, 0.2)') : (isLight ? '#ffffff' : 'rgba(255, 255, 255, 0.05)'),
+                      color: step.status === 'success' ? (isLight ? '#16a34a' : '#34d399') : step.status === 'running' ? (isLight ? '#1877f2' : '#38bdf8') : (isLight ? '#65676b' : '#94a3b8')
                     }}
                   >
                     {step.status.toUpperCase()} ({step.duration})

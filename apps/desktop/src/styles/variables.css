@@ -31,6 +31,23 @@
   --accent-purple: #a855f7;
   --accent-pink: #ec4899;
 
+  /* Facebook & Instagram Tokens */
+  --fb-blue: #1877f2;
+  --fb-blue-hover: #166fe5;
+  --fb-blue-light: #e7f3ff;
+  --fb-bg: #f0f2f5;
+  --fb-card: #ffffff;
+  --fb-border: #e4e6eb;
+  --fb-text: #050505;
+  --fb-text-secondary: #65676b;
+  --ig-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  --ig-gradient-horizontal: linear-gradient(90deg, #f09433, #dc2743, #bc1888);
+  --ig-pink: #e1306c;
+  --ig-purple: #833ab4;
+  --ig-orange: #fd1d1d;
+  --ig-yellow: #f56040;
+  --ig-blue: #0095f6;
+
   /* Aliases for universal component compatibility */
   --color-bg: var(--bg-primary);
   --color-surface: var(--bg-card);
@@ -104,8 +121,8 @@
   --shadow-glow-cyan: 0 0 24px rgba(14, 165, 233, 0.3);
   --shadow-glow-emerald: 0 0 24px rgba(16, 185, 129, 0.3);
   
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
 
   --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
@@ -113,37 +130,44 @@
   --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* ==========================================================================
+   INSTAGRAM & FACEBOOK LIGHT MODE THEME
+   ========================================================================== */
 [data-theme="light"] {
-  --bg-primary: #f8fafc;
+  /* Facebook Canvas Background & Pure White Cards */
+  --bg-primary: #f0f2f5;
   --bg-secondary: #ffffff;
-  --bg-tertiary: #f1f5f9;
+  --bg-tertiary: #f0f2f5;
   --bg-card: #ffffff;
-  --bg-card-hover: #f8fafc;
+  --bg-card-hover: #f7f8fa;
   --bg-elevated: #ffffff;
-  --bg-glass: rgba(255, 255, 255, 0.92);
-  --bg-glass-card: rgba(248, 250, 252, 0.9);
+  --bg-glass: rgba(255, 255, 255, 0.95);
+  --bg-glass-card: rgba(255, 255, 255, 0.92);
   
-  --border-subtle: rgba(15, 23, 42, 0.08);
-  --border-focus: #4f46e5;
-  --border-highlight: rgba(79, 70, 229, 0.25);
-  --border-strong: rgba(15, 23, 42, 0.16);
+  /* Facebook Light Borders */
+  --border-subtle: #e4e6eb;
+  --border-focus: #1877f2;
+  --border-highlight: rgba(24, 119, 242, 0.25);
+  --border-strong: #ced0d4;
   
-  --text-primary: #0f172a;
-  --text-secondary: #334155;
-  --text-muted: #64748b;
-  --text-inverse: #f8fafc;
+  /* High-Contrast Facebook Text */
+  --text-primary: #050505;
+  --text-secondary: #65676b;
+  --text-muted: #8a8d91;
+  --text-inverse: #ffffff;
   
-  --accent-primary: #4f46e5;
-  --accent-primary-hover: #4338ca;
-  --accent-primary-light: #6366f1;
-  --accent-secondary: #0284c7;
-  --accent-secondary-light: #0ea5e9;
-  --accent-success: #059669;
-  --accent-success-light: #10b981;
-  --accent-warning: #d97706;
-  --accent-danger: #dc2626;
-  --accent-purple: #9333ea;
-  --accent-pink: #db2777;
+  /* Signature Facebook Blue & Instagram Gradient Accents */
+  --accent-primary: #1877f2;
+  --accent-primary-hover: #166fe5;
+  --accent-primary-light: #e7f3ff;
+  --accent-secondary: #0095f6;
+  --accent-secondary-light: #e0f1ff;
+  --accent-success: #42b72a;
+  --accent-success-light: #e7f8ea;
+  --accent-warning: #f7b125;
+  --accent-danger: #fa383e;
+  --accent-purple: #833ab4;
+  --accent-pink: #e1306c;
 
   --color-bg: var(--bg-primary);
   --color-surface: var(--bg-card);
@@ -153,35 +177,36 @@
   --color-text-main: var(--text-primary);
   --color-text-muted: var(--text-muted);
   --color-text-secondary: var(--text-secondary);
-  --color-primary-400: #6366f1;
-  --color-primary-500: #4f46e5;
-  --color-primary-600: #4338ca;
-  --color-secondary-400: #0ea5e9;
-  --color-success: #059669;
-  --color-warning: #d97706;
-  --color-danger: #dc2626;
+  --color-primary-400: #1877f2;
+  --color-primary-500: #1877f2;
+  --color-primary-600: #166fe5;
+  --color-secondary-400: #0095f6;
+  --color-success: #42b72a;
+  --color-warning: #f7b125;
+  --color-danger: #fa383e;
   
-  /* Canvas & Visualization Engine Tokens (Light Mode) */
+  /* Light Mode Canvas & Diagrams */
   --canvas-bg: #f8fafc;
   --canvas-surface: #ffffff;
-  --canvas-border: rgba(15, 23, 42, 0.08);
-  --canvas-grid: #e2e8f0;
-  --canvas-grid-subtle: #f1f5f9;
-  --canvas-axis: #94a3b8;
-  --canvas-text: #334155;
-  --canvas-subtext: #64748b;
-  --canvas-point: #0284c7;
-  --canvas-point-stroke: #0369a1;
-  --canvas-line: #4f46e5;
-  --canvas-glow: rgba(79, 70, 229, 0.15);
-  --canvas-crosshair: rgba(71, 85, 105, 0.35);
+  --canvas-border: #e4e6eb;
+  --canvas-grid: #e4e6eb;
+  --canvas-grid-subtle: #f0f2f5;
+  --canvas-axis: #8a8d91;
+  --canvas-text: #050505;
+  --canvas-subtext: #65676b;
+  --canvas-point: #1877f2;
+  --canvas-point-stroke: #166fe5;
+  --canvas-line: #1877f2;
+  --canvas-glow: rgba(24, 119, 242, 0.15);
+  --canvas-crosshair: rgba(101, 103, 107, 0.35);
 
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.1), 0 4px 8px -4px rgba(0, 0, 0, 0.04);
-  --shadow-xl: 0 20px 32px -4px rgba(0, 0, 0, 0.12);
-  --shadow-glow: 0 0 20px rgba(79, 70, 229, 0.15);
-  --shadow-glow-cyan: 0 0 20px rgba(2, 132, 199, 0.15);
-  --shadow-glow-emerald: 0 0 20px rgba(5, 150, 105, 0.15);
+  /* Facebook / Instagram Soft Elevated Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 20px 36px rgba(0, 0, 0, 0.16);
+  --shadow-glow: 0 0 20px rgba(24, 119, 242, 0.2);
+  --shadow-glow-cyan: 0 0 20px rgba(0, 149, 246, 0.2);
+  --shadow-glow-emerald: 0 0 20px rgba(66, 183, 42, 0.2);
 }
