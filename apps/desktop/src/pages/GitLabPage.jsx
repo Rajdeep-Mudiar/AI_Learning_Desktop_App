@@ -864,9 +864,18 @@ export default function GitLabPage() {
     setPipelineRunning(false);
   };
 
-  const handleMergePr = () => {
-    setPrStatus('merged');
-    executeGitCommand(`git merge feature/auth`);
+  const getBranchStyle = (branchName) => {
+    const palette = [
+      { color: isLight ? '#1877f2' : '#38bdf8', bg: isLight ? '#e7f3ff' : 'rgba(56, 189, 248, 0.15)', border: isLight ? '#1877f2' : '#38bdf8' },
+      { color: isLight ? '#16a34a' : '#34d399', bg: isLight ? '#e6ffec' : 'rgba(52, 211, 153, 0.15)', border: isLight ? '#16a34a' : '#34d399' },
+      { color: isLight ? '#9333ea' : '#c084fc', bg: isLight ? '#f3e8ff' : 'rgba(192, 132, 252, 0.15)', border: isLight ? '#9333ea' : '#c084fc' },
+      { color: isLight ? '#d97706' : '#fbbf24', bg: isLight ? '#fef3c7' : 'rgba(251, 191, 36, 0.15)', border: isLight ? '#d97706' : '#fbbf24' },
+      { color: isLight ? '#e1306c' : '#f472b6', bg: isLight ? '#fdf2f8' : 'rgba(244, 114, 182, 0.15)', border: isLight ? '#e1306c' : '#f472b6' },
+      { color: isLight ? '#0284c7' : '#06b6d4', bg: isLight ? '#e0f2fe' : 'rgba(6, 182, 212, 0.15)', border: isLight ? '#0284c7' : '#06b6d4' }
+    ];
+    const unique = ['main', ...branches.filter(b => b !== 'main')];
+    const idx = Math.max(0, unique.indexOf(branchName));
+    return palette[idx % palette.length];
   };
 
   const COMMAND_PRESETS = [
@@ -1137,68 +1146,199 @@ export default function GitLabPage() {
                     </div>
                   </div>
 
-                  {/* MODE A: VISUAL DAG GRAPH NODES */}
-                  {commitViewMode === 'graph' && (
-                    <div style={{ width: '100%', minWidth: 0, overflow: 'hidden' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 12, overflowX: 'auto', padding: '10px 4px', minHeight: '140px', width: '100%', boxSizing: 'border-box' }}>
-                        {filteredCommits.map((c, idx) => {
-                          const isHead = (c.branch === currentBranch && idx === filteredCommits.map(x => x.branch).lastIndexOf(currentBranch)) || currentBranch === c.hash;
-                          const isSelected = activeCommit?.hash === c.hash;
-                          const hasTag = tags.find(t => t.commitHash === c.hash);
+                  {/* MODE A: VISUAL DAG GRAPH NODES WITH TREE BRANCH RAILS */}
+                  {commitViewMode === 'graph' && (() => {
+                    const uniqueBranches = ['main', ...branches.filter(b => b !== 'main')];
+                    const laneHeight = 115;
+                    const colWidth = 235;
+                    const startX = 145; // left rail for branch pill labels
 
-                          return (
-                            <div key={c.id} style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
+                    // Calculate 2D position (x, y) for every commit
+                    const commitMap = {};
+                    const positionedCommits = filteredCommits.map((c, idx) => {
+                      let laneIdx = uniqueBranches.indexOf(c.branch);
+                      if (laneIdx === -1) laneIdx = 0;
+                      const x = idx * colWidth + startX;
+                      const y = laneIdx * laneHeight + 65;
+                      const pos = { ...c, idx, x, y, laneIdx };
+                      commitMap[c.hash] = pos;
+                      commitMap[c.id] = pos;
+                      return pos;
+                    });
+
+                    const canvasWidth = Math.max(820, positionedCommits.length * colWidth + startX + 60);
+                    const canvasHeight = Math.max(220, uniqueBranches.length * laneHeight + 35);
+
+                    return (
+                      <div style={{ width: '100%', minWidth: 0, overflowX: 'auto', background: isLight ? '#fcfcfd' : '#070b14', borderRadius: '10px', border: isLight ? '1px solid #e4e6eb' : '1px solid #1e293b', padding: '12px 10px', boxSizing: 'border-box' }}>
+                        <div style={{ position: 'relative', width: canvasWidth, height: canvasHeight, minHeight: '180px' }}>
+                          
+                          {/* SVG Background Layer for Curved Tree Branch Rails & Connectors */}
+                          <svg style={{ position: 'absolute', top: 0, left: 0, width: canvasWidth, height: canvasHeight, pointerEvents: 'none' }}>
+                            {/* 1. Horizontal Rail Guides for Each Branch */}
+                            {uniqueBranches.map((bName, lIdx) => {
+                              const bTheme = getBranchStyle(bName);
+                              const laneY = lIdx * laneHeight + 65;
+                              return (
+                                <g key={`lane-${bName}`}>
+                                  <line
+                                    x1={startX - 15}
+                                    y1={laneY}
+                                    x2={canvasWidth - 20}
+                                    y2={laneY}
+                                    stroke={bTheme.color}
+                                    strokeWidth="2"
+                                    strokeDasharray="4 6"
+                                    opacity={isLight ? 0.35 : 0.25}
+                                  />
+                                </g>
+                              );
+                            })}
+
+                            {/* 2. Commit Connector Lines (Parent to Child & Merges) */}
+                            {positionedCommits.map((c) => {
+                              const parentCommit = c.parent ? (commitMap[c.parent] || positionedCommits.find(p => p.hash === c.parent || p.id === c.parent)) : null;
+                              const cTheme = getBranchStyle(c.branch);
+                              const isMerge = c.message.toLowerCase().startsWith('merge');
+
+                              return (
+                                <g key={`lines-${c.id}`}>
+                                  {/* Direct Parent Connection */}
+                                  {parentCommit && (
+                                    parentCommit.laneIdx === c.laneIdx ? (
+                                      // Straight horizontal branch connection
+                                      <line
+                                        x1={parentCommit.x + 85}
+                                        y1={parentCommit.y}
+                                        x2={c.x - 85}
+                                        y2={c.y}
+                                        stroke={cTheme.color}
+                                        strokeWidth="3.5"
+                                        strokeLinecap="round"
+                                      />
+                                    ) : (
+                                      // Smooth S-Curve Branching Out from Parent
+                                      <path
+                                        d={`M ${parentCommit.x + 40} ${parentCommit.y} C ${parentCommit.x + 110} ${parentCommit.y}, ${c.x - 110} ${c.y}, ${c.x - 85} ${c.y}`}
+                                        fill="none"
+                                        stroke={cTheme.color}
+                                        strokeWidth="3.5"
+                                        strokeLinecap="round"
+                                      />
+                                    )
+                                  )}
+
+                                  {/* Merge Curve (from another branch back into current) */}
+                                  {isMerge && (
+                                    <path
+                                      d={`M ${c.x - 170} ${c.laneIdx === 0 ? 180 : 65} C ${c.x - 90} ${c.laneIdx === 0 ? 180 : 65}, ${c.x - 60} ${c.y}, ${c.x - 85} ${c.y}`}
+                                      fill="none"
+                                      stroke="#8b5cf6"
+                                      strokeWidth="2.5"
+                                      strokeDasharray="5 5"
+                                      strokeLinecap="round"
+                                    />
+                                  )}
+                                </g>
+                              );
+                            })}
+                          </svg>
+
+                          {/* 3. Sticky / Left-Aligned Branch Name Rails */}
+                          {uniqueBranches.map((bName, lIdx) => {
+                            const bTheme = getBranchStyle(bName);
+                            const laneY = lIdx * laneHeight + 65;
+                            const isCurrent = currentBranch === bName;
+
+                            return (
                               <div
+                                key={`label-${bName}`}
+                                style={{
+                                  position: 'absolute',
+                                  left: 6,
+                                  top: laneY - 18,
+                                  zIndex: 3,
+                                  background: isCurrent ? (isLight ? '#1877f2' : '#1e3a5f') : (isLight ? '#ffffff' : '#131d31'),
+                                  color: isCurrent ? '#ffffff' : bTheme.color,
+                                  border: `1.5px solid ${bTheme.color}`,
+                                  padding: '4px 10px',
+                                  borderRadius: '16px',
+                                  fontSize: '0.72rem',
+                                  fontWeight: 800,
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  gap: 5,
+                                  boxShadow: isCurrent ? (isLight ? '0 2px 8px rgba(24, 119, 242, 0.3)' : '0 0 12px rgba(56, 189, 248, 0.4)') : 'none'
+                                }}
+                              >
+                                <GitBranch size={12} />
+                                <span>{bName}</span>
+                                {isCurrent && <span style={{ fontSize: '0.62rem', background: '#ffffff', color: '#1877f2', padding: '1px 5px', borderRadius: '8px', fontWeight: 900 }}>HEAD</span>}
+                              </div>
+                            );
+                          })}
+
+                          {/* 4. Positioned Commit Cards along the Rails */}
+                          {positionedCommits.map((c) => {
+                            const isHead = (c.branch === currentBranch && c.idx === positionedCommits.map(x => x.branch).lastIndexOf(currentBranch)) || currentBranch === c.hash;
+                            const isSelected = activeCommit?.hash === c.hash;
+                            const hasTag = tags.find(t => t.commitHash === c.hash);
+                            const bTheme = getBranchStyle(c.branch);
+
+                            return (
+                              <div
+                                key={c.id}
                                 onClick={() => setSelectedCommitHash(c.hash)}
                                 style={{
+                                  position: 'absolute',
+                                  left: c.x - 85,
+                                  top: c.y - 42,
+                                  width: '180px',
+                                  zIndex: isSelected ? 10 : 4,
                                   background: isSelected ? (isLight ? '#ffffff' : '#1a2744') : (isLight ? '#ffffff' : (c.branch === 'main' ? '#131d31' : '#1e1b4b')),
-                                  border: isSelected ? (isLight ? '2px solid #1877f2' : '2px solid #38bdf8') : isHead ? (isLight ? '2px dashed #1877f2' : '2px dashed #38bdf8') : (isLight ? '1px solid #e4e6eb' : (c.branch === 'main' ? '#334155' : '#6366f1')),
-                                  padding: '12px 14px',
+                                  border: isSelected ? (isLight ? '2px solid #1877f2' : '2px solid #38bdf8') : isHead ? `2px dashed ${bTheme.color}` : (isLight ? '1px solid #e4e6eb' : `1px solid ${bTheme.border}`),
+                                  padding: '10px 12px',
                                   borderRadius: '10px',
-                                  minWidth: '180px',
-                                  maxWidth: '230px',
                                   boxShadow: isSelected ? (isLight ? '0 4px 18px rgba(24, 119, 242, 0.25)' : '0 0 20px rgba(56, 189, 248, 0.45)') : (isLight ? '0 1px 3px rgba(0,0,0,0.06)' : 'none'),
-                                  position: 'relative',
                                   cursor: 'pointer',
                                   transition: 'all 0.15s ease'
                                 }}
                               >
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
                                   <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                                    <span style={{ fontFamily: 'monospace', fontSize: '0.8rem', color: isLight ? '#d97706' : '#fbbf24', fontWeight: 800 }}>#{c.hash}</span>
+                                    <span style={{ fontFamily: 'monospace', fontSize: '0.78rem', color: isLight ? '#d97706' : '#fbbf24', fontWeight: 800 }}>#{c.hash}</span>
                                     {c.verified && (
                                       <span title="GPG Key Verified Commit" style={{ fontSize: '0.65rem', color: '#16a34a', display: 'flex', alignItems: 'center' }}>
-                                        <ShieldCheck size={12} />
+                                        <ShieldCheck size={11} />
                                       </span>
                                     )}
                                   </div>
-                                  <span style={{ fontSize: '0.65rem', padding: '2px 6px', borderRadius: '4px', background: isLight ? '#e7f3ff' : (c.branch === 'main' ? '#0f172a' : '#4338ca'), color: isLight ? '#1877f2' : '#f8fafc', fontWeight: 700 }}>
+                                  <span style={{ fontSize: '0.62rem', padding: '2px 6px', borderRadius: '4px', background: bTheme.bg, color: bTheme.color, fontWeight: 700, border: `1px solid ${bTheme.color}33` }}>
                                     {c.branch}
                                   </span>
                                 </div>
 
-                                <div style={{ fontSize: '0.82rem', fontWeight: 700, color: isLight ? '#050505' : '#ffffff', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', marginBottom: 6 }}>
+                                <div style={{ fontSize: '0.8rem', fontWeight: 700, color: isLight ? '#050505' : '#ffffff', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', marginBottom: 4 }}>
                                   {c.message}
                                 </div>
 
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.72rem', color: isLight ? '#65676b' : '#94a3b8' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.7rem', color: isLight ? '#65676b' : '#94a3b8' }}>
                                   <span>{c.avatar || '👨‍💻'} {c.author}</span>
                                   {isHead && <span style={{ color: isLight ? '#1877f2' : '#38bdf8', fontWeight: 800 }}>HEAD ➔</span>}
                                 </div>
 
                                 {hasTag && (
-                                  <div style={{ position: 'absolute', top: -9, right: 8, background: 'linear-gradient(45deg, #f09433, #e1306c)', color: '#ffffff', fontSize: '0.62rem', fontWeight: 900, padding: '2px 6px', borderRadius: '4px', boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}>
+                                  <div style={{ position: 'absolute', top: -9, right: 8, background: 'linear-gradient(45deg, #f09433, #e1306c)', color: '#ffffff', fontSize: '0.6rem', fontWeight: 900, padding: '2px 6px', borderRadius: '4px', boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}>
                                     🏷️ {hasTag.name}
                                   </div>
                                 )}
                               </div>
-                              {idx < filteredCommits.length - 1 && <div style={{ color: isLight ? '#1877f2' : '#38bdf8', fontSize: '1.2rem', fontWeight: 800, flexShrink: 0 }}>➔</div>}
-                            </div>
-                          );
-                        })}
+                            );
+                          })}
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    );
+                  })()}
 
                   {/* MODE B: GITHUB COMMITS FEED TIMELINE */}
                   {commitViewMode === 'feed' && (
