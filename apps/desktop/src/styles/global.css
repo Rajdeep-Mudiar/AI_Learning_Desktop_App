@@ -108,17 +108,25 @@ code, pre {
   height: 100vh;
   overflow: hidden;
   background-color: var(--bg-primary);
+  min-width: 0;
+  max-width: 100%;
 }
 
 .page-scroll-area {
   flex: 1;
   overflow-y: auto;
-  padding: 32px 40px 64px 40px;
+  overflow-x: hidden;
+  padding: 24px 28px 48px 28px;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .container {
-  max-width: 1320px;
+  max-width: 100%;
+  width: 100%;
   margin: 0 auto;
+  min-width: 0;
 }
 
 /* Keyframe Animations */
