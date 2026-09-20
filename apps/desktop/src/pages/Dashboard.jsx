@@ -15,6 +15,7 @@ import {
   Bot,
   ArrowRight,
   TrendingUp,
+  Code2,
 } from 'lucide-react';
 import { dashboardService } from '../services/dashboardService';
 import { useAuth } from '../contexts/AuthContext';
