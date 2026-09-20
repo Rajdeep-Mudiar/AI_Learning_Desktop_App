@@ -307,7 +307,7 @@ CHALLENGES_STORE = [
             "print(json.dumps(results))\n"
         )
     },
-    # ================= GIT CHALLENGE =================
+    # ================= GIT & GITHUB CHALLENGES =================
     {
         "id": "git-fast-forward",
         "title": "Git Fast-Forward Merge Validator",
@@ -340,6 +340,157 @@ CHALLENGES_STORE = [
             "    r2 = can_fast_forward(dag, 'C4', 'C3')  # C4 is on different branch -> False\n"
             "    p = (r1 is True) and (r2 is False)\n"
             "    results.append({'test_id': 't1', 'desc': 'Direct ancestor line detection', 'passed': bool(p), 'expected': 'True, False', 'actual': f'{r1}, {r2}'})\n"
+            "except Exception as e:\n"
+            "    results.append({'test_id': 'err', 'desc': 'Execution error', 'passed': False, 'error': str(e)})\n"
+            "print('---TEST_RESULTS_START---')\n"
+            "print(json.dumps(results))\n"
+        )
+    },
+    {
+        "id": "git-merge-base",
+        "title": "Git 3-Way Merge Base Finder (LCA)",
+        "domain": "github",
+        "category": "Git & GitHub",
+        "difficulty": "Intermediate",
+        "description": "Find the lowest common ancestor (merge-base) commit between two branch tips in a Git commit DAG.",
+        "skills_tested": ["Git 3-Way Merge", "Lowest Common Ancestor", "DAG Graph"],
+        "xp_reward": 150,
+        "problem_statement": (
+            "Write a function `find_merge_base(parent_map: dict, commit_a: str, commit_b: str) -> str`\n\n"
+            "Given a directed acyclic graph `parent_map` mapping each commit to a list of parent commit IDs,\n"
+            "find the most recent common ancestor commit between `commit_a` and `commit_b` (equivalent to `git merge-base`)."
+        ),
+        "starter_code": (
+            "def find_merge_base(parent_map: dict, commit_a: str, commit_b: str) -> str:\n"
+            "    # Return the commit_id of the most recent common ancestor\n"
+            "    pass\n"
+        ),
+        "hints": [
+            "Hint: Collect all ancestors of commit_a into a set, then perform a BFS from commit_b to find the first common node."
+        ],
+        "test_harness_code": (
+            "\n"
+            "import json\n"
+            "results = []\n"
+            "try:\n"
+            "    dag = {'c1': [], 'c2': ['c1'], 'c3': ['c2'], 'c4': ['c2'], 'c5': ['c3'], 'c6': ['c4']}\n"
+            "    res = find_merge_base(dag, 'c5', 'c6')\n"
+            "    p = res == 'c2'\n"
+            "    results.append({'test_id': 't1', 'desc': 'Find lowest common ancestor c2 for c5 and c6', 'passed': bool(p), 'expected': 'c2', 'actual': str(res)})\n"
+            "except Exception as e:\n"
+            "    results.append({'test_id': 'err', 'desc': 'Execution error', 'passed': False, 'error': str(e)})\n"
+            "print('---TEST_RESULTS_START---')\n"
+            "print(json.dumps(results))\n"
+        )
+    },
+    {
+        "id": "github-pr-conflict-detector",
+        "title": "GitHub PR Merge Conflict Detector",
+        "domain": "github",
+        "category": "Git & GitHub",
+        "difficulty": "Beginner",
+        "description": "Analyze file change dictionaries from two branches to detect file-level and line-range merge conflicts.",
+        "skills_tested": ["Merge Conflicts", "Code Review", "Diff Processing"],
+        "xp_reward": 120,
+        "problem_statement": (
+            "Write a function `detect_conflicts(base_branch_diffs: dict, pr_branch_diffs: dict) -> list`\n\n"
+            "`base_branch_diffs` and `pr_branch_diffs` map `filename -> list_of_modified_line_numbers`.\n"
+            "Return a sorted list of filenames that have overlapping line number modifications."
+        ),
+        "starter_code": (
+            "def detect_conflicts(base_branch_diffs: dict, pr_branch_diffs: dict) -> list:\n"
+            "    # Return list of conflicting filenames\n"
+            "    pass\n"
+        ),
+        "hints": [
+            "Hint: Find intersection of files, then check if set(linesA) & set(linesB) is non-empty."
+        ],
+        "test_harness_code": (
+            "\n"
+            "import json\n"
+            "results = []\n"
+            "try:\n"
+            "    base = {'auth.py': [10, 11, 12], 'db.py': [5, 6]}\n"
+            "    pr = {'auth.py': [12, 13, 14], 'db.py': [20, 21], 'routes.py': [1]}\n"
+            "    res = detect_conflicts(base, pr)\n"
+            "    p = res == ['auth.py']\n"
+            "    results.append({'test_id': 't1', 'desc': 'Identify auth.py overlap on line 12', 'passed': bool(p), 'expected': \"['auth.py']\", 'actual': str(res)})\n"
+            "except Exception as e:\n"
+            "    results.append({'test_id': 'err', 'desc': 'Execution error', 'passed': False, 'error': str(e)})\n"
+            "print('---TEST_RESULTS_START---')\n"
+            "print(json.dumps(results))\n"
+        )
+    },
+    {
+        "id": "github-actions-matrix",
+        "title": "GitHub Actions Matrix Strategy Generator",
+        "domain": "github",
+        "category": "Git & GitHub",
+        "difficulty": "Intermediate",
+        "description": "Compute all job dimension permutations for a GitHub Actions CI matrix strategy config.",
+        "skills_tested": ["GitHub Actions", "Matrix Builds", "CI/CD Pipeline"],
+        "xp_reward": 140,
+        "problem_statement": (
+            "Write a function `generate_matrix_jobs(matrix_config: dict) -> list`\n\n"
+            "Given `matrix_config = {'os': ['ubuntu-latest', 'windows-latest'], 'python-version': ['3.11', '3.12']}`,\n"
+            "return a list of all combination dictionaries: `[{'os': ..., 'python-version': ...}, ...]`."
+        ),
+        "starter_code": (
+            "import itertools\n\n"
+            "def generate_matrix_jobs(matrix_config: dict) -> list:\n"
+            "    # Return list of all cartesian product job configs\n"
+            "    pass\n"
+        ),
+        "hints": [
+            "Hint: Use itertools.product on the dictionary values and pair with keys."
+        ],
+        "test_harness_code": (
+            "\n"
+            "import json\n"
+            "results = []\n"
+            "try:\n"
+            "    cfg = {'os': ['ubuntu', 'windows'], 'node': ['18', '20']}\n"
+            "    res = generate_matrix_jobs(cfg)\n"
+            "    p = len(res) == 4 and {'os': 'ubuntu', 'node': '18'} in res\n"
+            "    results.append({'test_id': 't1', 'desc': 'Generates 4 job combinations correctly', 'passed': bool(p), 'expected': '4 jobs', 'actual': f'{len(res)} jobs'})\n"
+            "except Exception as e:\n"
+            "    results.append({'test_id': 'err', 'desc': 'Execution error', 'passed': False, 'error': str(e)})\n"
+            "print('---TEST_RESULTS_START---')\n"
+            "print(json.dumps(results))\n"
+        )
+    },
+    {
+        "id": "git-blob-hasher",
+        "title": "Git Object Store & SHA-1 Hasher",
+        "domain": "github",
+        "category": "Git & GitHub",
+        "difficulty": "Beginner",
+        "description": "Implement standard Git blob format serialization and compute its SHA-1 hash object ID.",
+        "skills_tested": ["Git Internals", "Blob Storage", "SHA-1 Hash"],
+        "xp_reward": 110,
+        "problem_statement": (
+            "Write a function `compute_git_blob_sha(content_str: str) -> str`\n\n"
+            "In Git, a blob is formatted as: `blob <byte_length>\\0<content_bytes>`.\n"
+            "Compute and return the hex SHA-1 digest string of this header + content."
+        ),
+        "starter_code": (
+            "import hashlib\n\n"
+            "def compute_git_blob_sha(content_str: str) -> str:\n"
+            "    # Format as 'blob <len>\\0<content>' and return hashlib.sha1 hex digest\n"
+            "    pass\n"
+        ),
+        "hints": [
+            "Hint: Use b'blob ' + str(len(content_bytes)).encode() + b'\\0' + content_bytes."
+        ],
+        "test_harness_code": (
+            "\n"
+            "import json\n"
+            "results = []\n"
+            "try:\n"
+            "    # 'hello world\\n' in git has known sha 3b18e512dba79e4c8300dd08aeb37f8e728b8dad\n"
+            "    res = compute_git_blob_sha('hello world\\n')\n"
+            "    p = res.lower() == '3b18e512dba79e4c8300dd08aeb37f8e728b8dad'\n"
+            "    results.append({'test_id': 't1', 'desc': 'Computes exact Git blob sha for hello world', 'passed': bool(p), 'expected': '3b18e512dba79e4c8300dd08aeb37f8e728b8dad', 'actual': str(res)})\n"
             "except Exception as e:\n"
             "    results.append({'test_id': 'err', 'desc': 'Execution error', 'passed': False, 'error': str(e)})\n"
             "print('---TEST_RESULTS_START---')\n"

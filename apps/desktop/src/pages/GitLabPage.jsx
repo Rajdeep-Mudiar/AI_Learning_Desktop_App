@@ -842,13 +842,94 @@ export default function GitLabPage() {
         `+    return jwt.encode(payload, SECRET, algorithm="RS256")`
       ]);
     }
+    // ==========================================
+    // 3. GITHUB CLI (gh) COMMANDS
+    // ==========================================
+    else if (lowerCmd === 'gh pr list' || lowerCmd.startsWith('gh pr list')) {
+      setActiveTab('github-pr');
+      setSimAlertMsg('🔀 GitHub PR Hub: Displaying open pull requests for this repository.');
+      setTerminalHistory(prev => [
+        ...prev,
+        `Showing 3 open pull requests in developer/ai-lab-app`,
+        `#42  feat: implement enterprise JWT authentication and security headers  (feature/auth -> main)`,
+        `#43  fix: optimize database connection pool and retry backoff           (fix/db-pool -> main)`,
+        `#44  ci: matrix test runner for Python 3.11 and 3.12                    (ci/matrix -> main)`
+      ]);
+    }
+    else if (lowerCmd.startsWith('gh pr checkout')) {
+      const prId = cmd.replace(/gh pr checkout\s+/i, '').trim();
+      setActiveTab('github-pr');
+      if (prId === '42' || prId === '#42') {
+        setCurrentBranch('feature/auth');
+        setSimAlertMsg(`👉 Checked out branch 'feature/auth' from Pull Request #42.`);
+        setTerminalHistory(prev => [...prev, `Switched to branch 'feature/auth'`, `Checked out Pull Request #42`]);
+      } else {
+        setTerminalHistory(prev => [...prev, `Checked out Pull Request #${prId}`]);
+      }
+    }
+    else if (lowerCmd.startsWith('gh pr merge')) {
+      setActiveTab('github-pr');
+      setPrStatus('merged');
+      executeGitCommand('git merge feature/auth');
+      setSimAlertMsg('🔀 Pull Request #42 merged into main successfully.');
+      setTerminalHistory(prev => [...prev, `Merged Pull Request #42 via merge commit.`]);
+    }
+    else if (lowerCmd === 'gh pr view' || lowerCmd.startsWith('gh pr view')) {
+      setActiveTab('github-pr');
+      setSimAlertMsg('🔀 Viewing Pull Request #42 details and code review.');
+      setTerminalHistory(prev => [
+        ...prev,
+        `#42 feat: implement enterprise JWT authentication and security headers`,
+        `Author: @alexchen • State: OPEN • Reviews: 2 Approved`,
+        `Base: main <-- Head: feature/auth`
+      ]);
+    }
+    else if (lowerCmd === 'gh issue list' || lowerCmd.startsWith('gh issue list')) {
+      setSimAlertMsg('📋 GitHub Issues: Listing open repository issue tickets.');
+      setTerminalHistory(prev => [
+        ...prev,
+        `Showing 3 open issues in developer/ai-lab-app`,
+        `#12  [bug] Token expiration returns 500 instead of 401          (auth, backend)`,
+        `#15  [enhancement] Add dark/light Instagram theme toggle        (frontend, ui)`,
+        `#19  [good first issue] Add CI cache for pytest dependencies    (ci/cd, devops)`
+      ]);
+    }
+    else if (lowerCmd === 'gh workflow list' || lowerCmd.startsWith('gh workflow list')) {
+      setActiveTab('github-actions');
+      setSimAlertMsg('🚀 GitHub Actions: Listing active CI/CD workflow pipelines.');
+      setTerminalHistory(prev => [
+        ...prev,
+        `Active workflows:`,
+        `Enterprise CI/CD Automated Deployment Matrix  .github/workflows/main.yml      active`,
+        `Security & Vulnerability CodeQL Scan           .github/workflows/security.yml  active`
+      ]);
+    }
+    else if (lowerCmd === 'gh workflow run' || lowerCmd.startsWith('gh workflow run')) {
+      setActiveTab('github-actions');
+      runCicdPipeline();
+      setSimAlertMsg('🚀 Triggered GitHub Actions CI/CD matrix build pipeline.');
+      setTerminalHistory(prev => [...prev, `Created workflow_dispatch event for .github/workflows/main.yml`]);
+    }
+    else if (lowerCmd === 'gh release list' || lowerCmd.startsWith('gh release list')) {
+      setSimAlertMsg('🏷️ GitHub Releases: Listing published repository release tags.');
+      setTerminalHistory(prev => [
+        ...prev,
+        `v0.1.0  Initial Platform Preview Release  (commit e4f1a0)  2 days ago`
+      ]);
+    }
+    else if (lowerCmd.startsWith('gh ')) {
+      setTerminalHistory(prev => [
+        ...prev,
+        `GitHub CLI (gh) - supported simulations: 'gh pr list', 'gh pr view', 'gh pr checkout 42', 'gh pr merge', 'gh issue list', 'gh workflow run', 'gh release list'.`
+      ]);
+    }
     else if (lowerCmd === 'clear' || lowerCmd === 'cls') {
       setTerminalHistory([]);
     }
     else {
       setTerminalHistory(prev => [
         ...prev,
-        `sh: command not found: '${cmd}'. Try 'cd', 'ls', 'pwd', 'cat <file>', 'touch <file>', or 'git status', 'git add <file>', 'git commit'.`
+        `sh: command not found: '${cmd}'. Try 'git status', 'git add <file>', 'git commit', or 'gh pr list', 'gh issue list', 'gh workflow run'.`
       ]);
     }
   };
@@ -895,7 +976,11 @@ export default function GitLabPage() {
     { label: 'git stash', cmd: 'git stash' },
     { label: 'git stash pop', cmd: 'git stash pop' },
     { label: 'git diff', cmd: 'git diff' },
-    { label: 'git push origin main', cmd: 'git push origin main' }
+    { label: 'git push origin main', cmd: 'git push origin main' },
+    { label: 'gh pr list', cmd: 'gh pr list' },
+    { label: 'gh pr checkout 42', cmd: 'gh pr checkout 42' },
+    { label: 'gh pr merge', cmd: 'gh pr merge' },
+    { label: 'gh workflow run', cmd: 'gh workflow run' }
   ];
 
   const SIMULATION_VIEWS = [
