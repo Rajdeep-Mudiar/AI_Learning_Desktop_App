@@ -198,6 +198,7 @@ COURSES_DATA = [
         "slug": "prompt-engineering-agents",
         "title": "Prompt Engineering & AI Autonomous Agents",
         "description": "Crafting high-precision prompts, multi-step chain of thought reasoning, and building AI agents that use external APIs and tools.",
+        "domain": "ai-ml",
         "category": "Practical AI",
         "level": "Beginner",
         "estimated_hours": 10,
@@ -229,6 +230,174 @@ COURSES_DATA = [
                 "description": "Function calling, external tool usage, and the ReAct (Reason + Act) loop.",
                 "order": 3,
                 "lesson_ids": ["prompt-ai-agents-tool-use"]
+            }
+        ]
+    },
+    # =========================================================================
+    # COURSE 7: WEB DEVELOPMENT (DOMAIN: web-dev)
+    # =========================================================================
+    {
+        "slug": "fullstack-web-dev",
+        "title": "Modern Full-Stack Web Development",
+        "domain": "web-dev",
+        "description": "Master modern responsive web development: HTML5 semantics, CSS3 flexbox layouts, modern ES6+ JavaScript, React 18 component state, and REST APIs.",
+        "category": "Web Development",
+        "level": "Beginner",
+        "estimated_hours": 14,
+        "icon": "Globe",
+        "color": "#06B6D4",
+        "order": 7,
+        "is_published": True,
+        "prerequisites": [],
+        "skills_taught": ["HTML5 Semantics", "CSS Box Model", "Flexbox & Grid", "Async JavaScript", "React Hooks", "REST APIs"],
+        "syllabus_overview": "Learn how the modern web works from the ground up. From CSS layout models to building reactive component trees in React 18 and fetching data asynchronously from backend APIs.",
+        "modules": [
+            {
+                "id": "web-mod-1",
+                "title": "Module 1: HTML5 & Modern CSS Layouts",
+                "description": "Semantic architecture, the CSS Box Model, and mastering responsive Flexbox grids.",
+                "order": 1,
+                "lesson_ids": ["web-html-css-box-model"]
+            },
+            {
+                "id": "web-mod-2",
+                "title": "Module 2: JavaScript ES6+ & Async Fetching",
+                "description": "The event loop, DOM manipulation, promises, async/await, and REST API consumption.",
+                "order": 2,
+                "lesson_ids": ["web-javascript-dom-async"]
+            },
+            {
+                "id": "web-mod-3",
+                "title": "Module 3: React 18 Components & State",
+                "description": "JSX, props, useState, useEffect, and building fast reactive interfaces.",
+                "order": 3,
+                "lesson_ids": ["web-react-hooks-state"]
+            }
+        ]
+    },
+    # =========================================================================
+    # COURSE 8: MOBILE APP DEVELOPMENT (DOMAIN: app-dev)
+    # =========================================================================
+    {
+        "slug": "mobile-app-engineering",
+        "title": "Cross-Platform Mobile App Engineering",
+        "domain": "app-dev",
+        "description": "Build high-performance native iOS and Android mobile apps using React Native and Flutter with fluid navigation, gesture handling, and offline storage.",
+        "category": "App Development",
+        "level": "Intermediate",
+        "estimated_hours": 16,
+        "icon": "Smartphone",
+        "color": "#EC4899",
+        "order": 8,
+        "is_published": True,
+        "prerequisites": ["fullstack-web-dev"],
+        "skills_taught": ["Mobile Viewports", "React Native", "Flutter Widgets", "Navigation Stacks", "Touch Gestures", "Async Storage"],
+        "syllabus_overview": "Understand mobile app architecture. Learn how React Native and Flutter compile into native UI widgets, manage mobile viewports, handle touch gestures, and persist data locally.",
+        "modules": [
+            {
+                "id": "app-mod-1",
+                "title": "Module 1: Mobile Viewports & Layouts",
+                "description": "Safe areas, responsive density pixels, touch targets, and mobile flexbox.",
+                "order": 1,
+                "lesson_ids": ["app-viewport-flexbox-layout"]
+            },
+            {
+                "id": "app-mod-2",
+                "title": "Module 2: Navigation Stacks & Gestures",
+                "description": "Stack navigators, tab bars, drawer menus, and fluid swipe gestures.",
+                "order": 2,
+                "lesson_ids": ["app-navigation-stacks-gestures"]
+            },
+            {
+                "id": "app-mod-3",
+                "title": "Module 3: Offline Storage & Device APIs",
+                "description": "AsyncStorage, SQLite, camera permissions, and background network sync.",
+                "order": 3,
+                "lesson_ids": ["app-offline-storage-apis"]
+            }
+        ]
+    },
+    # =========================================================================
+    # COURSE 9: SYSTEM DESIGN (DOMAIN: system-design)
+    # =========================================================================
+    {
+        "slug": "system-design-architecture",
+        "title": "Scalable Distributed Systems & High-Load Design",
+        "domain": "system-design",
+        "description": "Architect high-availability backends handling millions of requests per second with Load Balancers, Redis caching, microservices, and database sharding.",
+        "category": "System Design",
+        "level": "Advanced",
+        "estimated_hours": 20,
+        "icon": "Layers",
+        "color": "#10B981",
+        "order": 9,
+        "is_published": True,
+        "prerequisites": [],
+        "skills_taught": ["Load Balancing", "Microservices", "Redis Caching", "Database Sharding", "Message Queues", "CAP Theorem"],
+        "syllabus_overview": "Master modern distributed systems engineering. Learn how top tech companies scale to 100M+ users with caching layers, message brokers, consistent hashing, and high-availability database replication.",
+        "modules": [
+            {
+                "id": "sys-mod-1",
+                "title": "Module 1: Monoliths to Microservices & Load Balancers",
+                "description": "Scaling horizontally, reverse proxies, and Layer 4 vs Layer 7 load balancing algorithms.",
+                "order": 1,
+                "lesson_ids": ["sys-monolith-microservices-loadbalancing"]
+            },
+            {
+                "id": "sys-mod-2",
+                "title": "Module 2: Distributed Caching with Redis",
+                "description": "Cache-Aside, Write-Through patterns, cache invalidation, and thundering herd mitigation.",
+                "order": 2,
+                "lesson_ids": ["sys-caching-redis-memcached"]
+            },
+            {
+                "id": "sys-mod-3",
+                "title": "Module 3: Database Replication & Sharding",
+                "description": "Primary-Replica synchronization, consistent hashing partitions, and the CAP theorem.",
+                "order": 3,
+                "lesson_ids": ["sys-database-sharding-replication"]
+            }
+        ]
+    },
+    # =========================================================================
+    # COURSE 10: GIT & GITHUB (DOMAIN: github)
+    # =========================================================================
+    {
+        "slug": "git-github-mastery",
+        "title": "Mastering Git, Branching Strategies & Team Workflows",
+        "domain": "github",
+        "description": "Demystify Git internals: Immutable DAG commit trees, branch pointers, resolving merge conflicts, interactive rebasing, and automated GitHub Actions CI/CD.",
+        "category": "Git & GitHub",
+        "level": "Beginner",
+        "estimated_hours": 10,
+        "icon": "GitBranch",
+        "color": "#F59E0B",
+        "order": 10,
+        "is_published": True,
+        "prerequisites": [],
+        "skills_taught": ["Git Internals", "DAG Commit Tree", "Branching & Merging", "Interactive Rebase", "Pull Requests", "GitHub Actions CI/CD"],
+        "syllabus_overview": "Understand Git as an immutable content-addressable directed acyclic graph. Learn how to navigate branches, rebase cleanly, solve conflicts with confidence, and automate CI/CD pipelines.",
+        "modules": [
+            {
+                "id": "git-mod-1",
+                "title": "Module 1: Git Internals & The Commit Graph",
+                "description": "Blobs, trees, commit objects, and how HEAD points to branch references.",
+                "order": 1,
+                "lesson_ids": ["git-internals-commit-dag"]
+            },
+            {
+                "id": "git-mod-2",
+                "title": "Module 2: Branching, Merges & Rebase Mastery",
+                "description": "Fast-forward merges, 3-way merges, solving merge conflicts, and interactive rebase squashing.",
+                "order": 2,
+                "lesson_ids": ["git-branching-merge-rebase"]
+            },
+            {
+                "id": "git-mod-3",
+                "title": "Module 3: GitHub PRs & Automated CI/CD Pipelines",
+                "description": "Forking workflows, code reviews, protected branches, and building GitHub Actions workflows.",
+                "order": 3,
+                "lesson_ids": ["git-pull-requests-cicd"]
             }
         ]
     }
@@ -1372,8 +1541,491 @@ LESSONS_DATA = [
         },
         "quiz_id": "quiz-prompt-ai-agents-tool-use",
         "summary": "You learned how AI agents use function calling and the ReAct loop to interact with tools and execute multi-step workflows.",
-        "next_lesson_slug": None,
+        "next_lesson_slug": "web-html-css-box-model",
         "prev_lesson_slug": "prompt-chain-of-thought-reasoning"
+    },
+    # =========================================================================
+    # COURSE 7: WEB DEVELOPMENT LESSONS
+    # =========================================================================
+    {
+        "slug": "web-html-css-box-model",
+        "course_slug": "fullstack-web-dev",
+        "module_id": "web-mod-1",
+        "title": "HTML5 Semantic Architecture & The CSS Box Model",
+        "order": 1,
+        "estimated_minutes": 20,
+        "difficulty": "Beginner",
+        "skill_tag": "web_layout",
+        "learning_objectives": [
+            "Understand why semantic HTML5 (<header>, <main>, <article>) improves accessibility and SEO.",
+            "Master the CSS Box Model: Content, Padding, Border, and Margin.",
+            "Build responsive layouts using CSS Flexbox (justify-content, align-items, flex-direction)."
+        ],
+        "theory_sections": [
+            {
+                "title": "The Box Model Analogy",
+                "content_markdown": "Every single element on a web page is a rectangular box:\n1. **Content**: The photo or text itself.\n2. **Padding**: Bubble wrap inside the cardboard box protecting the item.\n3. **Border**: The cardboard box itself.\n4. **Margin**: The empty distance between your package and neighboring packages on the shelf!\n\nUsing `box-sizing: border-box` ensures padding and borders stay inside your specified width without breaking responsive grids.",
+                "key_takeaway": "Always use border-box so padding doesn't unexpectedly expand element widths."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "CSS Box Model Layers",
+            "subtitle": "Margin -> Border -> Padding -> Content",
+            "diagram_type": "box_model"
+        },
+        "code_example": {
+            "title": "Responsive Card Layout with Flexbox",
+            "language": "html",
+            "code": "<div class=\"user-card\">\n  <img src=\"avatar.png\" class=\"avatar\" />\n  <div class=\"details\">\n    <h3>Alex Morgan</h3>\n    <p>Frontend Engineer</p>\n  </div>\n</div>\n\n<style>\n.user-card {\n  display: flex;\n  align-items: center;\n  gap: 1rem;\n  padding: 1.5rem;\n  background: #1e293b;\n  border-radius: 12px;\n}\n</style>",
+            "explanation": "Demonstrates clean flexbox alignment with consistent padding and spacing.",
+            "output_preview": "[Flex Container with aligned Avatar and Text Details]"
+        },
+        "quiz_id": "quiz-web-html-css-box-model",
+        "summary": "You mastered HTML5 semantics, the CSS Box Model, and flexbox alignment.",
+        "next_lesson_slug": "web-javascript-dom-async",
+        "prev_lesson_slug": "prompt-ai-agents-tool-use"
+    },
+    {
+        "slug": "web-javascript-dom-async",
+        "course_slug": "fullstack-web-dev",
+        "module_id": "web-mod-2",
+        "title": "Modern JavaScript ES6+, Event Loop & Async Fetch",
+        "order": 2,
+        "estimated_minutes": 25,
+        "difficulty": "Beginner",
+        "skill_tag": "javascript_core",
+        "learning_objectives": [
+            "Understand the JavaScript Single-Threaded Event Loop & Call Stack.",
+            "Learn how Promises and Async/Await prevent UI freezing during network calls.",
+            "Fetch JSON data from REST API endpoints safely with try/catch error handling."
+        ],
+        "theory_sections": [
+            {
+                "title": "The Restaurant Kitchen (Event Loop)",
+                "content_markdown": "JavaScript has only **one thread (one waiter)**.\n* If the waiter waits 10 minutes at the kitchen door for steak to cook (Synchronous network block), no other tables get water!\n* Instead, the waiter sends the steak order to the kitchen (Web API background worker) and serves other customers.\n* When the steak is cooked, it rings a bell in the **Callback Queue**, and the waiter delivers it as soon as their hands are free!\n\n**Async/Await** lets you write clean asynchronous code without blocking the browser UI.",
+                "key_takeaway": "Async/await prevents blocking the main thread while fetching data over the network."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "JavaScript Event Loop Architecture",
+            "subtitle": "Call Stack -> Web APIs -> Callback Queue -> Event Loop",
+            "diagram_type": "event_loop"
+        },
+        "code_example": {
+            "title": "Fetching REST API Data with Async/Await in JavaScript",
+            "language": "javascript",
+            "code": "async function loadUserData(userId) {\n  try {\n    const response = await fetch(`https://api.example.com/users/${userId}`);\n    if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);\n    const data = await response.json();\n    console.log('User Profile:', data.name);\n    return data;\n  } catch (error) {\n    console.error('Failed to load user:', error.message);\n  }\n}",
+            "explanation": "Demonstrates safe asynchronous network fetching with proper error boundary handling.",
+            "output_preview": "User Profile: Alex Morgan"
+        },
+        "quiz_id": "quiz-web-javascript-dom-async",
+        "summary": "You mastered async/await, promises, and the JavaScript event loop.",
+        "next_lesson_slug": "web-react-hooks-state",
+        "prev_lesson_slug": "web-html-css-box-model"
+    },
+    {
+        "slug": "web-react-hooks-state",
+        "course_slug": "fullstack-web-dev",
+        "module_id": "web-mod-3",
+        "title": "React 18: Component State, Props & Custom Hooks",
+        "order": 3,
+        "estimated_minutes": 25,
+        "difficulty": "Intermediate",
+        "skill_tag": "react_engineering",
+        "learning_objectives": [
+            "Understand React's declarative Virtual DOM rendering lifecycle.",
+            "Master useState for dynamic UI state and useEffect for lifecycle side-effects.",
+            "Learn one-way data flow: Passing props down and bubbling events up."
+        ],
+        "theory_sections": [
+            {
+                "title": "Declarative UI vs Imperative DOM",
+                "content_markdown": "In traditional vanilla JS, you manually query elements and modify innerHTML: `document.getElementById('btn').style.background = 'blue'` (Imperative).\n\nIn **React**, you simply declare what the UI should look like based on current state: *'If `isLiked` is true, render a red heart; otherwise render a gray heart.'* React takes care of surgically updating the actual browser DOM using its high-speed Virtual DOM reconciliation diff algorithm!",
+                "key_takeaway": "React component state drives the UI automatically whenever variables change."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "React Component Tree & State Flow",
+            "subtitle": "Parent State -> Props Passed Down -> Event Bubbling Up",
+            "diagram_type": "component_hierarchy"
+        },
+        "code_example": {
+            "title": "Building an Interactive Stateful Component in React 18",
+            "language": "javascript",
+            "code": "import React, { useState, useEffect } from 'react';\n\nexport function LikeCounter({ initialLikes = 0 }) {\n  const [likes, setLikes] = useState(initialLikes);\n  const [isLiked, setIsLiked] = useState(false);\n\n  const handleToggle = () => {\n    setIsLiked(!isLiked);\n    setLikes(prev => isLiked ? prev - 1 : prev + 1);\n  };\n\n  return (\n    <button onClick={handleToggle} style={{ color: isLiked ? '#f43f5e' : '#94a3b8' }}>\n      ♥ {likes} Likes\n    </button>\n  );\n}",
+            "explanation": "Demonstrates useState state updates and conditional inline styling.",
+            "output_preview": "[Interactive Heart Button with Live Counter]"
+        },
+        "quiz_id": "quiz-web-react-hooks-state",
+        "summary": "You understood React 18 component state, props, and declarative Virtual DOM rendering.",
+        "next_lesson_slug": "app-viewport-flexbox-layout",
+        "prev_lesson_slug": "web-javascript-dom-async"
+    },
+
+    # =========================================================================
+    # COURSE 8: MOBILE APP DEVELOPMENT LESSONS
+    # =========================================================================
+    {
+        "slug": "app-viewport-flexbox-layout",
+        "course_slug": "mobile-app-engineering",
+        "module_id": "app-mod-1",
+        "title": "Mobile Viewports, Touch Targets & Mobile Flexbox",
+        "order": 1,
+        "estimated_minutes": 20,
+        "difficulty": "Beginner",
+        "skill_tag": "mobile_ui",
+        "learning_objectives": [
+            "Understand Density-Independent Pixels (dp / pt) across different screen densities.",
+            "Design for Human Fingers: Minimum 44x44 pt touch target guidelines.",
+            "Master React Native Flexbox differences (default flex-direction: column)."
+        ],
+        "theory_sections": [
+            {
+                "title": "Mobile Screens Aren't Web Browsers",
+                "content_markdown": "On mobile devices, screens have high pixel density (2x Retina, 3x Super Retina) and physical obstructions like the top camera notch / Dynamic Island and home swipe bars.\n\nMobile apps use **Safe Area Views** and **Density Independent Pixels (dp)** so buttons look the exact same physical size on a 5-inch phone and a 7-inch phablet.",
+                "key_takeaway": "Always wrap mobile screens in SafeAreaView and maintain touch targets >= 44x44 dp."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "Mobile Safe Area & Touch Boundaries",
+            "subtitle": "Notch -> Status Bar -> Safe Content Area -> Home Indicator",
+            "diagram_type": "mobile_safe_area"
+        },
+        "code_example": {
+            "title": "Safe Area Layout in React Native",
+            "language": "javascript",
+            "code": "import { SafeAreaView, View, Text, StyleSheet } from 'react-native';\n\nexport default function HomeScreen() {\n  return (\n    <SafeAreaView style={styles.container}>\n      <View style={styles.card}>\n        <Text style={styles.title}>Mobile Native App</Text>\n      </View>\n    </SafeAreaView>\n  );\n}\n\nconst styles = StyleSheet.create({\n  container: { flex: 1, backgroundColor: '#090d16' },\n  card: { padding: 20, margin: 16, backgroundColor: '#1e293b', borderRadius: 16 }\n});",
+            "explanation": "Illustrates safe area wrapping and responsive mobile card styling.",
+            "output_preview": "[Mobile Screen with padding under hardware notch]"
+        },
+        "quiz_id": "quiz-app-viewport-flexbox-layout",
+        "summary": "You mastered mobile viewport density, safe areas, and touch target accessibility.",
+        "next_lesson_slug": "app-navigation-stacks-gestures",
+        "prev_lesson_slug": "web-react-hooks-state"
+    },
+    {
+        "slug": "app-navigation-stacks-gestures",
+        "course_slug": "mobile-app-engineering",
+        "module_id": "app-mod-2",
+        "title": "Navigation Stacks, Tab Bars & Touch Gestures",
+        "order": 2,
+        "estimated_minutes": 25,
+        "difficulty": "Intermediate",
+        "skill_tag": "mobile_navigation",
+        "learning_objectives": [
+            "Understand Stack Navigation (Push and Pop screen lifecycles).",
+            "Implement Bottom Tab Navigators for primary app destinations.",
+            "Handle Pan Gestures and swipe-to-dismiss interactions."
+        ],
+        "theory_sections": [
+            {
+                "title": "The Pancake Stack Analogy",
+                "content_markdown": "Mobile navigation behaves like a **stack of pancakes**:\n* When you tap an item in a list, you **Push** a new Details screen on top of the stack.\n* When you tap Back or swipe from the left edge, you **Pop** the top pancake off, revealing the list beneath it with its exact scroll position preserved!",
+                "key_takeaway": "Stack navigators push and pop screens while preserving historical scroll state."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "Mobile Navigation Stack Lifecycle",
+            "subtitle": "Screen 1 (Home) -> Push Screen 2 (Details) -> Pop Back to Screen 1",
+            "diagram_type": "nav_stack"
+        },
+        "code_example": {
+            "title": "Stack Navigation Transition in React Navigation",
+            "language": "javascript",
+            "code": "import { createStackNavigator } from '@react-navigation/stack';\n\nconst Stack = createStackNavigator();\n\nexport function AppNavigator() {\n  return (\n    <Stack.Navigator initialRouteName=\"Feed\">\n      <Stack.Screen name=\"Feed\" component={FeedScreen} />\n      <Stack.Screen name=\"Details\" component={DetailsScreen} />\n    </Stack.Navigator>\n  );\n}",
+            "explanation": "Configures a stack navigator with smooth native slide transitions.",
+            "output_preview": "[Stack Navigator Root]"
+        },
+        "quiz_id": "quiz-app-navigation-stacks-gestures",
+        "summary": "You mastered mobile screen lifecycles, navigation stacks, and gesture interactions.",
+        "next_lesson_slug": "app-offline-storage-apis",
+        "prev_lesson_slug": "app-viewport-flexbox-layout"
+    },
+    {
+        "slug": "app-offline-storage-apis",
+        "course_slug": "mobile-app-engineering",
+        "module_id": "app-mod-3",
+        "title": "Local Offline Storage & Native Device Hardware APIs",
+        "order": 3,
+        "estimated_minutes": 25,
+        "difficulty": "Intermediate",
+        "skill_tag": "mobile_apis",
+        "learning_objectives": [
+            "Persist user authentication tokens and preferences with AsyncStorage and SecureStore.",
+            "Request runtime permissions for Camera, Location, and Push Notifications.",
+            "Build offline-first synchronization pipelines for spotty cellular networks."
+        ],
+        "theory_sections": [
+            {
+                "title": "Offline-First Mobile Architecture",
+                "content_markdown": "Mobile phones go through subway tunnels and elevators with zero connectivity. A professional mobile app must **never show a blank screen or crash when offline**.\n\nBy caching API responses in local storage (AsyncStorage or SQLite), the app renders cached data immediately on launch, then silently refreshes in the background once network connectivity returns.",
+                "key_takeaway": "Always render cached offline data first, then reconcile with network updates."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "Offline-First Sync Architecture",
+            "subtitle": "UI -> Local Cache (Instant) -> Background Sync -> Remote API",
+            "diagram_type": "offline_sync"
+        },
+        "code_example": {
+            "title": "Persisting User Settings with AsyncStorage",
+            "language": "javascript",
+            "code": "import AsyncStorage from '@react-native-async-storage/async-storage';\n\nexport async function saveThemePreference(theme) {\n  try {\n    await AsyncStorage.setItem('@user_theme', theme);\n    console.log('Theme saved locally!');\n  } catch (e) {\n    console.error('Failed to save theme', e);\n  }\n}",
+            "explanation": "Demonstrates asynchronous key-value persistence for offline settings.",
+            "output_preview": "Theme saved locally!"
+        },
+        "quiz_id": "quiz-app-offline-storage-apis",
+        "summary": "You mastered mobile local persistence, permissions, and offline-first architectures.",
+        "next_lesson_slug": "sys-monolith-microservices-loadbalancing",
+        "prev_lesson_slug": "app-navigation-stacks-gestures"
+    },
+
+    # =========================================================================
+    # COURSE 9: SYSTEM DESIGN LESSONS
+    # =========================================================================
+    {
+        "slug": "sys-monolith-microservices-loadbalancing",
+        "course_slug": "system-design-architecture",
+        "module_id": "sys-mod-1",
+        "title": "Monoliths vs Microservices & Layer 4/7 Load Balancing",
+        "order": 1,
+        "estimated_minutes": 30,
+        "difficulty": "Advanced",
+        "skill_tag": "system_scalability",
+        "learning_objectives": [
+            "Understand trade-offs between Monoliths (simplicity, fast deployment) and Microservices (independent scaling, fault isolation).",
+            "Learn Layer 4 (Transport/IP) vs Layer 7 (Application/HTTP URI) load balancing.",
+            "Explore Load Balancing Algorithms: Round-Robin, Least Connections, and Weighted IP Hashing."
+        ],
+        "theory_sections": [
+            {
+                "title": "The Airport Traffic Controller (Load Balancer)",
+                "content_markdown": "If 100,000 users try to connect to a single backend server at the same time, the server runs out of RAM and crashes (Single Point of Failure).\n\nA **Load Balancer (like Nginx, HAProxy, or AWS ALB)** sits in front of 10 identical servers:\n* It accepts all incoming traffic on port 443.\n* It checks health pings on each server.\n* It distributes requests evenly across all healthy instances, ensuring no single server gets overwhelmed!",
+                "key_takeaway": "Load balancers enable horizontal scaling and eliminate single points of failure."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "Layer 7 Load Balancing Architecture",
+            "subtitle": "Clients -> Reverse Proxy / ALB -> App Server Pool -> Shared DB",
+            "diagram_type": "load_balancer_flow"
+        },
+        "code_example": {
+            "title": "Simulating a Round-Robin Load Balancer in Python",
+            "language": "python",
+            "code": "class RoundRobinLoadBalancer:\n    def __init__(self, servers):\n        self.servers = servers\n        self.current_idx = 0\n\n    def route_request(self, request_id):\n        server = self.servers[self.current_idx]\n        self.current_idx = (self.current_idx + 1) % len(self.servers)\n        return f\"Request {request_id} routed to -> {server}\"\n\nlb = RoundRobinLoadBalancer(['Server-A (US-East)', 'Server-B (US-West)', 'Server-C (EU-Central)'])\nfor req in range(1, 6):\n    print(lb.route_request(req))",
+            "explanation": "Illustrates cyclic round-robin request distribution across a backend cluster.",
+            "output_preview": "Request 1 routed to -> Server-A (US-East)\nRequest 2 routed to -> Server-B (US-West)\nRequest 3 routed to -> Server-C (EU-Central)\nRequest 4 routed to -> Server-A (US-East)\nRequest 5 routed to -> Server-B (US-West)"
+        },
+        "quiz_id": "quiz-sys-monolith-microservices-loadbalancing",
+        "summary": "You mastered horizontal scaling, reverse proxies, and load balancing algorithms.",
+        "next_lesson_slug": "sys-caching-redis-memcached",
+        "prev_lesson_slug": "app-offline-storage-apis"
+    },
+    {
+        "slug": "sys-caching-redis-memcached",
+        "course_slug": "system-design-architecture",
+        "module_id": "sys-mod-2",
+        "title": "Distributed Caching Strategies: Cache-Aside & Redis",
+        "order": 2,
+        "estimated_minutes": 25,
+        "difficulty": "Advanced",
+        "skill_tag": "system_caching",
+        "learning_objectives": [
+            "Learn why RAM access (Redis ~1ms) is 100x faster than Disk database queries (SSD ~50ms).",
+            "Master Caching Patterns: Cache-Aside, Write-Through, Write-Back, and Refresh-Ahead.",
+            "Prevent Cache Penetration, Cache Breakdown, and Thundering Herd stampedes."
+        ],
+        "theory_sections": [
+            {
+                "title": "The Sticky Note on Your Desk (Caching)",
+                "content_markdown": "If someone asks for your Wi-Fi password 100 times a day, you don't walk into the basement to read the tiny label under the router every time.\n\nYou write it on a **sticky note on your desk (In-Memory Cache)** and read it in 1 second!\n\n**Redis** is an ultra-fast in-memory key-value store that sits between your application and database. Over 90% of read traffic can be served directly from RAM in sub-millisecond speeds.",
+                "key_takeaway": "Caching shields your database from high-volume repetitive read operations."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "Cache-Aside (Lazy Loading) Sequence",
+            "subtitle": "App checks Redis -> (Hit) Return Data | (Miss) Query DB & Store in Redis",
+            "diagram_type": "cache_sequence"
+        },
+        "code_example": {
+            "title": "Cache-Aside Pattern Implementation in Python",
+            "language": "python",
+            "code": "mock_db = {'user:42': {'name': 'Sarah Connor', 'role': 'Admin'}}\nmock_cache = {}\n\ndef get_user_profile(user_id):\n    # 1. Check in-memory cache first\n    if user_id in mock_cache:\n        print(f\"[CACHE HIT] Returning {user_id} from Redis RAM in 1ms\")\n        return mock_cache[user_id]\n    \n    # 2. On cache miss, query persistent database\n    print(f\"[CACHE MISS] Querying disk database for {user_id} in 35ms...\")\n    data = mock_db.get(user_id)\n    if data:\n        mock_cache[user_id] = data  # Store for next time\n    return data\n\nprint(get_user_profile('user:42'))\nprint(get_user_profile('user:42'))  # Second call is instant cache hit!",
+            "explanation": "Demonstrates cache hit/miss resolution and lazy population.",
+            "output_preview": "[CACHE MISS] Querying disk database for user:42 in 35ms...\n{'name': 'Sarah Connor', 'role': 'Admin'}\n[CACHE HIT] Returning user:42 from Redis RAM in 1ms\n{'name': 'Sarah Connor', 'role': 'Admin'}"
+        },
+        "quiz_id": "quiz-sys-caching-redis-memcached",
+        "summary": "You mastered distributed caching, Redis in-memory acceleration, and cache eviction strategies.",
+        "next_lesson_slug": "sys-database-sharding-replication",
+        "prev_lesson_slug": "sys-monolith-microservices-loadbalancing"
+    },
+    {
+        "slug": "sys-database-sharding-replication",
+        "course_slug": "system-design-architecture",
+        "module_id": "sys-mod-3",
+        "title": "Database Scaling: Leader-Follower Replication & Sharding",
+        "order": 3,
+        "estimated_minutes": 30,
+        "difficulty": "Advanced",
+        "skill_tag": "database_architecture",
+        "learning_objectives": [
+            "Differentiate Vertical Scaling (bigger machine) from Horizontal Scaling (multiple machines).",
+            "Master Primary-Replica (Leader-Follower) read-scaling architectures.",
+            "Understand Database Sharding & Partitioning using Consistent Hashing."
+        ],
+        "theory_sections": [
+            {
+                "title": "Splitting the Phonebook (Sharding)",
+                "content_markdown": "If a city has 50 million citizens, a single telephone book would be too heavy to lift.\n\nInstead, you split it into 3 smaller books:\n* Book 1: Last names A - H\n* Book 2: Last names I - Q\n* Book 3: Last names R - Z\n\n**Database Sharding** splits large database tables across independent physical server nodes based on a **Shard Key** (like `user_id % 4`), allowing databases to scale to billions of rows with zero bottlenecks.",
+                "key_takeaway": "Sharding distributes massive datasets across multiple database nodes by partition key."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "Leader-Follower DB Replication & Shard Partitions",
+            "subtitle": "Primary DB (Writes) -> Async Replicas (Reads) -> Sharded Clusters",
+            "diagram_type": "db_sharding"
+        },
+        "code_example": {
+            "title": "Hash-Based Shard Key Routing in Python",
+            "language": "python",
+            "code": "import hashlib\n\nclass ShardRouter:\n    def __init__(self, num_shards=4):\n        self.num_shards = num_shards\n\n    def get_shard_id(self, user_uuid: str) -> int:\n        # Hash user UUID to an integer and modulo by total shards\n        hash_int = int(hashlib.md5(user_uuid.encode()).hexdigest(), 16)\n        return hash_int % self.num_shards\n\nrouter = ShardRouter(num_shards=4)\nusers = ['usr_a9f1', 'usr_b3e2', 'usr_c8d7', 'usr_d410']\nfor u in users:\n    print(f\"User {u} -> Assigned to DB Node #{router.get_shard_id(u)}\")",
+            "explanation": "Demonstrates consistent hash distribution of users across isolated database shards.",
+            "output_preview": "User usr_a9f1 -> Assigned to DB Node #2\nUser usr_b3e2 -> Assigned to DB Node #0\nUser usr_c8d7 -> Assigned to DB Node #3\nUser usr_d410 -> Assigned to DB Node #1"
+        },
+        "quiz_id": "quiz-sys-database-sharding-replication",
+        "summary": "You mastered read-replica replication, database sharding, and consistent hashing partitions.",
+        "next_lesson_slug": "git-internals-commit-dag",
+        "prev_lesson_slug": "sys-caching-redis-memcached"
+    },
+
+    # =========================================================================
+    # COURSE 10: GIT & GITHUB LESSONS
+    # =========================================================================
+    {
+        "slug": "git-internals-commit-dag",
+        "course_slug": "git-github-mastery",
+        "module_id": "git-mod-1",
+        "title": "Git Internals: Blobs, Trees & The Immutable Commit DAG",
+        "order": 1,
+        "estimated_minutes": 20,
+        "difficulty": "Beginner",
+        "skill_tag": "git_internals",
+        "learning_objectives": [
+            "Understand Git's 3 core object types: Blobs (file contents), Trees (directories), and Commits (snapshots).",
+            "Understand why Git is an Immutable Directed Acyclic Graph (DAG) indexed by SHA-1/SHA-256 hashes.",
+            "Learn what the HEAD pointer is and how detached HEAD states occur."
+        ],
+        "theory_sections": [
+            {
+                "title": "Git Is Not a Delta Tracker, It's a Snapshot Camera",
+                "content_markdown": "Many developers think Git saves differences (diffs) between files like a spreadsheet change log.\n\nIn reality, **Git takes a full snapshot photo of your entire project at every commit**!\n* If a file didn't change, Git simply points to the existing file object (Blob) from the previous snapshot to save disk space.\n* Every snapshot has a cryptographically unique SHA hash based on its contents and parent commit.",
+                "key_takeaway": "Commits are immutable snapshots pointing backwards to parent snapshots in a DAG."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "Git Object Storage Architecture",
+            "subtitle": "Commit Object -> Tree Object -> File Blobs (SHA-1 Addressed)",
+            "diagram_type": "git_dag"
+        },
+        "code_example": {
+            "title": "Simulating SHA Hash Content Addressing in Python",
+            "language": "python",
+            "code": "import hashlib\n\ndef create_git_blob(content: str) -> str:\n    header = f\"blob {len(content)}\\0\"\n    store = header + content\n    sha1 = hashlib.sha1(store.encode('utf-8')).hexdigest()\n    return sha1\n\nfile_content = \"def hello_world(): return 'Hello AI Learning Lab'\"\nblob_hash = create_git_blob(file_content)\nprint(f\"File Content: '{file_content}'\")\nprint(f\"Git SHA-1 Blob Hash: {blob_hash}\")",
+            "explanation": "Illustrates how Git hashes header metadata and file contents into immutable 40-character object keys.",
+            "output_preview": "File Content: 'def hello_world(): return 'Hello AI Learning Lab''\nGit SHA-1 Blob Hash: 43a8dc2361ef2e8b28cfba05c6a1e3e78b7b2559"
+        },
+        "quiz_id": "quiz-git-internals-commit-dag",
+        "summary": "You mastered Git internal objects, content-addressable storage, and commit DAG mechanics.",
+        "next_lesson_slug": "git-branching-merge-rebase",
+        "prev_lesson_slug": "sys-database-sharding-replication"
+    },
+    {
+        "slug": "git-branching-merge-rebase",
+        "course_slug": "git-github-mastery",
+        "module_id": "git-mod-2",
+        "title": "Branching, Fast-Forward Merges vs Interactive Rebase",
+        "order": 2,
+        "estimated_minutes": 25,
+        "difficulty": "Intermediate",
+        "skill_tag": "git_workflows",
+        "learning_objectives": [
+            "Understand that a Git branch is simply a 41-byte pointer text file referencing a commit hash.",
+            "Differentiate Fast-Forward Merges from 3-Way Merge Commits.",
+            "Master Interactive Rebase (`git rebase -i`): Squashing, rewording, and creating linear commit histories."
+        ],
+        "theory_sections": [
+            {
+                "title": "Merge vs Rebase: The History Battle",
+                "content_markdown": "* **`git merge feature`**: Combines histories and creates a new **Merge Commit** with two parents. Preserves exact chronological timeline but creates messy 'train track' branch graphs.\n* **`git rebase main`**: Lifts your feature commits and replays them one-by-one on top of the latest `main` commit, producing a perfectly clean, linear history.",
+                "key_takeaway": "Use rebase for local cleanup before opening a pull request, and merge for protected release branches."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "Git Merge vs Git Rebase Comparison",
+            "subtitle": "Merge (Diamond Graph) vs Rebase (Linear Graph)",
+            "diagram_type": "merge_vs_rebase"
+        },
+        "code_example": {
+            "title": "Common Git Branching Commands",
+            "language": "bash",
+            "code": "# 1. Create and switch to feature branch\ngit checkout -b feature/auth-jwt\n\n# 2. Stage and commit changes\ngit commit -m \"feat: implement JWT token validation\"\n\n# 3. Pull latest main and rebase cleanly\ngit checkout main\ngit pull origin main\ngit checkout feature/auth-jwt\ngit rebase main",
+            "explanation": "Demonstrates the standard rebase workflow before opening a pull request.",
+            "output_preview": "[Clean linear Git branch history]"
+        },
+        "quiz_id": "quiz-git-branching-merge-rebase",
+        "summary": "You mastered Git branching, 3-way merges, and interactive rebasing.",
+        "next_lesson_slug": "git-pull-requests-cicd",
+        "prev_lesson_slug": "git-internals-commit-dag"
+    },
+    {
+        "slug": "git-pull-requests-cicd",
+        "course_slug": "git-github-mastery",
+        "module_id": "git-mod-3",
+        "title": "GitHub Pull Requests & Automated CI/CD Actions",
+        "order": 3,
+        "estimated_minutes": 25,
+        "difficulty": "Intermediate",
+        "skill_tag": "github_cicd",
+        "learning_objectives": [
+            "Master the GitHub Pull Request (PR) review lifecycle: Branch protections, approvals, and comments.",
+            "Write GitHub Actions YAML workflows for automated testing and linting on push.",
+            "Understand Semantic Versioning and automated release tagging."
+        ],
+        "theory_sections": [
+            {
+                "title": "Automated Quality Gates (CI/CD)",
+                "content_markdown": "In modern software teams, nobody merges code directly into `main`.\n\nEvery change goes through a **Pull Request** where **GitHub Actions** automatically runs your test suite (`pytest`, `npm test`) and linters inside isolated cloud virtual runners.\n\nIf all tests pass and a teammate approves, the PR is merged safely!",
+                "key_takeaway": "GitHub Actions automate testing on every pull request to ensure bugs never reach production."
+            }
+        ],
+        "visual_explainer": {
+            "type": "diagram",
+            "title": "GitHub Actions CI/CD Pipeline Flow",
+            "subtitle": "git push -> Webhook -> GitHub Runner -> Run Tests -> Deploy Artifact",
+            "diagram_type": "cicd_pipeline"
+        },
+        "code_example": {
+            "title": "Sample GitHub Actions CI Workflow (.github/workflows/ci.yml)",
+            "language": "yaml",
+            "code": "name: CI Pipeline\non: [push, pull_request]\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - name: Set up Python 3.13\n        uses: actions/setup-python@v5\n        with:\n          python-version: '3.13'\n      - name: Run Pytest Test Suite\n        run: |\n          pip install -r requirements.txt\n          pytest tests/ -v",
+            "explanation": "Configures an automated GitHub Actions testing job triggered on every commit.",
+            "output_preview": "[GitHub Actions CI: 28 Passed in 12s]"
+        },
+        "quiz_id": "quiz-git-pull-requests-cicd",
+        "summary": "You mastered GitHub pull requests, code reviews, and automated CI/CD pipelines.",
+        "next_lesson_slug": None,
+        "prev_lesson_slug": "git-branching-merge-rebase"
     }
 ]
 
@@ -1978,10 +2630,302 @@ QUIZZES_DATA = [
                 "hint": "Reason, Act, Observe, Repeat."
             }
         ]
+    },
+
+    # Course 7 Quizzes (Web Dev)
+    {
+        "id": "quiz-web-html-css-box-model",
+        "lesson_slug": "web-html-css-box-model",
+        "title": "HTML5 & CSS Box Model Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "When using `box-sizing: border-box` in CSS, what elements are included in the element's total declared width?",
+                "options": [
+                    "Content only (padding and border add extra width)",
+                    "Content, Padding, and Border (padding and border do NOT expand total width)",
+                    "Margin and Padding only",
+                    "Border and Margin only"
+                ],
+                "correct_answer": 1,
+                "points": 10,
+                "skill_tag": "web_layout",
+                "explanation": "With border-box, the width you declare includes content, padding, and border, preventing unexpected layout overflows.",
+                "hint": "Border-box absorbs padding inside the box."
+            }
+        ]
+    },
+    {
+        "id": "quiz-web-javascript-dom-async",
+        "lesson_slug": "web-javascript-dom-async",
+        "title": "JavaScript Event Loop & Async Fetch Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "Why is using async/await essential when fetching data over the network in browser JavaScript?",
+                "options": [
+                    "It converts JavaScript into WebAssembly",
+                    "It prevents long network requests from blocking the single main execution thread, keeping the UI smooth and responsive",
+                    "It doubles network download speed",
+                    "It encrypts the payload"
+                ],
+                "correct_answer": 1,
+                "points": 10,
+                "skill_tag": "javascript_core",
+                "explanation": "JavaScript is single-threaded. Blocking the main thread freezes clicks and animations. Async/await allows network requests to resolve in the background queue.",
+                "hint": "Think of non-blocking I/O keeping the UI responsive."
+            }
+        ]
+    },
+    {
+        "id": "quiz-web-react-hooks-state",
+        "lesson_slug": "web-react-hooks-state",
+        "title": "React 18 State & Hooks Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "In React 18, what triggers a component to re-render its UI?",
+                "options": [
+                    "A change in local state (useState) or incoming props from a parent component",
+                    "Changing a regular JavaScript variable `let x = 5`",
+                    "Writing a comment in the code",
+                    "Closing the browser tab"
+                ],
+                "correct_answer": 0,
+                "points": 10,
+                "skill_tag": "react_engineering",
+                "explanation": "React components re-render whenever their state (useState) or props change, prompting Virtual DOM reconciliation.",
+                "hint": "State and props are the two drivers of React rendering."
+            }
+        ]
+    },
+
+    # Course 8 Quizzes (App Dev)
+    {
+        "id": "quiz-app-viewport-flexbox-layout",
+        "lesson_slug": "app-viewport-flexbox-layout",
+        "title": "Mobile Viewport & Touch Layout Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "What is the recommended minimum touch target size for interactive mobile buttons on iOS and Android?",
+                "options": ["10x10 pt", "44x44 pt (or 48x48 dp)", "100x100 pt", "2x2 pt"],
+                "correct_answer": 1,
+                "points": 10,
+                "skill_tag": "mobile_ui",
+                "explanation": "Apple and Google Human Interface Guidelines mandate at least 44x44 pt / 48x48 dp so human thumbs can comfortably tap targets without misclicks.",
+                "hint": "Around 44-48 density pixels."
+            }
+        ]
+    },
+    {
+        "id": "quiz-app-navigation-stacks-gestures",
+        "lesson_slug": "app-navigation-stacks-gestures",
+        "title": "Mobile Navigation Stacks Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "When a user taps 'Back' in a mobile stack navigator, what happens to the active screen?",
+                "options": [
+                    "The app restarts from scratch",
+                    "The current top screen is Popped off the stack, revealing the previous screen with its scroll position intact",
+                    "The screen is duplicated",
+                    "The phone locks"
+                ],
+                "correct_answer": 1,
+                "points": 10,
+                "skill_tag": "mobile_navigation",
+                "explanation": "Stack navigation operates on LIFO (Last In, First Out). Tapping back pops the top screen off the stack.",
+                "hint": "Think of popping the top pancake off a stack."
+            }
+        ]
+    },
+    {
+        "id": "quiz-app-offline-storage-apis",
+        "lesson_slug": "app-offline-storage-apis",
+        "title": "Mobile Offline Storage & APIs Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "What is the primary objective of an Offline-First mobile architecture?",
+                "options": [
+                    "To disable internet access permanently",
+                    "To load cached local data instantly on launch so the app never shows a blank screen or crash in poor connectivity",
+                    "To double battery drain",
+                    "To prevent push notifications"
+                ],
+                "correct_answer": 1,
+                "points": 10,
+                "skill_tag": "mobile_apis",
+                "explanation": "Offline-first ensures users see immediate cached content even on subway commutes, syncing updates silently in the background.",
+                "hint": "Instant local render followed by background sync."
+            }
+        ]
+    },
+
+    # Course 9 Quizzes (System Design)
+    {
+        "id": "quiz-sys-monolith-microservices-loadbalancing",
+        "lesson_slug": "sys-monolith-microservices-loadbalancing",
+        "title": "Load Balancing & Microservices Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "What is the difference between Layer 4 and Layer 7 Load Balancing?",
+                "options": [
+                    "Layer 4 routes by IP/Port (TCP); Layer 7 inspects HTTP headers, cookies, and URL paths",
+                    "Layer 4 is for mobile apps only",
+                    "Layer 7 is hardware only",
+                    "They are identical"
+                ],
+                "correct_answer": 0,
+                "points": 10,
+                "skill_tag": "system_scalability",
+                "explanation": "Layer 4 operates at the transport layer (TCP/UDP IP routing). Layer 7 operates at the application layer, allowing intelligent routing based on HTTP paths (e.g. /api/v1/auth vs /api/v1/video).",
+                "hint": "Layer 7 understands HTTP application protocols."
+            }
+        ]
+    },
+    {
+        "id": "quiz-sys-caching-redis-memcached",
+        "lesson_slug": "sys-caching-redis-memcached",
+        "title": "Distributed Caching & Redis Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "In the Cache-Aside (Lazy Loading) pattern, what happens on a Cache Miss?",
+                "options": [
+                    "The application crashes immediately",
+                    "The app queries the primary database, returns the result to the client, and stores it in the cache for future requests",
+                    "All cache data is deleted",
+                    "The request is dropped"
+                ],
+                "correct_answer": 1,
+                "points": 10,
+                "skill_tag": "system_caching",
+                "explanation": "On a cache miss, the application falls back to querying the slower database, then populates the cache so subsequent requests are served instantly from RAM.",
+                "hint": "Check cache -> miss -> read DB -> populate cache."
+            }
+        ]
+    },
+    {
+        "id": "quiz-sys-database-sharding-replication",
+        "lesson_slug": "sys-database-sharding-replication",
+        "title": "Database Sharding & Replication Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "Why is Primary-Replica (Leader-Follower) replication used in high-traffic web applications?",
+                "options": [
+                    "To prevent any data from being written",
+                    "To route write transactions to the Primary node while distributing read queries across multiple Replica nodes",
+                    "To reduce internet bandwidth to zero",
+                    "To eliminate the need for SQL queries"
+                ],
+                "correct_answer": 1,
+                "points": 10,
+                "skill_tag": "database_architecture",
+                "explanation": "Most applications have 90% read traffic and 10% write traffic. Distributing reads across replicas prevents the primary node from bottlenecking.",
+                "hint": "Writes go to the leader; reads scale across followers."
+            }
+        ]
+    },
+
+    # Course 10 Quizzes (Git & GitHub)
+    {
+        "id": "quiz-git-internals-commit-dag",
+        "lesson_slug": "git-internals-commit-dag",
+        "title": "Git Internals & Commit DAG Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "How does Git represent files and directory structure internally?",
+                "options": [
+                    "As a single giant Microsoft Excel sheet",
+                    "As cryptographically hashed Blobs (files), Trees (directories), and Commits (snapshots) in an Immutable Directed Acyclic Graph (DAG)",
+                    "As plain text strings in a temporary folder",
+                    "As MP3 audio waveforms"
+                ],
+                "correct_answer": 1,
+                "points": 10,
+                "skill_tag": "git_internals",
+                "explanation": "Git uses SHA content-addressable storage where Blobs store file data, Trees map directories, and Commits store snapshot metadata and parent pointers.",
+                "hint": "Blobs, Trees, and Commits form an immutable DAG."
+            }
+        ]
+    },
+    {
+        "id": "quiz-git-branching-merge-rebase",
+        "lesson_slug": "git-branching-merge-rebase",
+        "title": "Git Branching & Rebase Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "What is the primary difference between `git merge` and `git rebase`?",
+                "options": [
+                    "Merge preserves exact branch history by creating a merge commit; Rebase replays commits to produce a clean linear history",
+                    "Rebase deletes all your source code",
+                    "Merge is only for GitHub, Rebase is only for GitLab",
+                    "They perform the exact same operation with no difference"
+                ],
+                "correct_answer": 0,
+                "points": 10,
+                "skill_tag": "git_workflows",
+                "explanation": "Merge creates a multi-parent commit keeping both branch histories. Rebase rewires your branch onto the latest base commit for a linear graph.",
+                "hint": "Rebase creates a clean straight line; merge creates a merge commit."
+            }
+        ]
+    },
+    {
+        "id": "quiz-git-pull-requests-cicd",
+        "lesson_slug": "git-pull-requests-cicd",
+        "title": "GitHub Pull Requests & CI/CD Quiz",
+        "passing_score": 70,
+        "questions": [
+            {
+                "id": "q1",
+                "type": "multiple_choice",
+                "question": "What is the role of GitHub Actions in a team development workflow?",
+                "options": [
+                    "To automatically run unit tests, type checks, and build validations on every Pull Request before merging",
+                    "To generate random passwords",
+                    "To replace the Monaco editor",
+                    "To format hard drives"
+                ],
+                "correct_answer": 0,
+                "points": 10,
+                "skill_tag": "github_cicd",
+                "explanation": "GitHub Actions automates CI/CD quality gates, running automated test suites to ensure broken code is never merged into production branches.",
+                "hint": "Automated testing and validation on PR triggers."
+            }
+        ]
     }
 ]
 
 SKILLS_DATA = [
+    # AI & ML Skills
     {
         "id": "skill-python-basics",
         "name": "Python & NumPy Computing",
@@ -2102,5 +3046,145 @@ SKILLS_DATA = [
         "prerequisites": ["skill-python-basics"],
         "mastery_threshold": 70,
         "matching_lessons": ["prompt-foundations-few-shot", "prompt-chain-of-thought-reasoning", "prompt-ai-agents-tool-use"]
+    },
+
+    # Web Dev Skills
+    {
+        "id": "skill-web-layout",
+        "name": "HTML5 & CSS Layouts",
+        "category": "Web Development",
+        "description": "Semantic markup, CSS box model, responsive flexbox, and grid systems.",
+        "icon": "Globe",
+        "tier": 1,
+        "prerequisites": [],
+        "mastery_threshold": 70,
+        "matching_lessons": ["web-html-css-box-model"]
+    },
+    {
+        "id": "skill-javascript-core",
+        "name": "Modern JavaScript & Async",
+        "category": "Web Development",
+        "description": "Event loops, DOM manipulation, promises, async/await, and REST APIs.",
+        "icon": "Code2",
+        "tier": 1,
+        "prerequisites": ["skill-web-layout"],
+        "mastery_threshold": 70,
+        "matching_lessons": ["web-javascript-dom-async"]
+    },
+    {
+        "id": "skill-react-engineering",
+        "name": "React 18 & State Architecture",
+        "category": "Web Development",
+        "description": "Declarative Virtual DOM rendering, useState, useEffect, and custom hooks.",
+        "icon": "Sparkles",
+        "tier": 2,
+        "prerequisites": ["skill-javascript-core"],
+        "mastery_threshold": 70,
+        "matching_lessons": ["web-react-hooks-state"]
+    },
+
+    # App Dev Skills
+    {
+        "id": "skill-mobile-ui",
+        "name": "Mobile Viewports & Layouts",
+        "category": "App Development",
+        "description": "Safe areas, touch targets, pixel density, and mobile flexbox.",
+        "icon": "Smartphone",
+        "tier": 1,
+        "prerequisites": [],
+        "mastery_threshold": 70,
+        "matching_lessons": ["app-viewport-flexbox-layout"]
+    },
+    {
+        "id": "skill-mobile-navigation",
+        "name": "Mobile Navigation & Gestures",
+        "category": "App Development",
+        "description": "Stack navigators, tab bars, drawer menus, and touch gestures.",
+        "icon": "Layers",
+        "tier": 2,
+        "prerequisites": ["skill-mobile-ui"],
+        "mastery_threshold": 70,
+        "matching_lessons": ["app-navigation-stacks-gestures"]
+    },
+    {
+        "id": "skill-mobile-apis",
+        "name": "Offline Storage & Native APIs",
+        "category": "App Development",
+        "description": "AsyncStorage, SQLite, camera permissions, and offline-first architectures.",
+        "icon": "HardDrive",
+        "tier": 2,
+        "prerequisites": ["skill-mobile-navigation"],
+        "mastery_threshold": 70,
+        "matching_lessons": ["app-offline-storage-apis"]
+    },
+
+    # System Design Skills
+    {
+        "id": "skill-system-scalability",
+        "name": "Microservices & Load Balancing",
+        "category": "System Design",
+        "description": "Horizontal scaling, reverse proxies, and Layer 4/7 load balancing.",
+        "icon": "Layers",
+        "tier": 3,
+        "prerequisites": [],
+        "mastery_threshold": 70,
+        "matching_lessons": ["sys-monolith-microservices-loadbalancing"]
+    },
+    {
+        "id": "skill-system-caching",
+        "name": "Distributed Caching & Redis",
+        "category": "System Design",
+        "description": "Cache-Aside, Write-Through, cache invalidation, and thundering herd mitigation.",
+        "icon": "Cpu",
+        "tier": 3,
+        "prerequisites": ["skill-system-scalability"],
+        "mastery_threshold": 70,
+        "matching_lessons": ["sys-caching-redis-memcached"]
+    },
+    {
+        "id": "skill-database-architecture",
+        "name": "Database Sharding & Replication",
+        "category": "System Design",
+        "description": "Primary-Replica synchronization, consistent hashing, and the CAP theorem.",
+        "icon": "Database",
+        "tier": 4,
+        "prerequisites": ["skill-system-caching"],
+        "mastery_threshold": 70,
+        "matching_lessons": ["sys-database-sharding-replication"]
+    },
+
+    # Git & GitHub Skills
+    {
+        "id": "skill-git-internals",
+        "name": "Git Internals & Commit DAG",
+        "category": "Git & GitHub",
+        "description": "Blobs, trees, commit objects, and immutable SHA content addressing.",
+        "icon": "GitCommit",
+        "tier": 1,
+        "prerequisites": [],
+        "mastery_threshold": 70,
+        "matching_lessons": ["git-internals-commit-dag"]
+    },
+    {
+        "id": "skill-git-workflows",
+        "name": "Branching, Merging & Rebase",
+        "category": "Git & GitHub",
+        "description": "Fast-forward merges, 3-way merges, conflict resolution, and interactive rebasing.",
+        "icon": "GitBranch",
+        "tier": 2,
+        "prerequisites": ["skill-git-internals"],
+        "mastery_threshold": 70,
+        "matching_lessons": ["git-branching-merge-rebase"]
+    },
+    {
+        "id": "skill-github-cicd",
+        "name": "GitHub PRs & CI/CD Actions",
+        "category": "Git & GitHub",
+        "description": "Pull Request code reviews, branch protections, and automated GitHub Actions workflows.",
+        "icon": "GitPullRequest",
+        "tier": 2,
+        "prerequisites": ["skill-git-workflows"],
+        "mastery_threshold": 70,
+        "matching_lessons": ["git-pull-requests-cicd"]
     }
 ]

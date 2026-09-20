@@ -1,18 +1,54 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Flame, Sun, Moon, LogOut, User as UserIcon } from 'lucide-react';
+import { Search, Flame, Sun, Moon, LogOut, Sparkles, ChevronDown } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
+import { useDomain } from '../../contexts/DomainContext';
 
 export default function TopNav() {
   const { user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
+  const { domainInfo, openPicker } = useDomain();
   const navigate = useNavigate();
 
   const streakCount = user?.streak?.current || 1;
 
   return (
     <header className="top-nav">
+      {/* Domain Switcher Pill */}
+      <button
+        onClick={openPicker}
+        className="btn"
+        style={{
+          background: 'var(--bg-tertiary)',
+          border: `1.5px solid ${domainInfo.color}60`,
+          color: 'var(--text-primary)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 10,
+          padding: '6px 14px',
+          borderRadius: '20px',
+          fontWeight: 600,
+          fontSize: '0.85rem',
+          cursor: 'pointer',
+          transition: 'all 0.2s ease',
+          boxShadow: `0 2px 8px ${domainInfo.color}20`
+        }}
+        title="Click to Switch Learning Domain"
+      >
+        <span
+          style={{
+            width: 10,
+            height: 10,
+            borderRadius: '50%',
+            background: domainInfo.color,
+            boxShadow: `0 0 8px ${domainInfo.color}`
+          }}
+        />
+        <span>Track: <strong style={{ color: domainInfo.color }}>{domainInfo.shortTitle}</strong></span>
+        <ChevronDown size={14} style={{ color: 'var(--text-muted)' }} />
+      </button>
+
       <div className="search-trigger-box" onClick={() => navigate('/learn')} style={{ cursor: 'pointer' }}>
         <Search size={16} />
         <span>Search courses, concepts, lessons...</span>
