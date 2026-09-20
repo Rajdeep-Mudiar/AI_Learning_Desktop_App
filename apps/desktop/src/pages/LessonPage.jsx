@@ -265,26 +265,6 @@ export default function LessonPage() {
         <h1 style={{ fontSize: '2rem', lineHeight: 1.3, color: 'var(--text-primary)' }}>{lesson.title}</h1>
       </div>
 
-      {/* Learning Objectives */}
-      {lesson.learning_objectives?.length > 0 && (
-        <div className="card" style={{ background: 'var(--bg-secondary)', marginBottom: 28, padding: 20 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-            <Target size={18} style={{ color: 'var(--accent-primary)' }} />
-            <h3 style={{ fontSize: '0.95rem' }}>Learning Objectives</h3>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
-            {lesson.learning_objectives.map((obj, idx) => (
-              <div key={idx} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
-                <span style={{ color: 'var(--color-primary-400)', fontWeight: 700 }}>✓</span>
-                <div>
-                  <InlineMarkdown text={obj} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
       {/* Theory Sections */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 24, marginBottom: 32 }}>
         {lesson.theory_sections?.map((sec, idx) => (
@@ -319,7 +299,7 @@ export default function LessonPage() {
 
       {/* Interactive Visual Explainer */}
       {lesson.visual_explainer && (
-        <VisualExplainerCard visual={lesson.visual_explainer} />
+        <VisualExplainerCard visual={lesson.visual_explainer} domain={lesson.domain || lesson.course_slug} />
       )}
 
       {/* Code Snippet Box */}
