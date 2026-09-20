@@ -22,12 +22,13 @@ class SkillService:
             s_id = s["id"]
             mastery_pct = float(user_mastery.get(s_id, 0.0))
             
+            title = s.get("title") or s.get("name", s_id)
             node = SkillNode(
                 id=s_id,
                 category=cat,
-                title=s["title"],
-                description=s["description"],
-                level=s.get("level", 0),
+                title=title,
+                description=s.get("description", ""),
+                level=s.get("level", s.get("tier", 0)),
                 prerequisites=s.get("prerequisites", []),
                 icon=s.get("icon"),
                 mastery_percentage=mastery_pct
