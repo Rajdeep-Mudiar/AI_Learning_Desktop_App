@@ -307,195 +307,266 @@ CHALLENGES_STORE = [
             "print(json.dumps(results))\n"
         )
     },
-    # ================= GIT & GITHUB CHALLENGES =================
+    # ================= GIT & GITHUB SITUATIONAL CHALLENGES =================
     {
         "id": "git-fast-forward",
-        "title": "Git Fast-Forward Merge Validator",
+        "title": "Git Branching & Fast-Forward Merging",
         "domain": "github",
         "category": "Git & GitHub",
         "difficulty": "Beginner",
-        "description": "Determine whether branch B can be fast-forward merged into branch A given a commit parent map.",
-        "skills_tested": ["Git Commit Graph", "DAG Traversal", "Branch Pointers"],
+        "challenge_type": "git-terminal",
+        "description": "Situational Challenge: Create a feature branch, commit staged changes, and execute a clean fast-forward merge into main.",
+        "skills_tested": ["git branch", "git checkout -b", "git add", "git commit", "git merge"],
         "xp_reward": 100,
         "problem_statement": (
-            "Write a function `can_fast_forward(parent_map: dict, target_branch_commit: str, source_branch_commit: str) -> bool`\n\n"
-            "`parent_map` maps `commit_id -> list_of_parent_commit_ids`.\n"
-            "A fast-forward merge from source into target is possible if `target_branch_commit` is a direct ancestor of `source_branch_commit`."
+            "### Scenario Background\n"
+            "You are working on an authentication feature for an enterprise repository. Your task is to branch off `main`, stage & commit your security updates, and fast-forward merge your feature back into `main` without creating merge clutter.\n\n"
+            "### Objectives:\n"
+            "1. **Step 1:** Create and switch to a new branch called `feature/auth`.\n"
+            "2. **Step 2:** Stage all modified changes and commit with message `feat: add jwt auth`.\n"
+            "3. **Step 3:** Switch back to `main` and fast-forward merge `feature/auth` into `main`."
         ),
-        "starter_code": (
-            "def can_fast_forward(parent_map: dict, target_branch_commit: str, source_branch_commit: str) -> bool:\n"
-            "    # Return True if target is an ancestor of source\n"
-            "    pass\n"
-        ),
+        "starter_code": "# Type Git commands in the interactive terminal on the right to complete each scenario step.",
         "hints": [
-            "Hint: Traverse upwards from source_branch_commit using BFS or DFS."
+            "Step 1: Use `git checkout -b feature/auth` or `git switch -c feature/auth`.",
+            "Step 2: Use `git add .` (or `git add src/auth/jwt.py`) followed by `git commit -m \"feat: add jwt auth\"`.",
+            "Step 3: Use `git checkout main` and then `git merge feature/auth`."
         ],
-        "test_harness_code": (
-            "\n"
-            "import json\n"
-            "results = []\n"
-            "try:\n"
-            "    dag = {'C1': [], 'C2': ['C1'], 'C3': ['C2'], 'C4': ['C1']}\n"
-            "    r1 = can_fast_forward(dag, 'C1', 'C3')  # C1 is ancestor of C3 -> True\n"
-            "    r2 = can_fast_forward(dag, 'C4', 'C3')  # C4 is on different branch -> False\n"
-            "    p = (r1 is True) and (r2 is False)\n"
-            "    results.append({'test_id': 't1', 'desc': 'Direct ancestor line detection', 'passed': bool(p), 'expected': 'True, False', 'actual': f'{r1}, {r2}'})\n"
-            "except Exception as e:\n"
-            "    results.append({'test_id': 'err', 'desc': 'Execution error', 'passed': False, 'error': str(e)})\n"
-            "print('---TEST_RESULTS_START---')\n"
-            "print(json.dumps(results))\n"
-        )
+        "scenarios": [
+            {
+                "step": 1,
+                "title": "Create & Checkout Feature Branch",
+                "instruction": "Create and switch to a new branch named `feature/auth`.",
+                "hint": "Try `git checkout -b feature/auth` or `git switch -c feature/auth`",
+                "accepted_patterns": ["checkout -b feature/auth", "switch -c feature/auth", "branch feature/auth"],
+                "success_message": "Branch 'feature/auth' created and checked out successfully!"
+            },
+            {
+                "step": 2,
+                "title": "Stage & Commit Authentication Changes",
+                "instruction": "Stage modified files and commit with message `feat: add jwt auth`.",
+                "hint": "Try `git add .` then `git commit -m \"feat: add jwt auth\"`",
+                "accepted_patterns": ["commit -m \"feat: add jwt auth\"", "commit -m 'feat: add jwt auth'", "commit -am \"feat: add jwt auth\""],
+                "success_message": "Changes committed with message 'feat: add jwt auth' on branch feature/auth!"
+            },
+            {
+                "step": 3,
+                "title": "Fast-Forward Merge into Main",
+                "instruction": "Switch back to `main` branch and fast-forward merge `feature/auth`.",
+                "hint": "Try `git checkout main` followed by `git merge feature/auth`",
+                "accepted_patterns": ["merge feature/auth"],
+                "success_message": "Fast-forward merge completed cleanly! Branch 'main' updated to match feature/auth."
+            }
+        ],
+        "test_harness_code": ""
     },
     {
         "id": "git-merge-base",
-        "title": "Git 3-Way Merge Base Finder (LCA)",
+        "title": "Git 3-Way Merge & Conflict Resolution",
         "domain": "github",
         "category": "Git & GitHub",
         "difficulty": "Intermediate",
-        "description": "Find the lowest common ancestor (merge-base) commit between two branch tips in a Git commit DAG.",
-        "skills_tested": ["Git 3-Way Merge", "Lowest Common Ancestor", "DAG Graph"],
+        "challenge_type": "git-terminal",
+        "description": "Situational Challenge: Inspect divergent branch commit history, verify merge bases, and execute a 3-way merge.",
+        "skills_tested": ["git log", "git merge", "3-way merge", "git status"],
         "xp_reward": 150,
         "problem_statement": (
-            "Write a function `find_merge_base(parent_map: dict, commit_a: str, commit_b: str) -> str`\n\n"
-            "Given a directed acyclic graph `parent_map` mapping each commit to a list of parent commit IDs,\n"
-            "find the most recent common ancestor commit between `commit_a` and `commit_b` (equivalent to `git merge-base`)."
+            "### Scenario Background\n"
+            "A teammate branched off to develop `feature/payments` while commits were added to `main`. You need to inspect the commit history DAG and execute a 3-way merge.\n\n"
+            "### Objectives:\n"
+            "1. **Step 1:** Inspect the commit DAG log history using `git log`.\n"
+            "2. **Step 2:** Merge branch `feature/payments` into your current branch.\n"
+            "3. **Step 3:** Check the repository status with `git status` to verify clean working tree."
         ),
-        "starter_code": (
-            "def find_merge_base(parent_map: dict, commit_a: str, commit_b: str) -> str:\n"
-            "    # Return the commit_id of the most recent common ancestor\n"
-            "    pass\n"
-        ),
+        "starter_code": "# Type Git commands in the interactive terminal on the right to complete each scenario step.",
         "hints": [
-            "Hint: Collect all ancestors of commit_a into a set, then perform a BFS from commit_b to find the first common node."
+            "Step 1: Run `git log` or `git log --oneline`.",
+            "Step 2: Run `git merge feature/payments`.",
+            "Step 3: Run `git status`."
         ],
-        "test_harness_code": (
-            "\n"
-            "import json\n"
-            "results = []\n"
-            "try:\n"
-            "    dag = {'c1': [], 'c2': ['c1'], 'c3': ['c2'], 'c4': ['c2'], 'c5': ['c3'], 'c6': ['c4']}\n"
-            "    res = find_merge_base(dag, 'c5', 'c6')\n"
-            "    p = res == 'c2'\n"
-            "    results.append({'test_id': 't1', 'desc': 'Find lowest common ancestor c2 for c5 and c6', 'passed': bool(p), 'expected': 'c2', 'actual': str(res)})\n"
-            "except Exception as e:\n"
-            "    results.append({'test_id': 'err', 'desc': 'Execution error', 'passed': False, 'error': str(e)})\n"
-            "print('---TEST_RESULTS_START---')\n"
-            "print(json.dumps(results))\n"
-        )
+        "scenarios": [
+            {
+                "step": 1,
+                "title": "Inspect Commit DAG Graph",
+                "instruction": "Inspect the linear commit DAG history.",
+                "hint": "Run `git log`",
+                "accepted_patterns": ["git log", "log"],
+                "success_message": "DAG commit history displayed from HEAD to root commit."
+            },
+            {
+                "step": 2,
+                "title": "Execute 3-Way Merge",
+                "instruction": "Merge branch `feature/payments` into `main`.",
+                "hint": "Run `git merge feature/payments`",
+                "accepted_patterns": ["merge feature/payments"],
+                "success_message": "3-way merge commit created connecting feature/payments into main!"
+            },
+            {
+                "step": 3,
+                "title": "Verify Repository Status",
+                "instruction": "Verify working tree and staging index status.",
+                "hint": "Run `git status`",
+                "accepted_patterns": ["git status", "status"],
+                "success_message": "Repository status verified clean after merge!"
+            }
+        ],
+        "test_harness_code": ""
     },
     {
         "id": "github-pr-conflict-detector",
-        "title": "GitHub PR Merge Conflict Detector",
+        "title": "GitHub Pull Request & Code Review Workflow",
         "domain": "github",
         "category": "Git & GitHub",
         "difficulty": "Beginner",
-        "description": "Analyze file change dictionaries from two branches to detect file-level and line-range merge conflicts.",
-        "skills_tested": ["Merge Conflicts", "Code Review", "Diff Processing"],
+        "challenge_type": "git-terminal",
+        "description": "Situational Challenge: List open Pull Requests via GitHub CLI (gh), checkout PR code, and merge into production.",
+        "skills_tested": ["gh pr list", "gh pr checkout", "gh pr view", "gh pr merge"],
         "xp_reward": 120,
         "problem_statement": (
-            "Write a function `detect_conflicts(base_branch_diffs: dict, pr_branch_diffs: dict) -> list`\n\n"
-            "`base_branch_diffs` and `pr_branch_diffs` map `filename -> list_of_modified_line_numbers`.\n"
-            "Return a sorted list of filenames that have overlapping line number modifications."
+            "### Scenario Background\n"
+            "You are reviewing open pull requests on the remote GitHub repository. You need to use the GitHub CLI (`gh`) to list open PRs, inspect PR #42, and merge it.\n\n"
+            "### Objectives:\n"
+            "1. **Step 1:** List all open pull requests with `gh pr list`.\n"
+            "2. **Step 2:** Checkout Pull Request #42 using `gh pr checkout 42`.\n"
+            "3. **Step 3:** Merge Pull Request #42 with `gh pr merge 42`."
         ),
-        "starter_code": (
-            "def detect_conflicts(base_branch_diffs: dict, pr_branch_diffs: dict) -> list:\n"
-            "    # Return list of conflicting filenames\n"
-            "    pass\n"
-        ),
+        "starter_code": "# Type GitHub CLI (gh) commands in the interactive terminal on the right.",
         "hints": [
-            "Hint: Find intersection of files, then check if set(linesA) & set(linesB) is non-empty."
+            "Step 1: Run `gh pr list`.",
+            "Step 2: Run `gh pr checkout 42`.",
+            "Step 3: Run `gh pr merge 42` or `gh pr merge`."
         ],
-        "test_harness_code": (
-            "\n"
-            "import json\n"
-            "results = []\n"
-            "try:\n"
-            "    base = {'auth.py': [10, 11, 12], 'db.py': [5, 6]}\n"
-            "    pr = {'auth.py': [12, 13, 14], 'db.py': [20, 21], 'routes.py': [1]}\n"
-            "    res = detect_conflicts(base, pr)\n"
-            "    p = res == ['auth.py']\n"
-            "    results.append({'test_id': 't1', 'desc': 'Identify auth.py overlap on line 12', 'passed': bool(p), 'expected': \"['auth.py']\", 'actual': str(res)})\n"
-            "except Exception as e:\n"
-            "    results.append({'test_id': 'err', 'desc': 'Execution error', 'passed': False, 'error': str(e)})\n"
-            "print('---TEST_RESULTS_START---')\n"
-            "print(json.dumps(results))\n"
-        )
+        "scenarios": [
+            {
+                "step": 1,
+                "title": "List Open Pull Requests",
+                "instruction": "List all active pull requests in the repository using `gh pr list`.",
+                "hint": "Type `gh pr list`",
+                "accepted_patterns": ["gh pr list", "pr list"],
+                "success_message": "Found 3 open Pull Requests: #42 (JWT Auth), #43 (DB Pool), #44 (CI Matrix)."
+            },
+            {
+                "step": 2,
+                "title": "Checkout Pull Request #42",
+                "instruction": "Checkout Pull Request #42 to inspect its local branch.",
+                "hint": "Type `gh pr checkout 42`",
+                "accepted_patterns": ["gh pr checkout 42", "gh pr checkout #42", "checkout feature/auth"],
+                "success_message": "Switched to branch 'feature/auth' from Pull Request #42."
+            },
+            {
+                "step": 3,
+                "title": "Merge Pull Request #42",
+                "instruction": "Merge Pull Request #42 into main.",
+                "hint": "Type `gh pr merge 42` or `gh pr merge`",
+                "accepted_patterns": ["gh pr merge", "pr merge"],
+                "success_message": "Pull Request #42 approved and merged into main successfully!"
+            }
+        ],
+        "test_harness_code": ""
     },
     {
         "id": "github-actions-matrix",
-        "title": "GitHub Actions Matrix Strategy Generator",
+        "title": "GitHub Actions CI/CD Matrix & Automated Pipeline",
         "domain": "github",
         "category": "Git & GitHub",
         "difficulty": "Intermediate",
-        "description": "Compute all job dimension permutations for a GitHub Actions CI matrix strategy config.",
-        "skills_tested": ["GitHub Actions", "Matrix Builds", "CI/CD Pipeline"],
+        "challenge_type": "git-terminal",
+        "description": "Situational Challenge: Inspect GitHub Actions CI/CD workflows, trigger pipeline execution, and create release tags.",
+        "skills_tested": ["gh workflow list", "gh workflow run", "git tag", "Release Pointers"],
         "xp_reward": 140,
         "problem_statement": (
-            "Write a function `generate_matrix_jobs(matrix_config: dict) -> list`\n\n"
-            "Given `matrix_config = {'os': ['ubuntu-latest', 'windows-latest'], 'python-version': ['3.11', '3.12']}`,\n"
-            "return a list of all combination dictionaries: `[{'os': ..., 'python-version': ...}, ...]`."
+            "### Scenario Background\n"
+            "Your team is deploying a new version. You need to inspect active GitHub Actions workflows, trigger a workflow dispatch build, and tag the release `v1.0.0`.\n\n"
+            "### Objectives:\n"
+            "1. **Step 1:** List active workflows using `gh workflow list`.\n"
+            "2. **Step 2:** Trigger the automated CI/CD matrix build using `gh workflow run`.\n"
+            "3. **Step 3:** Create release tag `v1.0.0` pinned to current HEAD."
         ),
-        "starter_code": (
-            "import itertools\n\n"
-            "def generate_matrix_jobs(matrix_config: dict) -> list:\n"
-            "    # Return list of all cartesian product job configs\n"
-            "    pass\n"
-        ),
+        "starter_code": "# Type GitHub CLI and Git tag commands in the terminal.",
         "hints": [
-            "Hint: Use itertools.product on the dictionary values and pair with keys."
+            "Step 1: Run `gh workflow list`.",
+            "Step 2: Run `gh workflow run`.",
+            "Step 3: Run `git tag v1.0.0` or `git tag -a v1.0.0 -m \"Release v1.0.0\"`."
         ],
-        "test_harness_code": (
-            "\n"
-            "import json\n"
-            "results = []\n"
-            "try:\n"
-            "    cfg = {'os': ['ubuntu', 'windows'], 'node': ['18', '20']}\n"
-            "    res = generate_matrix_jobs(cfg)\n"
-            "    p = len(res) == 4 and {'os': 'ubuntu', 'node': '18'} in res\n"
-            "    results.append({'test_id': 't1', 'desc': 'Generates 4 job combinations correctly', 'passed': bool(p), 'expected': '4 jobs', 'actual': f'{len(res)} jobs'})\n"
-            "except Exception as e:\n"
-            "    results.append({'test_id': 'err', 'desc': 'Execution error', 'passed': False, 'error': str(e)})\n"
-            "print('---TEST_RESULTS_START---')\n"
-            "print(json.dumps(results))\n"
-        )
+        "scenarios": [
+            {
+                "step": 1,
+                "title": "List CI/CD Workflows",
+                "instruction": "Inspect active workflows in `.github/workflows/` using `gh workflow list`.",
+                "hint": "Type `gh workflow list`",
+                "accepted_patterns": ["gh workflow list", "workflow list"],
+                "success_message": "Active workflow found: 'Enterprise CI/CD Automated Deployment Matrix'."
+            },
+            {
+                "step": 2,
+                "title": "Trigger Automated Pipeline",
+                "instruction": "Trigger the automated matrix test & build pipeline using `gh workflow run`.",
+                "hint": "Type `gh workflow run`",
+                "accepted_patterns": ["gh workflow run", "workflow run"],
+                "success_message": "GitHub Actions CI/CD pipeline triggered and running test matrix!"
+            },
+            {
+                "step": 3,
+                "title": "Publish Release Tag",
+                "instruction": "Tag the current commit with release version `v1.0.0`.",
+                "hint": "Type `git tag v1.0.0`",
+                "accepted_patterns": ["git tag v1.0.0", "tag v1.0.0", "tag -a v1.0.0"],
+                "success_message": "Created release tag 'v1.0.0' pinned to current HEAD!"
+            }
+        ],
+        "test_harness_code": ""
     },
     {
         "id": "git-blob-hasher",
-        "title": "Git Object Store & SHA-1 Hasher",
+        "title": "Git Staging & Safe History Rollback",
         "domain": "github",
         "category": "Git & GitHub",
         "difficulty": "Beginner",
-        "description": "Implement standard Git blob format serialization and compute its SHA-1 hash object ID.",
-        "skills_tested": ["Git Internals", "Blob Storage", "SHA-1 Hash"],
+        "challenge_type": "git-terminal",
+        "description": "Situational Challenge: Unstage unwanted files, stash active modifications, and revert a faulty commit safely.",
+        "skills_tested": ["git restore --staged", "git stash", "git revert", "Safe Rollback"],
         "xp_reward": 110,
         "problem_statement": (
-            "Write a function `compute_git_blob_sha(content_str: str) -> str`\n\n"
-            "In Git, a blob is formatted as: `blob <byte_length>\\0<content_bytes>`.\n"
-            "Compute and return the hex SHA-1 digest string of this header + content."
+            "### Scenario Background\n"
+            "You accidentally staged a secret configuration file and discovered a bug in commit `9a01f8`. You must unstage the config file, stash your work, and revert `9a01f8`.\n\n"
+            "### Objectives:\n"
+            "1. **Step 1:** Unstage `config/database.env` without losing working changes.\n"
+            "2. **Step 2:** Save your uncommitted modifications to the stash with `git stash`.\n"
+            "3. **Step 3:** Safely revert commit `9a01f8` using `git revert 9a01f8`."
         ),
-        "starter_code": (
-            "import hashlib\n\n"
-            "def compute_git_blob_sha(content_str: str) -> str:\n"
-            "    # Format as 'blob <len>\\0<content>' and return hashlib.sha1 hex digest\n"
-            "    pass\n"
-        ),
+        "starter_code": "# Type Git undo and rollback commands in the terminal.",
         "hints": [
-            "Hint: Use b'blob ' + str(len(content_bytes)).encode() + b'\\0' + content_bytes."
+            "Step 1: Run `git restore --staged config/database.env` or `git reset config/database.env`.",
+            "Step 2: Run `git stash`.",
+            "Step 3: Run `git revert 9a01f8`."
         ],
-        "test_harness_code": (
-            "\n"
-            "import json\n"
-            "results = []\n"
-            "try:\n"
-            "    # 'hello world\\n' in git has known sha 3b18e512dba79e4c8300dd08aeb37f8e728b8dad\n"
-            "    res = compute_git_blob_sha('hello world\\n')\n"
-            "    p = res.lower() == '3b18e512dba79e4c8300dd08aeb37f8e728b8dad'\n"
-            "    results.append({'test_id': 't1', 'desc': 'Computes exact Git blob sha for hello world', 'passed': bool(p), 'expected': '3b18e512dba79e4c8300dd08aeb37f8e728b8dad', 'actual': str(res)})\n"
-            "except Exception as e:\n"
-            "    results.append({'test_id': 'err', 'desc': 'Execution error', 'passed': False, 'error': str(e)})\n"
-            "print('---TEST_RESULTS_START---')\n"
-            "print(json.dumps(results))\n"
-        )
+        "scenarios": [
+            {
+                "step": 1,
+                "title": "Unstage Sensitive Configuration",
+                "instruction": "Unstage `config/database.env` while keeping working directory changes.",
+                "hint": "Type `git restore --staged config/database.env` or `git reset config/database.env`",
+                "accepted_patterns": ["restore --staged", "reset config/database.env", "reset -- config/database.env", "git reset"],
+                "success_message": "Unstaged 'config/database.env' back to working directory!"
+            },
+            {
+                "step": 2,
+                "title": "Save Work to Stash",
+                "instruction": "Save uncommitted modifications into the LIFO stash stack.",
+                "hint": "Type `git stash`",
+                "accepted_patterns": ["git stash", "stash push", "stash"],
+                "success_message": "Saved uncommitted changes into stash@{0}!"
+            },
+            {
+                "step": 3,
+                "title": "Revert Faulty Commit",
+                "instruction": "Safely revert commit `9a01f8` with an inverse patch commit.",
+                "hint": "Type `git revert 9a01f8`",
+                "accepted_patterns": ["git revert 9a01f8", "revert 9a01f8"],
+                "success_message": "Created inverse forward revert commit for '9a01f8'!"
+            }
+        ],
+        "test_harness_code": ""
     }
 ]
 
@@ -507,6 +578,7 @@ class ChallengeService:
                 id=c["id"],
                 title=c["title"],
                 domain=c.get("domain", "ai-ml"),
+                challenge_type=c.get("challenge_type", "python"),
                 category=c["category"],
                 difficulty=c["difficulty"],
                 description=c["description"],
@@ -529,14 +601,16 @@ class ChallengeService:
             id=challenge["id"],
             title=challenge["title"],
             domain=challenge.get("domain", "ai-ml"),
+            challenge_type=challenge.get("challenge_type", "python"),
             category=challenge["category"],
             difficulty=challenge["difficulty"],
             description=challenge["description"],
             skills_tested=challenge["skills_tested"],
             xp_reward=challenge.get("xp_reward", 100),
             problem_statement=challenge["problem_statement"],
-            starter_code=challenge["starter_code"],
-            hints=challenge["hints"],
+            starter_code=challenge.get("starter_code", ""),
+            hints=challenge.get("hints", []),
+            scenarios=challenge.get("scenarios", None),
             visible_test_cases_count=2,
             total_test_cases_count=3
         )

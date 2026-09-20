@@ -14,6 +14,7 @@ class ChallengeSummary(BaseModel):
     id: str
     title: str
     domain: str = "ai-ml"
+    challenge_type: Optional[str] = "python"
     category: str
     difficulty: str  # Beginner, Intermediate, Advanced
     description: str
@@ -25,6 +26,7 @@ class ChallengeDetail(ChallengeSummary):
     problem_statement: str
     starter_code: str
     hints: List[str]
+    scenarios: Optional[List[Dict[str, Any]]] = None
     visible_test_cases_count: int
     total_test_cases_count: int
 
