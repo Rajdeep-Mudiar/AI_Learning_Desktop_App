@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { GitFork, CheckCircle2, Lock, Sparkles, BookOpen } from 'lucide-react';
 import { skillService } from '../../services/skillService';
+import { useDomain } from '../../contexts/DomainContext';
 import LoadingSpinner from '../common/LoadingSpinner';
 import ProgressBar from '../common/ProgressBar';
 import Badge from '../common/Badge';
 
 export default function SkillTreeGraph() {
+  const { currentDomain, domainInfo } = useDomain();
   const [skillData, setSkillData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState(null);
@@ -16,9 +18,6 @@ export default function SkillTreeGraph() {
         setLoading(true);
         const data = await skillService.getSkillTree();
         setSkillData(data);
-        if (data.categories?.length > 0) {
-          setActiveCategory(data.categories[0].category);
-        }
       } catch (err) {
         console.error('Failed to load skill tree:', err);
       } finally {
@@ -28,10 +27,35 @@ export default function SkillTreeGraph() {
     loadTree();
   }, []);
 
-  if (loading) return <LoadingSpinner message="Calculating dynamic skill knowledge graph..." />;
-  if (!skillData) return <div className="card">Unable to load skill tree.</div>;
+  // Filter categories according to active domain
+  const visibleCategories = React.useMemo(() => {
+    if (!skillData?.categories) return [];
+    return skillData.categories.filter((cat) => {
+      const name = cat.category.toLowerCase();
+      if (currentDomain === 'all') return true;
+      if (currentDomain === 'web-dev') return name.includes('web') || name.includes('frontend') || name.includes('javascript');
+      if (currentDomain === 'app-dev') return name.includes('app') || name.includes('mobile');
+      if (currentDomain === 'system-design') return name.includes('system') || name.includes('distributed');
+      if (currentDomain === 'github') return name.includes('git') || name.includes('github');
+      // ai-ml
+      return !name.includes('web') && !name.includes('app') && !name.includes('system') && !name.includes('git');
+    });
+  }, [skillData, currentDomain]);
 
-  const currentCategoryObj = skillData.categories.find((c) => c.category === activeCategory) || skillData.categories[0];
+  useEffect(() => {
+    if (visibleCategories.length > 0) {
+      if (!visibleCategories.some((c) => c.category === activeCategory)) {
+        setActiveCategory(visibleCategories[0].category);
+      }
+    }
+  }, [visibleCategories, activeCategory]);
+
+  if (loading) return <LoadingSpinner message="Calculating dynamic skill knowledge graph..." />;
+  if (!skillData || visibleCategories.length === 0) {
+    return <div className="card" style={{ textAlign: 'center', padding: 32 }}>No skill categories available for this track.</div>;
+  }
+
+  const currentCategoryObj = visibleCategories.find((c) => c.category === activeCategory) || visibleCategories[0];
 
   const getMasteryColor = (pct) => {
     if (pct >= 80) return '#10b981';
@@ -44,7 +68,7 @@ export default function SkillTreeGraph() {
     <div>
       {/* Category Tabs */}
       <div style={{ display: 'flex', gap: 8, overflowX: 'auto', paddingBottom: 12, marginBottom: 20 }}>
-        {skillData.categories.map((cat) => {
+        {visibleCategories.map((cat) => {
           const isActive = cat.category === activeCategory;
           return (
             <button

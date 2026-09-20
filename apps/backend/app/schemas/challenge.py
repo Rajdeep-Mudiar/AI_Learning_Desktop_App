@@ -13,6 +13,7 @@ class TestCaseResult(BaseModel):
 class ChallengeSummary(BaseModel):
     id: str
     title: str
+    domain: str = "ai-ml"
     category: str
     difficulty: str  # Beginner, Intermediate, Advanced
     description: str

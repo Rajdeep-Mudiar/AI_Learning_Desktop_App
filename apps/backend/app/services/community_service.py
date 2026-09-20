@@ -73,14 +73,15 @@ CAREER_PATHS: List[CareerPath] = [
     CareerPath(
         id="applied-ml-engineer",
         role_title="Applied Machine Learning Engineer",
+        domain="ai-ml",
         average_salary="$165,000 / yr",
         market_demand="Very High",
         description="Designs, builds, and deploys predictive ML pipelines, feature stores, and real-time classification/regression microservices.",
         readiness_percentage=85,
         skills_required=[
-            RoleSkillRequirement(skill_name="NumPy Matrix Operations & Vectorization", importance="Must Have", is_mastered=True, matching_course="Foundations of AI & Mathematics"),
-            RoleSkillRequirement(skill_name="Supervised Learning & Hyperparameter Tuning", importance="Must Have", is_mastered=True, matching_course="Supervised Learning Mastery"),
-            RoleSkillRequirement(skill_name="Model Evaluation & Diagnostic Curves (ROC, Confusion Matrix)", importance="Must Have", is_mastered=True, matching_course="Supervised Learning Mastery"),
+            RoleSkillRequirement(skill_name="NumPy Matrix Operations & Vectorization", importance="Must Have", is_mastered=True, matching_course="Python & NumPy Foundations for AI"),
+            RoleSkillRequirement(skill_name="Supervised Learning & Hyperparameter Tuning", importance="Must Have", is_mastered=True, matching_course="Machine Learning Fundamentals"),
+            RoleSkillRequirement(skill_name="Model Evaluation & Diagnostic Curves (ROC, Confusion Matrix)", importance="Must Have", is_mastered=True, matching_course="Machine Learning Fundamentals"),
             RoleSkillRequirement(skill_name="Subprocess & Safe Model Serving Pipelines", importance="Important", is_mastered=True, matching_course="AI Engineering Systems"),
             RoleSkillRequirement(skill_name="Real-Time Data Streaming & Feature Stores", importance="Good to Have", is_mastered=False, matching_course="MLOps & Scaled Systems")
         ]
@@ -88,15 +89,80 @@ CAREER_PATHS: List[CareerPath] = [
     CareerPath(
         id="foundation-model-researcher",
         role_title="Foundation Model / LLM Researcher",
+        domain="ai-ml",
         average_salary="$210,000 / yr",
         market_demand="Very High",
         description="Develops novel Transformer architectures, attention optimizations, parameter-efficient fine-tuning (PEFT/LoRA), and pre-training scaling laws.",
         readiness_percentage=75,
         skills_required=[
-            RoleSkillRequirement(skill_name="Scaled Dot-Product Attention Mechanics", importance="Must Have", is_mastered=True, matching_course="Deep Learning & Neural Architectures"),
-            RoleSkillRequirement(skill_name="Backpropagation Calculus & Gradient Dynamics", importance="Must Have", is_mastered=True, matching_course="Deep Learning & Neural Architectures"),
-            RoleSkillRequirement(skill_name="LoRA & Low-Rank Parameter Adaptation", importance="Must Have", is_mastered=True, matching_course="AI Research Mode"),
-            RoleSkillRequirement(skill_name="Distributed GPU Training & FP8 Quantization", importance="Important", is_mastered=False, matching_course="Distributed AI Research")
+            RoleSkillRequirement(skill_name="Scaled Dot-Product Attention Mechanics", importance="Must Have", is_mastered=True, matching_course="Deep Learning & Neural Networks"),
+            RoleSkillRequirement(skill_name="Backpropagation Calculus & Gradient Dynamics", importance="Must Have", is_mastered=True, matching_course="Deep Learning & Neural Networks"),
+            RoleSkillRequirement(skill_name="LoRA & Low-Rank Parameter Adaptation", importance="Must Have", is_mastered=True, matching_course="Generative AI, Transformers & LLMs"),
+            RoleSkillRequirement(skill_name="Distributed GPU Training & FP8 Quantization", importance="Important", is_mastered=False, matching_course="Generative AI, Transformers & LLMs")
+        ]
+    ),
+    # ================= WEB DEV CAREER =================
+    CareerPath(
+        id="fullstack-web-engineer",
+        role_title="Full-Stack Web & React Engineer",
+        domain="web-dev",
+        average_salary="$145,000 / yr",
+        market_demand="Very High",
+        description="Builds high-performance interactive web apps, reactive React 18 interfaces, REST/GraphQL APIs, and responsive design systems.",
+        readiness_percentage=90,
+        skills_required=[
+            RoleSkillRequirement(skill_name="HTML5 Semantics & Responsive CSS Grid", importance="Must Have", is_mastered=True, matching_course="Modern Full-Stack Web Development"),
+            RoleSkillRequirement(skill_name="Modern ES6+ Async JavaScript", importance="Must Have", is_mastered=True, matching_course="Modern Full-Stack Web Development"),
+            RoleSkillRequirement(skill_name="React 18 Hooks & State Architecture", importance="Must Have", is_mastered=True, matching_course="Modern Full-Stack Web Development"),
+            RoleSkillRequirement(skill_name="REST API Integration & Web Vitals", importance="Important", is_mastered=True, matching_course="Modern Full-Stack Web Development")
+        ]
+    ),
+    # ================= APP DEV CAREER =================
+    CareerPath(
+        id="mobile-app-developer",
+        role_title="Cross-Platform Mobile Engineer",
+        domain="app-dev",
+        average_salary="$150,000 / yr",
+        market_demand="High",
+        description="Creates production native-feel iOS and Android mobile apps using React Native and Flutter with gesture handlers and offline storage.",
+        readiness_percentage=80,
+        skills_required=[
+            RoleSkillRequirement(skill_name="Mobile Viewports & Density Pixels", importance="Must Have", is_mastered=True, matching_course="Cross-Platform Mobile App Engineering"),
+            RoleSkillRequirement(skill_name="Navigation Stacks & Touch Gestures", importance="Must Have", is_mastered=True, matching_course="Cross-Platform Mobile App Engineering"),
+            RoleSkillRequirement(skill_name="Offline SQLite & Async Storage", importance="Must Have", is_mastered=True, matching_course="Cross-Platform Mobile App Engineering"),
+            RoleSkillRequirement(skill_name="Native Device Permissions & Push Notifications", importance="Important", is_mastered=False, matching_course="Cross-Platform Mobile App Engineering")
+        ]
+    ),
+    # ================= SYSTEM DESIGN CAREER =================
+    CareerPath(
+        id="distributed-systems-architect",
+        role_title="Distributed Systems & Cloud Architect",
+        domain="system-design",
+        average_salary="$195,000 / yr",
+        market_demand="Very High",
+        description="Designs high-concurrency microservices, multi-region database sharding, Redis caching tiers, and fault-tolerant infrastructure.",
+        readiness_percentage=85,
+        skills_required=[
+            RoleSkillRequirement(skill_name="Load Balancing & Microservices", importance="Must Have", is_mastered=True, matching_course="Scalable Distributed Systems & High-Load Design"),
+            RoleSkillRequirement(skill_name="Distributed Caching with Redis", importance="Must Have", is_mastered=True, matching_course="Scalable Distributed Systems & High-Load Design"),
+            RoleSkillRequirement(skill_name="Database Replication & CAP Theorem Sharding", importance="Must Have", is_mastered=True, matching_course="Scalable Distributed Systems & High-Load Design"),
+            RoleSkillRequirement(skill_name="Message Queues (Kafka/RabbitMQ)", importance="Important", is_mastered=False, matching_course="Scalable Distributed Systems & High-Load Design")
+        ]
+    ),
+    # ================= GIT & GITHUB CAREER =================
+    CareerPath(
+        id="devops-release-engineer",
+        role_title="DevOps & Release Engineer",
+        domain="github",
+        average_salary="$155,000 / yr",
+        market_demand="High",
+        description="Automates team git workflows, branch protection gates, GitHub Actions CI/CD matrix runners, and containerized deployment pipelines.",
+        readiness_percentage=88,
+        skills_required=[
+            RoleSkillRequirement(skill_name="Git Internals & Commit DAG", importance="Must Have", is_mastered=True, matching_course="Mastering Git, Branching Strategies & Team Workflows"),
+            RoleSkillRequirement(skill_name="Branching, Merges & Interactive Rebase", importance="Must Have", is_mastered=True, matching_course="Mastering Git, Branching Strategies & Team Workflows"),
+            RoleSkillRequirement(skill_name="GitHub Actions Automated CI/CD Pipelines", importance="Must Have", is_mastered=True, matching_course="Mastering Git, Branching Strategies & Team Workflows"),
+            RoleSkillRequirement(skill_name="Infrastructure as Code (Terraform/Docker)", importance="Important", is_mastered=False, matching_course="Mastering Git, Branching Strategies & Team Workflows")
         ]
     )
 ]

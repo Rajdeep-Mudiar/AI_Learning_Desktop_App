@@ -70,6 +70,118 @@ INTERVIEW_TRACKS: List[InterviewTrack] = [
                 expected_key_points=["Intrinsic rank of adaptation is small", "B in R^(d x r) and A in R^(r x k)", "Linear forward fusion W = W_0 + BA at inference", "VRAM reduction"]
             )
         ]
+    ),
+    # ================= WEB DEV INTERVIEW =================
+    InterviewTrack(
+        id="frontend-engineer",
+        title="Senior Frontend & React 18 Engineer Interview",
+        role_target="Senior Frontend / Full-Stack Engineer",
+        domain="web-dev",
+        difficulty="Mid-Level",
+        duration_minutes=45,
+        questions_count=2,
+        description="Comprehensive evaluation of React 18 Concurrent features, reconciliation algorithms, CSS layout engines, and Web Vitals performance.",
+        banner_color="linear-gradient(135deg, #06b6d4, #3b82f6)",
+        questions=[
+            InterviewQuestion(
+                id="fe-q1",
+                category="React Internals",
+                question="How does React 18 Fiber architecture enable non-blocking concurrent rendering with useTransition and useDeferredValue?",
+                rubric="Candidate should explain Fiber nodes as linked list units of work, time slicing via MessageChannel, and prioritizing user inputs over background re-renders.",
+                expected_key_points=["Fiber tree linked list", "Time slicing & scheduler", "Priority lanes", "Interruptible work units"]
+            ),
+            InterviewQuestion(
+                id="fe-q2",
+                category="Performance & Web Vitals",
+                question="Explain how to diagnose and optimize Largest Contentful Paint (LCP) and Cumulative Layout Shift (CLS) on high-traffic web applications.",
+                rubric="Candidate should discuss preloading critical hero images, CSS aspect-ratio containment, font display swap, and avoiding layout thrashing.",
+                expected_key_points=["LCP image preloading", "Explicit width/height or aspect-ratio for CLS", "Avoid layout thrashing", "Server-Side Rendering / Streaming"]
+            )
+        ]
+    ),
+    # ================= APP DEV INTERVIEW =================
+    InterviewTrack(
+        id="mobile-engineer",
+        title="Cross-Platform Mobile Engineer Interview",
+        role_target="Senior Mobile Engineer (React Native / Flutter)",
+        domain="app-dev",
+        difficulty="Mid-Level",
+        duration_minutes=45,
+        questions_count=2,
+        description="Assesses native bridge communication, JSI architecture, Flutter Impeller rendering pipeline, and memory optimization.",
+        banner_color="linear-gradient(135deg, #ec4899, #f43f5e)",
+        questions=[
+            InterviewQuestion(
+                id="app-q1",
+                category="Mobile Architecture",
+                question="Compare React Native's New Architecture (TurboModules + Fabric using JSI) against the legacy asynchronous JSON Bridge.",
+                rubric="Candidate should highlight direct C++ synchronous memory sharing via JSI, eliminating serialized JSON overhead and enabling instant layout measurements.",
+                expected_key_points=["JSI direct C++ pointers", "Synchronous method invocation", "Fabric C++ layout engine", "Elimination of JSON serialization bottleneck"]
+            ),
+            InterviewQuestion(
+                id="app-q2",
+                category="Offline & State",
+                question="How do you architect an offline-first mobile app that handles multi-device sync conflicts and background network re-connection?",
+                rubric="Candidate should explain local SQLite queues, idempotency keys, CRDTs or last-write-wins timestamps, and background job sync workers.",
+                expected_key_points=["Local SQLite storage as source of truth", "Sync queue with idempotency keys", "Conflict resolution strategy", "Background fetch workers"]
+            )
+        ]
+    ),
+    # ================= SYSTEM DESIGN INTERVIEW =================
+    InterviewTrack(
+        id="system-architect",
+        title="Distributed Systems & High-Load Architecture",
+        role_target="Staff Systems Architect / Backend Lead",
+        domain="system-design",
+        difficulty="Senior / Staff",
+        duration_minutes=60,
+        questions_count=2,
+        description="Architecting global distributed backends handling 100M+ DAU with database sharding, CAP theorem trade-offs, and consensus algorithms.",
+        banner_color="linear-gradient(135deg, #10b981, #059669)",
+        questions=[
+            InterviewQuestion(
+                id="sys-q1",
+                category="Distributed Systems & Sharding",
+                question="How would you design a distributed ID generator (like Snowflake) producing 64-bit strictly monotonic or time-ordered IDs across 1,000 independent worker nodes without central locking?",
+                rubric="Candidate should detail 41-bit timestamp + 10-bit machine/node ID + 12-bit sequence counter, and handle clock drift/NTP backwards skew.",
+                expected_key_points=["Bit allocation (Timestamp + NodeID + Sequence)", "Decentralized lock-free generation", "NTP clock skew handling", "64-bit integer indexing in SQL/NoSQL"]
+            ),
+            InterviewQuestion(
+                id="sys-q2",
+                category="High-Availability & Caching",
+                question="Explain the Cache-Aside pattern with Redis and how you mitigate Thundering Herd (Cache Stampede) and Cache Penetration problems.",
+                rubric="Candidate should propose distributed locks (Redlock), probabilistic early expiration (XFetch), Bloom filters for non-existent keys, and stale cache fallbacks.",
+                expected_key_points=["Cache-Aside read/write flow", "Distributed mutex locks on cache miss", "Bloom filter for cache penetration", "Probabilistic early expiration (XFetch)"]
+            )
+        ]
+    ),
+    # ================= GIT & GITHUB INTERVIEW =================
+    InterviewTrack(
+        id="git-devops-engineer",
+        title="Git Internals, Branching & DevOps CI/CD Interview",
+        role_target="DevOps / Release Engineer & Monorepo Lead",
+        domain="github",
+        difficulty="Mid-Level",
+        duration_minutes=45,
+        questions_count=2,
+        description="Evaluates deep knowledge of Git object storage (blobs, trees, commits), 3-way merge algorithms, interactive rebasing, and GitHub Actions security.",
+        banner_color="linear-gradient(135deg, #f59e0b, #ea580c)",
+        questions=[
+            InterviewQuestion(
+                id="git-q1",
+                category="Git Internals",
+                question="How does Git store file history under the .git/objects directory? Explain the relationship between Blobs, Trees, and Commits.",
+                rubric="Candidate should describe content-addressable SHA-1/SHA-256 storage: Blobs hold file payloads without filenames, Trees hold directory mappings and permissions, Commits reference top-level Trees and parent Commit SHAs.",
+                expected_key_points=["Content-addressable SHA hash keys", "Blobs store raw content", "Trees store file paths & modes", "Commits form an immutable Directed Acyclic Graph"]
+            ),
+            InterviewQuestion(
+                id="git-q2",
+                category="Branching & Merges",
+                question="Explain the internal difference between `git merge --no-ff`, `git merge --squash`, and `git rebase`. When should each be enforced in team branching guidelines?",
+                rubric="Candidate should analyze merge commit creation, linear histories without merge bubbles, squashing noisy feature commits, and avoiding rebasing shared public branches.",
+                expected_key_points=["Rebase produces clean linear history", "Squash consolidates PR commits into one", "3-way merge preserves exact branch topology", "Never rebase shared public branches"]
+            )
+        ]
     )
 ]
 

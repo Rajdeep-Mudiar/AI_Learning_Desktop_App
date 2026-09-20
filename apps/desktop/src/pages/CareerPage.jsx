@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { careerService } from '../services/careerService';
+import { useDomain } from '../contexts/DomainContext';
 import { Briefcase, CheckCircle2, Circle, TrendingUp, DollarSign, Lightbulb } from 'lucide-react';
 
 export default function CareerPage() {
+  const { currentDomain, activeDomainInfo } = useDomain();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -30,15 +32,19 @@ export default function CareerPage() {
     );
   }
 
+  const filteredPaths = (data.career_paths || []).filter(
+    (p) => currentDomain === 'all' || !p.domain || p.domain === currentDomain
+  );
+
   return (
     <div className="container" style={{ paddingBottom: 'var(--space-2xl)' }}>
       {/* Header */}
       <div style={{ marginBottom: 'var(--space-xl)' }}>
         <h1 style={{ fontSize: 'var(--font-2xl)', fontWeight: 800, margin: '0 0 var(--space-xs) 0', color: 'var(--color-text-main)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Briefcase size={24} color="var(--color-primary-400)" /> AI Career Roadmaps & Skill Gap Analysis
+          <Briefcase size={24} color="var(--color-primary-400)" /> {activeDomainInfo?.label || 'Engineering'} Career Roadmaps & Skill Gap Analysis
         </h1>
         <p style={{ margin: 0, color: 'var(--color-text-muted)', fontSize: 'var(--font-sm)' }}>
-          Map your conceptual mastery, autograded challenges, and viva evaluations against industry hiring benchmarks.
+          Map your conceptual mastery, autograded challenges, and viva evaluations against industry hiring benchmarks in {activeDomainInfo?.label || 'software engineering'}.
         </p>
       </div>
 
@@ -58,7 +64,7 @@ export default function CareerPage() {
 
       {/* Career Roles Grid */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xl)' }}>
-        {data.career_paths.map((path) => (
+        {filteredPaths.map((path) => (
           <div key={path.id} className="card" style={{ padding: 'var(--space-xl)', display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 'var(--space-md)' }}>
               <div>

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { projectService } from '../services/projectService';
+import { useDomain } from '../contexts/DomainContext';
 import { FolderGit2, ArrowRight, Clock, Layers, Award } from 'lucide-react';
 
 export default function ProjectsPage() {
+  const { currentDomain, domainInfo } = useDomain();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filterCategory, setFilterCategory] = useState('all');
@@ -25,23 +27,28 @@ export default function ProjectsPage() {
     }
   };
 
-  const categories = ['all', 'NLP', 'RAG & LLM', 'Computer Vision'];
-  const filtered = filterCategory === 'all' ? projects : projects.filter((p) => p.category === filterCategory);
+  const domainFiltered = projects.filter((p) => {
+    if (currentDomain === 'all') return true;
+    return (p.domain || 'ai-ml') === currentDomain;
+  });
+
+  const categories = ['all', ...new Set(domainFiltered.map((p) => p.category))];
+  const filtered = filterCategory === 'all' ? domainFiltered : domainFiltered.filter((p) => p.category === filterCategory);
 
   return (
     <div className="container" style={{ paddingBottom: 'var(--space-2xl)' }}>
       {/* Header */}
       <div style={{ marginBottom: 'var(--space-xl)' }}>
         <h1 style={{ fontSize: 'var(--font-2xl)', fontWeight: 800, margin: '0 0 var(--space-xs) 0', color: 'var(--color-text-main)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <FolderGit2 size={24} color="var(--color-primary-400)" /> Guided AI Project Portfolio Builder
+          <FolderGit2 size={24} color={domainInfo.color} /> {currentDomain === 'all' ? 'Engineering Portfolio Projects & Viva' : `${domainInfo.title} Portfolio & Viva`}
         </h1>
         <p style={{ margin: 0, color: 'var(--color-text-muted)', fontSize: 'var(--font-sm)' }}>
-          Build production-grade AI systems, defend your design choices in an AI Oral Viva exam, and export GitHub-ready README portfolios.
+          Build production-grade systems in {domainInfo.shortTitle}, defend your design choices in an AI Oral Viva exam, and export GitHub-ready README portfolios.
         </p>
       </div>
 
       {/* Category filters */}
-      <div style={{ display: 'flex', gap: 'var(--space-xs)', marginBottom: 'var(--space-xl)' }}>
+      <div style={{ display: 'flex', gap: 'var(--space-xs)', marginBottom: 'var(--space-xl)', flexWrap: 'wrap' }}>
         {categories.map((cat) => (
           <button
             key={cat}
@@ -49,9 +56,9 @@ export default function ProjectsPage() {
             style={{
               padding: '6px 14px',
               borderRadius: 'var(--radius-full)',
-              background: filterCategory === cat ? 'rgba(99, 102, 241, 0.15)' : 'var(--color-surface)',
-              border: filterCategory === cat ? '1px solid var(--color-primary-400)' : '1px solid var(--color-border)',
-              color: filterCategory === cat ? 'var(--color-primary-400)' : 'var(--color-text-muted)',
+              background: filterCategory === cat ? `${domainInfo.color}25` : 'var(--color-surface)',
+              border: filterCategory === cat ? `1px solid ${domainInfo.color}` : '1px solid var(--color-border)',
+              color: filterCategory === cat ? domainInfo.color : 'var(--color-text-muted)',
               fontSize: 'var(--font-xs)',
               fontWeight: filterCategory === cat ? 700 : 500,
               cursor: 'pointer',

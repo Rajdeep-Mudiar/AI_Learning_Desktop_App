@@ -15,9 +15,10 @@ class ProjectTrack(BaseModel):
     id: str
     title: str
     tagline: str
+    domain: str = "ai-ml"
     difficulty: str  # "Beginner", "Intermediate", "Advanced"
     estimated_hours: int
-    category: str  # "NLP", "Computer Vision", "Classical ML", "RAG & LLM"
+    category: str  # "NLP", "Computer Vision", "Classical ML", "RAG & LLM", "Web Development", etc.
     description: str
     dataset_name: str
     architecture: str

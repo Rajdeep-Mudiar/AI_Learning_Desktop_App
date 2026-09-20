@@ -48,17 +48,27 @@ export default function Sidebar() {
         ];
       case 'system-design':
         return [
-          { path: '/system-design-lab', label: 'Architecture & Traffic Simulator', icon: Layers },
-          { path: '/interviews', label: 'System Design Mock Interviews', icon: Video },
+          { path: '/system-design-lab', label: 'Traffic & Topology Sim', icon: Layers },
           { path: '/challenges', label: 'Scalability Challenges', icon: Award }
         ];
       case 'github':
         return [
-          { path: '/git-lab', label: 'Git DAG Visualizer & Shell', icon: GitBranch },
-          { path: '/challenges', label: 'Git Workflow Challenges', icon: Award },
-          { path: '/projects', label: 'Open Source Repos', icon: FolderGit2 }
+          { path: '/git-lab', label: 'Git DAG Graph & Shell', icon: GitBranch },
+          { path: '/challenges', label: 'Git Workflow Challenges', icon: Award }
         ];
-      default: // ai-ml
+      case 'all':
+        return [
+          { path: '/algorithms', label: 'Algorithm Lab (AI)', icon: Cpu },
+          { path: '/deep-learning', label: 'Deep Learning Lab', icon: Network },
+          { path: '/web-lab', label: 'Web Dev Sandbox', icon: Globe },
+          { path: '/app-lab', label: 'Mobile App Lab', icon: Smartphone },
+          { path: '/system-design-lab', label: 'System Design Lab', icon: Layers },
+          { path: '/git-lab', label: 'Git DAG Visualizer', icon: GitBranch },
+          { path: '/playground', label: 'Code Playground', icon: Terminal },
+          { path: '/challenges', label: 'Coding Challenges', icon: Award }
+        ];
+      case 'ai-ml':
+      default:
         return [
           { path: '/algorithms', label: 'Algorithm Lab', icon: Cpu },
           { path: '/deep-learning', label: 'Deep Learning Lab', icon: Network },
@@ -66,6 +76,17 @@ export default function Sidebar() {
           { path: '/playground', label: 'Python Playground', icon: Terminal },
           { path: '/challenges', label: 'AI Challenges', icon: Award }
         ];
+    }
+  };
+
+  const getTrackBrandTitle = () => {
+    switch (currentDomain) {
+      case 'web-dev': return 'Web Dev Lab';
+      case 'app-dev': return 'App Dev Lab';
+      case 'system-design': return 'System Design';
+      case 'github': return 'Git & GitHub';
+      case 'all': return 'Engineering Suite';
+      default: return 'AI Learning Lab';
     }
   };
 
@@ -89,7 +110,7 @@ export default function Sidebar() {
           <Sparkles size={18} />
         </div>
         <div>
-          <h1 className="sidebar-logo-text">AI Learning Lab</h1>
+          <h1 className="sidebar-logo-text">{getTrackBrandTitle()}</h1>
           <p style={{ fontSize: '0.68rem', color: domainInfo.color, fontWeight: 700, letterSpacing: '0.04em' }}>
             {domainInfo.shortTitle.toUpperCase()} TRACK
           </p>
@@ -122,13 +143,13 @@ export default function Sidebar() {
 
         {/* Specialized Domain Laboratories */}
         <div className="nav-section-title" style={{ marginTop: 12 }}>
-          {domainInfo.shortTitle} Laboratories
+          {currentDomain === 'all' ? 'All Laboratories' : `${domainInfo.shortTitle} Laboratories`}
         </div>
         {domainLabs.map((item) => {
           const Icon = item.icon;
           return (
             <NavLink
-              key={item.path}
+              key={item.path + item.label}
               to={item.path}
               className={({ isActive }) => `nav-item ${isActive ? 'nav-item-active' : ''}`}
             >
@@ -145,7 +166,7 @@ export default function Sidebar() {
         <NavLink to="/tutor" className={({ isActive }) => `nav-item ${isActive ? 'nav-item-active' : ''}`}>
           <div className="nav-item-left">
             <Bot size={18} />
-            <span>AI Tutor</span>
+            <span>{currentDomain === 'web-dev' ? 'Web AI Tutor' : currentDomain === 'app-dev' ? 'Mobile AI Tutor' : currentDomain === 'system-design' ? 'Systems AI Tutor' : currentDomain === 'github' ? 'Git AI Tutor' : 'AI Tutor'}</span>
           </div>
         </NavLink>
 

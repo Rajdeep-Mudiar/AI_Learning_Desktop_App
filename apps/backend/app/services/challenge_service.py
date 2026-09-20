@@ -169,6 +169,182 @@ CHALLENGES_STORE = [
             "print('---TEST_RESULTS_START---')\n"
             "print(json.dumps(results))\n"
         )
+    },
+    # ================= WEB DEV CHALLENGE =================
+    {
+        "id": "web-css-specificity",
+        "title": "CSS Selector Specificity Engine",
+        "domain": "web-dev",
+        "category": "Web Development",
+        "difficulty": "Beginner",
+        "description": "Compute the CSS specificity tuple (IDs, Classes/Attributes, Elements) for a given CSS selector.",
+        "skills_tested": ["CSS Specificity", "Selector Parsing", "DOM Modeling"],
+        "xp_reward": 100,
+        "problem_statement": (
+            "Write a function `calculate_specificity(selector: str) -> tuple` that returns `(ids, classes, tags)` counts.\n\n"
+            "Rules:\n"
+            "- `#id` increments IDs.\n"
+            "- `.class` or `[attr]` increments classes/attributes.\n"
+            "- Standard element tags (`div`, `p`, `span`, `h1`) increment tags.\n"
+            "- Return a 3-tuple `(ids, classes, tags)`."
+        ),
+        "starter_code": (
+            "import re\n\n"
+            "def calculate_specificity(selector: str) -> tuple:\n"
+            "    # Return (ids, classes, tags)\n"
+            "    pass\n"
+        ),
+        "hints": [
+            "Hint 1: Count '#' occurrences for IDs.",
+            "Hint 2: Count '.' occurrences for classes.",
+            "Hint 3: Strip IDs and classes to isolate remaining tag names."
+        ],
+        "test_harness_code": (
+            "\n"
+            "import json\n"
+            "results = []\n"
+            "try:\n"
+            "    r1 = calculate_specificity('#main .nav-item a')\n"
+            "    p1 = r1 == (1, 1, 1)\n"
+            "    results.append({'test_id': 't1', 'desc': '#main .nav-item a -> (1, 1, 1)', 'passed': bool(p1), 'expected': '(1, 1, 1)', 'actual': str(r1)})\n"
+            "\n"
+            "    r2 = calculate_specificity('div.card')\n"
+            "    p2 = r2 == (0, 1, 1)\n"
+            "    results.append({'test_id': 't2', 'desc': 'div.card -> (0, 1, 1)', 'passed': bool(p2), 'expected': '(0, 1, 1)', 'actual': str(r2)})\n"
+            "except Exception as e:\n"
+            "    results.append({'test_id': 'err', 'desc': 'Runtime error', 'passed': False, 'error': str(e)})\n"
+            "print('---TEST_RESULTS_START---')\n"
+            "print(json.dumps(results))\n"
+        )
+    },
+    # ================= APP DEV CHALLENGE =================
+    {
+        "id": "app-viewport-clamp",
+        "title": "Mobile Viewport Touch Target Clamp",
+        "domain": "app-dev",
+        "category": "App Development",
+        "difficulty": "Beginner",
+        "description": "Ensure interactive touch targets meet Apple Human Interface (44x44pt) and Android Material (48x48dp) minimum boundaries.",
+        "skills_tested": ["Touch Targets", "Mobile Viewports", "UI Constraints"],
+        "xp_reward": 100,
+        "problem_statement": (
+            "Write a function `clamp_touch_target(width: float, height: float, os_type: str = 'ios') -> tuple`\n\n"
+            "- For 'ios': minimum size is (44.0, 44.0).\n"
+            "- For 'android': minimum size is (48.0, 48.0).\n"
+            "- If input dimension is smaller, expand to minimum. If larger, leave as is.\n"
+            "- Return `(clamped_w, clamped_h)`."
+        ),
+        "starter_code": (
+            "def clamp_touch_target(width: float, height: float, os_type: str = 'ios') -> tuple:\n"
+            "    # Your implementation:\n"
+            "    pass\n"
+        ),
+        "hints": [
+            "Hint: Use `max(width, min_val)` for both dimensions."
+        ],
+        "test_harness_code": (
+            "\n"
+            "import json\n"
+            "results = []\n"
+            "try:\n"
+            "    r1 = clamp_touch_target(32.0, 20.0, 'ios')\n"
+            "    p1 = r1 == (44.0, 44.0)\n"
+            "    results.append({'test_id': 't1', 'desc': 'iOS touch target expansion to 44pt', 'passed': bool(p1), 'expected': '(44.0, 44.0)', 'actual': str(r1)})\n"
+            "\n"
+            "    r2 = clamp_touch_target(60.0, 30.0, 'android')\n"
+            "    p2 = r2 == (60.0, 48.0)\n"
+            "    results.append({'test_id': 't2', 'desc': 'Android touch height expansion to 48dp', 'passed': bool(p2), 'expected': '(60.0, 48.0)', 'actual': str(r2)})\n"
+            "except Exception as e:\n"
+            "    results.append({'test_id': 'err', 'desc': 'Runtime error', 'passed': False, 'error': str(e)})\n"
+            "print('---TEST_RESULTS_START---')\n"
+            "print(json.dumps(results))\n"
+        )
+    },
+    # ================= SYSTEM DESIGN CHALLENGE =================
+    {
+        "id": "sys-token-bucket",
+        "title": "Token Bucket Rate Limiter",
+        "domain": "system-design",
+        "category": "System Design",
+        "difficulty": "Intermediate",
+        "description": "Implement a deterministic token bucket rate limiter to prevent server DDoS and API starvation.",
+        "skills_tested": ["Rate Limiting", "Token Bucket", "Traffic Shaping"],
+        "xp_reward": 150,
+        "problem_statement": (
+            "Write a class `TokenBucket(capacity: int, refill_rate_per_sec: float)` with method:\n"
+            "`allow_request(tokens_requested: int, current_time_sec: float) -> bool`\n\n"
+            "- Refill tokens proportionally based on elapsed time since last request up to `capacity`.\n"
+            "- If available tokens >= tokens_requested, deduct tokens and return True, else return False."
+        ),
+        "starter_code": (
+            "class TokenBucket:\n"
+            "    def __init__(self, capacity: int, refill_rate_per_sec: float):\n"
+            "        self.capacity = float(capacity)\n"
+            "        self.refill_rate = float(refill_rate_per_sec)\n"
+            "        self.tokens = float(capacity)\n"
+            "        self.last_time = 0.0\n\n"
+            "    def allow_request(self, tokens_requested: int, current_time_sec: float) -> bool:\n"
+            "        pass\n"
+        ),
+        "hints": [
+            "Hint: elapsed = current_time_sec - self.last_time; self.tokens = min(self.capacity, self.tokens + elapsed * self.refill_rate)."
+        ],
+        "test_harness_code": (
+            "\n"
+            "import json\n"
+            "results = []\n"
+            "try:\n"
+            "    tb = TokenBucket(capacity=5, refill_rate_per_sec=1.0)\n"
+            "    tb.last_time = 0.0\n"
+            "    r1 = tb.allow_request(3, 0.0)  # tokens left: 2\n"
+            "    r2 = tb.allow_request(3, 0.0)  # rejected (only 2 left)\n"
+            "    r3 = tb.allow_request(2, 2.0)  # refilled +2 -> 4 tokens -> allows 2\n"
+            "    p = (r1 is True) and (r2 is False) and (r3 is True)\n"
+            "    results.append({'test_id': 't1', 'desc': 'Capacity drain and refill sequence', 'passed': bool(p), 'expected': 'True, False, True', 'actual': f'{r1}, {r2}, {r3}'})\n"
+            "except Exception as e:\n"
+            "    results.append({'test_id': 'err', 'desc': 'Execution error', 'passed': False, 'error': str(e)})\n"
+            "print('---TEST_RESULTS_START---')\n"
+            "print(json.dumps(results))\n"
+        )
+    },
+    # ================= GIT CHALLENGE =================
+    {
+        "id": "git-fast-forward",
+        "title": "Git Fast-Forward Merge Validator",
+        "domain": "github",
+        "category": "Git & GitHub",
+        "difficulty": "Beginner",
+        "description": "Determine whether branch B can be fast-forward merged into branch A given a commit parent map.",
+        "skills_tested": ["Git Commit Graph", "DAG Traversal", "Branch Pointers"],
+        "xp_reward": 100,
+        "problem_statement": (
+            "Write a function `can_fast_forward(parent_map: dict, target_branch_commit: str, source_branch_commit: str) -> bool`\n\n"
+            "`parent_map` maps `commit_id -> list_of_parent_commit_ids`.\n"
+            "A fast-forward merge from source into target is possible if `target_branch_commit` is a direct ancestor of `source_branch_commit`."
+        ),
+        "starter_code": (
+            "def can_fast_forward(parent_map: dict, target_branch_commit: str, source_branch_commit: str) -> bool:\n"
+            "    # Return True if target is an ancestor of source\n"
+            "    pass\n"
+        ),
+        "hints": [
+            "Hint: Traverse upwards from source_branch_commit using BFS or DFS."
+        ],
+        "test_harness_code": (
+            "\n"
+            "import json\n"
+            "results = []\n"
+            "try:\n"
+            "    dag = {'C1': [], 'C2': ['C1'], 'C3': ['C2'], 'C4': ['C1']}\n"
+            "    r1 = can_fast_forward(dag, 'C1', 'C3')  # C1 is ancestor of C3 -> True\n"
+            "    r2 = can_fast_forward(dag, 'C4', 'C3')  # C4 is on different branch -> False\n"
+            "    p = (r1 is True) and (r2 is False)\n"
+            "    results.append({'test_id': 't1', 'desc': 'Direct ancestor line detection', 'passed': bool(p), 'expected': 'True, False', 'actual': f'{r1}, {r2}'})\n"
+            "except Exception as e:\n"
+            "    results.append({'test_id': 'err', 'desc': 'Execution error', 'passed': False, 'error': str(e)})\n"
+            "print('---TEST_RESULTS_START---')\n"
+            "print(json.dumps(results))\n"
+        )
     }
 ]
 
@@ -179,6 +355,7 @@ class ChallengeService:
             ChallengeSummary(
                 id=c["id"],
                 title=c["title"],
+                domain=c.get("domain", "ai-ml"),
                 category=c["category"],
                 difficulty=c["difficulty"],
                 description=c["description"],
@@ -200,6 +377,7 @@ class ChallengeService:
         return ChallengeDetail(
             id=challenge["id"],
             title=challenge["title"],
+            domain=challenge.get("domain", "ai-ml"),
             category=challenge["category"],
             difficulty=challenge["difficulty"],
             description=challenge["description"],

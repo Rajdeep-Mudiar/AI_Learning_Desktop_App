@@ -12,6 +12,7 @@ class InterviewTrack(BaseModel):
     id: str
     title: str
     role_target: str
+    domain: str = "ai-ml"
     difficulty: str  # "Junior", "Mid-Level", "Senior / Staff"
     duration_minutes: int
     questions_count: int

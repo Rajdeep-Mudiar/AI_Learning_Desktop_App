@@ -41,6 +41,7 @@ class RoleSkillRequirement(BaseModel):
 class CareerPath(BaseModel):
     id: str
     role_title: str
+    domain: str = "ai-ml"
     average_salary: str
     description: str
     market_demand: str  # "Very High", "High", "Growing"

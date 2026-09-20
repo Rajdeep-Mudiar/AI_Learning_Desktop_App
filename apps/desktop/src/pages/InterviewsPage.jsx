@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { interviewService } from '../services/interviewService';
+import { useDomain } from '../contexts/DomainContext';
 import { Video, Clock, HelpCircle, ArrowRight, Award } from 'lucide-react';
 
 export default function InterviewsPage() {
+  const { currentDomain, domainInfo } = useDomain();
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -24,15 +26,20 @@ export default function InterviewsPage() {
     }
   };
 
+  const filteredTracks = tracks.filter((t) => {
+    if (currentDomain === 'all') return true;
+    return (t.domain || 'ai-ml') === currentDomain;
+  });
+
   return (
     <div className="container" style={{ paddingBottom: 'var(--space-2xl)' }}>
       {/* Header */}
       <div style={{ marginBottom: 'var(--space-xl)' }}>
         <h1 style={{ fontSize: 'var(--font-2xl)', fontWeight: 800, margin: '0 0 var(--space-xs) 0', color: 'var(--color-text-main)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Video size={24} color="var(--color-primary-400)" /> AI Technical Interview & Viva Simulator
+          <Video size={24} color={domainInfo.color} /> {currentDomain === 'all' ? 'Engineering Technical Interview & Viva Simulator' : `${domainInfo.title} Technical Interview Simulator`}
         </h1>
         <p style={{ margin: 0, color: 'var(--color-text-muted)', fontSize: 'var(--font-sm)' }}>
-          Simulate real-world ML engineering and AI research interviews with dynamic AI evaluation rubrics and hire/no-hire recommendations.
+          Simulate real-world {domainInfo.shortTitle} technical interviews with dynamic AI evaluation rubrics and hire/no-hire recommendations.
         </p>
       </div>
 
@@ -42,7 +49,7 @@ export default function InterviewsPage() {
         </div>
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: 'var(--space-xl)' }}>
-          {tracks.map((track) => (
+          {filteredTracks.map((track) => (
             <div
               key={track.id}
               className="card"

@@ -178,6 +178,186 @@ PROJECTS_CATALOG: List[ProjectTrack] = [
                 is_completed=False
             )
         ]
+    ),
+    # ================= WEB DEV PROJECT =================
+    ProjectTrack(
+        id="fullstack-saas-ecommerce",
+        title="Modern Reactive SaaS & E-Commerce Platform",
+        tagline="Production responsive fullstack web application with React 18 component hierarchy, CSS Grid, and REST API integration.",
+        domain="web-dev",
+        difficulty="Intermediate",
+        estimated_hours=12,
+        category="Web Development",
+        description="Build a high-performance responsive web dashboard featuring shopping cart state, real-time analytics chart widgets, and async REST checkout flow.",
+        dataset_name="Store Catalog & Customer Transactions API",
+        architecture="HTML5 Semantics -> CSS Flexbox/Grid -> React 18 Virtual DOM -> Async REST API Gateway",
+        skills_covered=["React 18 Hooks", "CSS Box Model", "Async Fetching", "REST APIs", "State Management"],
+        banner_gradient="linear-gradient(135deg, #06b6d4, #3b82f6)",
+        milestones=[
+            ProjectMilestone(
+                id="web-m1",
+                step_number=1,
+                title="Semantic HTML5 & Responsive CSS Grid Layout",
+                description="Construct responsive layout with mobile-first media queries and CSS grid product showcase.",
+                tasks=[
+                    "Implement semantic header, main, and aside sections",
+                    "Design responsive CSS Grid product card layout",
+                    "Add dark/light theme CSS custom properties"
+                ],
+                starter_code="<!-- HTML5 Layout -->\n<div class='product-grid'></div>\n",
+                solution_code="<main class='container'><div class='product-grid'></div></main>\n",
+                is_completed=True
+            ),
+            ProjectMilestone(
+                id="web-m2",
+                step_number=2,
+                title="React 18 State Management & Async Fetching",
+                description="Manage reactive shopping cart state with useState/useReducer and async fetch API.",
+                tasks=[
+                    "Implement useReducer cart actions (ADD, REMOVE, UPDATE_QTY)",
+                    "Fetch catalog data asynchronously with loading state handling",
+                    "Persist cart state to localStorage"
+                ],
+                starter_code="const [cart, setCart] = useState([]);\n",
+                solution_code="const [cart, dispatch] = useReducer(cartReducer, initialCart);\n",
+                is_completed=False
+            )
+        ]
+    ),
+    # ================= APP DEV PROJECT =================
+    ProjectTrack(
+        id="crossplatform-mobile-app",
+        title="Cross-Platform Mobile Fitness & Tracker App",
+        tagline="Cross-platform iOS and Android mobile app with gesture interactions, navigation stacks, and offline SQLite storage.",
+        domain="app-dev",
+        difficulty="Intermediate",
+        estimated_hours=14,
+        category="App Development",
+        description="Engineer a fluid mobile application supporting touch gestures, nested stack/tab navigation, and offline-first workout logging.",
+        dataset_name="Mobile Device Sensor & Offline SQLite DB",
+        architecture="Mobile Viewport -> Touch Gesture Handler -> React Native / Flutter Widgets -> Offline SQLite Store",
+        skills_covered=["React Native", "Flutter Widgets", "Navigation Stacks", "Touch Gestures", "Offline Storage"],
+        banner_gradient="linear-gradient(135deg, #ec4899, #f43f5e)",
+        milestones=[
+            ProjectMilestone(
+                id="app-m1",
+                step_number=1,
+                title="Mobile Viewport, Safe Area & Stack Navigation",
+                description="Configure multi-screen navigation stack with animated transitions and safe area insets.",
+                tasks=[
+                    "Set up Stack and BottomTab navigators",
+                    "Configure iOS Notch & Android gesture bar safe insets",
+                    "Implement responsive density pixel typography"
+                ],
+                starter_code="// Stack Navigator\n",
+                solution_code="// Stack Navigator configured with Screen Transitions\n",
+                is_completed=True
+            ),
+            ProjectMilestone(
+                id="app-m2",
+                step_number=2,
+                title="Offline Storage & Background Sync",
+                description="Store logs locally in SQLite/AsyncStorage and sync when device regains network connectivity.",
+                tasks=[
+                    "Implement local SQLite CRUD operations",
+                    "Listen for network status changes with NetInfo",
+                    "Sync offline log queue with remote backend"
+                ],
+                starter_code="// Local Storage Handler\n",
+                solution_code="// SQLite Store + Sync Manager\n",
+                is_completed=False
+            )
+        ]
+    ),
+    # ================= SYSTEM DESIGN PROJECT =================
+    ProjectTrack(
+        id="distributed-rate-limiter-cache",
+        title="Distributed Rate Limiter & High-Throughput Cache Proxy",
+        tagline="Scalable distributed caching layer and sliding window rate limiter handling 100k+ requests per second.",
+        domain="system-design",
+        difficulty="Advanced",
+        estimated_hours=16,
+        category="System Design",
+        description="Design and benchmark a distributed Redis caching layer with consistent hashing, sliding log rate limiting, and cache stampede mitigation.",
+        dataset_name="100,000 Concurrent Traffic Requests",
+        architecture="Load Balancer (Round Robin) -> API Gateway -> Redis Cluster (Consistent Hashing) -> Primary/Replica DB",
+        skills_covered=["Load Balancing", "Redis Caching", "Consistent Hashing", "Rate Limiting", "CAP Theorem"],
+        banner_gradient="linear-gradient(135deg, #10b981, #059669)",
+        milestones=[
+            ProjectMilestone(
+                id="sys-m1",
+                step_number=1,
+                title="Consistent Hashing Ring & Cluster Partitioning",
+                description="Implement virtual node consistent hashing ring to partition requests evenly across cache nodes.",
+                tasks=[
+                    "Construct hash ring with 100 virtual nodes per server",
+                    "Handle node addition and removal with minimal key migration",
+                    "Measure key distribution standard deviation (< 5%)"
+                ],
+                starter_code="# Consistent Hashing Ring\n",
+                solution_code="# ConsistentHashRing with Virtual Nodes\n",
+                is_completed=True
+            ),
+            ProjectMilestone(
+                id="sys-m2",
+                step_number=2,
+                title="Cache Stampede Mitigation & Read-Through Pattern",
+                description="Implement Mutex Locking and probabilistic early expiration to eliminate cache stampedes.",
+                tasks=[
+                    "Implement Cache-Aside with Distributed Mutex Locks",
+                    "Simulate 1,000 concurrent cache miss requests on single key",
+                    "Verify backend database receives only 1 query"
+                ],
+                starter_code="# Cache Read-Through\n",
+                solution_code="# Cache stampede lock implementation\n",
+                is_completed=False
+            )
+        ]
+    ),
+    # ================= GIT & GITHUB PROJECT =================
+    ProjectTrack(
+        id="enterprise-git-cicd-pipeline",
+        title="Enterprise Git Monorepo Workflow & CI/CD Pipeline",
+        tagline="Automated team development pipeline with branch protection rules, interactive rebasing, and GitHub Actions CI/CD gates.",
+        domain="github",
+        difficulty="Intermediate",
+        estimated_hours=8,
+        category="Git & GitHub",
+        description="Set up an automated open-source GitHub workflow with Pull Request quality gates, automated test runners, semantic versioning, and changelog generation.",
+        dataset_name="GitHub Monorepo Commit Tree & PR Webhooks",
+        architecture="Git DAG -> Feature Branch -> Pull Request -> GitHub Actions Matrix Runner -> Merge Queue",
+        skills_covered=["Git Internals", "DAG Commit Trees", "Branching & Merging", "Interactive Rebase", "GitHub Actions CI/CD"],
+        banner_gradient="linear-gradient(135deg, #f59e0b, #ea580c)",
+        milestones=[
+            ProjectMilestone(
+                id="git-m1",
+                step_number=1,
+                title="Branching Strategy & DAG Commit Hygiene",
+                description="Enforce clean linear commit history using interactive rebase and squashed merges.",
+                tasks=[
+                    "Configure protected main branch with status checks",
+                    "Perform interactive git rebase to squash fixup commits",
+                    "Resolve 3-way merge conflicts cleanly"
+                ],
+                starter_code="# Git Branch Setup\n",
+                solution_code="# Git Rebase & Branching Configuration\n",
+                is_completed=True
+            ),
+            ProjectMilestone(
+                id="git-m2",
+                step_number=2,
+                title="GitHub Actions Automated CI/CD Workflow",
+                description="Author GitHub Actions YAML workflow matrix for automated unit testing and build verification.",
+                tasks=[
+                    "Write .github/workflows/ci.yml test workflow",
+                    "Add matrix testing across Node 18, 20 and Python 3.10, 3.13",
+                    "Configure automatic artifact deployment on main branch push"
+                ],
+                starter_code="# GitHub Actions YAML\n",
+                solution_code="# CI/CD Workflow Matrix YAML\n",
+                is_completed=False
+            )
+        ]
     )
 ]
 

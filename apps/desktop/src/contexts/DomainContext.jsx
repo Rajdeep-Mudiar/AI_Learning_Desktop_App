@@ -1,6 +1,19 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 export const DOMAINS = {
+  'all': {
+    id: 'all',
+    title: 'All Engineering Disciplines',
+    shortTitle: 'All Tracks',
+    tagline: 'Complete Engineering Suite: AI & ML, Web Development, Mobile Apps, System Design & Git Workflows',
+    icon: 'Sparkles',
+    color: '#6366F1',
+    gradient: 'linear-gradient(135deg, #6366F1, #EC4899)',
+    badge: 'Complete Suite',
+    categories: ['All Categories'],
+    skills: ['AI & ML', 'Web Engineering', 'Mobile Apps', 'Distributed Systems', 'Git & CI/CD'],
+    defaultRoute: '/dashboard'
+  },
   'ai-ml': {
     id: 'ai-ml',
     title: 'AI & Machine Learning',
@@ -18,25 +31,25 @@ export const DOMAINS = {
     id: 'web-dev',
     title: 'Web Development',
     shortTitle: 'Web Dev',
-    tagline: 'Full-Stack Modern Web: HTML5, CSS3, React 18, Node.js & Next.js',
+    tagline: 'Full-Stack Modern Web: HTML5, CSS3, React 18, Node.js & REST APIs',
     icon: 'Globe',
     color: '#06B6D4',
     gradient: 'linear-gradient(135deg, #06B6D4, #3B82F6)',
     badge: 'High Demand',
-    categories: ['Web Foundations', 'Frontend Engineering', 'Backend & APIs', 'Full-Stack Next.js', 'Web Security'],
-    skills: ['Semantic HTML', 'Modern CSS & Flexbox', 'JavaScript ES6+', 'React Hooks', 'REST & GraphQL', 'State Management'],
+    categories: ['Web Development', 'Frontend Engineering', 'Backend & APIs'],
+    skills: ['Semantic HTML', 'Modern CSS & Flexbox', 'JavaScript ES6+', 'React Hooks', 'REST & APIs', 'State Management'],
     defaultRoute: '/web-lab'
   },
   'app-dev': {
     id: 'app-dev',
     title: 'App Development',
     shortTitle: 'App Dev',
-    tagline: 'Cross-Platform Mobile Engineering: React Native, Flutter, Dart & iOS/Android',
+    tagline: 'Cross-Platform Mobile Engineering: React Native, Flutter, Mobile Viewports & Offline APIs',
     icon: 'Smartphone',
     color: '#EC4899',
     gradient: 'linear-gradient(135deg, #EC4899, #F43F5E)',
     badge: 'Trending',
-    categories: ['Mobile UI Fundamentals', 'React Native & Expo', 'Flutter & Dart', 'Mobile State & APIs', 'Store Deployment'],
+    categories: ['App Development', 'Mobile UI', 'React Native & Flutter'],
     skills: ['Mobile Layouts', 'React Native', 'Flutter Widgets', 'Mobile Navigation', 'Async Storage', 'Device APIs'],
     defaultRoute: '/app-lab'
   },
@@ -44,25 +57,25 @@ export const DOMAINS = {
     id: 'system-design',
     title: 'System Design',
     shortTitle: 'System Design',
-    tagline: 'Architect Scalable High-Load Distributed Systems & Microservices',
+    tagline: 'Architect Scalable High-Load Distributed Systems, Microservices & Redis Caching',
     icon: 'Layers',
     color: '#10B981',
     gradient: 'linear-gradient(135deg, #10B981, #059669)',
     badge: 'Staff Level',
-    categories: ['Distributed Systems', 'Caching & Databases', 'Microservices & Queues', 'Scalability Patterns', 'Fault Tolerance'],
-    skills: ['Load Balancers', 'Redis Caching', 'Database Sharding', 'Kafka & Message Queues', 'CAP Theorem', 'Rate Limiting'],
+    categories: ['System Design', 'Distributed Systems', 'Caching & Sharding'],
+    skills: ['Load Balancers', 'Redis Caching', 'Database Sharding', 'Microservices', 'CAP Theorem', 'Rate Limiting'],
     defaultRoute: '/system-design-lab'
   },
   'github': {
     id: 'github',
     title: 'Git & GitHub Workflows',
     shortTitle: 'Git & GitHub',
-    tagline: 'Master Version Control, Branching Strategies, Pull Requests & CI/CD Pipelines',
+    tagline: 'Master Version Control, Directed Acyclic Graph Commits, Branching, Rebasing & CI/CD Pipelines',
     icon: 'GitBranch',
     color: '#F59E0B',
     gradient: 'linear-gradient(135deg, #F59E0B, #EA580C)',
     badge: 'Core Skill',
-    categories: ['Git Fundamentals', 'Branching & Merging', 'Rebase & Cherry-Pick', 'GitHub Team Flow', 'GitHub Actions CI/CD'],
+    categories: ['Git & GitHub', 'Branching & Merging', 'CI/CD Automation'],
     skills: ['Git Internals', 'Branching & Merging', 'Merge Conflicts', 'Interactive Rebase', 'Pull Requests', 'CI/CD Automation'],
     defaultRoute: '/git-lab'
   }

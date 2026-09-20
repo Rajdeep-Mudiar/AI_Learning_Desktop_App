@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { tutorService } from '../services/tutorService';
+import { useDomain } from '../contexts/DomainContext';
 import ChatMessageBubble from '../components/tutor/ChatMessageBubble';
 import TutorContextSelector from '../components/tutor/TutorContextSelector';
 import TutorSettingsDrawer from '../components/tutor/TutorSettingsDrawer';
 import { Send, Sparkles, Settings as SettingsIcon, Trash2, Bot } from 'lucide-react';
 
 export default function TutorPage() {
+  const { currentDomain, activeDomainInfo } = useDomain();
   const [messages, setMessages] = useState([]);
   const [inputPrompt, setInputPrompt] = useState('');
   const [loading, setLoading] = useState(false);
@@ -70,6 +72,47 @@ export default function TutorPage() {
     }
   };
 
+  const DOMAIN_QUESTIONS = {
+    'all': [
+      "Explain the event loop and microtask queues in JavaScript",
+      "How does backpropagation calculate weight gradients?",
+      "Design a scalable distributed rate-limiter with Redis & Token Bucket",
+      "What is the difference between git merge --squash and git rebase?"
+    ],
+    'web-dev': [
+      "How does React 18 Concurrent Mode work under the hood?",
+      "Explain CSS Stacking Contexts and z-index calculation",
+      "How to prevent CSRF and XSS in modern full-stack web apps?",
+      "What is the difference between SSR, SSG, and ISR in Next.js?"
+    ],
+    'app-dev': [
+      "How does Flutter's rendering pipeline (Widget, Element, RenderObject) work?",
+      "Explain the differences between React Native Fabric renderer and the old bridge",
+      "How to optimize 60/120 FPS scrolling performance on mobile devices?",
+      "What are best practices for offline-first data sync in mobile apps?"
+    ],
+    'system-design': [
+      "Design a globally distributed URL shortener (TinyURL) handling 100k QPS",
+      "Explain CAP Theorem vs PACELC Theorem with real-world database examples",
+      "How do distributed consensus algorithms (Raft / Paxos) achieve leader election?",
+      "Design an idempotent payment processing pipeline with at-least-once messaging"
+    ],
+    'github': [
+      "What is the difference between git reset --soft, --mixed, and --hard?",
+      "How do you resolve complex merge conflicts in interactive rebasing?",
+      "Design a GitHub Actions CI/CD matrix build with automated caching and deployment",
+      "Explain Git internals: Blobs, Trees, Commits, and Annotated Tags"
+    ],
+    'ai-ml': [
+      "Why does Scaled Dot-Product Attention divide by √d_k?",
+      "Derive the Ordinary Least Squares (OLS) Normal Equation",
+      "Why did my gradient explode to NaN during training?",
+      "What is the mathematical difference between Gini Impurity and Entropy?"
+    ]
+  };
+
+  const quickQuestions = DOMAIN_QUESTIONS[currentDomain] || DOMAIN_QUESTIONS['all'];
+
   const handleSendMessage = async (textToSend) => {
     const text = (textToSend || inputPrompt).trim();
     if (!text || loading) return;
@@ -95,6 +138,7 @@ export default function TutorPage() {
         ollama_base_url: ollamaUrl,
         context: {
           ...context,
+          active_domain: currentDomain,
           student_level: 'intermediate',
         },
       };
@@ -134,9 +178,9 @@ export default function TutorPage() {
 
   const MODES_CONFIG = [
     { id: 'socratic', name: 'Socratic Guide', icon: '🦉', desc: 'Prompts with questions & intuition' },
-    { id: 'explain_mistake', name: 'Explain My Mistake', icon: '🔍', desc: 'Pinpoints flawed math/code' },
-    { id: 'math_derivation', name: 'Math & Derivations', icon: '📐', desc: 'Step-by-step proofs & dimensions' },
-    { id: 'code_review', name: 'Code Review', icon: '⚡', desc: 'NumPy/PyTorch vectorization checks' },
+    { id: 'explain_mistake', name: 'Explain My Mistake', icon: '🔍', desc: 'Pinpoints flawed code/logic' },
+    { id: 'math_derivation', name: 'Architecture & Proofs', icon: '📐', desc: 'Step-by-step logic & diagrams' },
+    { id: 'code_review', name: 'Code Review', icon: '⚡', desc: 'Performance, clean code & security checks' },
   ];
 
   return (
@@ -145,10 +189,10 @@ export default function TutorPage() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-md)' }}>
         <div>
           <h1 style={{ fontSize: 'var(--font-xl)', fontWeight: 800, margin: '0 0 2px 0', color: 'var(--color-text-main)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Sparkles size={20} color="var(--color-primary-400)" /> Context-Aware AI Tutor
+            <Sparkles size={20} color="var(--color-primary-400)" /> Context-Aware {activeDomainInfo?.label || 'Engineering'} AI Tutor
           </h1>
           <p style={{ margin: 0, color: 'var(--color-text-muted)', fontSize: 'var(--font-xs)' }}>
-            Grounded in your active lessons, coding playground, and diagnostic challenges.
+            Grounded in your active {activeDomainInfo?.label || 'engineering'} lessons, coding playground, and diagnostic challenges.
           </p>
         </div>
 
@@ -233,20 +277,15 @@ export default function TutorPage() {
               <Bot size={28} />
             </div>
             <h3 style={{ margin: '0 0 var(--space-xs) 0', fontSize: 'var(--font-lg)', color: 'var(--color-text-main)' }}>
-              How can I assist your AI learning today?
+              How can I assist your {activeDomainInfo?.label || 'learning'} journey today?
             </h3>
             <p style={{ margin: '0 0 var(--space-lg) 0', fontSize: 'var(--font-xs)', color: 'var(--color-text-muted)' }}>
-              Ask questions about backpropagation mathematics, debug PyTorch/NumPy broadcasting bugs, or request Socratic guidance.
+              Ask questions about architectures, code implementations, debugging, or request Socratic guidance.
             </p>
 
             {/* Quick Prompt Starters */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-sm)', textAlign: 'left' }}>
-              {(presets.quick_questions.length > 0 ? presets.quick_questions : [
-                "Why does Scaled Dot-Product Attention divide by √d_k?",
-                "Derive the Ordinary Least Squares (OLS) Normal Equation",
-                "Why did my gradient explode to NaN during training?",
-                "What is the mathematical difference between Gini Impurity and Entropy?"
-              ]).map((q, idx) => (
+              {quickQuestions.map((q, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleSendMessage(q)}

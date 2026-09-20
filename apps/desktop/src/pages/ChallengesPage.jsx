@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Award, Code2, ArrowRight, Sparkles, CheckCircle2, ChevronRight } from 'lucide-react';
 import { challengeService } from '../services/challengeService';
+import { useDomain } from '../contexts/DomainContext';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import Badge from '../components/common/Badge';
 
 export default function ChallengesPage() {
+  const { currentDomain, domainInfo } = useDomain();
   const [challenges, setChallenges] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filterDifficulty, setFilterDifficulty] = useState('All');
@@ -26,9 +28,11 @@ export default function ChallengesPage() {
     loadChallenges();
   }, []);
 
-  const filtered = challenges.filter(
-    (c) => filterDifficulty === 'All' || c.difficulty === filterDifficulty
-  );
+  const filtered = challenges.filter((c) => {
+    const matchesDomain = currentDomain === 'all' || (c.domain || 'ai-ml') === currentDomain;
+    const matchesDiff = filterDifficulty === 'All' || c.difficulty === filterDifficulty;
+    return matchesDomain && matchesDiff;
+  });
 
   const getDifficultyBadge = (diff) => {
     switch (diff) {
@@ -39,18 +43,22 @@ export default function ChallengesPage() {
     }
   };
 
-  if (loading) return <LoadingSpinner message="Loading AI coding challenges..." />;
+  if (loading) return <LoadingSpinner message="Loading coding challenges..." />;
 
   return (
     <div className="animate-fade-in" style={{ maxWidth: '1000px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24, flexWrap: 'wrap', gap: 12 }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-            <span className="badge badge-purple">Phase 3 Autograder</span>
+            <span className="badge badge-purple" style={{ background: `${domainInfo.color}20`, color: domainInfo.color, border: `1px solid ${domainInfo.color}40` }}>
+              {currentDomain === 'all' ? 'All Tracks Autograder' : `${domainInfo.title} Autograder`}
+            </span>
           </div>
-          <h1 style={{ fontSize: '1.75rem', marginBottom: 6 }}>AI Coding Challenges</h1>
+          <h1 style={{ fontSize: '1.75rem', marginBottom: 6 }}>
+            {currentDomain === 'all' ? 'Engineering Challenges' : `${domainInfo.title} Challenges`}
+          </h1>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.925rem' }}>
-            Implement core machine learning algorithms from scratch and verify against automated test suites.
+            Implement core algorithms and data patterns from scratch and verify against automated sandbox test suites.
           </p>
         </div>
 
