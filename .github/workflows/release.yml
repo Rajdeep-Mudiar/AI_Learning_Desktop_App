@@ -1,0 +1,80 @@
+name: Release Desktop App
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: 'windows-latest'
+            args: ''
+          - platform: 'ubuntu-22.04'
+            args: ''
+          - platform: 'macos-latest'
+            args: ''
+
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: 'apps/desktop/package-lock.json'
+
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+
+      - name: Install Linux Dependencies (Ubuntu only)
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev
+
+      - name: Install Frontend Dependencies
+        working-directory: apps/desktop
+        run: npm ci
+
+      - name: Build Frontend & Tauri App
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          projectPath: apps/desktop
+          tagName: ${{ github.ref_name }}
+          releaseName: 'AI Learning Lab ${{ github.ref_name }}'
+          releaseBody: |
+            ## 🚀 AI Learning Lab Release ${{ github.ref_name }}
+            
+            ### ✨ What's New:
+            - **Situational Git & GitHub Workflow Challenges**:
+              - Authentic real-world Git scenarios with interactive CLI terminal validation.
+              - Live multi-lane branch & commit DAG visualizer preview.
+            - **Interactive Git & GitHub Laboratory**:
+              - Dynamic branch tree rails and deep commit inspector.
+              - Multi-tool support for both `git` and `gh` operations.
+            - **Gamified Mastery & AI Tutor Sandbox**:
+              - XP rewards, streak tracking, progressive hints, and automated sandbox validation.
+            
+            ### 📦 Binaries & Installers
+            Download the appropriate installer below for your operating system:
+            - **Windows**: `.msi` / `.exe` (Setup)
+            - **macOS**: `.dmg` (Universal / Apple Silicon & Intel)
+            - **Linux**: `.deb` / `.AppImage`
+          releaseDraft: false
+          prerelease: false
+          args: ${{ matrix.args }}
