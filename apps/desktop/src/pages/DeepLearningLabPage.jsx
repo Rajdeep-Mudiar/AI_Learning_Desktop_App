@@ -5,9 +5,29 @@ import CNNKernelVisualizer from '../components/neural/CNNKernelVisualizer';
 import TransformerAttentionVisualizer from '../components/neural/TransformerAttentionVisualizer';
 
 export default function DeepLearningLabPage() {
-  const [activeTab, setActiveTab] = useState('mlp'); // 'mlp' | 'cnn' | 'transformer'
+  const [activeTab, setActiveTab] = useState('regression'); // 'regression' | 'mlp' | 'cnn' | 'transformer'
 
-  // --- MLP State ---
+  // --- Regression State (Level 1 Basics) ---
+  const [slope, setSlope] = useState(1.5);
+  const [bias, setBias] = useState(0.5);
+  const [regDataPoints, setRegDataPoints] = useState([
+    { x: -2, y: -2.4, class: 0 },
+    { x: -1, y: -0.8, class: 0 },
+    { x: 0, y: 0.6, class: 0 },
+    { x: 1, y: 2.1, class: 1 },
+    { x: 2, y: 3.4, class: 1 },
+    { x: 3, y: 5.1, class: 1 }
+  ]);
+
+  // Compute Mean Squared Error (MSE)
+  const mseLoss = (
+    regDataPoints.reduce((acc, p) => {
+      const pred = slope * p.x + bias;
+      return acc + Math.pow(pred - p.y, 2);
+    }, 0) / regDataPoints.length
+  ).toFixed(3);
+
+  // --- MLP State (Level 2) ---
   const [layerSizes, setLayerSizes] = useState([2, 4, 4, 1]);
   const [activation, setActivation] = useState('relu');
   const [learningRate, setLearningRate] = useState(0.08);
@@ -16,14 +36,14 @@ export default function DeepLearningLabPage() {
   const [mlpData, setMlpData] = useState(null);
   const [mlpLoading, setMlpLoading] = useState(false);
 
-  // --- CNN State ---
+  // --- CNN State (Level 3) ---
   const [selectedKernel, setSelectedKernel] = useState('sobel_horizontal');
   const [poolingType, setPoolingType] = useState('max');
   const [stride, setStride] = useState(1);
   const [cnnData, setCnnData] = useState(null);
   const [cnnLoading, setCnnLoading] = useState(false);
 
-  // --- Transformer State ---
+  // --- Transformer State (Level 4) ---
   const [sentence, setSentence] = useState('The transformer model calculates attention weights across tokens');
   const [numHeads, setNumHeads] = useState(4);
   const [transformerData, setTransformerData] = useState(null);
@@ -100,9 +120,10 @@ export default function DeepLearningLabPage() {
       {/* Top Architecture Mode Tabs */}
       <div style={{ display: 'flex', gap: 'var(--space-sm)', borderBottom: '1px solid var(--color-border)', marginBottom: 'var(--space-xl)' }}>
         {[
-          { id: 'mlp', label: '🧠 Multi-Layer Perceptron (MLP) Graph' },
-          { id: 'cnn', label: '🖼️ CNN 2D Feature Map & Pooling' },
-          { id: 'transformer', label: '✨ Transformer Scaled Dot-Product Attention' },
+          { id: 'regression', label: '📈 1. Linear & Logistic Boundary (Basics)' },
+          { id: 'mlp', label: '🧠 2. Multi-Layer Perceptron (MLP) Graph' },
+          { id: 'cnn', label: '🖼️ 3. CNN 2D Feature Map & Pooling' },
+          { id: 'transformer', label: '✨ 4. Transformer Multi-Head Attention' },
         ].map((tab) => (
           <button
             key={tab.id}
@@ -123,6 +144,72 @@ export default function DeepLearningLabPage() {
           </button>
         ))}
       </div>
+
+      {/* Tab 1: Regression (Basics Level 1) */}
+      {activeTab === 'regression' && (
+        <div style={{ display: 'grid', gap: 'var(--space-xl)' }}>
+          <div className="card" style={{ padding: 'var(--space-xl)', background: '#090d16', border: '1px solid #1e293b' }}>
+            <h3 style={{ margin: '0 0 var(--space-md) 0', color: 'var(--color-text-main)', fontSize: 'var(--font-lg)' }}>
+              Interactive Linear Regression & Loss Minimization
+            </h3>
+            <p style={{ fontSize: 'var(--font-xs)', color: 'var(--color-text-muted)', margin: '0 0 var(--space-lg) 0' }}>
+              Formula: <code>y_pred = w * x + b</code>. Adjust weight slope ($w$) and bias ($b$) to minimize the Mean Squared Error (MSE).
+            </p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-xl)', alignItems: 'center' }}>
+              <div style={{ background: '#1e293b', padding: '24px', borderRadius: '14px', border: '1px solid #334155', textAlign: 'center' }}>
+                <div style={{ fontSize: 'var(--font-xs)', color: '#94a3b8' }}>Calculated Mean Squared Error (MSE):</div>
+                <div style={{ fontSize: '3rem', fontWeight: 800, color: mseLoss < 0.5 ? '#10b981' : '#f59e0b', margin: '8px 0' }}>
+                  {mseLoss}
+                </div>
+                <div style={{ fontSize: '11px', color: '#94a3b8' }}>
+                  Model equation: <strong>y = {slope}x + {bias}</strong>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--font-xs)', marginBottom: '4px' }}>
+                    <span>Weight Slope ($w$): <strong>{slope}</strong></span>
+                  </div>
+                  <input
+                    type="range"
+                    min="-3"
+                    max="5"
+                    step="0.1"
+                    value={slope}
+                    onChange={(e) => setSlope(parseFloat(e.target.value))}
+                    style={{ width: '100%' }}
+                  />
+                </div>
+
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--font-xs)', marginBottom: '4px' }}>
+                    <span>Bias Intercept ($b$): <strong>{bias}</strong></span>
+                  </div>
+                  <input
+                    type="range"
+                    min="-5"
+                    max="5"
+                    step="0.1"
+                    value={bias}
+                    onChange={(e) => setBias(parseFloat(e.target.value))}
+                    style={{ width: '100%' }}
+                  />
+                </div>
+
+                <button
+                  onClick={() => { setSlope(1.5); setBias(0.5); }}
+                  className="btn btn-secondary btn-sm"
+                  style={{ alignSelf: 'flex-start' }}
+                >
+                  ⚡ Auto-Fit Optimal Gradient
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Tab 1: MLP */}
       {activeTab === 'mlp' && (
