@@ -28,13 +28,22 @@ import {
   Check,
   X,
   FileText,
-  Workflow
+  Workflow,
+  Cpu,
+  CornerDownRight,
+  Database
 } from 'lucide-react';
 import Badge from '../components/common/Badge';
 
 export default function GitLabPage() {
   const [activeTab, setActiveTab] = useState('all-terminal'); 
   // 'all-terminal' | 'snapshots' | 'branching' | 'undo-rebase' | 'remotes-sync' | 'github-pr' | 'github-actions'
+
+  // --- Dynamic Command Simulation State (Reacts dynamically to typed commands) ---
+  const [activeSimView, setActiveSimView] = useState('dag'); 
+  // 'dag' | 'staging-trees' | 'diff-inspector' | 'branch-network' | 'rebase-replay' | 'stash-stack' | 'remote-sync' | 'reset-rollback'
+  const [lastExecutedCmd, setLastExecutedCmd] = useState('git status');
+  const [simAlertMsg, setSimAlertMsg] = useState('Type any Git command below or click a quick-command pill to trigger live visual simulations in real time.');
 
   // --- Global DAG / Repo State ---
   const [repoInitialized, setRepoInitialized] = useState(true);
@@ -66,7 +75,7 @@ export default function GitLabPage() {
   const [commandInput, setCommandInput] = useState('');
   const [terminalHistory, setTerminalHistory] = useState([
     '⚡ Interactive Git 2.45 Command Engine Ready.',
-    'Type any Git command below or click a quick-command chip to execute simulations in real time.'
+    'Type any Git command below or click a quick-command pill to execute simulations in real time.'
   ]);
 
   // --- GitHub PR Simulation State ---
@@ -87,6 +96,31 @@ export default function GitLabPage() {
   ]);
   const [pipelineRunning, setPipelineRunning] = useState(false);
 
+  // Live input detection to dynamically hint/switch simulations as the user types
+  const handleInputChange = (val) => {
+    setCommandInput(val);
+    const clean = val.trim().toLowerCase();
+    if (!clean) return;
+
+    if (clean.startsWith('git status') || clean.startsWith('git add')) {
+      setActiveSimView('staging-trees');
+    } else if (clean.startsWith('git diff')) {
+      setActiveSimView('diff-inspector');
+    } else if (clean.startsWith('git branch') || clean.startsWith('git checkout') || clean.startsWith('git switch')) {
+      setActiveSimView('branch-network');
+    } else if (clean.startsWith('git rebase') || clean.startsWith('git cherry-pick')) {
+      setActiveSimView('rebase-replay');
+    } else if (clean.startsWith('git stash')) {
+      setActiveSimView('stash-stack');
+    } else if (clean.startsWith('git remote') || clean.startsWith('git fetch') || clean.startsWith('git pull') || clean.startsWith('git push') || clean.startsWith('git clone')) {
+      setActiveSimView('remote-sync');
+    } else if (clean.startsWith('git reset') || clean.startsWith('git revert')) {
+      setActiveSimView('reset-rollback');
+    } else if (clean.startsWith('git commit') || clean.startsWith('git log') || clean.startsWith('git merge') || clean.startsWith('git tag') || clean.startsWith('git init')) {
+      setActiveSimView('dag');
+    }
+  };
+
   // Command Execution Parser
   const executeGitCommand = (rawCmd) => {
     const cmd = rawCmd.trim();
@@ -94,14 +128,21 @@ export default function GitLabPage() {
 
     setTerminalHistory(prev => [...prev, `$ ${cmd}`]);
     setCommandInput('');
+    setLastExecutedCmd(cmd);
+
+    const lowerCmd = cmd.toLowerCase();
 
     if (cmd === 'git init') {
       setRepoInitialized(true);
+      setActiveSimView('dag');
+      setSimAlertMsg('✅ Created `.git/` metadata folder, initialized object database & refs/heads/main.');
       setTerminalHistory(prev => [...prev, 'Initialized empty Git repository in /workspace/.git/']);
     } 
-    else if (cmd.startsWith('git clone ')) {
-      const url = cmd.replace('git clone ', '').trim();
+    else if (lowerCmd.startsWith('git clone')) {
+      const url = cmd.replace(/git clone\s*/i, '').trim() || 'https://github.com/developer/ai-lab-app.git';
       setRemoteOriginUrl(url);
+      setActiveSimView('remote-sync');
+      setSimAlertMsg(`☁️ Cloned remote repository from ${url} into local working directory.`);
       setTerminalHistory(prev => [
         ...prev,
         `Cloning into 'repo'...`,
@@ -110,7 +151,9 @@ export default function GitLabPage() {
         `Receiving objects: 100% (14/14), done.`
       ]);
     }
-    else if (cmd === 'git status' || cmd === 'git status -s') {
+    else if (lowerCmd === 'git status' || lowerCmd.startsWith('git status')) {
+      setActiveSimView('staging-trees');
+      setSimAlertMsg('🔍 3-Trees Status Inspector: Comparing Working Directory, Staging Index, and HEAD.');
       const stagedNames = stagedFiles.map(f => `  (use "git restore --staged <file>..." to unstage)\n\tnew file:   ${f.name}`);
       const untracked = workingFiles.filter(f => f.status === 'untracked').map(f => `\t${f.name}`);
       const modified = workingFiles.filter(f => f.status === 'modified').map(f => `\tmodified:   ${f.name}`);
@@ -124,16 +167,20 @@ export default function GitLabPage() {
         stagedFiles.length === 0 && workingFiles.filter(f => f.status !== 'clean').length === 0 ? 'nothing to commit, working tree clean' : ''
       ].filter(Boolean));
     }
-    else if (cmd === 'git add .' || cmd.startsWith('git add ')) {
-      setStagedFiles([...stagedFiles, ...workingFiles.filter(f => f.status !== 'clean')]);
+    else if (lowerCmd === 'git add .' || lowerCmd.startsWith('git add')) {
+      setActiveSimView('staging-trees');
+      const newlyStaged = workingFiles.filter(f => f.status !== 'clean');
+      setStagedFiles(prev => [...prev, ...newlyStaged]);
       setWorkingFiles(prev => prev.map(f => ({ ...f, status: 'clean' })));
+      setSimAlertMsg(`📦 Staged ${newlyStaged.length || 'all'} file snapshot(s) into the Git Index.`);
       setTerminalHistory(prev => [...prev, `Staged all modified & untracked changes to index.`]);
     }
-    else if (cmd.startsWith('git commit -m ') || cmd.startsWith('git commit -am ')) {
-      const match = cmd.match(/-m\s+["'](.*?)["']/);
+    else if (lowerCmd.startsWith('git commit -m') || lowerCmd.startsWith('git commit -am') || lowerCmd.startsWith('git commit --message')) {
+      setActiveSimView('dag');
+      const match = cmd.match(/-m\s+["'](.*?)["']/i);
       const msg = match ? match[1] : 'Update codebase';
       const newHash = Math.random().toString(16).substring(2, 8);
-      const parentId = commits[commits.length - 1].id;
+      const parentId = commits.length > 0 ? commits[commits.length - 1].id : null;
       const newCommit = {
         id: `c${commits.length + 1}`,
         hash: newHash,
@@ -144,161 +191,208 @@ export default function GitLabPage() {
       };
       setCommits(prev => [...prev, newCommit]);
       setStagedFiles([]);
+      setSimAlertMsg(`✨ Created immutable DAG commit object [${newHash}] on branch '${currentBranch}'.`);
       setTerminalHistory(prev => [...prev, `[${currentBranch} ${newHash}] ${msg}`, ` 2 files changed, 22 insertions(+), 3 deletions(-)`]);
     }
-    else if (cmd === 'git commit --amend' || cmd.startsWith('git commit --amend -m')) {
-      const match = cmd.match(/-m\s+["'](.*?)["']/);
+    else if (lowerCmd.startsWith('git commit --amend')) {
+      setActiveSimView('dag');
+      const match = cmd.match(/-m\s+["'](.*?)["']/i);
       const newMsg = match ? match[1] : `${commits[commits.length - 1].message} (amended)`;
       setCommits(prev => {
         const copy = [...prev];
-        copy[copy.length - 1] = { ...copy[copy.length - 1], message: newMsg };
+        if (copy.length > 0) {
+          copy[copy.length - 1] = { ...copy[copy.length - 1], message: newMsg };
+        }
         return copy;
       });
-      setTerminalHistory(prev => [...prev, `[${currentBranch} ${commits[commits.length - 1].hash}] ${newMsg} (amended)`]);
+      setSimAlertMsg(`✏️ Amended commit ${commits[commits.length - 1]?.hash || ''} with updated message & snapshot.`);
+      setTerminalHistory(prev => [...prev, `[${currentBranch} ${commits[commits.length - 1]?.hash}] ${newMsg} (amended)`]);
     }
-    else if (cmd.startsWith('git branch -d ') || cmd.startsWith('git branch -D ')) {
-      const target = cmd.replace(/git branch -[dD]\s+/, '').trim();
+    else if (lowerCmd.startsWith('git branch -d') || lowerCmd.startsWith('git branch -d')) {
+      setActiveSimView('branch-network');
+      const target = cmd.replace(/git branch -[dD]\s+/i, '').trim();
       if (target === currentBranch) {
+        setSimAlertMsg(`⚠️ Error: Cannot delete branch '${target}' checked out at current HEAD.`);
         setTerminalHistory(prev => [...prev, `error: Cannot delete branch '${target}' checked out at current HEAD.`]);
       } else if (branches.includes(target)) {
         setBranches(prev => prev.filter(b => b !== target));
-        setTerminalHistory(prev => [...prev, `Deleted branch ${target} (was ${commits[commits.length - 1].hash}).`]);
+        setSimAlertMsg(`🗑️ Deleted branch pointer '${target}'.`);
+        setTerminalHistory(prev => [...prev, `Deleted branch ${target} (was ${commits[commits.length - 1]?.hash}).`]);
       } else {
         setTerminalHistory(prev => [...prev, `error: branch '${target}' not found.`]);
       }
     }
-    else if (cmd.startsWith('git branch ')) {
-      const newBranch = cmd.replace('git branch ', '').trim();
+    else if (lowerCmd.startsWith('git branch') && lowerCmd !== 'git branch' && lowerCmd !== 'git branch -a') {
+      setActiveSimView('branch-network');
+      const newBranch = cmd.replace(/git branch\s+/i, '').trim();
       if (!branches.includes(newBranch)) {
         setBranches(prev => [...prev, newBranch]);
+        setSimAlertMsg(`🌿 Created new branch pointer '${newBranch}' pointing to commit ${commits[commits.length - 1]?.hash}.`);
         setTerminalHistory(prev => [...prev, `Created branch '${newBranch}'`]);
       } else {
         setTerminalHistory(prev => [...prev, `fatal: A branch named '${newBranch}' already exists.`]);
       }
     }
-    else if (cmd === 'git branch' || cmd === 'git branch -a') {
+    else if (lowerCmd === 'git branch' || lowerCmd === 'git branch -a') {
+      setActiveSimView('branch-network');
+      setSimAlertMsg(`🌿 Active branch: '${currentBranch}'. Total branches: ${branches.length}.`);
       setTerminalHistory(prev => [
         ...prev,
         ...branches.map(b => (b === currentBranch ? `* \x1b[32m${b}\x1b[0m` : `  ${b}`))
       ]);
     }
-    else if (cmd.startsWith('git checkout -b ') || cmd.startsWith('git switch -c ')) {
-      const newBranch = cmd.replace('git checkout -b ', '').replace('git switch -c ', '').trim();
+    else if (lowerCmd.startsWith('git checkout -b') || lowerCmd.startsWith('git switch -c')) {
+      setActiveSimView('branch-network');
+      const newBranch = cmd.replace(/git checkout -b\s+/i, '').replace(/git switch -c\s+/i, '').trim();
       setBranches(prev => [...prev, newBranch]);
       setCurrentBranch(newBranch);
+      setSimAlertMsg(`🌿 Created branch '${newBranch}' and moved HEAD pointer to it.`);
       setTerminalHistory(prev => [...prev, `Switched to a new branch '${newBranch}'`]);
     }
-    else if (cmd.startsWith('git checkout ') || cmd.startsWith('git switch ')) {
-      const target = cmd.replace('git checkout ', '').replace('git switch ', '').trim();
+    else if (lowerCmd.startsWith('git checkout') || lowerCmd.startsWith('git switch')) {
+      setActiveSimView('branch-network');
+      const target = cmd.replace(/git checkout\s+/i, '').replace(/git switch\s+/i, '').trim();
       if (branches.includes(target)) {
         setCurrentBranch(target);
+        setSimAlertMsg(`👉 HEAD pointer moved to branch '${target}'.`);
         setTerminalHistory(prev => [...prev, `Switched to branch '${target}'`]);
       } else {
         setTerminalHistory(prev => [...prev, `error: pathspec '${target}' did not match any file(s) known to git`]);
       }
     }
-    else if (cmd.startsWith('git merge ')) {
-      const sourceBranch = cmd.replace('git merge ', '').trim();
+    else if (lowerCmd.startsWith('git merge')) {
+      setActiveSimView('dag');
+      const sourceBranch = cmd.replace(/git merge\s+/i, '').trim() || 'feature/auth';
       const newHash = Math.random().toString(16).substring(2, 8);
       const newCommit = {
         id: `c${commits.length + 1}`,
         hash: newHash,
         message: `Merge branch '${sourceBranch}' into ${currentBranch}`,
         branch: currentBranch,
-        parent: commits[commits.length - 1].id,
+        parent: commits[commits.length - 1]?.id || null,
         author: 'Alex Chen'
       };
       setCommits(prev => [...prev, newCommit]);
+      setSimAlertMsg(`🔀 Merged branch '${sourceBranch}' into '${currentBranch}' with 3-way merge commit [${newHash}].`);
       setTerminalHistory(prev => [...prev, `Merge made by the 'ort' strategy. [${currentBranch} ${newHash}]`]);
     }
-    else if (cmd.startsWith('git rebase ')) {
-      const baseBranch = cmd.replace('git rebase ', '').trim();
+    else if (lowerCmd.startsWith('git rebase')) {
+      setActiveSimView('rebase-replay');
+      const baseBranch = cmd.replace(/git rebase\s+/i, '').trim() || 'main';
+      setSimAlertMsg(`⚡ Replayed ${currentBranch} commits linearly on top of ${baseBranch} without merge clutter.`);
       setTerminalHistory(prev => [
         ...prev,
         `First, rewinding head to replay your work on top of '${baseBranch}'...`,
-        `Applying: ${commits[commits.length - 1].message}`,
+        `Applying: ${commits[commits.length - 1]?.message || 'Current work'}`,
         `Successfully rebased and updated refs/heads/${currentBranch}.`
       ]);
     }
-    else if (cmd.startsWith('git cherry-pick ')) {
-      const pickHash = cmd.replace('git cherry-pick ', '').trim();
+    else if (lowerCmd.startsWith('git cherry-pick')) {
+      setActiveSimView('rebase-replay');
+      const pickHash = cmd.replace(/git cherry-pick\s+/i, '').trim() || '3c19e4';
       const newHash = Math.random().toString(16).substring(2, 8);
       const picked = {
         id: `c${commits.length + 1}`,
         hash: newHash,
         message: `Cherry-picked: ${pickHash}`,
         branch: currentBranch,
-        parent: commits[commits.length - 1].id,
+        parent: commits[commits.length - 1]?.id || null,
         author: 'Alex Chen'
       };
       setCommits(prev => [...prev, picked]);
+      setSimAlertMsg(`🍒 Cherry-picked commit ${pickHash} and applied its diff directly onto HEAD [${newHash}].`);
       setTerminalHistory(prev => [...prev, `[${currentBranch} ${newHash}] Cherry-picked ${pickHash}`]);
     }
-    else if (cmd.startsWith('git reset --hard')) {
+    else if (lowerCmd.startsWith('git reset --hard')) {
+      setActiveSimView('reset-rollback');
       if (commits.length > 1) {
         setCommits(prev => prev.slice(0, prev.length - 1));
         setStagedFiles([]);
-        setTerminalHistory(prev => [...prev, `HEAD is now at ${commits[commits.length - 2].hash} ${commits[commits.length - 2].message}`]);
+        setSimAlertMsg(`⚠️ Hard Reset: Rolled HEAD back 1 commit and wiped Staged Index & Working Tree.`);
+        setTerminalHistory(prev => [...prev, `HEAD is now at ${commits[commits.length - 2]?.hash} ${commits[commits.length - 2]?.message}`]);
+      } else {
+        setTerminalHistory(prev => [...prev, `Cannot reset further back; only 1 commit exists.`]);
       }
     }
-    else if (cmd.startsWith('git reset --soft')) {
+    else if (lowerCmd.startsWith('git reset --soft')) {
+      setActiveSimView('reset-rollback');
+      setSimAlertMsg(`↩️ Soft Reset: Rolled HEAD back 1 commit while preserving all changes in the Staging Index.`);
       setTerminalHistory(prev => [...prev, `HEAD moved back 1 commit. Previous changes retained in staging index.`]);
     }
-    else if (cmd.startsWith('git reset')) {
+    else if (lowerCmd.startsWith('git reset')) {
+      setActiveSimView('reset-rollback');
       setStagedFiles([]);
+      setSimAlertMsg(`↩️ Mixed Reset: Unstaged all changes from Index; working files remain intact.`);
       setTerminalHistory(prev => [...prev, `Unstaged all changes. Working tree files preserved.`]);
     }
-    else if (cmd.startsWith('git revert ')) {
-      const revHash = cmd.replace('git revert ', '').trim();
+    else if (lowerCmd.startsWith('git revert')) {
+      setActiveSimView('reset-rollback');
+      const revHash = cmd.replace(/git revert\s+/i, '').trim() || '9a01f8';
       const newHash = Math.random().toString(16).substring(2, 8);
       const revertCommit = {
         id: `c${commits.length + 1}`,
         hash: newHash,
         message: `Revert "${revHash}"`,
         branch: currentBranch,
-        parent: commits[commits.length - 1].id,
+        parent: commits[commits.length - 1]?.id || null,
         author: 'Alex Chen'
       };
       setCommits(prev => [...prev, revertCommit]);
+      setSimAlertMsg(`⏪ Reverted commit ${revHash} safely by appending inverse forward patch [${newHash}].`);
       setTerminalHistory(prev => [...prev, `[${currentBranch} ${newHash}] Revert "${revHash}"`]);
     }
-    else if (cmd === 'git stash' || cmd === 'git stash push') {
+    else if (lowerCmd === 'git stash' || lowerCmd === 'git stash push' || lowerCmd.startsWith('git stash push')) {
+      setActiveSimView('stash-stack');
       const stashed = workingFiles.filter(f => f.status !== 'clean');
       setStashStack(prev => [{ id: `stash@{${prev.length}}`, items: stashed, branch: currentBranch }, ...prev]);
       setWorkingFiles(prev => prev.map(f => ({ ...f, status: 'clean' })));
-      setTerminalHistory(prev => [...prev, `Saved working directory and index state WIP on ${currentBranch}: ${commits[commits.length - 1].hash}`]);
+      setSimAlertMsg(`📦 Saved uncommitted working changes into LIFO Stash Stack (stash@{0}).`);
+      setTerminalHistory(prev => [...prev, `Saved working directory and index state WIP on ${currentBranch}: ${commits[commits.length - 1]?.hash}`]);
     }
-    else if (cmd === 'git stash pop') {
+    else if (lowerCmd === 'git stash pop') {
+      setActiveSimView('stash-stack');
       if (stashStack.length > 0) {
         setStashStack(prev => prev.slice(1));
+        setSimAlertMsg(`📤 Popped stash@{0} from stack and re-applied changes to working directory.`);
         setTerminalHistory(prev => [...prev, `Dropped stash@{0} and restored changes into working directory.`]);
       } else {
         setTerminalHistory(prev => [...prev, `error: No stash entries found.`]);
       }
     }
-    else if (cmd === 'git stash list') {
+    else if (lowerCmd === 'git stash list') {
+      setActiveSimView('stash-stack');
+      setSimAlertMsg(`📋 Stash Stack contains ${stashStack.length} stashed item(s).`);
       setTerminalHistory(prev => [
         ...prev,
         ...(stashStack.length > 0 ? stashStack.map(s => `${s.id}: WIP on ${s.branch}`) : ['(no stash entries)'])
       ]);
     }
-    else if (cmd.startsWith('git tag -a ') || cmd.startsWith('git tag ')) {
-      const match = cmd.match(/git tag\s+(-a\s+)?([v\d\.]+)/);
-      const tagName = match ? match[2] : 'v1.0.0';
-      setTags(prev => [...prev, { name: tagName, commitHash: commits[commits.length - 1].hash }]);
-      setTerminalHistory(prev => [...prev, `Created tag '${tagName}' pointing to commit ${commits[commits.length - 1].hash}`]);
+    else if (lowerCmd.startsWith('git tag -a') || lowerCmd.startsWith('git tag')) {
+      if (lowerCmd === 'git tag') {
+        setActiveSimView('dag');
+        setSimAlertMsg(`🏷️ Displaying all repository release tags.`);
+        setTerminalHistory(prev => [...prev, ...tags.map(t => t.name)]);
+      } else {
+        setActiveSimView('dag');
+        const match = cmd.match(/git tag\s+(-a\s+)?([v\d\.]+)/i);
+        const tagName = match ? match[2] : 'v1.0.0';
+        setTags(prev => [...prev, { name: tagName, commitHash: commits[commits.length - 1]?.hash }]);
+        setSimAlertMsg(`🏷️ Created release tag '${tagName}' pinned to commit ${commits[commits.length - 1]?.hash}.`);
+        setTerminalHistory(prev => [...prev, `Created tag '${tagName}' pointing to commit ${commits[commits.length - 1]?.hash}`]);
+      }
     }
-    else if (cmd === 'git tag') {
-      setTerminalHistory(prev => [...prev, ...tags.map(t => t.name)]);
-    }
-    else if (cmd.startsWith('git remote -v')) {
+    else if (lowerCmd.startsWith('git remote -v') || lowerCmd === 'git remote') {
+      setActiveSimView('remote-sync');
+      setSimAlertMsg(`☁️ Remote origin tracking configured to: ${remoteOriginUrl}`);
       setTerminalHistory(prev => [
         ...prev,
         `origin\t${remoteOriginUrl} (fetch)`,
         `origin\t${remoteOriginUrl} (push)`
       ]);
     }
-    else if (cmd.startsWith('git fetch')) {
+    else if (lowerCmd.startsWith('git fetch')) {
+      setActiveSimView('remote-sync');
+      setSimAlertMsg(`⬇️ Fetched latest remote objects from ${remoteOriginUrl} into origin/main without merging.`);
       setTerminalHistory(prev => [
         ...prev,
         `remote: Enumerating objects: 6, done.`,
@@ -306,31 +400,39 @@ export default function GitLabPage() {
         ` * [new branch]      main       -> origin/main`
       ]);
     }
-    else if (cmd.startsWith('git pull')) {
+    else if (lowerCmd.startsWith('git pull')) {
+      setActiveSimView('remote-sync');
+      setSimAlertMsg(`🔄 Fetched & merged remote updates into local branch '${currentBranch}'.`);
       setTerminalHistory(prev => [
         ...prev,
-        `Updating ${commits[0].hash}..${commits[commits.length - 1].hash}`,
+        `Updating ${commits[0]?.hash}..${commits[commits.length - 1]?.hash}`,
         `Fast-forward`,
         ` 3 files changed, 45 insertions(+)`
       ]);
     }
-    else if (cmd.startsWith('git push')) {
+    else if (lowerCmd.startsWith('git push')) {
+      setActiveSimView('remote-sync');
       setRemoteCommitsCount(commits.length);
+      setSimAlertMsg(`⬆️ Pushed ${commits.length} local commit objects to remote origin repository (${remoteOriginUrl}).`);
       setTerminalHistory(prev => [
         ...prev,
         `Enumerating objects: 12, done.`,
         `Writing objects: 100% (12/12), 1.84 KiB | 1.84 MiB/s, done.`,
         `To ${remoteOriginUrl}`,
-        `   ${commits[0].hash}..${commits[commits.length - 1].hash}  ${currentBranch} -> ${currentBranch}`
+        `   ${commits[0]?.hash}..${commits[commits.length - 1]?.hash}  ${currentBranch} -> ${currentBranch}`
       ]);
     }
-    else if (cmd === 'git log' || cmd === 'git log --oneline' || cmd === 'git log --oneline --graph') {
+    else if (lowerCmd === 'git log' || lowerCmd.startsWith('git log')) {
+      setActiveSimView('dag');
+      setSimAlertMsg(`📜 Log Output: Displaying linear DAG history from HEAD to root commit.`);
       setTerminalHistory(prev => [
         ...prev,
         ...commits.slice().reverse().map(c => `* ${c.hash} (${c.branch}) ${c.message}`)
       ]);
     }
-    else if (cmd === 'git diff' || cmd === 'git diff --staged') {
+    else if (lowerCmd === 'git diff' || lowerCmd.startsWith('git diff')) {
+      setActiveSimView('diff-inspector');
+      setSimAlertMsg(`📊 Visual Code Diff Inspector: Showing unified code additions & deletions.`);
       setTerminalHistory(prev => [
         ...prev,
         `diff --git a/src/auth/jwt.py b/src/auth/jwt.py`,
@@ -344,13 +446,13 @@ export default function GitLabPage() {
         `+    return jwt.encode(payload, SECRET, algorithm="RS256")`
       ]);
     }
-    else if (cmd === 'clear') {
+    else if (lowerCmd === 'clear' || lowerCmd === 'cls') {
       setTerminalHistory([]);
     }
     else {
       setTerminalHistory(prev => [
         ...prev,
-        `git: '${cmd}' is not a recognized command. Click a command pill below or type 'git --help'`
+        `git: '${cmd}' is not a recognized command. Click a command pill below or type 'git status', 'git commit', 'git diff', 'git stash', 'git branch', etc.`
       ]);
     }
   };
@@ -396,6 +498,17 @@ export default function GitLabPage() {
     { label: 'git push origin main', cmd: 'git push origin main', category: 'Remote' }
   ];
 
+  const SIMULATION_VIEWS = [
+    { id: 'dag', label: 'DAG Commit Graph', icon: GitCommit, color: '#f59e0b' },
+    { id: 'staging-trees', label: '3-Trees Staging', icon: Layers, color: '#10b981' },
+    { id: 'diff-inspector', label: 'Diff Inspector', icon: FileCode, color: '#38bdf8' },
+    { id: 'branch-network', label: 'Branch Network', icon: GitBranch, color: '#a855f7' },
+    { id: 'rebase-replay', label: 'Rebase & Cherry-Pick', icon: RefreshCw, color: '#ec4899' },
+    { id: 'stash-stack', label: 'LIFO Stash Stack', icon: Archive, color: '#eab308' },
+    { id: 'remote-sync', label: 'Remote Sync & Fetch', icon: UploadCloud, color: '#8b5cf6' },
+    { id: 'reset-rollback', label: 'Reset & Rollback Matrix', icon: RotateCcw, color: '#f43f5e' }
+  ];
+
   return (
     <div className="animate-fade-in" style={{ paddingBottom: 40 }}>
       {/* Header */}
@@ -403,11 +516,11 @@ export default function GitLabPage() {
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
             <Badge variant="yellow"><GitBranch size={14} /> Git & GitHub Command Suite</Badge>
-            <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Interactive Command Visualizer</span>
+            <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Real-Time Reactive Simulator</span>
           </div>
           <h1 style={{ fontSize: '1.85rem', fontWeight: 800 }}>Complete Git & GitHub Command Simulator</h1>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
-            Simulate and visualize every command: staging trees, DAG branches, rebasing, cherry-picking, hard/soft resets, stash stacks, GitHub PRs, and CI/CD pipelines.
+            Simulate and visualize every command dynamically: typed commands in the shell emulator automatically update the live visual simulation stage in real time!
           </p>
         </div>
       </div>
@@ -415,7 +528,7 @@ export default function GitLabPage() {
       {/* Primary Navigation Tabs */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))', gap: 8, marginBottom: 20 }}>
         {[
-          { id: 'all-terminal', title: '💻 Interactive Terminal & DAG', level: 'Every Command', color: '#38bdf8' },
+          { id: 'all-terminal', title: '💻 Interactive Terminal & Stage', level: 'Every Command', color: '#38bdf8' },
           { id: 'snapshots', title: '📄 3-Trees & Diff Staging', level: 'add / commit / diff', color: '#10b981' },
           { id: 'branching', title: '🌿 Branching & Merges', level: 'branch / switch / merge', color: '#f59e0b' },
           { id: 'undo-rebase', title: '⚡ History, Rebase & Stash', level: 'rebase / reset / cherry-pick', color: '#ec4899' },
@@ -445,7 +558,7 @@ export default function GitLabPage() {
         })}
       </div>
 
-      {/* Quick Interactive Command Bar */}
+      {/* Quick Interactive Command Dispatcher Bar */}
       <div className="card" style={{ padding: '12px 16px', marginBottom: 20, background: 'var(--bg-tertiary)' }}>
         <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
           <Sparkles size={14} color="#38bdf8" /> Quick Command Dispatcher (Click to Execute Instantly):
@@ -473,55 +586,355 @@ export default function GitLabPage() {
         </div>
       </div>
 
-      {/* TAB 1: ALL-COMMAND INTERACTIVE TERMINAL & DAG */}
+      {/* TAB 1: ALL-COMMAND INTERACTIVE TERMINAL & DYNAMIC SIMULATION STAGE */}
       {activeTab === 'all-terminal' && (
         <div style={{ display: 'grid', gap: 20 }}>
-          {/* Live DAG Commit Graph Canvas */}
+          
+          {/* REACTIVE SIMULATION STAGE (Dynamically follows typed command) */}
           <div className="card" style={{ padding: 20, background: '#090d16', border: '1px solid #1e293b' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-              <h3 style={{ fontSize: '1.05rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 8 }}>
-                <GitCommit size={18} color="#f59e0b" /> Live Directed Acyclic Graph (DAG)
-              </h3>
+            
+            {/* Simulation Stage Header & View Switcher */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 16 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <div style={{ background: '#1e293b', padding: '4px 12px', borderRadius: '8px', fontSize: '0.8rem', color: '#f8fafc' }}>
-                  HEAD ➔ <strong style={{ color: '#38bdf8' }}>{currentBranch}</strong>
+                <div style={{ padding: '6px 10px', borderRadius: '8px', background: 'rgba(56, 189, 248, 0.1)', border: '1px solid rgba(56, 189, 248, 0.3)', display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <Sparkles size={16} color="#38bdf8" />
+                  <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#f8fafc' }}>
+                    Live Simulation Stage:
+                  </span>
+                  <span style={{ fontSize: '0.85rem', fontWeight: 700, color: SIMULATION_VIEWS.find(v => v.id === activeSimView)?.color || '#38bdf8' }}>
+                    {SIMULATION_VIEWS.find(v => v.id === activeSimView)?.label}
+                  </span>
                 </div>
-                {tags.length > 0 && (
-                  <div style={{ background: 'rgba(245, 158, 11, 0.2)', color: '#f59e0b', padding: '4px 10px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700 }}>
-                    🏷️ {tags.map(t => t.name).join(', ')}
-                  </div>
-                )}
+
+                <div style={{ background: '#1e293b', padding: '4px 10px', borderRadius: '8px', fontSize: '0.75rem', color: '#94a3b8' }}>
+                  HEAD: <strong style={{ color: '#38bdf8' }}>{currentBranch}</strong>
+                </div>
+              </div>
+
+              {/* View switcher buttons for quick manual inspection */}
+              <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+                {SIMULATION_VIEWS.map(v => {
+                  const isCurrent = activeSimView === v.id;
+                  const Icon = v.icon;
+                  return (
+                    <button
+                      key={v.id}
+                      onClick={() => setActiveSimView(v.id)}
+                      style={{
+                        padding: '4px 8px',
+                        borderRadius: '6px',
+                        fontSize: '0.7rem',
+                        fontWeight: 600,
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 4,
+                        background: isCurrent ? v.color : '#1e293b',
+                        color: isCurrent ? '#090d16' : '#94a3b8',
+                        border: 'none',
+                        cursor: 'pointer',
+                        transition: 'all 0.15s ease'
+                      }}
+                    >
+                      <Icon size={12} />
+                      {v.label.split(' ')[0]}
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: 20, overflowX: 'auto', padding: '12px 6px', minHeight: '130px' }}>
-              {commits.map((c, idx) => {
-                const isHead = c.branch === currentBranch && idx === commits.map(x => x.branch).lastIndexOf(currentBranch);
-                const hasTag = tags.find(t => t.commitHash === c.hash);
-                return (
-                  <div key={c.id} style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                    <div
-                      style={{
-                        background: c.branch === 'main' ? '#1e293b' : '#312e81',
-                        border: isHead ? '2px solid #38bdf8' : `1px solid ${c.branch === 'main' ? '#334155' : '#6366f1'}`,
-                        padding: '10px 14px',
-                        borderRadius: '10px',
-                        minWidth: '150px',
-                        boxShadow: isHead ? '0 0 12px rgba(56, 189, 248, 0.35)' : 'none'
-                      }}
-                    >
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 2 }}>
-                        <span style={{ fontFamily: 'monospace', fontSize: '0.75rem', color: '#f59e0b', fontWeight: 700 }}>{c.hash}</span>
-                        <span style={{ fontSize: '0.65rem', padding: '2px 5px', borderRadius: '4px', background: c.branch === 'main' ? '#0f172a' : '#4338ca', color: '#e2e8f0' }}>{c.branch}</span>
-                      </div>
-                      <div style={{ fontSize: '0.8rem', fontWeight: 600, color: '#f8fafc', whiteSpace: 'nowrap' }}>{c.message}</div>
-                      {hasTag && <div style={{ fontSize: '0.65rem', color: '#fbbf24', marginTop: 4 }}>🏷️ {hasTag.name}</div>}
-                    </div>
-                    {idx < commits.length - 1 && <div style={{ color: '#475569', fontSize: '1.2rem' }}>➔</div>}
-                  </div>
-                );
-              })}
+            {/* Dynamic Status Alert Message Banner */}
+            <div style={{ padding: '8px 14px', borderRadius: '8px', background: '#0f172a', border: '1px solid #334155', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.8rem', color: '#e2e8f0' }}>
+              <span style={{ color: '#38bdf8', fontWeight: 700 }}>Last Action:</span>
+              <span>{simAlertMsg}</span>
             </div>
+
+            {/* VIEW 1: DAG COMMIT GRAPH CANVAS */}
+            {activeSimView === 'dag' && (
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 20, overflowX: 'auto', padding: '16px 6px', minHeight: '140px' }}>
+                  {commits.map((c, idx) => {
+                    const isHead = c.branch === currentBranch && idx === commits.map(x => x.branch).lastIndexOf(currentBranch);
+                    const hasTag = tags.find(t => t.commitHash === c.hash);
+                    return (
+                      <div key={c.id} style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                        <div
+                          style={{
+                            background: c.branch === 'main' ? '#1e293b' : '#312e81',
+                            border: isHead ? '2px solid #38bdf8' : `1px solid ${c.branch === 'main' ? '#334155' : '#6366f1'}`,
+                            padding: '12px 16px',
+                            borderRadius: '10px',
+                            minWidth: '160px',
+                            boxShadow: isHead ? '0 0 16px rgba(56, 189, 248, 0.4)' : 'none',
+                            position: 'relative'
+                          }}
+                        >
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                            <span style={{ fontFamily: 'monospace', fontSize: '0.8rem', color: '#f59e0b', fontWeight: 700 }}>{c.hash}</span>
+                            <span style={{ fontSize: '0.65rem', padding: '2px 6px', borderRadius: '4px', background: c.branch === 'main' ? '#0f172a' : '#4338ca', color: '#e2e8f0', fontWeight: 600 }}>{c.branch}</span>
+                          </div>
+                          <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#f8fafc', whiteSpace: 'nowrap' }}>{c.message}</div>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 6, fontSize: '0.7rem', color: '#94a3b8' }}>
+                            <span>{c.author}</span>
+                            {isHead && <span style={{ color: '#38bdf8', fontWeight: 700 }}>HEAD ➔</span>}
+                          </div>
+                          {hasTag && (
+                            <div style={{ position: 'absolute', top: -10, right: 10, background: '#f59e0b', color: '#090d16', fontSize: '0.65rem', fontWeight: 800, padding: '2px 6px', borderRadius: '4px' }}>
+                              🏷️ {hasTag.name}
+                            </div>
+                          )}
+                        </div>
+                        {idx < commits.length - 1 && <div style={{ color: '#475569', fontSize: '1.4rem' }}>➔</div>}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* VIEW 2: 3-TREES STAGING INSPECTOR */}
+            {activeSimView === 'staging-trees' && (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 14 }}>
+                {/* 1. Working Directory */}
+                <div style={{ background: '#1e293b', padding: 14, borderRadius: 10, border: '1px solid #334155' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+                    <span style={{ fontWeight: 700, fontSize: '0.8rem', color: '#f43f5e', display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <FileCode size={14} /> 1. Working Tree
+                    </span>
+                    <button onClick={() => executeGitCommand('git add .')} className="btn btn-primary btn-sm" style={{ padding: '2px 8px', fontSize: '0.7rem' }}>
+                      + git add .
+                    </button>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                    {workingFiles.map((f, idx) => (
+                      <div key={idx} style={{ padding: '8px 10px', background: '#090d16', borderRadius: '6px', fontSize: '0.75rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <span>📄 {f.name}</span>
+                        <span style={{ color: f.status === 'clean' ? '#10b981' : '#f43f5e', fontWeight: 700, fontSize: '0.7rem' }}>{f.status}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 2. Staging Index */}
+                <div style={{ background: '#1e293b', padding: 14, borderRadius: 10, border: '1px solid #334155' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+                    <span style={{ fontWeight: 700, fontSize: '0.8rem', color: '#10b981', display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <Layers size={14} /> 2. Staging Index (Cache)
+                    </span>
+                    <button onClick={() => executeGitCommand('git reset')} disabled={stagedFiles.length === 0} className="btn btn-ghost btn-sm" style={{ padding: '2px 8px', fontSize: '0.7rem' }}>
+                      git reset
+                    </button>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                    {stagedFiles.map((f, idx) => (
+                      <div key={idx} style={{ padding: '8px 10px', background: '#090d16', borderRadius: '6px', fontSize: '0.75rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <span>✓ {f.name}</span>
+                        <span style={{ color: '#10b981', fontWeight: 700, fontSize: '0.7rem' }}>STAGED</span>
+                      </div>
+                    ))}
+                    {stagedFiles.length === 0 && <span style={{ fontSize: '0.75rem', color: '#94a3b8', fontStyle: 'italic', padding: '10px 0' }}>No staged snapshots (run 'git add' to stage)</span>}
+                  </div>
+                </div>
+
+                {/* 3. HEAD Commit */}
+                <div style={{ background: '#1e293b', padding: 14, borderRadius: 10, border: '1px solid #334155' }}>
+                  <div style={{ fontWeight: 700, fontSize: '0.8rem', color: '#38bdf8', marginBottom: 10, display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <GitCommit size={14} /> 3. Repository (HEAD Commit)
+                  </div>
+                  <div style={{ padding: '12px', background: '#090d16', borderRadius: '8px' }}>
+                    <div style={{ fontSize: '0.75rem', color: '#f59e0b', fontWeight: 700 }}>Commit: {commits[commits.length - 1]?.hash}</div>
+                    <div style={{ fontSize: '0.85rem', color: '#f8fafc', fontWeight: 600, marginTop: 4 }}>{commits[commits.length - 1]?.message}</div>
+                    <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: 2 }}>Branch: {commits[commits.length - 1]?.branch} • Author: {commits[commits.length - 1]?.author}</div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* VIEW 3: DIFF INSPECTOR */}
+            {activeSimView === 'diff-inspector' && (
+              <div style={{ background: '#0f172a', padding: 16, borderRadius: 10, border: '1px solid #334155' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <FileText size={16} color="#38bdf8" />
+                    <span style={{ fontFamily: 'monospace', fontSize: '0.85rem', fontWeight: 700, color: '#f8fafc' }}>
+                      diff --git a/{selectedDiffFile} b/{selectedDiffFile}
+                    </span>
+                  </div>
+                  <span style={{ fontSize: '0.75rem', color: '#10b981', fontWeight: 700 }}>+14 lines</span>
+                </div>
+
+                <div style={{ fontFamily: 'monospace', fontSize: '0.8rem', background: '#090d16', padding: 12, borderRadius: 8, lineHeight: 1.6 }}>
+                  <div style={{ color: '#94a3b8' }}>--- a/src/auth/jwt.py (Index)</div>
+                  <div style={{ color: '#94a3b8' }}>+++ b/src/auth/jwt.py (Working Tree)</div>
+                  <div style={{ color: '#64748b' }}>@@ -12,8 +12,12 @@ def generate_session_token(user_id: str):</div>
+                  <div style={{ color: '#cbd5e1' }}>     payload = {`{"sub": user_id}`}</div>
+                  <div style={{ background: 'rgba(244, 63, 94, 0.15)', color: '#f43f5e', padding: '2px 4px', borderRadius: '4px' }}>
+                    -    return jwt.encode(payload, SECRET_KEY, algorithm="HS256")
+                  </div>
+                  <div style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', padding: '2px 4px', borderRadius: '4px' }}>
+                    +    expire = datetime.utcnow() + timedelta(minutes=60)
+                  </div>
+                  <div style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', padding: '2px 4px', borderRadius: '4px' }}>
+                    +    payload.update({`{"exp": expire, "role": "admin"}`})
+                  </div>
+                  <div style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', padding: '2px 4px', borderRadius: '4px' }}>
+                    +    return jwt.encode(payload, RSA_PRIVATE_KEY, algorithm="RS256")
+                  </div>
+                  <div style={{ color: '#cbd5e1' }}>     # End of token creation routine</div>
+                </div>
+              </div>
+            )}
+
+            {/* VIEW 4: BRANCH NETWORK */}
+            {activeSimView === 'branch-network' && (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 14 }}>
+                <div style={{ background: '#1e293b', padding: 16, borderRadius: 10 }}>
+                  <div style={{ fontWeight: 700, fontSize: '0.85rem', color: '#a855f7', marginBottom: 10, display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <GitBranch size={16} /> Active Branch Pointers:
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    {branches.map((b, idx) => (
+                      <div key={idx} style={{ padding: '8px 12px', background: '#090d16', borderRadius: '6px', fontSize: '0.8rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <span style={{ color: b === currentBranch ? '#10b981' : '#f8fafc', fontWeight: b === currentBranch ? 800 : 400 }}>
+                          {b === currentBranch ? '● (HEAD) ' : '○ '}{b}
+                        </span>
+                        {b !== currentBranch && (
+                          <button onClick={() => executeGitCommand(`git checkout ${b}`)} className="btn btn-ghost btn-sm" style={{ padding: '2px 8px', fontSize: '0.7rem' }}>
+                            git checkout {b}
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div style={{ background: '#1e293b', padding: 16, borderRadius: 10 }}>
+                  <div style={{ fontWeight: 700, fontSize: '0.85rem', color: '#38bdf8', marginBottom: 10 }}>
+                    Fast Branch Actions:
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    <button onClick={() => executeGitCommand('git checkout -b feature/analytics')} className="btn btn-primary btn-sm">
+                      + Create Branch 'feature/analytics'
+                    </button>
+                    <button onClick={() => executeGitCommand('git merge main')} className="btn btn-secondary btn-sm">
+                      🔀 Merge 'main' into '{currentBranch}'
+                    </button>
+                    <button onClick={() => executeGitCommand('git switch main')} className="btn btn-outline btn-sm">
+                      👉 Switch to 'main'
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* VIEW 5: REBASE & CHERRY-PICK REPLAY */}
+            {activeSimView === 'rebase-replay' && (
+              <div style={{ background: '#0f172a', padding: 16, borderRadius: 10, border: '1px solid #334155' }}>
+                <div style={{ fontWeight: 700, fontSize: '0.85rem', color: '#ec4899', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <RefreshCw size={16} /> Linear Commit Replay vs Merge Commit Simulation:
+                </div>
+                <p style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: 12 }}>
+                  `git rebase` rewinds current branch commits, fast-forwards to the tip of upstream `main`, and reapplies your commits sequentially without creating a 3-way merge node.
+                </p>
+                <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                  <button onClick={() => executeGitCommand('git rebase main')} className="btn btn-outline btn-sm" style={{ borderColor: '#ec4899', color: '#ec4899' }}>
+                    ⚡ Execute: git rebase main
+                  </button>
+                  <button onClick={() => executeGitCommand('git cherry-pick 3c19e4')} className="btn btn-outline btn-sm" style={{ borderColor: '#38bdf8', color: '#38bdf8' }}>
+                    🍒 Execute: git cherry-pick 3c19e4
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* VIEW 6: LIFO STASH STACK */}
+            {activeSimView === 'stash-stack' && (
+              <div style={{ background: '#0f172a', padding: 16, borderRadius: 10, border: '1px solid #334155' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+                  <span style={{ fontWeight: 700, fontSize: '0.85rem', color: '#eab308', display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <Archive size={16} /> LIFO Stash Stack Storage ({stashStack.length} items)
+                  </span>
+                  <div style={{ display: 'flex', gap: 6 }}>
+                    <button onClick={() => executeGitCommand('git stash')} className="btn btn-primary btn-sm" style={{ padding: '3px 8px', fontSize: '0.7rem' }}>git stash</button>
+                    <button onClick={() => executeGitCommand('git stash pop')} className="btn btn-secondary btn-sm" style={{ padding: '3px 8px', fontSize: '0.7rem' }}>git stash pop</button>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  {stashStack.map((s, idx) => (
+                    <div key={idx} style={{ padding: '8px 12px', background: '#1e293b', borderRadius: '6px', fontSize: '0.8rem', display: 'flex', justifyContent: 'space-between' }}>
+                      <span style={{ fontFamily: 'monospace', color: '#eab308' }}>{s.id}: WIP on {s.branch}</span>
+                      <span style={{ color: '#94a3b8', fontSize: '0.75rem' }}>{s.items?.length || 1} modified files</span>
+                    </div>
+                  ))}
+                  {stashStack.length === 0 && (
+                    <div style={{ color: '#94a3b8', fontSize: '0.75rem', fontStyle: 'italic', padding: 8 }}>
+                      No stashed snapshots in stack. Modify files and run 'git stash' to store temporary uncommitted state.
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* VIEW 7: REMOTE SYNC & FETCH */}
+            {activeSimView === 'remote-sync' && (
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: 14, alignItems: 'center' }}>
+                <div style={{ background: '#1e293b', padding: 14, borderRadius: 10 }}>
+                  <div style={{ fontWeight: 700, fontSize: '0.8rem', color: '#10b981', marginBottom: 4 }}>💻 Local Repository</div>
+                  <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>Branch: {currentBranch}</div>
+                  <div style={{ fontSize: '0.75rem', color: '#38bdf8', fontWeight: 700, marginTop: 4 }}>{commits.length} Local Commits</div>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'center' }}>
+                  <button onClick={() => executeGitCommand('git fetch origin')} className="btn btn-ghost btn-sm" style={{ fontSize: '0.7rem' }}>
+                    Fetch ⬇️
+                  </button>
+                  <button onClick={() => executeGitCommand('git pull origin main')} className="btn btn-secondary btn-sm" style={{ fontSize: '0.7rem' }}>
+                    Pull 🔄
+                  </button>
+                  <button onClick={() => executeGitCommand('git push origin main')} className="btn btn-primary btn-sm" style={{ fontSize: '0.7rem' }}>
+                    Push ⬆️
+                  </button>
+                </div>
+
+                <div style={{ background: '#1e293b', padding: 14, borderRadius: 10 }}>
+                  <div style={{ fontWeight: 700, fontSize: '0.8rem', color: '#8b5cf6', marginBottom: 4 }}>☁️ GitHub Remote (origin)</div>
+                  <div style={{ fontSize: '0.75rem', color: '#94a3b8', wordBreak: 'break-all' }}>{remoteOriginUrl}</div>
+                  <div style={{ fontSize: '0.75rem', color: '#8b5cf6', fontWeight: 700, marginTop: 4 }}>{remoteCommitsCount} Remote Commits</div>
+                </div>
+              </div>
+            )}
+
+            {/* VIEW 8: RESET & ROLLBACK MATRIX */}
+            {activeSimView === 'reset-rollback' && (
+              <div style={{ background: '#0f172a', padding: 16, borderRadius: 10, border: '1px solid #334155' }}>
+                <div style={{ fontWeight: 700, fontSize: '0.85rem', color: '#f43f5e', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <RotateCcw size={16} /> Git Reset Comparison Matrix:
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 10 }}>
+                  <div style={{ background: '#1e293b', padding: 10, borderRadius: 8 }}>
+                    <div style={{ fontWeight: 700, fontSize: '0.75rem', color: '#38bdf8' }}>--soft HEAD~1</div>
+                    <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: 2 }}>Moves HEAD back. Changes remain in Staging Index.</div>
+                    <button onClick={() => executeGitCommand('git reset --soft HEAD~1')} className="btn btn-ghost btn-sm" style={{ marginTop: 6, fontSize: '0.65rem' }}>Run Soft Reset</button>
+                  </div>
+                  <div style={{ background: '#1e293b', padding: 10, borderRadius: 8 }}>
+                    <div style={{ fontWeight: 700, fontSize: '0.75rem', color: '#f59e0b' }}>--mixed (default)</div>
+                    <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: 2 }}>Moves HEAD back. Unstages Index; preserves Working files.</div>
+                    <button onClick={() => executeGitCommand('git reset')} className="btn btn-ghost btn-sm" style={{ marginTop: 6, fontSize: '0.65rem' }}>Run Mixed Reset</button>
+                  </div>
+                  <div style={{ background: '#1e293b', padding: 10, borderRadius: 8 }}>
+                    <div style={{ fontWeight: 700, fontSize: '0.75rem', color: '#f43f5e' }}>--hard HEAD~1</div>
+                    <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: 2 }}>Moves HEAD, wipes Index & discards uncommitted work.</div>
+                    <button onClick={() => executeGitCommand('git reset --hard HEAD~1')} className="btn btn-ghost btn-sm" style={{ marginTop: 6, fontSize: '0.65rem', color: '#f43f5e' }}>Run Hard Reset</button>
+                  </div>
+                  <div style={{ background: '#1e293b', padding: 10, borderRadius: 8 }}>
+                    <div style={{ fontWeight: 700, fontSize: '0.75rem', color: '#10b981' }}>git revert &lt;hash&gt;</div>
+                    <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: 2 }}>Safely creates a new forward commit that reverses past patch.</div>
+                    <button onClick={() => executeGitCommand('git revert 9a01f8')} className="btn btn-ghost btn-sm" style={{ marginTop: 6, fontSize: '0.65rem' }}>Run Revert</button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Terminal Console */}
@@ -529,7 +942,7 @@ export default function GitLabPage() {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 16px', background: '#0f172a', borderBottom: '1px solid #1e293b' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 <Terminal size={15} color="#38bdf8" />
-                <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#94a3b8' }}>Git Shell Emulator</span>
+                <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#94a3b8' }}>Git Shell Emulator (Dynamic Live Simulation Sync)</span>
               </div>
               <button onClick={() => setTerminalHistory([])} className="btn btn-ghost btn-sm" style={{ padding: '2px 6px', fontSize: '0.7rem' }}>
                 Clear Output
@@ -549,8 +962,8 @@ export default function GitLabPage() {
               <input
                 type="text"
                 value={commandInput}
-                onChange={(e) => setCommandInput(e.target.value)}
-                placeholder="Type git commands here (e.g. git status, git commit -m 'feat', git branch, git merge)..."
+                onChange={(e) => handleInputChange(e.target.value)}
+                placeholder="Type git commands here (e.g. git status, git commit -m 'feat', git diff, git branch, git stash, git push)..."
                 style={{ flex: 1, background: 'transparent', border: 'none', padding: '10px', color: '#f8fafc', fontFamily: 'monospace', fontSize: '0.85rem', outline: 'none' }}
               />
             </form>
@@ -566,7 +979,7 @@ export default function GitLabPage() {
               <Layers size={18} color="#10b981" /> Git 3-Trees Workflow (`git status`, `git add`, `git diff`)
             </h3>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
               {/* Working Tree */}
               <div style={{ background: '#1e293b', padding: 16, borderRadius: 10, border: '1px solid #334155' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
@@ -608,9 +1021,9 @@ export default function GitLabPage() {
               <div style={{ background: '#1e293b', padding: 16, borderRadius: 10, border: '1px solid #334155' }}>
                 <div style={{ fontWeight: 700, fontSize: '0.8rem', color: '#38bdf8', marginBottom: 8 }}>3. Local Repository (HEAD)</div>
                 <div style={{ padding: '12px', background: '#090d16', borderRadius: '8px' }}>
-                  <div style={{ fontSize: '0.75rem', color: '#f59e0b', fontWeight: 700 }}>Commit: {commits[commits.length - 1].hash}</div>
-                  <div style={{ fontSize: '0.8rem', color: '#f8fafc', marginTop: 4 }}>{commits[commits.length - 1].message}</div>
-                  <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: 2 }}>Branch: {commits[commits.length - 1].branch}</div>
+                  <div style={{ fontSize: '0.75rem', color: '#f59e0b', fontWeight: 700 }}>Commit: {commits[commits.length - 1]?.hash}</div>
+                  <div style={{ fontSize: '0.8rem', color: '#f8fafc', marginTop: 4 }}>{commits[commits.length - 1]?.message}</div>
+                  <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: 2 }}>Branch: {commits[commits.length - 1]?.branch}</div>
                 </div>
               </div>
             </div>
@@ -626,7 +1039,7 @@ export default function GitLabPage() {
               <GitBranch size={18} color="#f59e0b" /> Branching, Switching & Fast-Forward Merges
             </h3>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
               <div style={{ background: '#1e293b', padding: 16, borderRadius: 10 }}>
                 <div style={{ fontWeight: 700, fontSize: '0.85rem', color: '#38bdf8', marginBottom: 8 }}>Active Branches:</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -716,7 +1129,7 @@ export default function GitLabPage() {
               <UploadCloud size={18} color="#8b5cf6" /> Remote Synchronization (`remote`, `fetch`, `pull`, `push`)
             </h3>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
               <div style={{ background: '#1e293b', padding: 16, borderRadius: 10 }}>
                 <div style={{ fontWeight: 700, fontSize: '0.85rem', color: '#8b5cf6', marginBottom: 4 }}>Remote Endpoints (origin):</div>
                 <div style={{ fontFamily: 'monospace', fontSize: '0.75rem', color: '#38bdf8', padding: '8px', background: '#090d16', borderRadius: '6px' }}>
@@ -850,5 +1263,3 @@ export default function GitLabPage() {
     </div>
   );
 }
-
-
