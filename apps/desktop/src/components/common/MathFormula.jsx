@@ -8,17 +8,30 @@ export function formatMathString(rawStr) {
   if (!rawStr) return '';
   let s = String(rawStr);
 
-  // Clean raw LaTeX commands to clean Unicode math notation
+  // 1. First remove LaTeX grouping / delimiters
+  s = s.replace(/\\left\(/g, '(');
+  s = s.replace(/\\right\)/g, ')');
+  s = s.replace(/\\left\[/g, '[');
+  s = s.replace(/\\right\]/g, ']');
+  s = s.replace(/\\left\\\{/g, '{');
+  s = s.replace(/\\right\\\}/g, '}');
+
+  // 2. Text and styling commands
   s = s.replace(/\\text\{([^}]+)\}/g, '$1');
   s = s.replace(/\\mathbf\{([^}]+)\}/g, '$1');
   s = s.replace(/\\mathbb\{R\}\^\{([^}]+)\}/g, 'ℝ^$1');
   s = s.replace(/\\mathbb\{R\}/g, 'ℝ');
-  s = s.replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, '($1 / $2)');
+  s = s.replace(/\\mathrm\{([^}]+)\}/g, '$1');
+
+  // 3. Fractions, roots, and sums
+  s = s.replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, '$1 / $2');
   s = s.replace(/\\sqrt\{([^}]+)\}/g, '√($1)');
   s = s.replace(/\\sqrt/g, '√');
   s = s.replace(/\\sum_\{([^}]+)\}\^\{([^}]+)\}/g, 'Σ($1 to $2)');
   s = s.replace(/\\sum/g, 'Σ');
   s = s.replace(/\\prod/g, 'Π');
+
+  // 4. Greek letters
   s = s.replace(/\\sigma/g, 'σ');
   s = s.replace(/\\alpha/g, 'α');
   s = s.replace(/\\beta/g, 'β');
@@ -28,19 +41,19 @@ export function formatMathString(rawStr) {
   s = s.replace(/\\lambda/g, 'λ');
   s = s.replace(/\\Delta/g, 'Δ');
   s = s.replace(/\\nabla/g, '∇');
+
+  // 5. Operators & Relations with word boundaries
   s = s.replace(/\\cdot/g, ' · ');
   s = s.replace(/\\times/g, ' × ');
   s = s.replace(/\\approx/g, ' ≈ ');
-  s = s.replace(/\\le/g, ' ≤ ');
-  s = s.replace(/\\ge/g, ' ≥ ');
+  s = s.replace(/\\leq?\b/g, ' ≤ ');
+  s = s.replace(/\\geq?\b/g, ' ≥ ');
   s = s.replace(/\\neq/g, ' ≠ ');
-  s = s.replace(/\\in/g, ' ∈ ');
-  s = s.replace(/\\left\(/g, '(');
-  s = s.replace(/\\right\)/g, ')');
-  s = s.replace(/\\left\[/g, '[');
-  s = s.replace(/\\right\]/g, ']');
+  s = s.replace(/\\in\b/g, ' ∈ ');
   s = s.replace(/\\partial/g, '∂');
   s = s.replace(/\\top/g, 'ᵀ');
+
+  // 6. Subscripts & Superscripts
   s = s.replace(/\^T\b/g, 'ᵀ');
   s = s.replace(/\^\{T\}/g, 'ᵀ');
   s = s.replace(/\^2\b/g, '²');
@@ -52,14 +65,19 @@ export function formatMathString(rawStr) {
   s = s.replace(/\_0\b/g, '₀');
   s = s.replace(/\_1\b/g, '₁');
   s = s.replace(/\_2\b/g, '₂');
+
+  // 7. Common Math Functions
   s = s.replace(/\\max/g, 'max');
   s = s.replace(/\\min/g, 'min');
   s = s.replace(/\\log/g, 'log');
   s = s.replace(/\\exp/g, 'exp');
   s = s.replace(/\\tanh/g, 'tanh');
   s = s.replace(/\\softmax/gi, 'Softmax');
-  s = s.replace(/\\/g, ''); // strip remaining backslashes
-  s = s.replace(/\$/g, ''); // strip remaining $ math tags
+
+  // 8. Clean up extra backslashes, math dollar signs, and redundant spaces
+  s = s.replace(/\\/g, '');
+  s = s.replace(/\$/g, '');
+  s = s.replace(/\s+/g, ' ');
 
   return s.trim();
 }

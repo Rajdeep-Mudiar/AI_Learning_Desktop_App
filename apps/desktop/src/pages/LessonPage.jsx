@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, CheckCircle2, BookOpen, Clock, Target, Lightbulb, Sparkles, BookCheck } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle2, BookOpen, Clock, Target, Lightbulb, Sparkles } from 'lucide-react';
 import { courseService } from '../services/courseService';
 import VisualExplainerCard from '../components/lesson/VisualExplainerCard';
 import CodeSnippetBox from '../components/lesson/CodeSnippetBox';
@@ -9,6 +9,93 @@ import LoadingSpinner from '../components/common/LoadingSpinner';
 import Badge from '../components/common/Badge';
 import MathFormula, { formatMathString } from '../components/common/MathFormula';
 
+/**
+ * Parses inline markdown tokens (**bold**, *italic*, `code`, and $math$)
+ * into clean React elements with zero stray asterisks.
+ */
+function InlineMarkdown({ text }) {
+  if (!text) return null;
+  const raw = String(text);
+
+  // Split text by markdown tokens: **bold**, *italic*, `code`, $math$
+  const tokenRegex = /(\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`|\$[^$]+\$)/g;
+  const parts = raw.split(tokenRegex);
+
+  return (
+    <>
+      {parts.map((part, idx) => {
+        if (!part) return null;
+
+        // **bold**
+        if (part.startsWith('**') && part.endsWith('**') && part.length >= 4) {
+          const inner = part.slice(2, -2);
+          return (
+            <strong key={idx} style={{ color: 'var(--color-text-main)', fontWeight: 700 }}>
+              {inner}
+            </strong>
+          );
+        }
+
+        // *italic*
+        if (part.startsWith('*') && part.endsWith('*') && part.length >= 2) {
+          const inner = part.slice(1, -1);
+          return (
+            <em key={idx} style={{ fontStyle: 'italic', color: 'var(--color-primary-400)' }}>
+              {inner}
+            </em>
+          );
+        }
+
+        // `code`
+        if (part.startsWith('`') && part.endsWith('`') && part.length >= 2) {
+          const inner = part.slice(1, -1);
+          return (
+            <code
+              key={idx}
+              style={{
+                background: 'var(--color-surface-elevated)',
+                padding: '2px 7px',
+                borderRadius: '4px',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.875em',
+                color: '#38bdf8',
+                border: '1px solid var(--color-border)',
+              }}
+            >
+              {inner}
+            </code>
+          );
+        }
+
+        // $inline math$
+        if (part.startsWith('$') && part.endsWith('$') && part.length >= 2) {
+          const inner = part.slice(1, -1);
+          return (
+            <span
+              key={idx}
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontWeight: 600,
+                color: '#38bdf8',
+                padding: '0 2px',
+              }}
+            >
+              {formatMathString(inner)}
+            </span>
+          );
+        }
+
+        // Plain text: remove any accidental stray asterisks or unformatted symbols
+        const cleanText = part.replace(/\*/g, '');
+        return <span key={idx}>{cleanText}</span>;
+      })}
+    </>
+  );
+}
+
+/**
+ * Formats full lesson section content with structured blocks, lists, and formula cards.
+ */
 function FormattedSectionContent({ content }) {
   if (!content) return null;
 
@@ -33,37 +120,55 @@ function FormattedSectionContent({ content }) {
           );
         }
 
-        // Regular paragraph or bullet list
+        // Regular lines: bullet points, numbered lists, subheadings, paragraphs
         const lines = trimmed.split('\n');
         return (
-          <div key={idx} style={{ fontSize: '0.925rem', lineHeight: 1.7, color: 'var(--text-primary)' }}>
+          <div key={idx} style={{ fontSize: '0.925rem', lineHeight: 1.75, color: 'var(--text-primary)' }}>
             {lines.map((line, lIdx) => {
               const lineTrimmed = line.trim();
+              if (!lineTrimmed) return null;
+
+              // Bullet item: * or -
               if (lineTrimmed.startsWith('* ') || lineTrimmed.startsWith('- ')) {
+                const bulletContent = lineTrimmed.slice(2);
                 return (
-                  <div key={lIdx} style={{ display: 'flex', gap: '8px', paddingLeft: '8px', margin: '4px 0' }}>
-                    <span style={{ color: 'var(--color-primary-400)' }}>•</span>
-                    <span>{formatMathString(lineTrimmed.slice(2))}</span>
+                  <div key={lIdx} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', margin: '6px 0', paddingLeft: '8px' }}>
+                    <span style={{ color: 'var(--color-primary-400)', fontSize: '1.2rem', lineHeight: '1.2' }}>•</span>
+                    <div style={{ flex: 1 }}>
+                      <InlineMarkdown text={bulletContent} />
+                    </div>
                   </div>
                 );
               }
+
+              // Numbered item: 1. or 2.
+              const numMatch = lineTrimmed.match(/^(\d+)\.\s+(.*)$/);
+              if (numMatch) {
+                const num = numMatch[1];
+                const numContent = numMatch[2];
+                return (
+                  <div key={lIdx} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', margin: '6px 0', paddingLeft: '8px' }}>
+                    <span style={{ color: '#38bdf8', fontWeight: 700, minWidth: '18px' }}>{num}.</span>
+                    <div style={{ flex: 1 }}>
+                      <InlineMarkdown text={numContent} />
+                    </div>
+                  </div>
+                );
+              }
+
+              // Subheading: ###
               if (lineTrimmed.startsWith('### ')) {
                 return (
-                  <h4 key={lIdx} style={{ fontSize: '1.05rem', margin: '14px 0 6px 0', color: 'var(--color-text-main)' }}>
-                    {lineTrimmed.slice(4)}
+                  <h4 key={lIdx} style={{ fontSize: '1.05rem', margin: '16px 0 6px 0', color: 'var(--color-text-main)', fontWeight: 700 }}>
+                    <InlineMarkdown text={lineTrimmed.slice(4)} />
                   </h4>
                 );
               }
-              if (lineTrimmed.startsWith('**') && lineTrimmed.endsWith('**')) {
-                return (
-                  <div key={lIdx} style={{ fontWeight: 700, margin: '6px 0', color: 'var(--color-text-main)' }}>
-                    {formatMathString(lineTrimmed.slice(2, -2))}
-                  </div>
-                );
-              }
+
+              // Normal paragraph
               return (
-                <p key={lIdx} style={{ margin: '0 0 8px 0' }}>
-                  {formatMathString(line)}
+                <p key={lIdx} style={{ margin: '0 0 10px 0' }}>
+                  <InlineMarkdown text={line} />
                 </p>
               );
             })}
@@ -167,11 +272,16 @@ export default function LessonPage() {
             <Target size={18} style={{ color: 'var(--accent-primary)' }} />
             <h3 style={{ fontSize: '0.95rem' }}>Learning Objectives</h3>
           </div>
-          <ul style={{ paddingLeft: 20, display: 'flex', flexDirection: 'column', gap: 6, fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
             {lesson.learning_objectives.map((obj, idx) => (
-              <li key={idx}>{formatMathString(obj)}</li>
+              <div key={idx} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
+                <span style={{ color: 'var(--color-primary-400)', fontWeight: 700 }}>✓</span>
+                <div>
+                  <InlineMarkdown text={obj} />
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       )}
 
@@ -197,7 +307,10 @@ export default function LessonPage() {
                 lineHeight: 1.5,
               }}>
                 <Lightbulb size={18} style={{ color: 'var(--accent-primary)', flexShrink: 0 }} />
-                <span><b>Core Principle:</b> {formatMathString(sec.key_takeaway)}</span>
+                <span>
+                  <strong style={{ color: 'var(--color-text-main)' }}>Core Principle: </strong>
+                  <InlineMarkdown text={sec.key_takeaway} />
+                </span>
               </div>
             )}
           </div>
