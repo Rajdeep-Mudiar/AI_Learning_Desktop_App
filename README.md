@@ -38,20 +38,68 @@
 
 ---
 
-## Quick-Start Guide & How to Run
+## Quick-Start Guide & How to Run the Desktop App
 
 ### Prerequisites
 * **Python 3.10+** (Python 3.13 recommended)
 * **Node.js 18+** & npm
-* *(Optional)* **Rust & Cargo** (Download from [rustup.rs](https://rustup.rs/) — only needed for running the native Tauri desktop window)
-* *(Optional)* **MongoDB** (running on `localhost:27017` — fallback mock engine included)
+* **Rust & Cargo** (Download installer from [rustup.rs](https://rustup.rs/) — required for compiling the native Tauri desktop container)
+* *(Optional)* **MongoDB** (running on `localhost:27017` — automatic fallback mock engine included)
 * *(Optional)* **Ollama** (running on `localhost:11434` for local AI models)
 
 ---
 
-### Step 1: Initial Setup (One-Time)
+### Quick Launch Commands
 
-#### Backend Setup:
+#### Method 1: One-Click Windows Launch (Recommended)
+From the root project directory:
+```cmd
+.\scripts\start_dev.bat
+```
+*(Or double-click [`scripts/start_dev.bat`](file:///f:/Vibe_Coding/AI_Learning_Desktop_App/scripts/start_dev.bat) in File Explorer)*
+
+---
+
+#### Method 2: Running the Native Desktop App (Tauri Window)
+Open two PowerShell terminals:
+
+**Terminal 1: Start Backend**
+```powershell
+cd apps\backend
+.\venv\Scripts\python.exe main.py
+```
+> Backend starts at: `http://127.0.0.1:8000` (API Docs: `http://127.0.0.1:8000/docs`)
+
+**Terminal 2: Launch Tauri Desktop Window**
+```powershell
+cd apps\desktop
+$env:Path += ";$env:USERPROFILE\.cargo\bin"
+npm run tauri dev
+```
+> This opens the native desktop application window with access to all 5 learning tracks (**AI/ML, Web Dev, App Dev, System Design, Git/GitHub**).
+
+---
+
+#### Method 3: Running in Web Browser Mode (Fast UI Dev)
+
+**Terminal 1: Start Backend**
+```powershell
+cd apps\backend
+.\venv\Scripts\python.exe main.py
+```
+
+**Terminal 2: Start Frontend**
+```powershell
+cd apps\desktop
+npm run dev
+```
+> Open **`http://localhost:5173`** in your web browser.
+
+---
+
+### Step-by-Step Initial Setup (First Time Only)
+
+#### 1. Setup Backend Python Virtual Environment
 ```powershell
 cd apps\backend
 python -m venv venv
@@ -59,13 +107,13 @@ python -m venv venv
 .\venv\Scripts\pip.exe install -r requirements.txt
 ```
 
-#### Frontend Setup:
+#### 2. Install Desktop & Frontend Node Packages
 ```powershell
 cd ..\desktop
 npm install
 ```
 
-#### Seed Initial Curriculum & Quizzes:
+#### 3. Seed All 5 Domain Curriculums & Quizzes
 ```powershell
 cd ..\..
 $env:PYTHONPATH="f:\Vibe_Coding\AI_Learning_Desktop_App\apps\backend"
@@ -74,61 +122,14 @@ $env:PYTHONPATH="f:\Vibe_Coding\AI_Learning_Desktop_App\apps\backend"
 
 ---
 
-### Step 2: Running the Application
-
-You can run the application in any of the following 3 ways:
-
-#### Option A: One-Click Launch (Windows Batch File)
-From the project root:
-```cmd
-.\scripts\start_dev.bat
-```
-*(Or simply double-click `scripts\start_dev.bat` in File Explorer)*
-
----
-
-#### Option B: Browser Web Mode (Fast & Recommended for Development)
-
-1. **Terminal 1 (Backend - FastAPI)**:
-   ```powershell
-   cd apps\backend
-   .\venv\Scripts\python.exe main.py
-   ```
-   > Backend runs at: `http://127.0.0.1:8000` (Interactive API Swagger Docs: `http://127.0.0.1:8000/docs`)
-
-2. **Terminal 2 (Frontend - Vite Dev Server)**:
-   ```powershell
-   cd apps\desktop
-   npm run dev
-   ```
-   > Open your browser at: **`http://localhost:5173`**
-
----
-
-#### Option C: Native Tauri Desktop Window Mode
-
-1. **Terminal 1 (Backend - FastAPI)**:
-   ```powershell
-   cd apps\backend
-   .\venv\Scripts\python.exe main.py
-   ```
-
-2. **Terminal 2 (Native Desktop Window)**:
-   ```powershell
-   cd apps\desktop
-   npm run tauri dev
-   ```
-
----
-
 ### Common Gotchas & Troubleshooting
 
-* **`ModuleNotFoundError: No module named 'jose'` (or other package)**:
-  * You are running the global/conda python instead of the virtual environment. Use `.\venv\Scripts\python.exe main.py` or activate the environment via `.\venv\Scripts\Activate.ps1`.
-* **`npm error ENOENT: Could not read package.json`**:
-  * The root folder does not contain `package.json`. Make sure to navigate into `apps\desktop` first before running `npm` commands (`cd apps\desktop`).
 * **`cargo: program not found`**:
-  * Rust is not installed or not in your current terminal's PATH. Install Rust from [rustup.rs](https://rustup.rs/) and refresh PATH with `$env:Path += ";$env:USERPROFILE\.cargo\bin"`, or simply use **Option B (Browser Web Mode)** which requires no Rust setup.
+  * Rust is not installed or not loaded in your current terminal. Run `$env:Path += ";$env:USERPROFILE\.cargo\bin"` in PowerShell after installing from [rustup.rs](https://rustup.rs/).
+* **`npm error ENOENT: Could not read package.json`**:
+  * Ensure you navigate into the `apps\desktop` directory first (`cd apps\desktop`) before running `npm` commands.
+* **`ModuleNotFoundError: No module named 'jose'`**:
+  * You are running global Python instead of the virtual environment. Always execute using `.\venv\Scripts\python.exe main.py` or activate the virtual environment via `.\venv\Scripts\Activate.ps1`.
 
 ---
 
