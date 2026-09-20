@@ -63,20 +63,20 @@ From the root project directory:
 #### Method 2: Running the Native Desktop App (Tauri Window)
 Open two PowerShell terminals:
 
-**Terminal 1: Start Backend**
+**Terminal 1 (Start Backend):**
 ```powershell
 cd apps\backend
 .\venv\Scripts\python.exe main.py
 ```
-> Backend starts at: `http://127.0.0.1:8000` (API Docs: `http://127.0.0.1:8000/docs`)
+> Backend running at: `http://127.0.0.1:8000` (API Docs: `http://127.0.0.1:8000/docs`)
 
-**Terminal 2: Launch Tauri Desktop Window**
+**Terminal 2 (Start Tauri Desktop App):**
 ```powershell
 cd apps\desktop
 $env:Path += ";$env:USERPROFILE\.cargo\bin"
 npm run tauri dev
 ```
-> This opens the native desktop application window with access to all 5 learning tracks (**AI/ML, Web Dev, App Dev, System Design, Git/GitHub**).
+> This compiles and launches the native desktop app with access to all 5 learning tracks (**AI/ML, Web Dev, App Dev, System Design, Git/GitHub**).
 
 ---
 
