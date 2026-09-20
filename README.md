@@ -38,33 +38,115 @@
 
 ---
 
-## Quick-Start Guide
+## Quick-Start Guide & How to Run
 
 ### Prerequisites
 * **Python 3.10+** (Python 3.13 recommended)
-* **Node.js 18+**
+* **Node.js 18+** & npm
+* *(Optional)* **Rust & Cargo** (Download from [rustup.rs](https://rustup.rs/) — only needed for running the native Tauri desktop window)
 * *(Optional)* **MongoDB** (running on `localhost:27017` — fallback mock engine included)
 * *(Optional)* **Ollama** (running on `localhost:11434` for local AI models)
 
-### 1. One-Click Launch (Windows)
+---
+
+### Step 1: Initial Setup (One-Time)
+
+#### Backend Setup:
+```powershell
+cd apps\backend
+python -m venv venv
+.\venv\Scripts\python.exe -m pip install --upgrade pip
+.\venv\Scripts\pip.exe install -r requirements.txt
+```
+
+#### Frontend Setup:
+```powershell
+cd ..\desktop
+npm install
+```
+
+#### Seed Initial Curriculum & Quizzes:
+```powershell
+cd ..\..
+$env:PYTHONPATH="f:\Vibe_Coding\AI_Learning_Desktop_App\apps\backend"
+.\apps\backend\venv\Scripts\python.exe apps\backend\app\seed\seed_runner.py
+```
+
+---
+
+### Step 2: Running the Application
+
+You can run the application in any of the following 3 ways:
+
+#### Option A: One-Click Launch (Windows Batch File)
+From the project root:
 ```cmd
 .\scripts\start_dev.bat
 ```
-This automatically starts:
-- **FastAPI Backend**: `http://127.0.0.1:8000` (API Docs at `http://127.0.0.1:8000/docs`)
-- **React Desktop UI**: `http://localhost:5173`
+*(Or simply double-click `scripts\start_dev.bat` in File Explorer)*
 
-### 2. Run All Automated Tests
-```cmd
+---
+
+#### Option B: Browser Web Mode (Fast & Recommended for Development)
+
+1. **Terminal 1 (Backend - FastAPI)**:
+   ```powershell
+   cd apps\backend
+   .\venv\Scripts\python.exe main.py
+   ```
+   > Backend runs at: `http://127.0.0.1:8000` (Interactive API Swagger Docs: `http://127.0.0.1:8000/docs`)
+
+2. **Terminal 2 (Frontend - Vite Dev Server)**:
+   ```powershell
+   cd apps\desktop
+   npm run dev
+   ```
+   > Open your browser at: **`http://localhost:5173`**
+
+---
+
+#### Option C: Native Tauri Desktop Window Mode
+
+1. **Terminal 1 (Backend - FastAPI)**:
+   ```powershell
+   cd apps\backend
+   .\venv\Scripts\python.exe main.py
+   ```
+
+2. **Terminal 2 (Native Desktop Window)**:
+   ```powershell
+   cd apps\desktop
+   npm run tauri dev
+   ```
+
+---
+
+### Common Gotchas & Troubleshooting
+
+* **`ModuleNotFoundError: No module named 'jose'` (or other package)**:
+  * You are running the global/conda python instead of the virtual environment. Use `.\venv\Scripts\python.exe main.py` or activate the environment via `.\venv\Scripts\Activate.ps1`.
+* **`npm error ENOENT: Could not read package.json`**:
+  * The root folder does not contain `package.json`. Make sure to navigate into `apps\desktop` first before running `npm` commands (`cd apps\desktop`).
+* **`cargo: program not found`**:
+  * Rust is not installed or not in your current terminal's PATH. Install Rust from [rustup.rs](https://rustup.rs/) and refresh PATH with `$env:Path += ";$env:USERPROFILE\.cargo\bin"`, or simply use **Option B (Browser Web Mode)** which requires no Rust setup.
+
+---
+
+### Step 3: Running Automated Tests
+
+Run the full automated test suite (28 comprehensive test suites across auth, learning, simulations, sandboxes, and AI tutor):
+```powershell
 .\scripts\run_tests.bat
 ```
-Or via terminal:
+Or directly in PowerShell:
 ```powershell
 $env:PYTHONPATH="f:\Vibe_Coding\AI_Learning_Desktop_App\apps\backend"
 .\apps\backend\venv\Scripts\pytest.exe tests/ -v
 ```
 
-### 3. Build Production Distribution
+---
+
+### Step 4: Build Production Desktop Executable (.exe / .msi)
 ```cmd
 .\scripts\build_desktop.bat
 ```
