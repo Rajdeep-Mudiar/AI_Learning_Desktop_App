@@ -140,12 +140,12 @@ export default function DeepLearningLabPage() {
             </div>
 
             <div>
-              <label style={{ fontSize: '11px', color: 'var(--color-text-muted)', display: 'block', marginBottom: '2px' }}>Activation Function ($\sigma$)</label>
+              <label style={{ fontSize: '11px', color: 'var(--color-text-muted)', display: 'block', marginBottom: '2px' }}>Activation Function (σ)</label>
               <select className="input" value={activation} onChange={(e) => setActivation(e.target.value)} style={{ fontSize: 'var(--font-xs)' }}>
-                <option value="relu">ReLU ($\max(0, z)$)</option>
-                <option value="sigmoid">Sigmoid ($1 / (1 + e^{-z})$)</option>
-                <option value="tanh">Hyperbolic Tangent ($\tanh$)</option>
-                <option value="leaky_relu">Leaky ReLU ($\max(0.1z, z)$)</option>
+                <option value="relu">ReLU (max(0, z))</option>
+                <option value="sigmoid">Sigmoid (1 / (1 + e^-z))</option>
+                <option value="tanh">Hyperbolic Tangent (tanh)</option>
+                <option value="leaky_relu">Leaky ReLU (max(0.1z, z))</option>
               </select>
             </div>
 
