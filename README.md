@@ -2,8 +2,8 @@
 
 <div align="center">
 
-[![Live Website & Documentation](https://img.shields.io/badge/Live_Website-Documentation_%26_Downloads-6366f1?style=for-the-badge&logo=googlechrome&logoColor=white)](https://rajdeep-mudiar.github.io/AI_Learning_Desktop_App/)
-[![Latest Release](https://img.shields.io/github/v/release/Rajdeep-Mudiar/AI_Learning_Desktop_App?style=for-the-badge&color=ec4899&label=Release)](https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest)
+[![Live Website](https://img.shields.io/badge/Live_Website-6366f1?style=for-the-badge&logo=googlechrome&logoColor=white)](https://rajdeep-mudiar.github.io/AI_Learning_Desktop_App/)
+[![Release](https://img.shields.io/badge/Release-ec4899?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest)
 
 </div>
 
