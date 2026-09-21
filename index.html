@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Learning Lab - Next-Gen Engineering Desktop App & Documentation</title>
+  <meta name="description" content="Official documentation and download portal for AI Learning Lab - An interactive desktop application mastering AI & ML, Full-Stack Web, Cross-Platform Mobile, System Design, and Git & GitHub.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="logo-wrap">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <span class="logo-text">AI Learning Lab</span>
+        <span class="logo-tag version-badge-val">v1.0.4</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#features" class="nav-link">Features</a></li>
+          <li><a href="#curriculum" class="nav-link">Curriculum</a></li>
+          <li><a href="#downloads" class="nav-link">Downloads</a></li>
+          <li><a href="#docs" class="nav-link">Documentation</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+          GitHub
+        </a>
+        <a href="#downloads" class="btn btn-primary btn-sm">
+          Get App
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">
+        <span class="hero-badge-pulse"></span>
+        <span id="heroVersionBadge">Version v1.0.4 Released — 28 Courses & 5 Complete Engineering Tracks</span>
+      </div>
+
+      <h1 class="hero-title">
+        The Ultimate Desktop Platform to Master <span class="gradient-text">Modern Software Engineering</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        An interactive, visual-first desktop environment covering AI & Machine Learning, Full-Stack Web Development, Cross-Platform Mobile Apps, Distributed System Design, and Git & GitHub.
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="#downloads" id="heroDownloadBtn" class="btn btn-primary btn-lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download for Windows (.exe)
+        </a>
+        <a href="#docs" class="btn btn-secondary btn-lg">
+          Explore Documentation &rarr;
+        </a>
+      </div>
+
+      <div class="os-detect-info">
+        <span>Available for <strong>Windows</strong>, <strong>macOS</strong> (Apple Silicon & Intel), and <strong>Linux</strong>.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 Tracks Feature Showcase -->
+  <section id="features" class="container">
+    <div class="section-header">
+      <div class="section-tag">Engineering Tracks</div>
+      <h2 class="section-title">Zero Fluff. Complete Mastery.</h2>
+      <p class="section-subtitle">Five comprehensive tracks structured from absolute beginner foundations to high-load enterprise architectures.</p>
+    </div>
+
+    <div class="features-grid">
+      <!-- AI & ML -->
+      <div class="feature-card">
+        <div class="feature-icon-box feature-icon-ai">🧠</div>
+        <h3 class="feature-title">AI & Machine Learning</h3>
+        <p class="feature-desc">Python & NumPy computing, Calculus & Linear Algebra, Neural Network backpropagation, Computer Vision CNNs, and Transformers & RAG pipelines.</p>
+      </div>
+
+      <!-- Web Dev -->
+      <div class="feature-card">
+        <div class="feature-icon-box feature-icon-web">🌐</div>
+        <h3 class="feature-title">Full-Stack Web Engineering</h3>
+        <p class="feature-desc">HTML5 architecture, CSS3 Grid & Flexbox, JavaScript V8 engine & async event loop, React 18 single-page apps, Node.js REST APIs, and Next.js SSR.</p>
+      </div>
+
+      <!-- App Dev -->
+      <div class="feature-card">
+        <div class="feature-icon-box feature-icon-app">📱</div>
+        <h3 class="feature-title">Cross-Platform Mobile Apps</h3>
+        <p class="feature-desc">React Native JSI bridges, Safe Areas, 60fps Reanimated 3 physics, synchronous MMKV caching, embedded SQLite, Flutter Impeller engine, and App Store releases.</p>
+      </div>
+
+      <!-- System Design -->
+      <div class="feature-card">
+        <div class="feature-icon-box feature-icon-sys">⚡</div>
+        <h3 class="feature-title">Distributed System Design</h3>
+        <p class="feature-desc">Horizontal scaling, Layer 4/7 Load Balancers, Redis Cache-Aside with stampede protection, Kafka event streams, Raft consensus, and database sharding rings.</p>
+      </div>
+
+      <!-- Git & GitHub -->
+      <div class="feature-card">
+        <div class="feature-icon-box feature-icon-git">🐙</div>
+        <h3 class="feature-title">Git & GitHub Workflows</h3>
+        <p class="feature-desc">Git object database (Blobs, Trees, Commits DAG), interactive rebase squashing, conflict resolution, reflog time travel, and automated GitHub Actions CI/CD.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Downloads Hub Section -->
+  <section id="downloads" class="download-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Installers & Binaries</div>
+        <h2 class="section-title">Download AI Learning Lab</h2>
+        <p class="section-subtitle">Fast, native desktop builds built on Tauri and Rust with zero bloat and instant startup.</p>
+      </div>
+
+      <!-- OS Selector Tabs -->
+      <div class="os-tabs">
+        <button class="os-tab-btn active" data-os="windows">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.902-1.801"/>
+          </svg>
+          Windows
+        </button>
+
+        <button class="os-tab-btn" data-os="macos">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.92-2.85-.9.04-1.98.6-2.61 1.34-.56.64-.99 1.69-.87 2.71 1 .08 2.01-.52 2.56-1.2"/>
+          </svg>
+          macOS
+        </button>
+
+        <button class="os-tab-btn" data-os="linux">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.001 2c-3.13 0-5.67 2.54-5.67 5.67 0 1.21.38 2.33 1.03 3.25-.09.28-.15.57-.15.88 0 1.06.6 1.98 1.48 2.44-.06.27-.1.55-.1.84 0 2.35 1.91 4.25 4.26 4.25s4.26-1.9 4.26-4.25c0-.29-.04-.57-.1-.84.88-.46 1.48-1.38 1.48-2.44 0-.31-.06-.6-.15-.88.65-.92 1.03-2.04 1.03-3.25 0-3.13-2.54-5.67-5.67-5.67z"/>
+          </svg>
+          Linux
+        </button>
+      </div>
+
+      <div class="download-cards-container">
+        <!-- Windows Panel -->
+        <div id="panel-windows" class="os-panel active">
+          <div class="download-card-hero">
+            <div class="download-header">
+              <div class="os-title-wrap">
+                <div class="os-large-icon">🪟</div>
+                <div>
+                  <h3 class="os-title">AI Learning Lab for Windows</h3>
+                  <div class="os-meta">Supports Windows 10 & 11 (64-bit x64 & ARM64) &bull; <span class="version-badge-val">v1.0.4</span></div>
+                </div>
+              </div>
+              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest" id="btn-win-main" class="btn btn-primary">
+                Download Installer (.exe)
+              </a>
+            </div>
+
+            <div class="download-options-grid">
+              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest" id="link-win-exe" class="download-option">
+                <div>
+                  <div class="option-type">NSIS Installer (.exe)</div>
+                  <div class="option-info">Recommended for most Windows users. Auto-updates enabled.</div>
+                </div>
+                <div class="option-cta">Download .exe (<span id="size-win-exe">Recommended</span>) &darr;</div>
+              </a>
+
+              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest" id="link-win-msi" class="download-option">
+                <div>
+                  <div class="option-type">Enterprise MSI (.msi)</div>
+                  <div class="option-info">Standard Windows Installer package for system administrators.</div>
+                </div>
+                <div class="option-cta">Download .msi (<span id="size-win-msi">Enterprise</span>) &darr;</div>
+              </a>
+
+              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest" id="link-win-zip" class="download-option">
+                <div>
+                  <div class="option-type">Portable (.zip)</div>
+                  <div class="option-info">No installation required. Run directly from USB or local drive.</div>
+                </div>
+                <div class="option-cta">Download .zip (<span id="size-win-zip">Portable</span>) &darr;</div>
+              </a>
+            </div>
+
+            <!-- Winget Command -->
+            <div class="cli-box">
+              <div class="cli-code">winget install RajdeepMudiar.AILearningLab</div>
+              <button class="copy-btn" data-clipboard="winget install RajdeepMudiar.AILearningLab">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                Copy
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- macOS Panel -->
+        <div id="panel-macos" class="os-panel">
+          <div class="download-card-hero">
+            <div class="download-header">
+              <div class="os-title-wrap">
+                <div class="os-large-icon">🍏</div>
+                <div>
+                  <h3 class="os-title">AI Learning Lab for macOS</h3>
+                  <div class="os-meta">Universal Binary: Apple Silicon (M1/M2/M3) & Intel x64 &bull; <span class="version-badge-val">v1.0.4</span></div>
+                </div>
+              </div>
+              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest" id="btn-mac-main" class="btn btn-primary">
+                Download DMG (.dmg)
+              </a>
+            </div>
+
+            <div class="download-options-grid">
+              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest" id="link-mac-arm" class="download-option">
+                <div>
+                  <div class="option-type">Apple Silicon DMG (M1/M2/M3)</div>
+                  <div class="option-info">Optimized for Apple ARM64 processors with ultra-low power draw.</div>
+                </div>
+                <div class="option-cta">Download ARM64 DMG (<span id="size-mac-arm">Apple Silicon</span>) &darr;</div>
+              </a>
+
+              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest" id="link-mac-intel" class="download-option">
+                <div>
+                  <div class="option-type">Intel Mac DMG (x86_64)</div>
+                  <div class="option-info">Native build for all Intel-based MacBooks, iMacs, and Mac Pros.</div>
+                </div>
+                <div class="option-cta">Download Intel DMG (<span id="size-mac-intel">Intel</span>) &darr;</div>
+              </a>
+            </div>
+
+            <!-- Homebrew Command -->
+            <div class="cli-box">
+              <div class="cli-code">brew install --cask ai-learning-lab</div>
+              <button class="copy-btn" data-clipboard="brew install --cask ai-learning-lab">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                Copy
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Linux Panel -->
+        <div id="panel-linux" class="os-panel">
+          <div class="download-card-hero">
+            <div class="download-header">
+              <div class="os-title-wrap">
+                <div class="os-large-icon">🐧</div>
+                <div>
+                  <h3 class="os-title">AI Learning Lab for Linux</h3>
+                  <div class="os-meta">Supports Ubuntu, Debian, Fedora, Arch, and all major distributions &bull; <span class="version-badge-val">v1.0.4</span></div>
+                </div>
+              </div>
+              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest" id="btn-linux-main" class="btn btn-primary">
+                Download AppImage
+              </a>
+            </div>
+
+            <div class="download-options-grid">
+              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest" id="link-linux-appimage" class="download-option">
+                <div>
+                  <div class="option-type">Standalone AppImage (.AppImage)</div>
+                  <div class="option-info">Universal executable across all distributions. Just chmod +x and run.</div>
+                </div>
+                <div class="option-cta">Download AppImage (<span id="size-linux-appimage">Universal</span>) &darr;</div>
+              </a>
+
+              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest" id="link-linux-deb" class="download-option">
+                <div>
+                  <div class="option-type">Debian / Ubuntu (.deb)</div>
+                  <div class="option-info">Native package for Ubuntu, Debian, Pop!_OS, and Linux Mint.</div>
+                </div>
+                <div class="option-cta">Download .deb (<span id="size-linux-deb">Debian/Ubuntu</span>) &darr;</div>
+              </a>
+
+              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest" id="link-linux-rpm" class="download-option">
+                <div>
+                  <div class="option-type">Red Hat / Fedora (.rpm)</div>
+                  <div class="option-info">Native package for Fedora, RHEL, CentOS, and openSUSE.</div>
+                </div>
+                <div class="option-cta">Download .rpm (<span id="size-linux-rpm">Fedora/RHEL</span>) &darr;</div>
+              </a>
+            </div>
+
+            <!-- Terminal Install Command -->
+            <div class="cli-box">
+              <div class="cli-code">curl -fsSL https://raw.githubusercontent.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/main/scripts/install.sh | bash</div>
+              <button class="copy-btn" data-clipboard="curl -fsSL https://raw.githubusercontent.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/main/scripts/install.sh | bash">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                Copy
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comprehensive Documentation Section -->
+  <section id="docs" class="docs-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Documentation & Manual</div>
+        <h2 class="section-title">Developer Guides & Reference</h2>
+        <p class="section-subtitle">Everything you need to navigate laboratories, run interactive sandboxes, and contribute to the platform.</p>
+      </div>
+
+      <div class="docs-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="docs-sidebar">
+          <div style="margin-bottom: 16px;">
+            <input type="text" id="docsSearchInput" placeholder="Search documentation..." style="width: 100%; padding: 8px 14px; background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: #fff; font-size: 0.85rem;">
+          </div>
+
+          <div class="docs-nav-group">
+            <div class="docs-nav-heading">Getting Started</div>
+            <ul class="docs-nav-list">
+              <li class="docs-nav-item"><a href="#doc-overview" class="docs-nav-link active">Platform Overview</a></li>
+              <li class="docs-nav-item"><a href="#doc-system-reqs" class="docs-nav-link">System Requirements</a></li>
+              <li class="docs-nav-item"><a href="#doc-installation" class="docs-nav-link">Installation Guide</a></li>
+            </ul>
+          </div>
+
+          <div class="docs-nav-group">
+            <div class="docs-nav-heading">Curriculum Tracks</div>
+            <ul class="docs-nav-list">
+              <li class="docs-nav-item"><a href="#doc-track-ai" class="docs-nav-link">AI & Machine Learning</a></li>
+              <li class="docs-nav-item"><a href="#doc-track-web" class="docs-nav-link">Full-Stack Web Dev</a></li>
+              <li class="docs-nav-item"><a href="#doc-track-app" class="docs-nav-link">Mobile App Dev</a></li>
+              <li class="docs-nav-item"><a href="#doc-track-sys" class="docs-nav-link">Distributed System Design</a></li>
+              <li class="docs-nav-item"><a href="#doc-track-git" class="docs-nav-link">Git & GitHub CI/CD</a></li>
+            </ul>
+          </div>
+
+          <div class="docs-nav-group">
+            <div class="docs-nav-heading">Interactive Labs</div>
+            <ul class="docs-nav-list">
+              <li class="docs-nav-item"><a href="#doc-sandbox" class="docs-nav-link">Live Code Sandboxes</a></li>
+              <li class="docs-nav-item"><a href="#doc-git-lab" class="docs-nav-link">Git Interactive Terminal</a></li>
+              <li class="docs-nav-item"><a href="#doc-sys-lab" class="docs-nav-link">System Design Canvas</a></li>
+            </ul>
+          </div>
+
+          <div class="docs-nav-group">
+            <div class="docs-nav-heading">Development</div>
+            <ul class="docs-nav-list">
+              <li class="docs-nav-item"><a href="#doc-architecture" class="docs-nav-link">Tech Stack & Architecture</a></li>
+              <li class="docs-nav-item"><a href="#doc-contributing" class="docs-nav-link">Contributing & Local Setup</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="docs-content">
+          <!-- Article: Overview -->
+          <article id="doc-overview" class="docs-article">
+            <h2 class="docs-h2">
+              <span>🚀</span> Platform Overview
+            </h2>
+            <p class="docs-p">
+              <strong>AI Learning Lab</strong> is a state-of-the-art desktop suite engineered to transform how developers learn modern computing concepts. Combining interactive visual explainers, W3Schools-style live editable sandboxes, and automated situational challenges, the application bridges theory with real-world execution.
+            </p>
+            <div class="callout callout-info">
+              <div class="callout-title">💡 Core Philosophy</div>
+              <p class="docs-p" style="margin-bottom: 0;">
+                No passive video watching. Every single lesson presents dynamic interactive diagrams, editable code examples that execute in real-time, and scenario-based terminal challenges.
+              </p>
+            </div>
+          </article>
+
+          <!-- Article: System Requirements -->
+          <article id="doc-system-reqs" class="docs-article">
+            <h2 class="docs-h2">
+              <span>💻</span> System Requirements
+            </h2>
+            <p class="docs-p">Thanks to Tauri's lightweight Rust core, AI Learning Lab uses under 90MB of RAM and boots in milliseconds.</p>
+            <table style="width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem;">
+              <thead>
+                <tr style="background: rgba(255,255,255,0.05); text-align: left;">
+                  <th style="padding: 10px; border: 1px solid var(--border-color);">Platform</th>
+                  <th style="padding: 10px; border: 1px solid var(--border-color);">Minimum OS</th>
+                  <th style="padding: 10px; border: 1px solid var(--border-color);">Architecture</th>
+                  <th style="padding: 10px; border: 1px solid var(--border-color);">Disk Space</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding: 10px; border: 1px solid var(--border-color);">Windows</td>
+                  <td style="padding: 10px; border: 1px solid var(--border-color);">Windows 10 / 11</td>
+                  <td style="padding: 10px; border: 1px solid var(--border-color);">x64, ARM64</td>
+                  <td style="padding: 10px; border: 1px solid var(--border-color);">150 MB</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px; border: 1px solid var(--border-color);">macOS</td>
+                  <td style="padding: 10px; border: 1px solid var(--border-color);">macOS 11.0 (Big Sur)+</td>
+                  <td style="padding: 10px; border: 1px solid var(--border-color);">Apple Silicon (M1/M2/M3), Intel</td>
+                  <td style="padding: 10px; border: 1px solid var(--border-color);">180 MB</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px; border: 1px solid var(--border-color);">Linux</td>
+                  <td style="padding: 10px; border: 1px solid var(--border-color);">glibc 2.31+ (Ubuntu 20.04+)</td>
+                  <td style="padding: 10px; border: 1px solid var(--border-color);">x86_64, aarch64</td>
+                  <td style="padding: 10px; border: 1px solid var(--border-color);">120 MB</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+
+          <!-- Article: Installation Guide -->
+          <article id="doc-installation" class="docs-article">
+            <h2 class="docs-h2">
+              <span>📦</span> Installation Guide
+            </h2>
+            
+            <h3 class="docs-h3">Windows Installation</h3>
+            <p class="docs-p">Download the <code>.exe</code> installer from the downloads hub and run the setup wizard. Or install via Winget:</p>
+            <div class="docs-code-block">
+              <pre><code>winget install RajdeepMudiar.AILearningLab</code></pre>
+            </div>
+
+            <h3 class="docs-h3">macOS Installation</h3>
+            <p class="docs-p">Open the downloaded <code>.dmg</code> file and drag the AI Learning Lab app into your Applications folder. If running on Apple Silicon, the universal binary will execute natively.</p>
+
+            <h3 class="docs-h3">Linux Installation (AppImage)</h3>
+            <div class="docs-code-block">
+              <pre><code>chmod +x AI-Learning-Lab-x86_64.AppImage
+./AI-Learning-Lab-x86_64.AppImage</code></pre>
+            </div>
+          </article>
+
+          <!-- Article: Curriculum -->
+          <article id="doc-track-ai" class="docs-article">
+            <h2 class="docs-h2">
+              <span>📚</span> Curriculum Tracks & Syllabi
+            </h2>
+            <p class="docs-p">The curriculum contains <strong>28 courses and 79 lessons</strong> with interactive quizzes and skill progression:</p>
+            <ul style="padding-left: 24px; color: var(--text-secondary); line-height: 1.8;">
+              <li><strong>AI & Machine Learning (6 Courses)</strong>: Python & NumPy Computing, Mathematics & Derivatives, Classical ML (Regression & Decision Trees), Deep Learning Perceptrons, Computer Vision CNNs, and Transformers & RAG Agents.</li>
+              <li><strong>Full-Stack Web Dev (7 Courses)</strong>: HTML5 Architecture, CSS3 Responsive Grid, JavaScript V8 Engine, React 18 & Zustand, Node.js REST APIs, and Next.js SSR Web Performance.</li>
+              <li><strong>App Development (6 Courses)</strong>: React Native Foundations, Mobile Gestures & Reanimated 3, Offline-First SQLite & MMKV, Flutter Impeller Engine, and Push Notifications & App Store Release.</li>
+              <li><strong>System Design (5 Courses)</strong>: Distributed Systems Foundations, Layer 4/7 Load Balancers & Gateways, Redis Caching & Kafka Event Streams, and Sharding & Raft Consensus.</li>
+              <li><strong>Git & GitHub (4 Courses)</strong>: Git Core Internals & DAG, Branching & Interactive Rebase, Pull Request Reviews, and Automated GitHub Actions CI/CD.</li>
+            </ul>
+          </article>
+
+          <!-- Article: Live Sandboxes -->
+          <article id="doc-sandbox" class="docs-article">
+            <h2 class="docs-h2">
+              <span>⚡</span> Interactive Sandboxes & W3Schools-like Live Editor
+            </h2>
+            <p class="docs-p">
+              Every lesson includes an embedded, responsive code sandbox. Users can edit HTML, CSS, JavaScript, Python, or Dart directly inside the browser/desktop window, click <strong>Run Code</strong>, and instantly see rendered live HTML or terminal stdout in real-time.
+            </p>
+          </article>
+
+          <!-- Article: Git Interactive Terminal -->
+          <article id="doc-git-lab" class="docs-article">
+            <h2 class="docs-h2">
+              <span>🐙</span> Git Interactive Terminal & Branch Tree Graph
+            </h2>
+            <p class="docs-p">
+              The Git Laboratory features an interactive xterm-powered terminal with command history (Up/Down arrow navigation). As you execute <code>git checkout -b feature</code>, <code>git commit -m "..."</code>, and <code>git rebase main</code>, the interactive SVG commit graph draws branch nodes and merge commits in real-time.
+            </p>
+          </article>
+
+          <!-- Article: Architecture -->
+          <article id="doc-architecture" class="docs-article">
+            <h2 class="docs-h2">
+              <span>🏗️</span> Tech Stack & Architecture
+            </h2>
+            <p class="docs-p">AI Learning Lab is built with high-performance modern technologies:</p>
+            <ul style="padding-left: 24px; color: var(--text-secondary); line-height: 1.8;">
+              <li><strong>Desktop Shell</strong>: Tauri 2.0 (Rust backend with WebKit/WebView2).</li>
+              <li><strong>Frontend UI</strong>: React 18, Vite, Lucide Icons, Canvas Visualizers.</li>
+              <li><strong>Backend Engine</strong>: Python 3.13, FastAPI, Motor AsyncIO.</li>
+              <li><strong>Database Persistence</strong>: MongoDB with offline-first caching.</li>
+            </ul>
+          </article>
+
+          <!-- Article: Contributing -->
+          <article id="doc-contributing" class="docs-article">
+            <h2 class="docs-h2">
+              <span>🤝</span> Local Setup & Contributing
+            </h2>
+            <p class="docs-p">To run the full stack locally for development:</p>
+            <div class="docs-code-block">
+              <pre><code># 1. Clone repository
+git clone https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App.git
+cd AI_Learning_Desktop_App
+
+# 2. Start backend server
+cd apps/backend
+python -m venv venv
+.\venv\Scripts\activate
+pip install -r requirements.txt
+python main.py
+
+# 3. Start desktop frontend in another terminal
+cd apps/desktop
+npm install
+npm run tauri dev</code></pre>
+            </div>
+          </article>
+        </main>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <ul class="footer-links">
+        <li><a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App" class="footer-link">GitHub Repository</a></li>
+        <li><a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases" class="footer-link">Release Notes</a></li>
+        <li><a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/issues" class="footer-link">Issue Tracker</a></li>
+        <li><a href="#docs" class="footer-link">Documentation</a></li>
+      </ul>
+      <p>&copy; 2026 AI Learning Lab. Open-source under MIT License. Crafted with precision for engineers worldwide.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
