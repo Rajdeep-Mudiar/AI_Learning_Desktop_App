@@ -1,6 +1,19 @@
 # AI Learning Lab
 
-**AI Learning Lab** is a desktop-first interactive artificial intelligence education and experimentation platform. Designed for students, university learners, ML practitioners, and AI researchers, the platform combines interactive simulations, sandboxed Python programming, context-aware AI tutoring, ML experimentation, neural visualizers, ArXiv paper reproduction workspaces, mock interview simulators, and career roadmaps into an integrated desktop developer environment.
+<div align="center">
+
+[![Live Documentation & Downloads](https://img.shields.io/badge/Live_Website-Documentation_%26_Downloads-6366f1?style=for-the-badge&logo=googlechrome&logoColor=white)](https://rajdeep-mudiar.github.io/AI_Learning_Desktop_App/)
+[![Latest Release](https://img.shields.io/github/v/release/Rajdeep-Mudiar/AI_Learning_Desktop_App?style=for-the-badge&color=ec4899&label=Release)](https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest)
+[![GitHub Pages Deployment](https://img.shields.io/badge/Deployment-Live_on_GitHub_Pages-10b981?style=for-the-badge&logo=github&logoColor=white)](https://rajdeep-mudiar.github.io/AI_Learning_Desktop_App/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-f59e0b?style=for-the-badge)](https://opensource.org/licenses/MIT)
+
+**🌐 Official Webpage & Documentation Portal:** [https://rajdeep-mudiar.github.io/AI_Learning_Desktop_App/](https://rajdeep-mudiar.github.io/AI_Learning_Desktop_App/)
+
+</div>
+
+---
+
+**AI Learning Lab** is a desktop-first interactive artificial intelligence education, software engineering, and experimentation platform. Designed for students, university learners, ML practitioners, and developers, the platform combines interactive simulations, sandboxed programming, context-aware AI tutoring, neural visualizers, ArXiv paper reproduction workspaces, mock interview simulators, and full-stack curriculum tracks into an integrated desktop developer environment.
 
 ---
 
