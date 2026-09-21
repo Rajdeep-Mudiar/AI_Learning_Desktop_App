@@ -7978,3 +7978,16 @@ SKILLS_DATA = [   {   'id': 'skill-python-basics',
         'matching_lessons': [   'git-github-prs-code-reviews',
                                 'git-actions-cicd-automation',
                                 'git-releases-tag-publishing']}]
+
+# Extend with comprehensive DSA and Cyber Security curriculum tracks
+from app.seed.dsa_cyber_seed_data import (
+    DSA_CYBER_COURSES,
+    DSA_CYBER_LESSONS,
+    DSA_CYBER_QUIZZES,
+    DSA_CYBER_SKILLS
+)
+
+COURSES_DATA.extend(DSA_CYBER_COURSES)
+LESSONS_DATA.extend(DSA_CYBER_LESSONS)
+QUIZZES_DATA.extend(DSA_CYBER_QUIZZES)
+SKILLS_DATA.extend(DSA_CYBER_SKILLS)

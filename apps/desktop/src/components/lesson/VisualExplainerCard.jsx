@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Eye, Sliders, RefreshCw, ExternalLink, Sparkles, Layers, Play, CheckCircle2, Globe, Cpu, GitBranch, Smartphone, Server } from 'lucide-react';
+import { Eye, Sliders, RefreshCw, ExternalLink, Sparkles, Layers, Play, CheckCircle2, Globe, Cpu, GitBranch, Smartphone, Server, Binary, ShieldCheck, Lock } from 'lucide-react';
 
 export default function VisualExplainerCard({ visual, domain }) {
   const navigate = useNavigate();
@@ -29,6 +29,12 @@ export default function VisualExplainerCard({ visual, domain }) {
     const title = (visual.title || '').toLowerCase();
     const dom = (domain || '').toLowerCase();
 
+    if (dom === 'dsa' || type.includes('bst') || type.includes('tree') || type.includes('sort') || type.includes('pointer') || type.includes('knapsack') || type.includes('stack') || title.includes('dsa') || title.includes('tree') || title.includes('pointer')) {
+      return { path: '/dsa-lab', label: 'Open DSA Lab', icon: Binary };
+    }
+    if (dom === 'cybersecurity' || type.includes('crypto') || type.includes('cipher') || type.includes('rsa') || type.includes('sha') || type.includes('sqli') || type.includes('firewall') || title.includes('cyber') || title.includes('security') || title.includes('crypto')) {
+      return { path: '/cyber-lab', label: 'Open Cyber Security Lab', icon: ShieldCheck };
+    }
     if (dom === 'web-dev' || type.includes('box_model') || type.includes('html') || type.includes('flex') || type.includes('grid') || type.includes('event_loop') || type.includes('vdom') || type.includes('middleware') || type.includes('jwt') || type.includes('hydration') || title.includes('web') || title.includes('css') || title.includes('html') || title.includes('react') || title.includes('dom') || title.includes('next.js')) {
       return { path: '/web-lab', label: 'Open Web Dev Lab', icon: Globe };
     }
@@ -415,6 +421,78 @@ export default function VisualExplainerCard({ visual, domain }) {
             <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 12 }}>
               Notice how <b>"it"</b> attends predominantly (0.78 weight) to <b>"animal"</b> across the sequence.
             </p>
+          </div>
+        );
+
+      case 'two_pointers_array':
+        return (
+          <div style={{ background: '#0b1120', padding: 18, borderRadius: 10, border: '1px solid #1e293b' }}>
+            <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: 12 }}>Two Pointers Array Search: <b>L (Left)</b> & <b>R (Right)</b> Inward Convergence</div>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: 10 }}>
+              {[2, 7, 11, 15, 22].map((num, i) => (
+                <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <span style={{ fontSize: '0.7rem', fontWeight: 700, color: i === 0 ? '#38bdf8' : i === 4 ? '#f43f5e' : 'transparent' }}>
+                    {i === 0 ? 'LEFT' : i === 4 ? 'RIGHT' : '-'}
+                  </span>
+                  <div style={{ width: 44, height: 44, borderRadius: 8, background: i === 0 ? 'rgba(56, 189, 248, 0.2)' : i === 4 ? 'rgba(244, 63, 94, 0.2)' : '#1e293b', border: i === 0 ? '2px solid #38bdf8' : i === 4 ? '2px solid #f43f5e' : '1px solid #334155', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700 }}>
+                    {num}
+                  </div>
+                  <span style={{ fontSize: '0.68rem', color: '#64748b' }}>[{i}]</span>
+                </div>
+              ))}
+            </div>
+            <div style={{ marginTop: 12, textAlign: 'center', fontSize: '0.78rem', color: '#34d399' }}>
+              arr[0] (2) + arr[4] (22) = 24. If target is 18, decrement Right pointer to reduce sum!
+            </div>
+          </div>
+        );
+
+      case 'bst_tree_traversal':
+        return (
+          <div style={{ background: '#0b1120', padding: 16, borderRadius: 10, border: '1px solid #1e293b', textAlign: 'center' }}>
+            <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: 10 }}>Binary Search Tree Property: <code>Left &lt; Root &lt; Right</code></div>
+            <svg width="280" height="120" viewBox="0 0 280 120" style={{ margin: '0 auto' }}>
+              <line x1="140" y1="20" x2="80" y2="60" stroke="#334155" strokeWidth="2" />
+              <line x1="140" y1="20" x2="200" y2="60" stroke="#334155" strokeWidth="2" />
+              <circle cx="140" cy="20" r="16" fill="#1e293b" stroke="#f43f5e" strokeWidth="2" />
+              <text x="140" y="24" fill="#fff" fontSize="11" fontWeight="bold" textAnchor="middle">50</text>
+
+              <circle cx="80" cy="60" r="14" fill="#1e293b" stroke="#38bdf8" strokeWidth="2" />
+              <text x="80" y="64" fill="#fff" fontSize="10" fontWeight="bold" textAnchor="middle">30</text>
+
+              <circle cx="200" cy="60" r="14" fill="#1e293b" stroke="#10b981" strokeWidth="2" />
+              <text x="200" y="64" fill="#fff" fontSize="10" fontWeight="bold" textAnchor="middle">70</text>
+            </svg>
+            <div style={{ fontSize: '0.75rem', color: '#a5b4fc', marginTop: 4 }}>Inorder Traversal: 30 → 50 → 70 (Always naturally sorted)</div>
+          </div>
+        );
+
+      case 'rsa_crypto_flow':
+        return (
+          <div style={{ background: '#0b1120', padding: 16, borderRadius: 10, border: '1px solid #1e293b' }}>
+            <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: 10 }}>Asymmetric Cryptography: Public Key Encrypts, Private Key Decrypts</div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr auto 1fr', alignItems: 'center', gap: 8, textAlign: 'center' }}>
+              <div style={{ background: '#1e293b', padding: 8, borderRadius: 6, fontSize: '0.75rem', color: '#f8fafc' }}>Plaintext "Hello"</div>
+              <span style={{ color: '#14b8a6' }}>🔒 + (Pub Key) →</span>
+              <div style={{ background: 'rgba(20, 184, 166, 0.2)', border: '1px dashed #14b8a6', padding: 8, borderRadius: 6, fontSize: '0.72rem', color: '#2dd4bf', fontFamily: 'var(--font-mono)' }}>0x8a92f...</div>
+              <span style={{ color: '#f43f5e' }}>🔑 + (Priv Key) →</span>
+              <div style={{ background: '#1e293b', padding: 8, borderRadius: 6, fontSize: '0.75rem', color: '#34d399' }}>Decrypted "Hello"</div>
+            </div>
+          </div>
+        );
+
+      case 'sql_injection_defense':
+        return (
+          <div style={{ background: '#0b1120', padding: 16, borderRadius: 10, border: '1px solid #1e293b' }}>
+            <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: 10 }}>SQL Injection Defense: Prepared Statements vs Vulnerable Concatenation</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <div style={{ background: 'rgba(244, 63, 94, 0.15)', border: '1px solid #f43f5e', padding: 8, borderRadius: 6, fontSize: '0.75rem', color: '#fca5a5', fontFamily: 'var(--font-mono)' }}>
+                ✖ Vulnerable: "SELECT * FROM users WHERE user = '" + input + "'"
+              </div>
+              <div style={{ background: 'rgba(16, 185, 129, 0.15)', border: '1px solid #10b981', padding: 8, borderRadius: 6, fontSize: '0.75rem', color: '#86efac', fontFamily: 'var(--font-mono)' }}>
+                ✔ Defended: "SELECT * FROM users WHERE user = ?" [Bind param: input]
+              </div>
+            </div>
           </div>
         );
 

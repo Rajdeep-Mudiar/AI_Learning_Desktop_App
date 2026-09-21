@@ -182,6 +182,62 @@ INTERVIEW_TRACKS: List[InterviewTrack] = [
                 expected_key_points=["Rebase produces clean linear history", "Squash consolidates PR commits into one", "3-way merge preserves exact branch topology", "Never rebase shared public branches"]
             )
         ]
+    ),
+    # ================= DSA INTERVIEW =================
+    InterviewTrack(
+        id="dsa-algorithms-engineer",
+        title="Algorithms & Data Structures Technical Interview",
+        role_target="Software Engineer / Core Systems (Mid - Senior)",
+        domain="dsa",
+        difficulty="Mid-Level",
+        duration_minutes=45,
+        questions_count=2,
+        description="Evaluates algorithmic efficiency, Two Pointers vs Sliding Window trade-offs, Tree validations, and Dynamic Programming state design.",
+        banner_color="linear-gradient(135deg, #f43f5e, #e11d48)",
+        questions=[
+            InterviewQuestion(
+                id="dsa-q1",
+                category="Complexity & Two Pointers",
+                question="Explain how the Two Pointers technique reduces runtime from O(N²) to O(N) in sorted search problems. Under what conditions does this technique fail?",
+                rubric="Candidate should explain directional monotonicity: sorted elements guarantee that moving inward prunes candidate subsets deterministically. It fails when the array is unsorted or non-monotonic.",
+                expected_key_points=["Directional monotonicity", "Deterministic pruning of search space", "O(N) linear time and O(1) space", "Requires sorted data"]
+            ),
+            InterviewQuestion(
+                id="dsa-q2",
+                category="Dynamic Programming",
+                question="How do you identify whether a problem has Optimal Substructure and Overlapping Subproblems? Explain with the 0/1 Knapsack problem.",
+                rubric="Candidate should define optimal substructure (global optimum constructed from subproblem optima) and overlapping subproblems (identical subproblem evaluations across branches). In 0/1 knapsack, choices at item i and capacity w depend on (i-1, w) and (i-1, w-wt).",
+                expected_key_points=["Optimal substructure definition", "Overlapping subproblems evaluation", "Recurrence state transition dp[i][w]", "Memoization table caching"]
+            )
+        ]
+    ),
+    # ================= CYBER SECURITY INTERVIEW =================
+    InterviewTrack(
+        id="cyber-security-specialist",
+        title="Cyber Security Defense & Threat Mitigation Interview",
+        role_target="Security Engineer / AppSec & SOC Analyst",
+        domain="cybersecurity",
+        difficulty="Mid - Senior",
+        duration_minutes=50,
+        questions_count=2,
+        description="Evaluates deep knowledge of OWASP Top 10 mitigations, PKI/TLS handshakes, stateful firewall packet filtering, and Zero Trust architectures.",
+        banner_color="linear-gradient(135deg, #14b8a6, #0d9488)",
+        questions=[
+            InterviewQuestion(
+                id="cyber-q1",
+                category="Web Security & OWASP",
+                question="Why do Parameterized Prepared Statements prevent SQL Injection at the architectural level while regex blacklists and string escaping often fail?",
+                rubric="Candidate should explain SQL compilation phases: prepared statements compile the query AST with placeholders before parameter binding. Parameters are treated strictly as inert literals over the binary wire protocol.",
+                expected_key_points=["Separate code from data channels", "Pre-compiled AST query plan", "Literal data binding", "Blacklist bypasses (encoding, double quotes)"]
+            ),
+            InterviewQuestion(
+                id="cyber-q2",
+                category="Enterprise Defense",
+                question="Explain the core principles of Zero Trust Architecture (ZTA). How does micro-segmentation limit the blast radius during an active breach?",
+                rubric="Candidate should discuss Never Trust Always Verify, identity-aware proxies, mutual TLS between microservices, least privilege access, and preventing lateral movement.",
+                expected_key_points=["Never Trust Always Verify", "Assume breach mentality", "Micro-segmentation blocks lateral movement", "Continuous identity & device posture verification"]
+            )
+        ]
     )
 ]
 

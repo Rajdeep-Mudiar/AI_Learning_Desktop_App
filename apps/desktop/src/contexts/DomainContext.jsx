@@ -5,13 +5,13 @@ export const DOMAINS = {
     id: 'all',
     title: 'All Engineering Disciplines',
     shortTitle: 'All Tracks',
-    tagline: 'Complete Engineering Suite: AI & ML, Web Development, Mobile Apps, System Design & Git Workflows',
+    tagline: 'Complete Engineering Suite: AI & ML, Web Dev, Mobile Apps, System Design, Git, DSA & Cyber Security',
     icon: 'Sparkles',
     color: '#6366F1',
     gradient: 'linear-gradient(135deg, #6366F1, #EC4899)',
     badge: 'Complete Suite',
     categories: ['All Categories'],
-    skills: ['AI & ML', 'Web Engineering', 'Mobile Apps', 'Distributed Systems', 'Git & CI/CD'],
+    skills: ['AI & ML', 'Web Engineering', 'Mobile Apps', 'Distributed Systems', 'Git & CI/CD', 'DSA & Algorithms', 'Cyber Security'],
     defaultRoute: '/dashboard'
   },
   'ai-ml': {
@@ -65,6 +65,32 @@ export const DOMAINS = {
     categories: ['System Design', 'Distributed Systems', 'Caching & Sharding'],
     skills: ['Load Balancers', 'Redis Caching', 'Database Sharding', 'Microservices', 'CAP Theorem', 'Rate Limiting'],
     defaultRoute: '/system-design-lab'
+  },
+  'dsa': {
+    id: 'dsa',
+    title: 'Data Structures & Algorithms',
+    shortTitle: 'DSA',
+    tagline: 'Master Array Pointers, Binary Trees, Stacks & Queues, Graphs & Dynamic Programming',
+    icon: 'Binary',
+    color: '#F43F5E',
+    gradient: 'linear-gradient(135deg, #F43F5E, #E11D48)',
+    badge: 'Interview Essential',
+    categories: ['Arrays & Strings', 'Linked Lists & Stacks', 'Trees & Graphs', 'Dynamic Programming'],
+    skills: ['Two Pointers & Sliding Window', 'Monotonic Stacks', 'Binary Search Trees', 'Graph BFS/DFS & Dijkstra', 'Dynamic Programming', 'Big-O Analysis'],
+    defaultRoute: '/dsa-lab'
+  },
+  'cybersecurity': {
+    id: 'cybersecurity',
+    title: 'Cyber Security & Defense',
+    shortTitle: 'Cyber Security',
+    tagline: 'Master Network Defense, Cryptography, OWASP Web Security, Threat Hunting & Zero Trust',
+    icon: 'ShieldCheck',
+    color: '#14B8A6',
+    gradient: 'linear-gradient(135deg, #14B8A6, #0D9488)',
+    badge: 'Mission Critical',
+    categories: ['Network Security', 'Applied Cryptography', 'Web App Security & OWASP', 'Threat Hunting & Zero Trust'],
+    skills: ['Network Packet Analysis', 'AES & RSA Cryptography', 'SQLi & XSS Prevention', 'JWT & Auth Defense', 'Zero Trust Architecture', 'Incident Response'],
+    defaultRoute: '/cyber-lab'
   },
   'github': {
     id: 'github',

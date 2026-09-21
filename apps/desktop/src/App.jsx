@@ -18,6 +18,8 @@ import WebDevLabPage from './pages/WebDevLabPage';
 import MobileAppLabPage from './pages/MobileAppLabPage';
 import SystemDesignLabPage from './pages/SystemDesignLabPage';
 import GitLabPage from './pages/GitLabPage';
+import DSALabPage from './pages/DSALabPage';
+import CyberLabPage from './pages/CyberLabPage';
 import PlaygroundPage from './pages/PlaygroundPage';
 import ChallengesPage from './pages/ChallengesPage';
 import ChallengeDetailPage from './pages/ChallengeDetailPage';
@@ -26,13 +28,9 @@ import ExperimentsPage from './pages/ExperimentsPage';
 import TutorPage from './pages/TutorPage';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
-import AchievementsPage from './pages/AchievementsPage';
 import ResearchPage from './pages/ResearchPage';
 import PaperDetailPage from './pages/PaperDetailPage';
-import InterviewsPage from './pages/InterviewsPage';
-import InterviewSessionPage from './pages/InterviewSessionPage';
 import HackathonsPage from './pages/HackathonsPage';
-import CommunityPage from './pages/CommunityPage';
 import CareerPage from './pages/CareerPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -82,6 +80,8 @@ export default function App() {
                 <Route path="app-lab" element={<MobileAppLabPage />} />
                 <Route path="system-design-lab" element={<SystemDesignLabPage />} />
                 <Route path="git-lab" element={<GitLabPage />} />
+                <Route path="dsa-lab" element={<DSALabPage />} />
+                <Route path="cyber-lab" element={<CyberLabPage />} />
                 
                 <Route path="playground" element={<PlaygroundPage />} />
                 <Route path="challenges" element={<ChallengesPage />} />
@@ -95,12 +95,8 @@ export default function App() {
                 <Route path="projects/:projectId" element={<ProjectDetailPage />} />
                 <Route path="research" element={<ResearchPage />} />
                 <Route path="research/:paperId" element={<PaperDetailPage />} />
-                <Route path="interviews" element={<InterviewsPage />} />
-                <Route path="interviews/:trackId" element={<InterviewSessionPage />} />
                 <Route path="hackathons" element={<HackathonsPage />} />
-                <Route path="community" element={<CommunityPage />} />
                 <Route path="career" element={<CareerPage />} />
-                <Route path="achievements" element={<AchievementsPage />} />
               </Route>
 
               {/* Fallback */}

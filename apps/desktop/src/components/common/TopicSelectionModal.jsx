@@ -13,7 +13,9 @@ import {
   Code2,
   Cpu,
   Terminal,
-  Zap
+  Zap,
+  Binary,
+  ShieldCheck
 } from 'lucide-react';
 import { useDomain } from '../../contexts/DomainContext';
 
@@ -22,6 +24,8 @@ const DOMAIN_ICONS = {
   'web-dev': Globe,
   'app-dev': Smartphone,
   'system-design': Layers,
+  'dsa': Binary,
+  'cybersecurity': ShieldCheck,
   'github': GitBranch
 };
 
@@ -113,7 +117,7 @@ export default function TopicSelectionModal() {
             What do you want to master today?
           </h1>
           <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', maxWidth: '640px', margin: '0 auto' }}>
-            Select your primary engineering discipline. The platform will dynamically configure courses, interactive visual labs, code sandboxes, and interview simulators tailored to your track.
+            Select your primary engineering discipline. The platform will dynamically configure courses, interactive visual labs, code sandboxes, and AI tutors tailored to your track.
           </p>
         </div>
 

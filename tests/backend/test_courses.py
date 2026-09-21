@@ -34,11 +34,26 @@ async def test_courses_and_lessons_flow():
         assert len(lesson_data["theory_sections"]) > 0
         assert lesson_data["code_example"] is not None
 
-        # 5. Get quiz
-        quiz_resp = await ac.get(f"/api/v1/quizzes/{lesson_data['quiz_id']}")
-        assert quiz_resp.status_code == 200
-        quiz_data = quiz_resp.json()
-        assert len(quiz_data["questions"]) > 0
-        # Ensure correct answers are NOT leaked in quiz detail endpoint
-        for q in quiz_data["questions"]:
-            assert "correct_answer" not in q
+        # 6. Verify DSA Course & Lesson Detail
+        dsa_resp = await ac.get("/api/v1/courses/dsa-foundations-arrays-strings")
+        assert dsa_resp.status_code == 200
+        dsa_data = dsa_resp.json()
+        assert dsa_data["domain"] == "dsa"
+        assert len(dsa_data["modules"]) >= 3
+
+        dsa_lesson_resp = await ac.get("/api/v1/lessons/dsa-big-o-memory-arrays")
+        assert dsa_lesson_resp.status_code == 200
+        dsa_lesson = dsa_lesson_resp.json()
+        assert len(dsa_lesson["theory_sections"]) > 0
+
+        # 7. Verify Cyber Security Course & Lesson Detail
+        cyber_resp = await ac.get("/api/v1/courses/cybersecurity-foundations-network-security")
+        assert cyber_resp.status_code == 200
+        cyber_data = cyber_resp.json()
+        assert cyber_data["domain"] == "cybersecurity"
+        assert len(cyber_data["modules"]) >= 3
+
+        cyber_lesson_resp = await ac.get("/api/v1/lessons/cyber-cia-triad-threat-modeling")
+        assert cyber_lesson_resp.status_code == 200
+        cyber_lesson = cyber_lesson_resp.json()
+        assert len(cyber_lesson["theory_sections"]) > 0

@@ -25,6 +25,9 @@ import {
   Smartphone,
   Layers,
   GitBranch,
+  Binary,
+  ShieldCheck,
+  Lock,
 } from 'lucide-react';
 import { useDomain } from '../../contexts/DomainContext';
 
@@ -34,6 +37,18 @@ export default function Sidebar() {
   // Dynamic specialized labs based on active domain
   const getDomainLabs = () => {
     switch (currentDomain) {
+      case 'dsa':
+        return [
+          { path: '/dsa-lab', label: 'DSA Visualizer & Sandbox', icon: Binary },
+          { path: '/playground', label: 'Code Playground', icon: Terminal },
+          { path: '/challenges', label: 'DSA Challenges', icon: Award }
+        ];
+      case 'cybersecurity':
+        return [
+          { path: '/cyber-lab', label: 'Crypto & Threat Defense Lab', icon: ShieldCheck },
+          { path: '/playground', label: 'Code Playground', icon: Terminal },
+          { path: '/challenges', label: 'Security Challenges', icon: Award }
+        ];
       case 'web-dev':
         return [
           { path: '/web-lab', label: 'Web Sandbox & Live Preview', icon: Globe },
@@ -60,6 +75,8 @@ export default function Sidebar() {
         return [
           { path: '/algorithms', label: 'Algorithm Lab (AI)', icon: Cpu },
           { path: '/deep-learning', label: 'Deep Learning Lab', icon: Network },
+          { path: '/dsa-lab', label: 'DSA Visualizer Lab', icon: Binary },
+          { path: '/cyber-lab', label: 'Cyber Defense Lab', icon: ShieldCheck },
           { path: '/web-lab', label: 'Web Dev Sandbox', icon: Globe },
           { path: '/app-lab', label: 'Mobile App Lab', icon: Smartphone },
           { path: '/system-design-lab', label: 'System Design Lab', icon: Layers },
@@ -81,6 +98,8 @@ export default function Sidebar() {
 
   const getTrackBrandTitle = () => {
     switch (currentDomain) {
+      case 'dsa': return 'DSA & Algorithms';
+      case 'cybersecurity': return 'Cyber Security Lab';
       case 'web-dev': return 'Web Dev Lab';
       case 'app-dev': return 'App Dev Lab';
       case 'system-design': return 'System Design';
@@ -166,7 +185,21 @@ export default function Sidebar() {
         <NavLink to="/tutor" className={({ isActive }) => `nav-item ${isActive ? 'nav-item-active' : ''}`}>
           <div className="nav-item-left">
             <Bot size={18} />
-            <span>{currentDomain === 'web-dev' ? 'Web AI Tutor' : currentDomain === 'app-dev' ? 'Mobile AI Tutor' : currentDomain === 'system-design' ? 'Systems AI Tutor' : currentDomain === 'github' ? 'Git AI Tutor' : 'AI Tutor'}</span>
+            <span>
+              {currentDomain === 'dsa'
+                ? 'DSA AI Tutor'
+                : currentDomain === 'cybersecurity'
+                ? 'Cyber AI Tutor'
+                : currentDomain === 'web-dev'
+                ? 'Web AI Tutor'
+                : currentDomain === 'app-dev'
+                ? 'Mobile AI Tutor'
+                : currentDomain === 'system-design'
+                ? 'Systems AI Tutor'
+                : currentDomain === 'github'
+                ? 'Git AI Tutor'
+                : 'AI Tutor'}
+            </span>
           </div>
         </NavLink>
 
@@ -177,33 +210,12 @@ export default function Sidebar() {
           </div>
         </NavLink>
 
-        <NavLink to="/interviews" className={({ isActive }) => `nav-item ${isActive ? 'nav-item-active' : ''}`}>
-          <div className="nav-item-left">
-            <Video size={18} />
-            <span>Mock Interviews</span>
-          </div>
-        </NavLink>
-
-        {/* Community & Career */}
+        {/* Growth & Career */}
         <div className="nav-section-title" style={{ marginTop: 12 }}>Growth & Career</div>
         <NavLink to="/career" className={({ isActive }) => `nav-item ${isActive ? 'nav-item-active' : ''}`}>
           <div className="nav-item-left">
             <Briefcase size={18} />
             <span>Career Roadmaps</span>
-          </div>
-        </NavLink>
-
-        <NavLink to="/community" className={({ isActive }) => `nav-item ${isActive ? 'nav-item-active' : ''}`}>
-          <div className="nav-item-left">
-            <Users size={18} />
-            <span>Community Forum</span>
-          </div>
-        </NavLink>
-
-        <NavLink to="/achievements" className={({ isActive }) => `nav-item ${isActive ? 'nav-item-active' : ''}`}>
-          <div className="nav-item-left">
-            <Trophy size={18} />
-            <span>Achievements</span>
           </div>
         </NavLink>
 

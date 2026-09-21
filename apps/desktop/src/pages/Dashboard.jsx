@@ -16,6 +16,9 @@ import {
   ArrowRight,
   TrendingUp,
   Code2,
+  Binary,
+  ShieldCheck,
+  Lock,
 } from 'lucide-react';
 import { dashboardService } from '../services/dashboardService';
 import { useAuth } from '../contexts/AuthContext';
@@ -56,6 +59,20 @@ export default function Dashboard() {
   // Track-specific quick labs
   const getQuickLabs = () => {
     switch (currentDomain) {
+      case 'dsa':
+        return [
+          { label: 'DSA Visualizer & Trees', icon: Binary, path: '/dsa-lab', color: '#F43F5E' },
+          { label: 'Sorting Race Studio', icon: Activity, path: '/dsa-lab', color: '#38BDF8' },
+          { label: 'LeetCode Challenges', icon: Trophy, path: '/challenges', color: '#F59E0B' },
+          { label: 'AI DSA Tutor', icon: Bot, path: '/tutor', color: '#8B5CF6' },
+        ];
+      case 'cybersecurity':
+        return [
+          { label: 'Threat Defense & CTF Lab', icon: ShieldCheck, path: '/cyber-lab', color: '#14B8A6' },
+          { label: 'Crypto & Hashing Studio', icon: Lock, path: '/cyber-lab', color: '#06B6D4' },
+          { label: 'Security Challenges', icon: Trophy, path: '/challenges', color: '#F59E0B' },
+          { label: 'Cyber AI Tutor', icon: Bot, path: '/tutor', color: '#EC4899' },
+        ];
       case 'web-dev':
         return [
           { label: 'Web Sandbox & Live Preview', icon: Terminal, path: '/web-lab', color: '#06B6D4' },

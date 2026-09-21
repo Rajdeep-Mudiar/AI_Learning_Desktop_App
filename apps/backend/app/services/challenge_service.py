@@ -567,6 +567,181 @@ CHALLENGES_STORE = [
             }
         ],
         "test_harness_code": ""
+    },
+    {
+        "id": "dsa-two-sum-linear",
+        "title": "Two Sum in O(N) Linear Time",
+        "domain": "dsa",
+        "category": "Arrays & Strings",
+        "difficulty": "Beginner",
+        "description": "Find indices of two numbers that add up to target using hash map in O(N) time and O(N) space.",
+        "skills_tested": ["Arrays & Strings", "Two Pointers", "Hash Maps"],
+        "xp_reward": 100,
+        "problem_statement": (
+            "Given an integer array `nums` and integer `target`, return indices `[i, j]` such that `nums[i] + nums[j] == target`.\n\n"
+            "Requirements:\n"
+            "- Assume each input has exactly one solution.\n"
+            "- You may not use the same element twice.\n"
+            "- Implement in O(N) single-pass runtime."
+        ),
+        "starter_code": (
+            "from typing import List, Tuple\n\n"
+            "def two_sum(nums: List[int], target: int) -> Tuple[int, int]:\n"
+            "    # Your O(N) solution here\n"
+            "    pass\n"
+        ),
+        "hints": [
+            "Hint 1: Use a dictionary mapping `value -> index`.",
+            "Hint 2: For each number `x`, check if `target - x` already exists in the dictionary."
+        ],
+        "test_harness_code": (
+            "\n"
+            "# Autograder harness\n"
+            "import json, sys\n"
+            "results = []\n"
+            "try:\n"
+            "    r1 = two_sum([2, 7, 11, 15], 9)\n"
+            "    p1 = sorted(list(r1)) == [0, 1]\n"
+            "    results.append({'test_id': 't1', 'desc': 'Simple pair [2, 7] -> 9', 'passed': bool(p1), 'expected': '[0, 1]', 'actual': str(r1)})\n"
+            "\n"
+            "    r2 = two_sum([3, 2, 4], 6)\n"
+            "    p2 = sorted(list(r2)) == [1, 2]\n"
+            "    results.append({'test_id': 't2', 'desc': 'Indices [1, 2] -> 6', 'passed': bool(p2), 'expected': '[1, 2]', 'actual': str(r2)})\n"
+            "except Exception as e:\n"
+            "    results.append({'test_id': 'err', 'desc': 'Runtime Error', 'passed': False, 'expected': 'Clean execution', 'actual': str(e)})\n"
+            "print('__AUTOGRADER_JSON_START__')\n"
+            "print(json.dumps(results))\n"
+            "print('__AUTOGRADER_JSON_END__')\n"
+        )
+    },
+    {
+        "id": "dsa-valid-parentheses",
+        "title": "Valid Parentheses Matcher with LIFO Stack",
+        "domain": "dsa",
+        "category": "Linked Lists & Stacks",
+        "difficulty": "Beginner",
+        "description": "Determine if input string containing brackets '()', '[]', '{}' has balanced and correctly ordered closing brackets.",
+        "skills_tested": ["Stacks & Queues", "LIFO Mechanics", "String Parsing"],
+        "xp_reward": 100,
+        "problem_statement": (
+            "Write a function `is_valid_parentheses(s: str) -> bool` that verifies bracket balancing.\n\n"
+            "Rules:\n"
+            "- Open brackets must be closed by the same type of brackets.\n"
+            "- Open brackets must be closed in the correct order.\n"
+            "- Every close bracket has a corresponding open bracket of the same type."
+        ),
+        "starter_code": (
+            "def is_valid_parentheses(s: str) -> bool:\n"
+            "    # Your stack-based implementation here\n"
+            "    pass\n"
+        ),
+        "hints": [
+            "Hint 1: Push open brackets onto a Python list acting as a LIFO stack.",
+            "Hint 2: When encountering a closing bracket, pop from the stack and verify it matches the expected bracket type."
+        ],
+        "test_harness_code": (
+            "\n"
+            "# Autograder harness\n"
+            "import json, sys\n"
+            "results = []\n"
+            "try:\n"
+            "    p1 = is_valid_parentheses('()[]{}') == True\n"
+            "    results.append({'test_id': 't1', 'desc': 'Balanced \"()[]{}\"', 'passed': bool(p1), 'expected': 'True', 'actual': str(is_valid_parentheses('()[]{}'))})\n"
+            "\n"
+            "    p2 = is_valid_parentheses('(]') == False\n"
+            "    results.append({'test_id': 't2', 'desc': 'Mismatched \"(]\"', 'passed': bool(p2), 'expected': 'False', 'actual': str(is_valid_parentheses('(]'))})\n"
+            "\n"
+            "    p3 = is_valid_parentheses('({[]})') == True\n"
+            "    results.append({'test_id': 't3', 'desc': 'Nested \"({[]})\"', 'passed': bool(p3), 'expected': 'True', 'actual': str(is_valid_parentheses('({[]})'))})\n"
+            "except Exception as e:\n"
+            "    results.append({'test_id': 'err', 'desc': 'Runtime Error', 'passed': False, 'expected': 'Clean execution', 'actual': str(e)})\n"
+            "print('__AUTOGRADER_JSON_START__')\n"
+            "print(json.dumps(results))\n"
+            "print('__AUTOGRADER_JSON_END__')\n"
+        )
+    },
+    {
+        "id": "cyber-sqli-input-sanitizer",
+        "title": "SQL Injection Defensive Parameterizer",
+        "domain": "cybersecurity",
+        "category": "Web App Security & OWASP",
+        "difficulty": "Beginner",
+        "description": "Construct safe parameterized SQL queries that isolate dangerous quote and comment tokens.",
+        "skills_tested": ["OWASP Top 10", "SQL Injection", "Defensive Coding"],
+        "xp_reward": 100,
+        "problem_statement": (
+            "Write a function `build_secure_user_query(table: str, username: str) -> tuple` that returns a parameterized SQL query template and its bind parameter tuple.\n\n"
+            "Example: For `build_secure_user_query('users', 'admin\\' OR 1=1')`, return `('SELECT * FROM users WHERE username = ?', ('admin\\' OR 1=1',))`."
+        ),
+        "starter_code": (
+            "from typing import Tuple\n\n"
+            "def build_secure_user_query(table: str, username: str) -> Tuple[str, Tuple[str]]:\n"
+            "    # Return (sql_template, params_tuple)\n"
+            "    pass\n"
+        ),
+        "hints": [
+            "Hint: Never format user input into the SQL string with `%` or f-strings.",
+            "Hint: Use `?` as the parameter placeholder."
+        ],
+        "test_harness_code": (
+            "\n"
+            "# Autograder harness\n"
+            "import json, sys\n"
+            "results = []\n"
+            "try:\n"
+            "    sql, params = build_secure_user_query('accounts', 'alice')\n"
+            "    p1 = '?' in sql and 'alice' not in sql and params == ('alice',)\n"
+            "    results.append({'test_id': 't1', 'desc': 'Safe parameterization', 'passed': bool(p1), 'expected': 'Parameterized query with ? placeholder', 'actual': f'{sql} with params {params}'})\n"
+            "\n"
+            "    sql2, params2 = build_secure_user_query('users', \"admin' OR '1'='1\")\n"
+            "    p2 = \"'1'='1\" not in sql2 and params2 == (\"admin' OR '1'='1\",)\n"
+            "    results.append({'test_id': 't2', 'desc': 'SQLi payload isolation', 'passed': bool(p2), 'expected': 'Payload bound as literal parameter', 'actual': f'{sql2} with params {params2}'})\n"
+            "except Exception as e:\n"
+            "    results.append({'test_id': 'err', 'desc': 'Runtime Error', 'passed': False, 'expected': 'Clean execution', 'actual': str(e)})\n"
+            "print('__AUTOGRADER_JSON_START__')\n"
+            "print(json.dumps(results))\n"
+            "print('__AUTOGRADER_JSON_END__')\n"
+        )
+    },
+    {
+        "id": "cyber-sha256-hash-verifier",
+        "title": "SHA-256 Payload Integrity Verifier",
+        "domain": "cybersecurity",
+        "category": "Applied Cryptography",
+        "difficulty": "Beginner",
+        "description": "Implement cryptographic hash computation and constant-time integrity verification.",
+        "skills_tested": ["Cryptography", "SHA-256 Hashing", "Integrity Verification"],
+        "xp_reward": 100,
+        "problem_statement": (
+            "Write a function `verify_file_integrity(content: bytes, expected_hash_hex: str) -> bool` that computes the SHA-256 digest of `content` and verifies it matches `expected_hash_hex` using constant-time comparison."
+        ),
+        "starter_code": (
+            "import hashlib\nimport hmac\n\ndef verify_file_integrity(content: bytes, expected_hash_hex: str) -> bool:\n    # Return True if SHA-256 hash matches expected_hash_hex\n    pass\n"
+        ),
+        "hints": [
+            "Hint 1: Use `hashlib.sha256(content).hexdigest()`.",
+            "Hint 2: Use `hmac.compare_digest(actual, expected)` to prevent timing side-channel attacks."
+        ],
+        "test_harness_code": (
+            "\n"
+            "# Autograder harness\n"
+            "import json, sys\n"
+            "results = []\n"
+            "try:\n"
+            "    test_data = b'Secure model binary weights v1.0'\n"
+            "    expected = hashlib.sha256(test_data).hexdigest()\n"
+            "    p1 = verify_file_integrity(test_data, expected) == True\n"
+            "    results.append({'test_id': 't1', 'desc': 'Legitimate payload verification', 'passed': bool(p1), 'expected': 'True', 'actual': str(verify_file_integrity(test_data, expected))})\n"
+            "\n"
+            "    corrupted = b'Secure model binary weights v1.1'\n"
+            "    p2 = verify_file_integrity(corrupted, expected) == False\n"
+            "    results.append({'test_id': 't2', 'desc': 'Corrupted payload detection', 'passed': bool(p2), 'expected': 'False', 'actual': str(verify_file_integrity(corrupted, expected))})\n"
+            "except Exception as e:\n"
+            "    results.append({'test_id': 'err', 'desc': 'Runtime Error', 'passed': False, 'expected': 'Clean execution', 'actual': str(e)})\n"
+            "print('__AUTOGRADER_JSON_START__')\n"
+            "print(json.dumps(results))\n"
+            "print('__AUTOGRADER_JSON_END__')\n"
+        )
     }
 ]
 

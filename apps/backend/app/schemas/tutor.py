@@ -13,14 +13,17 @@ class TutorContext(BaseModel):
     active_error: Optional[str] = None
     recent_quiz_mistake: Optional[str] = None
     student_level: Optional[str] = "intermediate"
+    active_domain: Optional[str] = "all"
 
 class TutorChatRequest(BaseModel):
     message: str
     history: List[ChatMessage] = Field(default_factory=list)
     mode: str = "socratic"  # "socratic", "explain_mistake", "math_derivation", "code_review"
-    provider: str = "auto"  # "auto", "ollama", "heuristic_local"
-    model_name: Optional[str] = "llama3"
+    provider: str = "auto"  # "auto", "ollama", "cloud_api", "heuristic_local"
+    model_name: Optional[str] = None
     ollama_base_url: Optional[str] = "http://localhost:11434"
+    api_key: Optional[str] = None
+    api_base: Optional[str] = None
     context: Optional[TutorContext] = None
 
 class TutorChatResponse(BaseModel):

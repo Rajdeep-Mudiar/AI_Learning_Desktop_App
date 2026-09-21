@@ -33,12 +33,14 @@ export default function SkillTreeGraph() {
     return skillData.categories.filter((cat) => {
       const name = cat.category.toLowerCase();
       if (currentDomain === 'all') return true;
+      if (currentDomain === 'dsa') return name.includes('dsa') || name.includes('algorithm') || name.includes('array') || name.includes('tree') || name.includes('stack') || name.includes('graph') || name.includes('structure');
+      if (currentDomain === 'cybersecurity') return name.includes('cyber') || name.includes('security') || name.includes('cryptography') || name.includes('network') || name.includes('owasp') || name.includes('threat');
       if (currentDomain === 'web-dev') return name.includes('web') || name.includes('frontend') || name.includes('javascript');
       if (currentDomain === 'app-dev') return name.includes('app') || name.includes('mobile');
       if (currentDomain === 'system-design') return name.includes('system') || name.includes('distributed');
       if (currentDomain === 'github') return name.includes('git') || name.includes('github');
       // ai-ml
-      return !name.includes('web') && !name.includes('app') && !name.includes('system') && !name.includes('git');
+      return !name.includes('web') && !name.includes('app') && !name.includes('system') && !name.includes('git') && !name.includes('dsa') && !name.includes('cyber') && !name.includes('security');
     });
   }, [skillData, currentDomain]);
 

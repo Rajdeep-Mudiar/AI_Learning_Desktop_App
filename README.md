@@ -9,7 +9,7 @@
 
 ---
 
-**AI Learning Lab** is a desktop-first interactive artificial intelligence education, software engineering, and experimentation platform. Designed for students, university learners, ML practitioners, and developers, the platform combines interactive simulations, sandboxed programming, context-aware AI tutoring, neural visualizers, ArXiv paper reproduction workspaces, mock interview simulators, and full-stack curriculum tracks into an integrated desktop developer environment.
+**AI Learning Lab** is a desktop-first interactive artificial intelligence education, software engineering, and experimentation platform. Designed for students, university learners, ML practitioners, and developers, the platform combines interactive simulations, sandboxed programming, context-aware AI tutoring, neural visualizers, ArXiv paper reproduction workspaces, visual laboratories, and 7 comprehensive curriculum tracks into an integrated desktop developer environment.
 
 ---
 
@@ -26,24 +26,25 @@
 * **Backend Services**: FastAPI (Python 3.13), Pydantic v2, JWT Security with bcrypt, async MongoDB (Motor/PyMongo), and in-memory mock fallback.
 * **Math & AI Computation Engines**: PyTorch, Scikit-learn, NumPy, SciPy.
 * **Sandbox Execution**: Subprocess runner with resource caps (5s timeout, peak memory measurement).
-* **AI Tutor Engine**: Local LLM integration (Ollama `llama3`, `mistral`, `deepseek`) with rule-based fallback.
+* **AI Tutor Engine**: Local LLM integration (Ollama `llama3.2:1b`, `qwen2.5-coder`, `qwen3`) with cloud API and dynamic reasoning fallbacks.
 
 ---
 
-## Complete Feature Matrix (Phases 1 through 11)
+## Complete Feature Matrix
 
-| Phase | Feature Module | URL Route | Key Capabilities |
-| :--- | :--- | :--- | :--- |
-| **Phase 1** | **Core Learning & Quizzes** | `/learn`, `/skills`, `/dashboard` | Syllabus, lesson reader, multi-stage quizzes with step-by-step math breakdowns, interactive skill tree graph. |
-| **Phase 2** | **Algorithm Lab & Diagnostics** | `/algorithms`, `/break-the-model` | Interactive canvas visualizers (Linear Regression, KNN Voronoi, Decision Tree, K-Means, PCA) & "Break the Model" diagnostic scenarios. |
-| **Phase 3** | **Python Coding Sandbox** | `/playground`, `/challenges` | Monaco Python editor, isolated execution engine with memory/timeout caps, autograded algorithmic coding challenges. |
-| **Phase 4** | **Datasets & ML Experiments** | `/datasets`, `/experiments` | Dataset explorer (Moons, Circles, Iris, Housing, Custom CSV), side-by-side model training (RF, SVM, Ridge), Confusion Matrices, ROC curves. |
-| **Phase 5** | **Deep Learning Lab** | `/deep-learning` | MLP forward/backward pass gradient flow graphs, CNN spatial 2D convolution & pooling filters, Transformer Multi-Head self-attention heatmaps. |
-| **Phase 6** | **Context-Aware AI Tutor** | `/tutor` | Socratic mentor personas (Socratic, Code Debugger, Mathematical Rigor, Intuitive Visualizer), auto-extracting current UI and code context. |
-| **Phase 7** | **Projects, Viva & Badges** | `/projects`, `/achievements` | Real-world AI project specifications, AI oral defense viva exam simulator, PDF/JSON portfolio exporter, gamified achievement badges. |
-| **Phase 8/9** | **AI Research Mode** | `/research`, `/research/:paperId` | ArXiv paper catalog (*Transformers*, *ResNet*, *LoRA*), mathematical equation explainer cards, step-by-step reproduction pipeline, linked Markdown scratchpad. |
-| **Phase 10** | **Interviews & Hackathons** | `/interviews`, `/hackathons` | Mock technical interview tracks with multi-rubric scoring & hire recommendations; competitive timed hackathons with live automated leaderboards. |
-| **Phase 11** | **Community & Career Paths** | `/community`, `/career` | Student discussion forum with code snippets and upvoting; career readiness roadmap mapping against market demand and salary benchmarks. |
+| Track / Feature Module | URL Route | Key Capabilities |
+| :--- | :--- | :--- |
+| **DSA Visual Laboratory** | `/dsa-lab` | Two Pointers, Sliding Window, BST Traversals, Sorting Race Simulators, Graph BFS/DFS Wavefronts, 0/1 Knapsack DP Matrix, live complexity benchmarks. |
+| **Cyber Security Defense Lab** | `/cyber-lab` | OWASP Top 10 defenses (SQLi, XSS), SHA-256 Avalanche Bit-Flipper, Stateful Firewall & SYN Port Scanner, JWT Inspector, CTF Challenge Sandboxes. |
+| **Core Curriculum & Quizzes** | `/learn`, `/skills`, `/dashboard` | 36 courses across 7 engineering disciplines, lesson reader, autograded quizzes with step-by-step math breakdowns, interactive skill tree graph. |
+| **Algorithm Lab & Diagnostics** | `/algorithms`, `/break-the-model` | Interactive canvas visualizers (Linear Regression, KNN Voronoi, Decision Tree, K-Means, PCA) & "Break the Model" diagnostic scenarios. |
+| **Code Sandbox & Challenges** | `/playground`, `/challenges` | Monaco code editor, isolated execution engine with memory/timeout caps, autograded algorithmic and security coding challenges. |
+| **Datasets & ML Experiments** | `/datasets`, `/experiments` | Dataset explorer (Moons, Circles, Iris, Housing, Custom CSV), side-by-side model training (RF, SVM, Ridge), Confusion Matrices, ROC curves. |
+| **Deep Learning Laboratory** | `/deep-learning` | MLP forward/backward pass gradient flow graphs, CNN spatial 2D convolution & pooling filters, Transformer Multi-Head self-attention heatmaps. |
+| **Context-Aware AI Tutor** | `/tutor` | Socratic mentor personas (Socratic, Code Debugger, Mathematical Rigor, Code Review), Ollama LLM integration, Cloud API support, and contextual grounding. |
+| **Projects & Oral Defense Viva** | `/projects`, `/projects/:projectId` | Real-world engineering project specifications, AI oral defense viva exam simulator, PDF/JSON portfolio exporter. |
+| **AI Research Paper Mode** | `/research`, `/research/:paperId` | ArXiv paper catalog (*Transformers*, *ResNet*, *LoRA*), mathematical equation explainer cards, step-by-step reproduction pipeline, linked Markdown scratchpad. |
+| **Career Paths & Hackathons** | `/career`, `/hackathons` | Career readiness roadmap mapping against market demand and salary benchmarks; competitive timed hackathons with live automated leaderboards. |
 
 ---
 

@@ -4,7 +4,7 @@ import { useDomain } from '../contexts/DomainContext';
 import ChatMessageBubble from '../components/tutor/ChatMessageBubble';
 import TutorContextSelector from '../components/tutor/TutorContextSelector';
 import TutorSettingsDrawer from '../components/tutor/TutorSettingsDrawer';
-import { Send, Sparkles, Settings as SettingsIcon, Trash2, Bot } from 'lucide-react';
+import { Send, Sparkles, Settings as SettingsIcon, Trash2, Bot, Cpu } from 'lucide-react';
 
 export default function TutorPage() {
   const { currentDomain, activeDomainInfo } = useDomain();
@@ -13,11 +13,14 @@ export default function TutorPage() {
   const [loading, setLoading] = useState(false);
   const [activeMode, setActiveMode] = useState('socratic'); // 'socratic' | 'explain_mistake' | 'math_derivation' | 'code_review'
 
-  // Settings state
+  // Persistent Settings
   const [showSettings, setShowSettings] = useState(false);
-  const [provider, setProvider] = useState('auto');
-  const [modelName, setModelName] = useState('llama3:latest');
-  const [ollamaUrl, setOllamaUrl] = useState('http://localhost:11434');
+  const [provider, setProvider] = useState(() => localStorage.getItem('ai_tutor_provider') || 'auto');
+  const [modelName, setModelName] = useState(() => localStorage.getItem('ai_tutor_model') || 'llama3.2:1b');
+  const [ollamaUrl, setOllamaUrl] = useState(() => localStorage.getItem('ai_tutor_ollama_url') || 'http://localhost:11434');
+  const [apiKey, setApiKey] = useState(() => localStorage.getItem('ai_tutor_api_key') || '');
+  const [apiBase, setApiBase] = useState(() => localStorage.getItem('ai_tutor_api_base') || '');
+  
   const [modelsList, setModelsList] = useState([]);
   const [isOllamaOnline, setIsOllamaOnline] = useState(false);
   const [refreshingModels, setRefreshingModels] = useState(false);
@@ -37,6 +40,26 @@ export default function TutorPage() {
   });
 
   const chatEndRef = useRef(null);
+
+  useEffect(() => {
+    localStorage.setItem('ai_tutor_provider', provider);
+  }, [provider]);
+
+  useEffect(() => {
+    localStorage.setItem('ai_tutor_model', modelName);
+  }, [modelName]);
+
+  useEffect(() => {
+    localStorage.setItem('ai_tutor_ollama_url', ollamaUrl);
+  }, [ollamaUrl]);
+
+  useEffect(() => {
+    localStorage.setItem('ai_tutor_api_key', apiKey);
+  }, [apiKey]);
+
+  useEffect(() => {
+    localStorage.setItem('ai_tutor_api_base', apiBase);
+  }, [apiBase]);
 
   useEffect(() => {
     loadPresets();
@@ -60,10 +83,14 @@ export default function TutorPage() {
     try {
       setRefreshingModels(true);
       const data = await tutorService.getModels(ollamaUrl);
-      setModelsList(data.available_models);
+      setModelsList(data.available_models || []);
       setIsOllamaOnline(data.is_ollama_online);
       if (data.default_model) {
-        setModelName(data.default_model);
+        // If current model isn't set or not available, use the online default
+        const names = (data.available_models || []).map((m) => m.name);
+        if (!modelName || !names.includes(modelName)) {
+          setModelName(data.default_model);
+        }
       }
     } catch (err) {
       console.error(err);
@@ -78,6 +105,18 @@ export default function TutorPage() {
       "How does backpropagation calculate weight gradients?",
       "Design a scalable distributed rate-limiter with Redis & Token Bucket",
       "What is the difference between git merge --squash and git rebase?"
+    ],
+    'dsa': [
+      "How do Two Pointers optimize Two Sum in a sorted array to O(N)?",
+      "Explain why Binary Search Tree In-order traversal gives sorted order",
+      "How do I formulate the DP state recurrence for 0/1 Knapsack?",
+      "Compare the time and space complexity of QuickSort vs MergeSort"
+    ],
+    'cybersecurity': [
+      "How do Prepared Statements eliminate SQL Injection vulnerabilities?",
+      "Explain how the SHA-256 Avalanche Effect guarantees integrity",
+      "What is the difference between Symmetric (AES) and Asymmetric (RSA) encryption?",
+      "How does Cross-Site Scripting (XSS) steal session cookies and how does CSP stop it?"
     ],
     'web-dev': [
       "How does React 18 Concurrent Mode work under the hood?",
@@ -136,6 +175,8 @@ export default function TutorPage() {
         provider,
         model_name: modelName,
         ollama_base_url: ollamaUrl,
+        api_key: apiKey || undefined,
+        api_base: apiBase || undefined,
         context: {
           ...context,
           active_domain: currentDomain,
@@ -204,7 +245,7 @@ export default function TutorPage() {
           )}
           <button onClick={() => setShowSettings(true)} className="btn btn-secondary" style={{ padding: '6px 12px', fontSize: 'var(--font-xs)', display: 'flex', alignItems: 'center', gap: '6px' }}>
             <SettingsIcon size={14} />
-            <span>{isOllamaOnline ? 'Ollama: Online' : 'Settings'}</span>
+            <span>{isOllamaOnline ? `Ollama: ${modelName || 'Online'}` : 'AI Settings'}</span>
           </button>
         </div>
       </div>
@@ -251,87 +292,83 @@ export default function TutorPage() {
           overflowY: 'auto',
           padding: 'var(--space-md)',
           background: 'var(--color-surface)',
-          border: '1px solid var(--color-border)',
           borderRadius: 'var(--radius-lg)',
+          border: '1px solid var(--color-border)',
           display: 'flex',
           flexDirection: 'column',
-          marginBottom: 'var(--space-md)',
+          gap: 'var(--space-md)',
+          marginBottom: 'var(--space-sm)',
         }}
       >
         {messages.length === 0 ? (
-          <div style={{ margin: 'auto', textAlign: 'center', maxWidth: '600px', padding: 'var(--space-xl)' }}>
-            <div
-              style={{
-                width: 54,
-                height: 54,
-                borderRadius: 'var(--radius-full)',
-                background: 'linear-gradient(135deg, #6366f1, #38bdf8)',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#ffffff',
-                boxShadow: 'var(--shadow-md)',
-                marginBottom: 'var(--space-md)',
-              }}
-            >
-              <Bot size={28} />
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', textAlign: 'center', color: 'var(--color-text-muted)', gap: 'var(--space-md)' }}>
+            <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'rgba(99, 102, 241, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Bot size={28} color="var(--color-primary-400)" />
             </div>
-            <h3 style={{ margin: '0 0 var(--space-xs) 0', fontSize: 'var(--font-lg)', color: 'var(--color-text-main)' }}>
-              How can I assist your {activeDomainInfo?.label || 'learning'} journey today?
-            </h3>
-            <p style={{ margin: '0 0 var(--space-lg) 0', fontSize: 'var(--font-xs)', color: 'var(--color-text-muted)' }}>
-              Ask questions about architectures, code implementations, debugging, or request Socratic guidance.
-            </p>
+            <div>
+              <h3 style={{ margin: '0 0 4px', fontSize: 'var(--font-md)', color: 'var(--color-text-main)' }}>
+                Ask Your {activeDomainInfo?.label || 'Engineering'} AI Tutor
+              </h3>
+              <p style={{ margin: 0, fontSize: 'var(--font-xs)', maxWidth: '440px' }}>
+                Ask conceptual questions, request architectural proofs, or paste errors from your coding playground.
+              </p>
+            </div>
 
-            {/* Quick Prompt Starters */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-sm)', textAlign: 'left' }}>
+            {/* Quick Prompts */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', width: '100%', maxWidth: '520px', marginTop: 'var(--space-xs)' }}>
+              <div style={{ fontSize: '11px', fontWeight: 600, color: 'var(--color-text-muted)', textAlign: 'left' }}>
+                Recommended Inquiries for {activeDomainInfo?.label || 'Active Track'}:
+              </div>
               {quickQuestions.map((q, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleSendMessage(q)}
                   style={{
-                    padding: '10px 12px',
-                    borderRadius: 'var(--radius-md)',
+                    padding: '8px 12px',
+                    borderRadius: 'var(--radius-sm)',
                     background: 'var(--color-surface-elevated)',
                     border: '1px solid var(--color-border)',
                     fontSize: '11px',
                     color: 'var(--color-text-main)',
-                    cursor: 'pointer',
-                    transition: 'border 0.15s ease',
                     textAlign: 'left',
+                    cursor: 'pointer',
+                    transition: 'all 0.15s ease',
                   }}
+                  onMouseOver={(e) => (e.currentTarget.style.borderColor = 'var(--color-primary-400)')}
+                  onMouseOut={(e) => (e.currentTarget.style.borderColor = 'var(--color-border)')}
                 >
-                  💡 {q}
+                  💬 {q}
                 </button>
               ))}
             </div>
           </div>
         ) : (
-          <>
-            {messages.map((msg, idx) => (
-              <ChatMessageBubble key={idx} message={msg} onFollowupClick={handleSendMessage} />
-            ))}
-            {loading && (
-              <div style={{ display: 'flex', gap: '8px', alignItems: 'center', padding: 'var(--space-md)', color: 'var(--color-text-muted)', fontSize: 'var(--font-xs)' }}>
-                <Bot size={18} color="var(--color-primary-400)" />
-                <span>AI Tutor is formulating a Socratic explanation...</span>
-              </div>
-            )}
-            <div ref={chatEndRef} />
-          </>
+          messages.map((msg, index) => (
+            <ChatMessageBubble
+              key={index}
+              message={msg}
+              onFollowupClick={(followupText) => handleSendMessage(followupText)}
+            />
+          ))
         )}
+        {loading && (
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center', color: 'var(--color-text-muted)', fontSize: 'var(--font-xs)', padding: '10px' }}>
+            <div className="spinner" style={{ width: '16px', height: '16px', border: '2px solid rgba(99,102,241,0.2)', borderTopColor: 'var(--color-primary-400)', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
+            <span>AI Tutor ({modelName || 'Neural Engine'}) is reasoning...</span>
+          </div>
+        )}
+        <div ref={chatEndRef} />
       </div>
 
-      {/* Input Box & Context Attachment */}
-      <div className="card" style={{ padding: 'var(--space-sm) var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-xs)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)' }}>
-          <TutorContextSelector context={context} onContextChange={setContext} />
-          <span style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>
-            Active Mode: <strong>{MODES_CONFIG.find((m) => m.id === activeMode)?.name}</strong>
-          </span>
-        </div>
+      {/* Input Area with Context Selector */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+        <TutorContextSelector
+          context={context}
+          onContextChange={setContext}
+          activeMode={activeMode}
+        />
 
-        <div style={{ display: 'flex', gap: 'var(--space-sm)', alignItems: 'flex-end' }}>
+        <div style={{ display: 'flex', gap: 'var(--space-xs)' }}>
           <textarea
             className="input"
             rows={2}
@@ -362,6 +399,10 @@ export default function TutorPage() {
         onModelNameChange={setModelName}
         ollamaUrl={ollamaUrl}
         onOllamaUrlChange={setOllamaUrl}
+        apiKey={apiKey}
+        onApiKeyChange={setApiKey}
+        apiBase={apiBase}
+        onApiBaseChange={setApiBase}
         modelsList={modelsList}
         isOllamaOnline={isOllamaOnline}
         onRefreshModels={loadModels}
