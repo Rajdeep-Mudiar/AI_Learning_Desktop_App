@@ -2,12 +2,8 @@
 
 <div align="center">
 
-[![Live Documentation & Downloads](https://img.shields.io/badge/Live_Website-Documentation_%26_Downloads-6366f1?style=for-the-badge&logo=googlechrome&logoColor=white)](https://rajdeep-mudiar.github.io/AI_Learning_Desktop_App/)
+[![Live Website & Documentation](https://img.shields.io/badge/Live_Website-Documentation_%26_Downloads-6366f1?style=for-the-badge&logo=googlechrome&logoColor=white)](https://rajdeep-mudiar.github.io/AI_Learning_Desktop_App/)
 [![Latest Release](https://img.shields.io/github/v/release/Rajdeep-Mudiar/AI_Learning_Desktop_App?style=for-the-badge&color=ec4899&label=Release)](https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest)
-[![GitHub Pages Deployment](https://img.shields.io/badge/Deployment-Live_on_GitHub_Pages-10b981?style=for-the-badge&logo=github&logoColor=white)](https://rajdeep-mudiar.github.io/AI_Learning_Desktop_App/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-f59e0b?style=for-the-badge)](https://opensource.org/licenses/MIT)
-
-**🌐 Official Webpage & Documentation Portal:** [https://rajdeep-mudiar.github.io/AI_Learning_Desktop_App/](https://rajdeep-mudiar.github.io/AI_Learning_Desktop_App/)
 
 </div>
 
