@@ -8,8 +8,9 @@ on:
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
+# Permissions required for GitHub Pages & Deployment
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -29,6 +30,9 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload Documentation Artifact
         uses: actions/upload-pages-artifact@v3
