@@ -8,10 +8,11 @@ export default function CourseCard({ course }) {
   const navigate = useNavigate();
 
   const getLevelVariant = (level) => {
-    switch (level) {
-      case 'Beginner': return 'green';
-      case 'Intermediate': return 'purple';
-      case 'Advanced': return 'pink';
+    switch ((level || '').toLowerCase()) {
+      case 'beginner': return 'green';
+      case 'intermediate': return 'purple';
+      case 'advanced': return 'pink';
+      case 'expert': return 'yellow';
       default: return 'blue';
     }
   };

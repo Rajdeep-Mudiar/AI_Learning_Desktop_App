@@ -23,34 +23,38 @@ export default function VisualExplainerCard({ visual, domain }) {
   // Event Loop simulation step
   const [eventLoopStep, setEventLoopStep] = useState(0);
 
-  // Determine intelligent lab destination & title
+  // Determine intelligent lab destination & title strictly by domain first
   const getLabDestination = () => {
+    const dom = (domain || '').toLowerCase();
     const type = (visual.diagram_type || '').toLowerCase();
     const title = (visual.title || '').toLowerCase();
-    const dom = (domain || '').toLowerCase();
 
-    if (dom === 'dsa' || type.includes('bst') || type.includes('tree') || type.includes('sort') || type.includes('pointer') || type.includes('knapsack') || type.includes('stack') || title.includes('dsa') || title.includes('tree') || title.includes('pointer')) {
+    if (dom === 'dsa' || dom.startsWith('dsa-') || dom.includes('dsa')) {
       return { path: '/dsa-lab', label: 'Open DSA Lab', icon: Binary };
     }
-    if (dom === 'cybersecurity' || type.includes('crypto') || type.includes('cipher') || type.includes('rsa') || type.includes('sha') || type.includes('sqli') || type.includes('firewall') || title.includes('cyber') || title.includes('security') || title.includes('crypto')) {
+    if (dom === 'cybersecurity' || dom.startsWith('cyber') || dom.includes('security')) {
       return { path: '/cyber-lab', label: 'Open Cyber Security Lab', icon: ShieldCheck };
     }
-    if (dom === 'web-dev' || type.includes('box_model') || type.includes('html') || type.includes('flex') || type.includes('grid') || type.includes('event_loop') || type.includes('vdom') || type.includes('middleware') || type.includes('jwt') || type.includes('hydration') || title.includes('web') || title.includes('css') || title.includes('html') || title.includes('react') || title.includes('dom') || title.includes('next.js')) {
+    if (dom === 'web-dev' || dom.startsWith('web-') || dom.includes('html') || dom.includes('css') || dom.includes('react') || dom.includes('javascript') || dom.includes('nodejs')) {
       return { path: '/web-lab', label: 'Open Web Dev Lab', icon: Globe };
     }
-    if (dom === 'github' || type.includes('git') || type.includes('commit') || type.includes('dag') || title.includes('git') || title.includes('github') || title.includes('rebase')) {
+    if (dom === 'github' || dom.startsWith('git-') || dom.includes('git')) {
       return { path: '/git-lab', label: 'Open Git & GitHub Lab', icon: GitBranch };
     }
-    if (dom === 'app-dev' || type.includes('mobile') || type.includes('viewport') || type.includes('safe_area') || title.includes('mobile') || title.includes('flutter') || title.includes('react native')) {
+    if (dom === 'app-dev' || dom.startsWith('app-') || dom.includes('flutter') || dom.includes('mobile')) {
       return { path: '/app-lab', label: 'Open Mobile App Lab', icon: Smartphone };
     }
-    if (dom === 'system-design' || type.includes('microservice') || type.includes('caching') || type.includes('sharding') || type.includes('system') || title.includes('system design') || title.includes('load balancer') || title.includes('redis')) {
+    if (dom === 'system-design' || dom.startsWith('system-') || dom.startsWith('sys-') || dom.includes('system')) {
       return { path: '/system-design-lab', label: 'Open System Design Lab', icon: Server };
     }
-    if (type.includes('cnn') || type.includes('transformer') || type.includes('backprop') || type.includes('activation') || type.includes('neural') || title.includes('deep learning') || title.includes('neural')) {
-      return { path: '/deep-learning', label: 'Open Deep Learning Lab', icon: Cpu };
+    if (dom === 'ai-ml' || dom.startsWith('ai') || dom.startsWith('aiml-') || dom.includes('deep-learning') || dom.includes('math') || dom.includes('python')) {
+      if (type.includes('cnn') || type.includes('transformer') || type.includes('neural') || title.includes('deep learning')) {
+        return { path: '/deep-learning', label: 'Open Deep Learning Lab', icon: Cpu };
+      }
+      return { path: '/algorithms', label: 'Open AI & ML Lab', icon: Cpu };
     }
-    return { path: '/algorithms', label: 'Open Machine Learning Lab', icon: Eye };
+
+    return { path: '/algorithms', label: 'Open Interactive Lab', icon: Eye };
   };
 
   const targetLab = getLabDestination();
@@ -496,13 +500,111 @@ export default function VisualExplainerCard({ visual, domain }) {
           </div>
         );
 
-      default:
+      case 'html_aria_landmarks':
+      case 'dom_tree_accessibility':
         return (
-          <div style={{ background: 'var(--canvas-bg)', borderRadius: 8, padding: 24, border: '1px solid var(--border-subtle)', textAlign: 'center' }}>
-            <Eye size={32} style={{ color: 'var(--accent-primary)', marginBottom: 8 }} />
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-              Interactive Visual Simulation: <b>{visual.title}</b>
-            </p>
+          <div style={{ background: '#0b1120', padding: 18, borderRadius: 10, border: '1px solid #1e293b' }}>
+            <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: 12 }}>Semantic HTML5 Landmarks &amp; Accessibility (AOM) Hierarchy</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, maxWidth: '520px', margin: '0 auto' }}>
+              <div style={{ padding: '8px 14px', background: 'rgba(56, 189, 248, 0.15)', border: '1px solid #38bdf8', borderRadius: 6, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontFamily: 'var(--font-mono)', color: '#38bdf8', fontSize: '0.82rem', fontWeight: 700 }}>&lt;header role="banner"&gt;</span>
+                <span style={{ fontSize: '0.72rem', color: '#94a3b8' }}>Global Branding &amp; Top Nav</span>
+              </div>
+              <div style={{ padding: '8px 14px', background: 'rgba(168, 85, 247, 0.15)', border: '1px solid #a855f7', borderRadius: 6, display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginLeft: 16 }}>
+                <span style={{ fontFamily: 'var(--font-mono)', color: '#c084fc', fontSize: '0.82rem', fontWeight: 700 }}>&lt;nav aria-label="Main Navigation"&gt;</span>
+                <span style={{ fontSize: '0.72rem', color: '#94a3b8' }}>Accessible Link List</span>
+              </div>
+              <div style={{ padding: '12px 14px', background: 'rgba(16, 185, 129, 0.15)', border: '1px solid #10b981', borderRadius: 6, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontFamily: 'var(--font-mono)', color: '#34d399', fontSize: '0.82rem', fontWeight: 700 }}>&lt;main id="content" role="main"&gt;</span>
+                  <span style={{ fontSize: '0.72rem', color: '#6ee7b7' }}>Primary Unique Document Body</span>
+                </div>
+                <div style={{ padding: '6px 12px', background: 'rgba(16, 185, 129, 0.2)', border: '1px dashed #10b981', borderRadius: 4, marginLeft: 16, display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ fontFamily: 'var(--font-mono)', color: '#a7f3d0', fontSize: '0.78rem' }}>&lt;article aria-labelledby="post-title"&gt;</span>
+                  <span style={{ fontSize: '0.7rem', color: '#cbd5e1' }}>Self-contained Article</span>
+                </div>
+              </div>
+              <div style={{ padding: '8px 14px', background: 'rgba(245, 158, 11, 0.15)', border: '1px solid #f59e0b', borderRadius: 6, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontFamily: 'var(--font-mono)', color: '#fbbf24', fontSize: '0.82rem', fontWeight: 700 }}>&lt;footer role="contentinfo"&gt;</span>
+                <span style={{ fontSize: '0.72rem', color: '#94a3b8' }}>Copyright, Legal &amp; Secondary Links</span>
+              </div>
+            </div>
+            <div style={{ marginTop: 12, textAlign: 'center', fontSize: '0.75rem', color: '#38bdf8' }}>
+              Screen readers allow blind users to jump directly between these landmark zones via rotor key commands!
+            </div>
+          </div>
+        );
+
+      case 'git_three_trees':
+        return (
+          <div style={{ background: '#0b1120', padding: 18, borderRadius: 10, border: '1px solid #1e293b' }}>
+            <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: 12 }}>The 3 Git States / Trees Workflow</div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr auto 1fr', gap: 8, alignItems: 'center', textAlign: 'center' }}>
+              <div style={{ background: '#1e293b', border: '1px solid #475569', padding: 12, borderRadius: 8 }}>
+                <div style={{ fontWeight: 700, color: '#f43f5e', fontSize: '0.8rem' }}>Working Directory</div>
+                <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: 4 }}>Untracked / Modified</div>
+              </div>
+              <span style={{ color: '#f59e0b', fontWeight: 700, fontSize: '0.75rem' }}>git add →</span>
+              <div style={{ background: 'rgba(245, 158, 11, 0.15)', border: '1px solid #f59e0b', padding: 12, borderRadius: 8 }}>
+                <div style={{ fontWeight: 700, color: '#fbbf24', fontSize: '0.8rem' }}>Staging Index</div>
+                <div style={{ fontSize: '0.7rem', color: '#fde68a', marginTop: 4 }}>Prepared Snapshot</div>
+              </div>
+              <span style={{ color: '#10b981', fontWeight: 700, fontSize: '0.75rem' }}>git commit →</span>
+              <div style={{ background: 'rgba(16, 185, 129, 0.15)', border: '1px solid #10b981', padding: 12, borderRadius: 8 }}>
+                <div style={{ fontWeight: 700, color: '#34d399', fontSize: '0.8rem' }}>Git Repository (HEAD)</div>
+                <div style={{ fontSize: '0.7rem', color: '#a7f3d0', marginTop: 4 }}>Immutable Commit SHA</div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'flutter_widget_tree':
+        return (
+          <div style={{ background: '#0b1120', padding: 18, borderRadius: 10, border: '1px solid #1e293b' }}>
+            <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: 12 }}>Flutter Reactive Three-Tree Hierarchy</div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10, textAlign: 'center' }}>
+              <div style={{ background: 'rgba(59, 130, 246, 0.15)', border: '1px solid #3b82f6', padding: 12, borderRadius: 8 }}>
+                <div style={{ fontWeight: 700, color: '#60a5fa', fontSize: '0.8rem' }}>Widget Tree</div>
+                <div style={{ fontSize: '0.7rem', color: '#93c5fd', marginTop: 4 }}>Immutable Configurations (Container, Text)</div>
+              </div>
+              <div style={{ background: 'rgba(168, 85, 247, 0.15)', border: '1px solid #a855f7', padding: 12, borderRadius: 8 }}>
+                <div style={{ fontWeight: 700, color: '#c084fc', fontSize: '0.8rem' }}>Element Tree</div>
+                <div style={{ fontSize: '0.7rem', color: '#e9d5ff', marginTop: 4 }}>Persistent State &amp; Lifecycle Bridge</div>
+              </div>
+              <div style={{ background: 'rgba(16, 185, 129, 0.15)', border: '1px solid #10b981', padding: 12, borderRadius: 8 }}>
+                <div style={{ fontWeight: 700, color: '#34d399', fontSize: '0.8rem' }}>RenderObject Tree</div>
+                <div style={{ fontSize: '0.7rem', color: '#a7f3d0', marginTop: 4 }}>Sizing, Layout &amp; GPU Painting</div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'consistent_hashing_ring':
+        return (
+          <div style={{ background: '#0b1120', padding: 18, borderRadius: 10, border: '1px solid #1e293b', textAlign: 'center' }}>
+            <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: 10 }}>Distributed Consistent Hashing Ring (0 to 2³²-1)</div>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: 16, alignItems: 'center' }}>
+              <div style={{ padding: 10, background: '#1e293b', border: '2px solid #38bdf8', borderRadius: 8, color: '#38bdf8', fontWeight: 700, fontSize: '0.75rem' }}>Node A (Tokens: 0, 1000)</div>
+              <span style={{ color: '#94a3b8' }}>↻</span>
+              <div style={{ padding: 10, background: '#1e293b', border: '2px solid #a855f7', borderRadius: 8, color: '#c084fc', fontWeight: 700, fontSize: '0.75rem' }}>Node B (Tokens: 2000, 3000)</div>
+              <span style={{ color: '#94a3b8' }}>↻</span>
+              <div style={{ padding: 10, background: '#1e293b', border: '2px solid #10b981', borderRadius: 8, color: '#34d399', fontWeight: 700, fontSize: '0.75rem' }}>Node C (Tokens: 4000, 5000)</div>
+            </div>
+            <div style={{ fontSize: '0.72rem', color: '#64748b', marginTop: 8 }}>Keys hash to coordinates and walk clockwise to the nearest node, minimizing cache invalidation when nodes join or fail.</div>
+          </div>
+        );
+
+      case 'jwt_signature_verify':
+        return (
+          <div style={{ background: '#0b1120', padding: 16, borderRadius: 10, border: '1px solid #1e293b' }}>
+            <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: 10 }}>JSON Web Token (JWT) Cryptographic Anatomy</div>
+            <div style={{ display: 'flex', gap: 6, fontFamily: 'var(--font-mono)', fontSize: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <span style={{ background: 'rgba(244, 63, 94, 0.2)', color: '#f43f5e', padding: '4px 8px', borderRadius: 4, border: '1px solid #f43f5e' }}>eyJhbGciOiJIUzI1NiJ9 (Header)</span>
+              <span style={{ color: '#fff' }}>.</span>
+              <span style={{ background: 'rgba(168, 85, 247, 0.2)', color: '#c084fc', padding: '4px 8px', borderRadius: 4, border: '1px solid #a855f7' }}>eyJzdWIiOiIxMjM0NTY3ODkwIn0 (Payload)</span>
+              <span style={{ color: '#fff' }}>.</span>
+              <span style={{ background: 'rgba(16, 185, 129, 0.2)', color: '#34d399', padding: '4px 8px', borderRadius: 4, border: '1px solid #10b981' }}>SflKxwRJSMeKKF2QT4f... (Signature)</span>
+            </div>
           </div>
         );
     }

@@ -66,16 +66,28 @@ class CourseService:
         modules_data = course.get("modules", [])
         module_details = []
         
-        # Build lookup of lessons by module_id
-        lessons_by_module: Dict[str, List[dict]] = {}
-        for l in lessons:
-            mod_id = l.get("module_id", "default")
-            lessons_by_module.setdefault(mod_id, []).append(l)
-            
+        # Build lookup of lessons
         next_up_lesson = None
+        assigned_slugs = set()
+        
         for m in modules_data:
             m_id = m["id"]
-            m_lessons = lessons_by_module.get(m_id, [])
+            m_lesson_ids = set(m.get("lesson_ids", []))
+            
+            # Find lessons for this module
+            m_lessons = [
+                l for l in lessons 
+                if (l.get("module_id") == m_id or l.get("slug") in m_lesson_ids or l.get("id") in m_lesson_ids)
+                and l.get("slug") not in assigned_slugs
+            ]
+            
+            # If no lessons matched explicitly and this is the only module, assign all course lessons
+            if not m_lessons and len(modules_data) == 1:
+                m_lessons = list(lessons)
+                
+            for l in m_lessons:
+                assigned_slugs.add(l.get("slug"))
+                
             m_lessons_sorted = sorted(m_lessons, key=lambda x: x.get("order", 1))
             
             lesson_summaries = []

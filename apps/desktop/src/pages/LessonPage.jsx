@@ -228,7 +228,7 @@ export default function LessonPage() {
   if (!lesson) return <div className="card">Lesson not found.</div>;
 
   return (
-    <div className="animate-fade-in" style={{ maxWidth: '920px', margin: '0 auto', paddingBottom: 60 }}>
+    <div className="animate-fade-in" style={{ maxWidth: '1180px', margin: '0 auto', padding: '0 20px 60px 20px' }}>
       {/* Top Breadcrumb & Navigation */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
         <button

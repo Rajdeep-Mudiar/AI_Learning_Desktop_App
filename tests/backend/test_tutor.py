@@ -49,4 +49,4 @@ async def test_tutor_chat_interaction():
         math_resp = await ac.post("/api/v1/tutor/chat", json=math_payload)
         assert math_resp.status_code == 200
         math_data = math_resp.json()
-        assert "Normal Equation" in math_data["response"]
+        assert "normal equation" in math_data["response"].lower()

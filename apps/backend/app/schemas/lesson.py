@@ -8,7 +8,7 @@ class TheorySection(BaseModel):
     math_latex: Optional[str] = None
 
 class VisualExplainer(BaseModel):
-    type: str  # diagram, simulation_preview, chart, architecture_flow
+    type: str = "diagram"  # diagram, simulation_preview, chart, architecture_flow
     title: str
     subtitle: Optional[str] = None
     diagram_type: Optional[str] = None  # e.g., "linear_regression", "neural_net", "matrix_mult", "attention"
@@ -26,6 +26,7 @@ class LessonBase(BaseModel):
     title: str
     slug: str
     course_slug: str
+    domain: Optional[str] = None
     module_id: str
     order: int
     estimated_minutes: int

@@ -40,7 +40,9 @@ export default function Courses() {
       c.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       c.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       c.skills_taught?.some((s) => s.toLowerCase().includes(searchQuery.toLowerCase()));
-    const matchesLevel = selectedLevel === 'All' || c.level === selectedLevel;
+    const matchesLevel =
+      selectedLevel === 'All' ||
+      (c.level && c.level.toLowerCase() === selectedLevel.toLowerCase());
     return matchesDomain && matchesSearch && matchesLevel;
   });
 
