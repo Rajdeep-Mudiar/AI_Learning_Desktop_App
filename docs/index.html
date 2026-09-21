@@ -23,7 +23,7 @@
           </svg>
         </div>
         <span class="logo-text">AI Learning Lab</span>
-        <span class="logo-tag">v1.0.4</span>
+        <span class="logo-tag version-badge-val">v1.0.4</span>
       </a>
 
       <nav>
@@ -54,7 +54,7 @@
     <div class="container">
       <div class="hero-badge">
         <span class="hero-badge-pulse"></span>
-        <span>Version 1.0.4 Released — 28 Courses & 5 Complete Engineering Tracks</span>
+        <span id="heroVersionBadge">Version v1.0.4 Released — 28 Courses & 5 Complete Engineering Tracks</span>
       </div>
 
       <h1 class="hero-title">
@@ -173,37 +173,37 @@
                 <div class="os-large-icon">🪟</div>
                 <div>
                   <h3 class="os-title">AI Learning Lab for Windows</h3>
-                  <div class="os-meta">Supports Windows 10 & 11 (64-bit x64 & ARM64) &bull; v1.0.4</div>
+                  <div class="os-meta">Supports Windows 10 & 11 (64-bit x64 & ARM64) &bull; <span class="version-badge-val">v1.0.4</span></div>
                 </div>
               </div>
-              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest/download/AI-Learning-Lab-Setup-x64.exe" class="btn btn-primary">
+              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest" id="btn-win-main" class="btn btn-primary">
                 Download Installer (.exe)
               </a>
             </div>
 
             <div class="download-options-grid">
-              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest/download/AI-Learning-Lab-Setup-x64.exe" class="download-option">
+              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest" id="link-win-exe" class="download-option">
                 <div>
                   <div class="option-type">NSIS Installer (.exe)</div>
                   <div class="option-info">Recommended for most Windows users. Auto-updates enabled.</div>
                 </div>
-                <div class="option-cta">Download .exe &darr;</div>
+                <div class="option-cta">Download .exe (<span id="size-win-exe">Recommended</span>) &darr;</div>
               </a>
 
-              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest/download/AI-Learning-Lab-x64.msi" class="download-option">
+              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest" id="link-win-msi" class="download-option">
                 <div>
                   <div class="option-type">Enterprise MSI (.msi)</div>
                   <div class="option-info">Standard Windows Installer package for system administrators.</div>
                 </div>
-                <div class="option-cta">Download .msi &darr;</div>
+                <div class="option-cta">Download .msi (<span id="size-win-msi">Enterprise</span>) &darr;</div>
               </a>
 
-              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest/download/AI-Learning-Lab-Portable-x64.zip" class="download-option">
+              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest" id="link-win-zip" class="download-option">
                 <div>
                   <div class="option-type">Portable (.zip)</div>
                   <div class="option-info">No installation required. Run directly from USB or local drive.</div>
                 </div>
-                <div class="option-cta">Download .zip &darr;</div>
+                <div class="option-cta">Download .zip (<span id="size-win-zip">Portable</span>) &darr;</div>
               </a>
             </div>
 
@@ -229,29 +229,29 @@
                 <div class="os-large-icon">🍏</div>
                 <div>
                   <h3 class="os-title">AI Learning Lab for macOS</h3>
-                  <div class="os-meta">Universal Binary: Apple Silicon (M1/M2/M3) & Intel x64 &bull; macOS 11.0+</div>
+                  <div class="os-meta">Universal Binary: Apple Silicon (M1/M2/M3) & Intel x64 &bull; <span class="version-badge-val">v1.0.4</span></div>
                 </div>
               </div>
-              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest/download/AI-Learning-Lab-Universal.dmg" class="btn btn-primary">
+              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest" id="btn-mac-main" class="btn btn-primary">
                 Download DMG (.dmg)
               </a>
             </div>
 
             <div class="download-options-grid">
-              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest/download/AI-Learning-Lab-aarch64.dmg" class="download-option">
+              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest" id="link-mac-arm" class="download-option">
                 <div>
                   <div class="option-type">Apple Silicon DMG (M1/M2/M3)</div>
                   <div class="option-info">Optimized for Apple ARM64 processors with ultra-low power draw.</div>
                 </div>
-                <div class="option-cta">Download ARM64 DMG &darr;</div>
+                <div class="option-cta">Download ARM64 DMG (<span id="size-mac-arm">Apple Silicon</span>) &darr;</div>
               </a>
 
-              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest/download/AI-Learning-Lab-x64.dmg" class="download-option">
+              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest" id="link-mac-intel" class="download-option">
                 <div>
                   <div class="option-type">Intel Mac DMG (x86_64)</div>
                   <div class="option-info">Native build for all Intel-based MacBooks, iMacs, and Mac Pros.</div>
                 </div>
-                <div class="option-cta">Download Intel DMG &darr;</div>
+                <div class="option-cta">Download Intel DMG (<span id="size-mac-intel">Intel</span>) &darr;</div>
               </a>
             </div>
 
@@ -277,37 +277,37 @@
                 <div class="os-large-icon">🐧</div>
                 <div>
                   <h3 class="os-title">AI Learning Lab for Linux</h3>
-                  <div class="os-meta">Supports Ubuntu, Debian, Fedora, Arch, and all major distributions &bull; v1.0.4</div>
+                  <div class="os-meta">Supports Ubuntu, Debian, Fedora, Arch, and all major distributions &bull; <span class="version-badge-val">v1.0.4</span></div>
                 </div>
               </div>
-              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest/download/AI-Learning-Lab-x86_64.AppImage" class="btn btn-primary">
+              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest" id="btn-linux-main" class="btn btn-primary">
                 Download AppImage
               </a>
             </div>
 
             <div class="download-options-grid">
-              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest/download/AI-Learning-Lab-x86_64.AppImage" class="download-option">
+              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest" id="link-linux-appimage" class="download-option">
                 <div>
                   <div class="option-type">Standalone AppImage (.AppImage)</div>
                   <div class="option-info">Universal executable across all distributions. Just chmod +x and run.</div>
                 </div>
-                <div class="option-cta">Download AppImage &darr;</div>
+                <div class="option-cta">Download AppImage (<span id="size-linux-appimage">Universal</span>) &darr;</div>
               </a>
 
-              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest/download/ai-learning-lab_amd64.deb" class="download-option">
+              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest" id="link-linux-deb" class="download-option">
                 <div>
                   <div class="option-type">Debian / Ubuntu (.deb)</div>
                   <div class="option-info">Native package for Ubuntu, Debian, Pop!_OS, and Linux Mint.</div>
                 </div>
-                <div class="option-cta">Download .deb &darr;</div>
+                <div class="option-cta">Download .deb (<span id="size-linux-deb">Debian/Ubuntu</span>) &darr;</div>
               </a>
 
-              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest/download/ai-learning-lab.x86_64.rpm" class="download-option">
+              <a href="https://github.com/Rajdeep-Mudiar/AI_Learning_Desktop_App/releases/latest" id="link-linux-rpm" class="download-option">
                 <div>
                   <div class="option-type">Red Hat / Fedora (.rpm)</div>
                   <div class="option-info">Native package for Fedora, RHEL, CentOS, and openSUSE.</div>
                 </div>
-                <div class="option-cta">Download .rpm &darr;</div>
+                <div class="option-cta">Download .rpm (<span id="size-linux-rpm">Fedora/RHEL</span>) &darr;</div>
               </a>
             </div>
 
